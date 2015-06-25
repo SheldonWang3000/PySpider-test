@@ -4,6 +4,7 @@
 # Project: test
 
 from pyspider.libs.base_handler import *
+from pyquery import PyQuery as pq
 import re
 
 
@@ -20,11 +21,14 @@ class Handler(BaseHandler):
     # @config(age=10 * 24 * 60 * 60)
     @config(age = 1)
     def index_page(self, response):
-        for each in response.doc('a[href^="http"]').items():
-            if re.match('http://www\.laho\.gov\.cn/ywpd/tdgl/zwxx/tdjyxx/gkcy/gkcrgp/\d+/t\d+_\d+\.htm', each.attr.href, re.U):
-                self.crawl(each.attr.href, fetch_type='js', callback=self.content_page)
-            if re.match('http://www\.laho\.gov\.cn/ywpd/tdgl/zwxx/tdjyxx/gkcy/gkcrgp/index_\d+\.htm', each.attr.href, re.U):
+        for each in response.doc('a.cn').items():
+            if pq(each).text() == u'下一页':
                 self.crawl(each.attr.href, fetch_type='js', callback=self.index_page)
+        for each in response.doc('a[href^="http"]').items():
+            if re.match('http://www\.laho\.gov\.cn/ywpd/tdgl/zwxx/tdjyxx/gkcy/gkcrgp/\d+/t\d+_\d+\.htm\?num\=1', each.attr.href, re.U):
+                self.crawl(each.attr.href, fetch_type='js', callback=self.content_page)
+            # if re.match('http://www\.laho\.gov\.cn/ywpd/tdgl/zwxx/tdjyxx/gkcy/gkcrgp/index_\d+\.htm', each.attr.href, re.U):
+                
 
     @config(priority=2)
     def content_page(self, response):
@@ -36,7 +40,7 @@ class Handler(BaseHandler):
         }
     
     def on_result(self, result):
-        path = 'D:/page/' + str(self.num) + '.txt'
+        path = '/root/page/' + str(self.num) + '.txt'
         print type(result)
         if result is not None:
             self.num += 1
