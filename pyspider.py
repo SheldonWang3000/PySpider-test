@@ -17,7 +17,8 @@ class Handler(BaseHandler):
         self.crawl('http://www.laho.gov.cn/ywpd/tdgl/zwxx/tdjyxx/gkcy/gkcrgp/index.htm', 
             fetch_type='js', callback=self.index_page)
 
-    @config(age=10 * 24 * 60 * 60)
+    # @config(age=10 * 24 * 60 * 60)
+    @config(age = 1)
     def index_page(self, response):
         for each in response.doc('a[href^="http"]').items():
             if re.match('http://www\.laho\.gov\.cn/ywpd/tdgl/zwxx/tdjyxx/gkcy/gkcrgp/\d+/t\d+_\d+\.htm', each.attr.href, re.U):
