@@ -1,8 +1,14 @@
-from pyquery import PyQuery as pq
-import os
-import urlparse
-# a = pq('<img src="../../../../../../../images/gl_ico2.jpg" alt="" class="f_l">')
-a = pq('<img src="http://www.laho.gov.cn/images/gl_ico2.jpg" alt="" class="f_l">')
-url = 'http://www.laho.gov.cn/ywpd/tdgl/zwxx/tdjyxx/gkcy/gkcrgp/201506/t20150604_395052.htm'
-print a.attr.src
-print urlparse.urljoin(url, a.attr.src)
+import multiprocessing 
+from itertools import repeat
+def testt(a):
+	print a
+def test((a, b)):
+	print str(a) + '+' + str(b) + '=' + str(a + b)
+if __name__ == '__main__':
+    pool = multiprocessing.Pool(processes=6)
+    l = [1, 2, 3]
+    ll = 100
+    # map(test, l, ll)
+    pool.map(test, zip(l, repeat(ll)))
+    pool.close()
+    pool.join()
