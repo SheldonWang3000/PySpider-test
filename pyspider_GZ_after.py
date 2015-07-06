@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from pyspider.libs.base_handler import *
 from pyquery import PyQuery as pq
 from bs4 import BeautifulSoup
@@ -70,7 +71,6 @@ class Handler(BaseHandler):
     @config(priority=2)
     def content_page(self, response):
         return {
-            "type": 'content',
             "url": response.url,
             "attachment": response.doc('a[href$="doc"]') + response.doc('a[href$="pdf"]') + response.doc('a[href$=".jpg"]'),
             "images": response.doc('img'),
@@ -83,9 +83,26 @@ class Handler(BaseHandler):
     #         m.update(result['url'])
     #         web_name = m.hexdigest()
     #         # path = 'D:/web/' + web_name + '/'
-    #         path = '/root/web/' + web_name + '/'
+    #         path = '~/web/' + web_name + '/'
     #         if not os.path.exists(path):
-    #             os.makedirs(path)
+    #             os.makedirs(path)           
+
+    #         # attachment = result['attachment'] 
+    #         # attachment_list = []
+    #         # for each in attachment.items():
+    #         #     attachment_list.append(each.attr.href)
+    #         # pool = ThreadPool(self.thread_num)
+    #         # pool.map(self.download_attachment, zip(attachment_list, repeat(path)))
+    #         # pool.close()
+
+    #         # image_list = []
+    #         # for each in result['images'].items():
+    #         #     image_url = urlparse.urljoin(result['url'], each.attr.src)
+    #         #     image_list.append(image_url)
+    #         # pool = ThreadPool(self.thread_num)
+    #         # pool.map(self.download_image, zip(image_list, repeat(path)))
+    #         # pool.close()
+
     #         page_path = path + 'page.txt'
     #         f = open(page_path, 'wb')
     #         f.write(result['html'].encode('utf-8'))
@@ -121,4 +138,4 @@ class Handler(BaseHandler):
             temp_width, temp_height = i.size
             if temp_width >= self.width and temp_height >= self.height:
                 image_path = path + os.path.basename(url)
-                # i.save(image_path)
+                i.save(image_path)

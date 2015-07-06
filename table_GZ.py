@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 __author__ = 'Teer'
 from bs4 import BeautifulSoup
 from urllib.request import urlopen

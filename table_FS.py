@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 url = 'http://www.fsgh.gov.cn/GTGHService/ViewCase/jsxmghxzyjs/BM00323315'
