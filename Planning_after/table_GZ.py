@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-__author__ = 'Teer'
+'''广州规划局'''
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
