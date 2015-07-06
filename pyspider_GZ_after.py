@@ -8,7 +8,7 @@ import re
 import urllib2
 import os
 from cStringIO import StringIO
-from PIL import Image
+import Image
 import urlparse
 from multiprocessing.dummy import Pool as ThreadPool 
 '''广州市国土资源和规划委员会'''
@@ -51,7 +51,7 @@ class Handler(BaseHandler):
             self.crawl(each, callback=self.content_page)
 
         ajax_url = response.url[:-1]
-        page_count = 10
+        # page_count = 10
         for i in range(2, page_count + 1):
             next_page = ajax_url + str(i)
             self.crawl(next_page, fetch_type='js', callback=self.next_list)
@@ -70,55 +70,66 @@ class Handler(BaseHandler):
 
     @config(priority=2)
     def content_page(self, response):
+        attachment = response.doc('a[href$="doc"]') + response.doc('a[href$="pdf"]') + response.doc('a[href$=".jpg"]')
+        images = response.doc('img')
+
+        url = response.url
+        m = md5.new()
+        m.update(url)
+        web_name = m.hexdigest()
+        # path = 'D:/web/' + web_name + '/'
+        path = '/home/teer/web/' + web_name + '/'
+        if not os.path.exists(path):
+            os.makedirs(path)           
+
+        attachment_list = []
+        if attachment is not None:
+            for each in attachment.items():
+                attachment_list.append(each.attr.href)
+            pool = ThreadPool(self.thread_num)
+            pool.map(self.download_attachment, zip(attachment_list, repeat(path)))
+            pool.close()
+
+        image_list = []
+        if images is not None:
+            for each in images.items():
+                image_url = urlparse.urljoin(url, each.attr.src)
+                image_list.append(image_url)
+            pool = ThreadPool(self.thread_num)
+            pool.map(self.download_image, zip(image_list, repeat(path)))
+            pool.close()
+
         return {
             "url": response.url,
-            "attachment": response.doc('a[href$="doc"]') + response.doc('a[href$="pdf"]') + response.doc('a[href$=".jpg"]'),
-            "images": response.doc('img'),
             "html": response.text,
         }
     
-    # def on_result(self, result):
-    #     if result is not None: 
-    #         m = md5.new()
-    #         m.update(result['url'])
-    #         web_name = m.hexdigest()
-    #         # path = 'D:/web/' + web_name + '/'
-    #         path = '~/web/' + web_name + '/'
-    #         if not os.path.exists(path):
-    #             os.makedirs(path)           
+    def on_result(self, result):
+        if result is not None: 
+            m = md5.new()
+            m.update(result['url'])
+            web_name = m.hexdigest()
+            # path = 'D:/web/' + web_name + '/'
+            path = '/home/teer/web/' + web_name + '/'
+            if not os.path.exists(path):
+                os.makedirs(path)           
 
-    #         # attachment = result['attachment'] 
-    #         # attachment_list = []
-    #         # for each in attachment.items():
-    #         #     attachment_list.append(each.attr.href)
-    #         # pool = ThreadPool(self.thread_num)
-    #         # pool.map(self.download_attachment, zip(attachment_list, repeat(path)))
-    #         # pool.close()
-
-    #         # image_list = []
-    #         # for each in result['images'].items():
-    #         #     image_url = urlparse.urljoin(result['url'], each.attr.src)
-    #         #     image_list.append(image_url)
-    #         # pool = ThreadPool(self.thread_num)
-    #         # pool.map(self.download_image, zip(image_list, repeat(path)))
-    #         # pool.close()
-
-    #         page_path = path + 'page.txt'
-    #         f = open(page_path, 'wb')
-    #         f.write(result['html'].encode('utf-8'))
-    #         f.close()
-    #         content_path = path + 'content.txt'
-    #         f = open(content_path, 'wb')
-    #         soup = BeautifulSoup(result['html'])
-    #         for i in soup('style') + soup('script'):
-    #             i.extract()
-    #         f.write(soup.get_text(strip=True).encode('utf-8'))
-    #         f.close()
-    #         url_path = path + 'url.txt'
-    #         f = open(url_path, 'wb')
-    #         f.write(result['url'].encode('utf-8'))
-    #         f.close()
-    #     super(Handler, self).on_result(result)
+            page_path = path + 'page.txt'
+            f = open(page_path, 'wb')
+            f.write(result['html'].encode('utf-8'))
+            f.close()
+            content_path = path + 'content.txt'
+            f = open(content_path, 'wb')
+            soup = BeautifulSoup(result['html'])
+            for i in soup('style') + soup('script'):
+                i.extract()
+            f.write(soup.get_text(strip=True).encode('utf-8'))
+            f.close()
+            url_path = path + 'url.txt'
+            f = open(url_path, 'wb')
+            f.write(result['url'].encode('utf-8'))
+            f.close()
+        super(Handler, self).on_result(result)
 
     def download_attachment(self, (url, path)):
         f = urllib2.urlopen(url)
