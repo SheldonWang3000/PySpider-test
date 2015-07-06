@@ -15,7 +15,7 @@ from multiprocessing.dummy import Pool as ThreadPool
 class Handler(BaseHandler):
     height = 250
     width = 250
-    thread_num = 8
+    thread_num = 14
     headers= {
         "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         "Accept-Encoding":"gzip, deflate, sdch",
@@ -82,49 +82,30 @@ class Handler(BaseHandler):
     #         m = md5.new()
     #         m.update(result['url'])
     #         web_name = m.hexdigest()
-    #         path = 'D:/web/' + web_name + '/'
-    #         # path = '/root/web/' + web_name + '/'
+    #         # path = 'D:/web/' + web_name + '/'
+    #         path = '/root/web/' + web_name + '/'
     #         if not os.path.exists(path):
     #             os.makedirs(path)
-
-            # attachment = result['attachment'] 
-            # attachment_list = []
-            # for each in attachment.items():
-            #     attachment_list.append(each.attr.href)
-            # pool = ThreadPool(self.thread_num)
-            # pool.map(self.download_attachment, zip(attachment_list, repeat(path)))
-            # pool.close()
-
-            # image_list = []
-            # for each in result['images'].items():
-            #     image_url = urlparse.urljoin(result['url'], each.attr.src)
-            #     image_list.append(image_url)
-            # pool = ThreadPool(self.thread_num)
-            # pool.map(self.download_image, zip(image_list, repeat(path)))
-            # pool.close()
-
-        #     page_path = path + 'page.txt'
-        #     f = open(page_path, 'wb')
-        #     f.write(result['html'].encode('utf-8'))
-        #     f.close()
-        #     content_path = path + 'content.txt'
-        #     f = open(content_path, 'wb')
-        #     soup = BeautifulSoup(result['html'])
-        #     for i in soup('style') + soup('script'):
-        #         i.extract()
-        #     f.write(soup.get_text(strip=True).encode('utf-8'))
-        #     f.close()
-        #     url_path = path + 'url.txt'
-        #     f = open(url_path, 'wb')
-        #     f.write(result['url'].encode('utf-8'))
-        #     f.close()
-        # super(Handler, self).on_result(result)
+    #         page_path = path + 'page.txt'
+    #         f = open(page_path, 'wb')
+    #         f.write(result['html'].encode('utf-8'))
+    #         f.close()
+    #         content_path = path + 'content.txt'
+    #         f = open(content_path, 'wb')
+    #         soup = BeautifulSoup(result['html'])
+    #         for i in soup('style') + soup('script'):
+    #             i.extract()
+    #         f.write(soup.get_text(strip=True).encode('utf-8'))
+    #         f.close()
+    #         url_path = path + 'url.txt'
+    #         f = open(url_path, 'wb')
+    #         f.write(result['url'].encode('utf-8'))
+    #         f.close()
+    #     super(Handler, self).on_result(result)
 
     def download_attachment(self, (url, path)):
         f = urllib2.urlopen(url)
         attachment_path = path + os.path.basename(url)
-        # filepath = 'D:/attachment/' + os.path.basename(url)
-        # filepath = '/root/attachment/' + os.path.basename(url)
         with open(attachment_path, 'wb') as code:
             code.write(f.read())
 
@@ -133,7 +114,6 @@ class Handler(BaseHandler):
         
         if self.height * self.width == 0:
             image_path = path + os.path.basename(url)
-            # filepath = '/root/image/' + os.path.basename(url)
             with open(image_path, 'wb') as code:
                 code.write(f.read())
         else:
@@ -141,5 +121,4 @@ class Handler(BaseHandler):
             temp_width, temp_height = i.size
             if temp_width >= self.width and temp_height >= self.height:
                 image_path = path + os.path.basename(url)
-                # filepath = '/root/image/' + os.path.basename(url)
-                i.save(image_path)
+                # i.save(image_path)

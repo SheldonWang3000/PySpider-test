@@ -8,4 +8,5 @@ print i.size
 width, height = i.size
 if width >= 40 and height >= 40:
 	filename = os.path.basename(url)
-	i.save('D:/' + filename)
+	print filename
+	i.save('/root/' + filename)
