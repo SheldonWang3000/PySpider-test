@@ -8,7 +8,10 @@ import re
 import urllib2
 import os
 from cStringIO import StringIO
-import Image
+'''on CentOS'''
+from PIL import Image
+'''on Ubuntu'''
+# import Image
 import urlparse
 from multiprocessing.dummy import Pool as ThreadPool 
 '''广州市国土资源和规划委员会'''
@@ -54,7 +57,7 @@ class Handler(BaseHandler):
         # page_count = 10
         for i in range(2, page_count + 1):
             next_page = ajax_url + str(i)
-            self.crawl(next_page, fetch_type='js', callback=self.next_list)
+            self.crawl(next_page, callback=self.next_list)
 
     @config(priority=2)
     def next_list(self, response):
@@ -70,34 +73,34 @@ class Handler(BaseHandler):
 
     @config(priority=2)
     def content_page(self, response):
-        attachment = response.doc('a[href$="doc"]') + response.doc('a[href$="pdf"]') + response.doc('a[href$=".jpg"]')
-        images = response.doc('img')
+        # attachment = response.doc('a[href$="doc"]') + response.doc('a[href$="pdf"]') + response.doc('a[href$=".jpg"]')
+        # images = response.doc('img')
 
-        url = response.url
-        m = md5.new()
-        m.update(url)
-        web_name = m.hexdigest()
-        # path = 'D:/web/' + web_name + '/'
-        path = '/home/teer/web/' + web_name + '/'
-        if not os.path.exists(path):
-            os.makedirs(path)           
+        # url = response.url
+        # m = md5.new()
+        # m.update(url)
+        # web_name = m.hexdigest()
+        # # path = 'D:/web/' + web_name + '/'
+        # path = '/root/web/' + web_name + '/'
+        # if not os.path.exists(path):
+        #     os.makedirs(path)           
 
-        attachment_list = []
-        if attachment is not None:
-            for each in attachment.items():
-                attachment_list.append(each.attr.href)
-            pool = ThreadPool(self.thread_num)
-            pool.map(self.download_attachment, zip(attachment_list, repeat(path)))
-            pool.close()
+        # attachment_list = []
+        # if attachment is not None:
+        #     for each in attachment.items():
+        #         attachment_list.append(each.attr.href)
+        #     pool = ThreadPool(self.thread_num)
+        #     pool.map(self.download_attachment, zip(attachment_list, repeat(path)))
+        #     pool.close()
 
-        image_list = []
-        if images is not None:
-            for each in images.items():
-                image_url = urlparse.urljoin(url, each.attr.src)
-                image_list.append(image_url)
-            pool = ThreadPool(self.thread_num)
-            pool.map(self.download_image, zip(image_list, repeat(path)))
-            pool.close()
+        # image_list = []
+        # if images is not None:
+        #     for each in images.items():
+        #         image_url = urlparse.urljoin(url, each.attr.src)
+        #         image_list.append(image_url)
+        #     pool = ThreadPool(self.thread_num)
+        #     pool.map(self.download_image, zip(image_list, repeat(path)))
+        #     pool.close()
 
         return {
             "url": response.url,
@@ -110,7 +113,7 @@ class Handler(BaseHandler):
             m.update(result['url'])
             web_name = m.hexdigest()
             # path = 'D:/web/' + web_name + '/'
-            path = '/home/teer/web/' + web_name + '/'
+            path = '/root/web/' + web_name + '/'
             if not os.path.exists(path):
                 os.makedirs(path)           
 
