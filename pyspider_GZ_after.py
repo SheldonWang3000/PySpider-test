@@ -89,7 +89,7 @@ class Handler(BaseHandler):
         if attachment is not None:
             for each in attachment.items():
                 attachment_list.append(each.attr.href)
-            pool = ThreadPool(len(attachment_list) if len(attachment_list) < thread_num else thread_num)
+            pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
             pool.map_async(self.download_attachment, zip(attachment_list, repeat(path)))
             pool.close()
 
@@ -98,7 +98,7 @@ class Handler(BaseHandler):
             for each in images.items():
                 image_url = urlparse.urljoin(url, each.attr.src)
                 image_list.append(image_url)
-            pool = ThreadPool(len(attachment_list) if len(attachment_list) < thread_num else thread_num)
+            pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
             pool.map_async(self.download_image, zip(image_list, repeat(path)))
             pool.close()
 
