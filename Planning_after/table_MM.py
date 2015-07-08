@@ -3,7 +3,7 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
-url = '''http://csgh.maoming.gov.cn/certselarea.aspx?id=407640'''
+url = '''http://csgh.maoming.gov.cn/certselarea.aspx?id=411016'''
 html = urlopen(url).read()
 # print(html)
 soup = BeautifulSoup(html, 'html.parser')

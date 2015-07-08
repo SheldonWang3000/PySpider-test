@@ -71,6 +71,7 @@ class Handler(BaseHandler):
     @config(priority=2)
     def content_page(self, response):
         attachment = response.doc('a[href$="doc"]') + response.doc('a[href$="pdf"]') + response.doc('a[href$=".jpg"]')
+            + response.doc('a[href$="png"]') + response.doc('a[href$="gif"]')
         images = response.doc('img')
 
         url = response.url
@@ -78,7 +79,7 @@ class Handler(BaseHandler):
         m.update(url)
         web_name = m.hexdigest()
         # path = 'D:/web/' + web_name + '/'
-        path = '/home/teer/web/' + web_name + '/'
+        path = '/root/web/' + web_name + '/'
         if not os.path.exists(path):
             os.makedirs(path)           
 
@@ -110,7 +111,7 @@ class Handler(BaseHandler):
             m.update(result['url'])
             web_name = m.hexdigest()
             # path = 'D:/web/' + web_name + '/'
-            path = '/home/teer/web/' + web_name + '/'
+            path = '/root/web/' + web_name + '/'
             if not os.path.exists(path):
                 os.makedirs(path)           
 

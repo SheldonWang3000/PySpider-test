@@ -3,16 +3,16 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
-html = urlopen('http://www.upo.gov.cn/gs/Content.aspx?cid=29301').read().decode('utf-8', 'ignore')
-soup = BeautifulSoup(html, 'html.parser', from_encoding='gbk')
+html = urlopen('http://www.upo.gov.cn/channel/szskgk/jsxmxzyjsZ.aspx?caseid=20150500005227').read()
+# print(html)
+soup = BeautifulSoup(html, 'html.parser')
 table = soup.find_all('table')
-table = table[6]
+table = table[4]
 td = table.find_all('td')
 tabs = []
 for i in range(len(td)):
-    temp = td[i].string.strip()
-    if len(temp) != 0:
-        tabs.append(td[i].string.strip())
+	tabs.append(td[i].string)
+# print(tabs)
 result = {}
 for i in range(0, len(tabs), 2):
     result[tabs[i]] = tabs[i + 1]
