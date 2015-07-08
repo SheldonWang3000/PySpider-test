@@ -73,8 +73,7 @@ class Handler(BaseHandler):
 
     @config(priority=2)
     def content_page(self, response):
-        attachment = response.doc('a[href$="doc"]') + response.doc('a[href$="pdf"]') + response.doc('a[href$=".jpg"]')
-            + response.doc('a[href$="png"]') + response.doc('a[href$="gif"]')
+        attachment = response.doc('a[href$="doc"]') + response.doc('a[href$="pdf"]') + response.doc('a[href$="jpg"]') + response.doc('a[href$="png"]') + response.doc('a[href$="gif"]')
         images = response.doc('img')
 
         url = response.url
@@ -86,19 +85,23 @@ class Handler(BaseHandler):
         if not os.path.exists(path):
             os.makedirs(path)           
 
-        # attachment_list = []
-        # if attachment is not None:
-        #     for each in attachment.items():
-        #         attachment_list.append(each.attr.href)
+        attachment_list = []
+        if attachment is not None:
+            for each in attachment.items():
+                attachment_list.append(each.attr.href)
+        for link in attachment_list:
+            self.crawl(link, callback=self.attachment_page, save=path)
         #     pool = ThreadPool(self.thread_num)
         #     pool.map(self.download_attachment, zip(attachment_list, repeat(path)))
         #     pool.close()
 
-        # image_list = []
-        # if images is not None:
-        #     for each in images.items():
-        #         image_url = urlparse.urljoin(url, each.attr.src)
-        #         image_list.append(image_url)
+        image_list = []
+        if images is not None:
+            for each in images.items():
+                image_url = urlparse.urljoin(url, each.attr.src)
+                image_list.append(image_url)
+        for link in image_list:
+            self.crawl(link, callback=self.image_page, save=path)
         #     pool = ThreadPool(self.thread_num)
         #     pool.map(self.download_image, zip(image_list, repeat(path)))
         #     pool.close()
@@ -108,6 +111,20 @@ class Handler(BaseHandler):
             "html": response.text,
         }
     
+    def attachment_page(self, response):
+        path = response.save
+        pool = ThreadPool(1)
+        pool.map_async(self.download_attachment, zip(response.url, path))
+        pool.close()
+        return None
+
+    def image_page(self, response):
+        path = response.save
+        pool = ThreadPool(1)
+        pool.map_async(self.download_image, zip(response.url, path))
+        pool.close()
+        return None
+
     def on_result(self, result):
         if result is not None: 
             m = md5.new()
