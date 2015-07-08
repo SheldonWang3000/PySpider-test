@@ -89,41 +89,23 @@ class Handler(BaseHandler):
         if attachment is not None:
             for each in attachment.items():
                 attachment_list.append(each.attr.href)
-        for link in attachment_list:
-            self.crawl(link, callback=self.attachment_page, save=path)
-        #     pool = ThreadPool(self.thread_num)
-        #     pool.map(self.download_attachment, zip(attachment_list, repeat(path)))
-        #     pool.close()
+            pool = ThreadPool(len(attachment_list) if len(attachment_list) < thread_num else thread_num)
+            pool.map_async(self.download_attachment, zip(attachment_list, repeat(path)))
+            pool.close()
 
         image_list = []
         if images is not None:
             for each in images.items():
                 image_url = urlparse.urljoin(url, each.attr.src)
                 image_list.append(image_url)
-        for link in image_list:
-            self.crawl(link, callback=self.image_page, save=path)
-        #     pool = ThreadPool(self.thread_num)
-        #     pool.map(self.download_image, zip(image_list, repeat(path)))
-        #     pool.close()
+            pool = ThreadPool(len(attachment_list) if len(attachment_list) < thread_num else thread_num)
+            pool.map_async(self.download_image, zip(image_list, repeat(path)))
+            pool.close()
 
         return {
             "url": response.url,
             "html": response.text,
         }
-    
-    def attachment_page(self, response):
-        path = response.save
-        pool = ThreadPool(1)
-        pool.map_async(self.download_attachment, zip(response.url, path))
-        pool.close()
-        return None
-
-    def image_page(self, response):
-        path = response.save
-        pool = ThreadPool(1)
-        pool.map_async(self.download_image, zip(response.url, path))
-        pool.close()
-        return None
 
     def on_result(self, result):
         if result is not None: 
@@ -153,8 +135,8 @@ class Handler(BaseHandler):
         super(Handler, self).on_result(result)
 
     def download_attachment(self, (url, path)):
-        f = urllib2.urlopen(url)
         attachment_path = path + os.path.basename(url)
+        f = urllib2.urlopen(url)
         with open(attachment_path, 'wb') as code:
             code.write(f.read())
 
