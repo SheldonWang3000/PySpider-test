@@ -36,7 +36,7 @@ class Handler(BaseHandler):
 
     @every(minutes=24 * 60)
     def on_start(self):
-        self.crawl('http://www.upo.gov.cn/WebApi/GsApi.aspx?do=phlist&lb=null&area=null&page=1', 
+        self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=005&area=all&page=1', 
             fetch_type='js', callback=self.index_page)
 
     # @config(age=10 * 24 * 60 * 60)
@@ -44,6 +44,7 @@ class Handler(BaseHandler):
     def index_page(self, response):
         r = BeautifulSoup(response.text)
         json = r.body.text
+        # print json
         null = ''
         true = 'true'
         false = 'false'
@@ -89,6 +90,7 @@ class Handler(BaseHandler):
         if not os.path.exists(path):
             os.makedirs(path)           
 
+        print len(images)
         attachment_list = []
         if attachment is not None:
             for each in attachment.items():
@@ -97,7 +99,6 @@ class Handler(BaseHandler):
                 t = threading.Thread(target=self.download_attachment, args=(i, path))
                 t.setDaemon(False)
                 t.start()
-            # for link in attachment_list:
             # for link in attachment_list:
             #     self.crawl(link, callback=self.attachment_page, save=path)
             # pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
@@ -112,7 +113,7 @@ class Handler(BaseHandler):
             for i in image_list:
                 t = threading.Thread(target=self.download_image, args=(i, path))
                 t.setDaemon(False)
-                t.start() 
+                t.start()
             # for link in image_list:
             #     self.crawl(link, callback=self.image_page, save=path)
             # pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
