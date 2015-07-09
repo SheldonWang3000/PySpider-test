@@ -14,6 +14,7 @@ from PIL import Image
 # import Image
 import urlparse
 from multiprocessing.dummy import Pool as ThreadPool 
+import threading
 '''广州市国土资源和规划委员会'''
 
 class Handler(BaseHandler):
@@ -81,7 +82,7 @@ class Handler(BaseHandler):
         m.update(url)
         web_name = m.hexdigest()
         # path = 'D:/web/' + web_name + '/'
-        path = '/root/web/' + web_name + '/'
+        path = '/root/web2/' + web_name + '/'
         if not os.path.exists(path):
             os.makedirs(path)           
 
@@ -89,23 +90,51 @@ class Handler(BaseHandler):
         if attachment is not None:
             for each in attachment.items():
                 attachment_list.append(each.attr.href)
-            pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
-            pool.map_async(self.download_attachment, zip(attachment_list, repeat(path)))
-            pool.close()
+            threads = []
+            for i in attachment_list:
+                t = threading.Thread(target=self.download_attachment, args=(i, path))
+                t.setDaemon(False)
+                threads.append(t)
+            for i in threads:
+                i.start()
+            # for link in attachment_list:
+            #     self.crawl(link, callback=self.attachment_page, save=path)
+            # pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
+            # pool.map_async(self.download_attachment, zip(attachment_list, repeat(path)))
+            # pool.close()
 
         image_list = []
         if images is not None:
             for each in images.items():
                 image_url = urlparse.urljoin(url, each.attr.src)
                 image_list.append(image_url)
-            pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
-            pool.map_async(self.download_image, zip(image_list, repeat(path)))
-            pool.close()
+            threads = []
+            for i in image_list:
+                t = threading.Thread(target=self.download_image, args=(i, path))
+                t.setDaemon(False)
+                threads.append(t)
+            for i in threads:
+                i.start()
+            # for link in image_list:
+            #     self.crawl(link, callback=self.image_page, save=path)
+            # pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
+            # pool.map_async(self.download_image, zip(image_list, repeat(path)))
+            # pool.close()
 
         return {
             "url": response.url,
             "html": response.text,
         }
+
+    def attachment_page(self, response):
+        path = response.save
+        self.download_attachment(response.url, path)
+        return None
+
+    def image_page(self, response):
+        path = response.save
+        self.download_image(response.url, path)
+        return None
 
     def on_result(self, result):
         if result is not None: 
@@ -113,7 +142,7 @@ class Handler(BaseHandler):
             m.update(result['url'])
             web_name = m.hexdigest()
             # path = 'D:/web/' + web_name + '/'
-            path = '/root/web/' + web_name + '/'
+            path = '/root/web2/' + web_name + '/'
             if not os.path.exists(path):
                 os.makedirs(path)           
 
@@ -134,13 +163,15 @@ class Handler(BaseHandler):
             f.close()
         super(Handler, self).on_result(result)
 
-    def download_attachment(self, (url, path)):
+    # def download_attachment(self, (url, path)):
+    def download_attachment(self, url, path):
         attachment_path = path + os.path.basename(url)
         f = urllib2.urlopen(url)
         with open(attachment_path, 'wb') as code:
             code.write(f.read())
 
-    def download_image(self, (url, path)):
+    # def download_image(self, (url, path)):
+    def download_image(self, url, path):
         f = urllib2.urlopen(url)
         
         if self.height * self.width == 0:
