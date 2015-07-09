@@ -85,12 +85,11 @@ class Handler(BaseHandler):
         m = md5.new()
         m.update(url)
         web_name = m.hexdigest()
-        # path = 'D:/web/' + web_name + '/'
-        path = '/root/web2/' + web_name + '/'
+        path = 'D:/web/' + web_name + '/'
+        # path = '/root/web2/' + web_name + '/'
         if not os.path.exists(path):
             os.makedirs(path)           
 
-        print len(images)
         attachment_list = []
         if attachment is not None:
             for each in attachment.items():
@@ -125,23 +124,13 @@ class Handler(BaseHandler):
             "html": response.text,
         }
 
-    def attachment_page(self, response):
-        path = response.save
-        self.download_attachment(response.url, path)
-        return None
-
-    def image_page(self, response):
-        path = response.save
-        self.download_image(response.url, path)
-        return None
-
     def on_result(self, result):
         if result is not None: 
             m = md5.new()
             m.update(result['url'])
             web_name = m.hexdigest()
-            # path = 'D:/web/' + web_name + '/'
-            path = '/root/web2/' + web_name + '/'
+            path = 'D:/web/' + web_name + '/'
+            # path = '/root/web2/' + web_name + '/'
             if not os.path.exists(path):
                 os.makedirs(path)           
 
@@ -154,7 +143,10 @@ class Handler(BaseHandler):
             soup = BeautifulSoup(result['html'])
             for i in soup('style') + soup('script'):
                 i.extract()
-            f.write(soup.get_text(strip=True).encode('utf-8'))
+            content = soup.decode('utf-8')
+            content = re.sub(r'<[/!]?\w+[^>]*>', '', content)
+            content = re.sub(r'\s+', '', content)
+            f.write(content.encode('utf-8'))
             f.close()
             url_path = path + 'url.txt'
             f = open(url_path, 'wb')
