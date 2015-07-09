@@ -156,22 +156,27 @@ class Handler(BaseHandler):
 
     # def download_attachment(self, (url, path)):
     def download_attachment(self, url, path):
-        attachment_path = path + os.path.basename(url)
-        f = urllib2.urlopen(url)
-        with open(attachment_path, 'wb') as code:
-            code.write(f.read())
+        try:
+            attachment_path = path + os.path.basename(url)
+            f = urllib2.urlopen(url)
+            with open(attachment_path, 'wb') as code:
+                code.write(f.read())
+        except urllib2:HTTPError:
+            print '404'
 
     # def download_image(self, (url, path)):
     def download_image(self, url, path):
-        f = urllib2.urlopen(url)
-        
-        if self.height * self.width == 0:
-            image_path = path + os.path.basename(url)
-            with open(image_path, 'wb') as code:
-                code.write(f.read())
-        else:
-            i = Image.open(StringIO(f.read()))
-            temp_width, temp_height = i.size
-            if temp_width >= self.width and temp_height >= self.height:
+        try:
+            f = urllib2.urlopen(url)
+            if self.height * self.width == 0:
                 image_path = path + os.path.basename(url)
-                i.save(image_path)
+                with open(image_path, 'wb') as code:
+                    code.write(f.read())
+            else:
+                i = Image.open(StringIO(f.read()))
+                temp_width, temp_height = i.size
+                if temp_width >= self.width and temp_height >= self.height:
+                    image_path = path + os.path.basename(url)
+                    i.save(image_path)
+        except urllib2:HTTPError:
+            print '404'
