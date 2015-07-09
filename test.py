@@ -1,5 +1,19 @@
 # coding=gbk
-# import multiprocessing 
+import threading
+import time
+def te(num):
+	time.sleep(0.5)
+	print 'te'
+if __name__ == '__main__':
+	threads = []
+	for i in range(10):
+		t = threading.Thread(target=te, args=([100]))
+		t.setDaemon(False)
+		threads.append(t)
+	for i in range(10):
+		threads[i].start()
+	print 'tttt'
+	# time.sleep(1)
 # from itertools import repeat
 # def testt(a):
 # 	print a
