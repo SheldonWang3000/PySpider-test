@@ -58,7 +58,7 @@ class Handler(BaseHandler):
             self.crawl(each, callback=self.content_page)
 
         ajax_url = response.url[:-1]
-        # page_count = 10
+        page_count = 100
         for i in range(2, page_count + 1):
             next_page = ajax_url + str(i)
             self.crawl(next_page, callback=self.next_list)
@@ -97,9 +97,10 @@ class Handler(BaseHandler):
             for each in attachment.items():
                 attachment_list.append(each.attr.href)
             for i in attachment_list:
-                t = threading.Thread(target=self.download_attachment, args=(i, path))
-                t.setDaemon(False)
-                t.start()
+                self.download_attachment(i, path)
+                # t = threading.Thread(target=self.download_attachment, args=(i, path))
+                # t.setDaemon(False)
+                # t.start()
             # for link in attachment_list:
             # for link in attachment_list:
             #     self.crawl(link, callback=self.attachment_page, save=path)
@@ -113,9 +114,10 @@ class Handler(BaseHandler):
                 image_url = urlparse.urljoin(url, each.attr.src)
                 image_list.append(image_url)
             for i in image_list:
-                t = threading.Thread(target=self.download_image, args=(i, path))
-                t.setDaemon(False)
-                t.start() 
+                self.download_image(i, path)
+                # t = threading.Thread(target=self.download_image, args=(i, path))
+                # t.setDaemon(False)
+                # t.start() 
             # for link in image_list:
             #     self.crawl(link, callback=self.image_page, save=path)
             # pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
@@ -182,5 +184,5 @@ class Handler(BaseHandler):
                 if temp_width >= self.width and temp_height >= self.height:
                     image_path = path + os.path.basename(url)
                     i.save(image_path)
-        except urllib2:HTTPError:
+        except urllib2.HTTPError:
             print '404'
