@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from itertools import repeat
 import md5
 import re
+import urllib
 import urllib2
 import os
 from cStringIO import StringIO
@@ -15,7 +16,7 @@ from PIL import Image
 import urlparse
 from multiprocessing.dummy import Pool as ThreadPool 
 import threading
-'''广州市国土资源和规划委员会'''
+'''佛山'''
 
 class Handler(BaseHandler):
     height = 250
@@ -36,44 +37,49 @@ class Handler(BaseHandler):
 
     @every(minutes=24 * 60)
     def on_start(self):
-        self.crawl('http://www.upo.gov.cn/WebApi/GsApi.aspx?do=phlist&lb=null&area=null&page=1', 
-            fetch_type='js', callback=self.index_page)
+        params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
+        data = urllib.urlencode(params)
+        self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData', 
+            method='POST',data=data, callback=self.index_page)
 
     # @config(age=10 * 24 * 60 * 60)
     @config(age = 1)
     def index_page(self, response):
         r = BeautifulSoup(response.text)
-        json = r.body.text
+        json_text = r.body.text
         null = ''
         true = 'true'
         false = 'false'
-        response_json = eval(json)
-        json_list = response_json['list']
-        domain = 'http://www.upo.gov.cn'
-        content_list = [domain + i['Url'] for i in json_list]
-        page_count = response_json['pagecount']
+        response_json = eval(json_text)
+        json_list = eval(response_json['datas'])
+        domain = 'http://www.fsgh.gov.cn/GTGHService/ViewCase/jsxmghxzyjs/'
+        content_list = [domain + i['4'] for i in json_list]
+
+        page_count = response_json['pageCount']
         page_count = int(page_count)
+        print page_count
 
         for each in content_list:
             self.crawl(each, callback=self.content_page)
 
-        ajax_url = response.url[:-1]
-        # page_count = 10
         for i in range(2, page_count + 1):
-            next_page = ajax_url + str(i)
-            self.crawl(next_page, callback=self.next_list)
+            temp_url = response.url + '/' + str(i)
+            params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
+            params['pageIndex'] = str(i)
+            temp_data = urllib.urlencode(params)
+            self.crawl(temp_url, method='POST', data=temp_data, callback=self.next_list)
 
     @config(priority=2)
     def next_list(self, response):
         r = BeautifulSoup(response.text)
-        json = r.body.text
+        json_text = r.body.text
         null = ''
         true = 'true'
         false = 'false'
-        response_json = eval(json)
-        json_list = response_json['list']
-        domain = 'http://www.upo.gov.cn'
-        content_list = [domain + i['Url'] for i in json_list]
+        response_json = eval(json_text)
+        json_list = eval(response_json['datas'])
+        domain = 'http://www.fsgh.gov.cn/GTGHService/ViewCase/jsxmghxzyjs/'
+        content_list = [domain + i['4'] for i in json_list]
 
         for each in content_list:
             self.crawl(each, callback=self.content_page)
@@ -87,8 +93,8 @@ class Handler(BaseHandler):
         m = md5.new()
         m.update(url)
         web_name = m.hexdigest()
-        # path = 'D:/web/' + web_name + '/'
-        path = '/root/web2/' + web_name + '/'
+        path = 'D:/web/' + web_name + '/'
+        # path = '/root/web2/' + web_name + '/'
         if not os.path.exists(path):
             os.makedirs(path)           
 
@@ -100,7 +106,6 @@ class Handler(BaseHandler):
                 t = threading.Thread(target=self.download_attachment, args=(i, path))
                 t.setDaemon(False)
                 t.start()
-            # for link in attachment_list:
             # for link in attachment_list:
             #     self.crawl(link, callback=self.attachment_page, save=path)
             # pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
@@ -115,7 +120,7 @@ class Handler(BaseHandler):
             for i in image_list:
                 t = threading.Thread(target=self.download_image, args=(i, path))
                 t.setDaemon(False)
-                t.start() 
+                t.start()
             # for link in image_list:
             #     self.crawl(link, callback=self.image_page, save=path)
             # pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
@@ -132,8 +137,8 @@ class Handler(BaseHandler):
             m = md5.new()
             m.update(result['url'])
             web_name = m.hexdigest()
-            # path = 'D:/web/' + web_name + '/'
-            path = '/root/web2/' + web_name + '/'
+            path = 'D:/web/' + web_name + '/'
+            # path = '/root/web2/' + web_name + '/'
             if not os.path.exists(path):
                 os.makedirs(path)           
 
@@ -171,7 +176,6 @@ class Handler(BaseHandler):
     def download_image(self, url, path):
         try:
             f = urllib2.urlopen(url)
-            
             if self.height * self.width == 0:
                 image_path = path + os.path.basename(url)
                 with open(image_path, 'wb') as code:
@@ -182,5 +186,5 @@ class Handler(BaseHandler):
                 if temp_width >= self.width and temp_height >= self.height:
                     image_path = path + os.path.basename(url)
                     i.save(image_path)
-        except urllib2:HTTPError:
+        except urllib2.HTTPError:
             print '404'

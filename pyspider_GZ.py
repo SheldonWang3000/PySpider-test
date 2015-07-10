@@ -50,6 +50,7 @@ class Handler(BaseHandler):
         false = 'false'
         response_json = eval(json)
         json_list = response_json['list']
+        print type(json_list)
         domain = 'http://www.upo.gov.cn'
         content_list = [domain + i['Url'] for i in json_list]
         page_count = response_json['pagecount']
@@ -68,6 +69,9 @@ class Handler(BaseHandler):
     def next_list(self, response):
         r = BeautifulSoup(response.text)
         json = r.body.text
+        null = ''
+        true = 'true'
+        false = 'false'
         response_json = eval(json)
         json_list = response_json['list']
         domain = 'http://www.upo.gov.cn'
@@ -161,7 +165,7 @@ class Handler(BaseHandler):
             f = urllib2.urlopen(url)
             with open(attachment_path, 'wb') as code:
                 code.write(f.read())
-        except urllib2:HTTPError:
+        except urllib2.HTTPError:
             print '404'
 
     # def download_image(self, (url, path)):
@@ -178,5 +182,5 @@ class Handler(BaseHandler):
                 if temp_width >= self.width and temp_height >= self.height:
                     image_path = path + os.path.basename(url)
                     i.save(image_path)
-        except urllib2:HTTPError:
+        except urllib2.HTTPError:
             print '404'
