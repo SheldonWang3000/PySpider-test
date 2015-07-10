@@ -161,7 +161,7 @@ class Handler(BaseHandler):
             f = urllib2.urlopen(url)
             with open(attachment_path, 'wb') as code:
                 code.write(f.read())
-        except urllib2:HTTPError:
+        except urllib2.HTTPError:
             print '404'
 
     # def download_image(self, (url, path)):
@@ -178,5 +178,5 @@ class Handler(BaseHandler):
                 if temp_width >= self.width and temp_height >= self.height:
                     image_path = path + os.path.basename(url)
                     i.save(image_path)
-        except urllib2:HTTPError:
+        except urllib2.HTTPError:
             print '404'
