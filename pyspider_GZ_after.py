@@ -91,7 +91,7 @@ class Handler(BaseHandler):
         m.update(url)
         web_name = m.hexdigest()
         # path = 'D:/web/' + web_name + '/'
-        path = '/home/teer/web2/' + web_name + '/'
+        path = '/home/teer/web/GZ_after/' + web_name + '/'
         if not os.path.exists(path):
             os.makedirs(path)           
 
@@ -134,7 +134,7 @@ class Handler(BaseHandler):
             m.update(result['url'])
             web_name = m.hexdigest()
             # path = 'D:/web/' + web_name + '/'
-            path = '/home/teer/web2/' + web_name + '/'
+            path = '/home/teer/web/GZ_after/' + web_name + '/'
             if not os.path.exists(path):
                 os.makedirs(path)           
 

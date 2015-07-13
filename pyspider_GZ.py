@@ -63,7 +63,7 @@ class Handler(BaseHandler):
 
         for each in content_list:
             self.crawl(each, callback=self.content_page)
-
+        print type(response.url)
         ajax_url = response.url[:-1]
         page_count = 100
         for i in range(2, page_count + 1):
@@ -95,7 +95,7 @@ class Handler(BaseHandler):
         m.update(url)
         web_name = m.hexdigest()
         # path = 'D:/web/' + web_name + '/'
-        path = '/home/teer/web2/' + web_name + '/'
+        path = '/home/teer/web/GZ/' + web_name + '/'
         if not os.path.exists(path):
             os.makedirs(path)           
 
@@ -137,7 +137,7 @@ class Handler(BaseHandler):
             m.update(result['url'])
             web_name = m.hexdigest()
             # path = 'D:/web/' + web_name + '/'
-            path = '/home/teer/web2/' + web_name + '/'
+            path = '/home/teer/web/GZ/' + web_name + '/'
             if not os.path.exists(path):
                 os.makedirs(path)           
 
