@@ -6,7 +6,7 @@
 	建设工程规划许可证:http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%B9%A4%B3%CC%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4
 ^*中山规划局：http://www.zsghj.gov.cn/list/p-1.html
 	无表格
-清远规划局_不分批前批后：http://www.qyup.gov.cn/qysghj/szls/201309/aa743ec8c82142f1bc99b55eac6521fc.shtml
+^清远规划局_不分批前批后：http://www.qyup.gov.cn/qysghj/szls/201309/aa743ec8c82142f1bc99b55eac6521fc.shtml
 汕头规划局：http://www.stghj.gov.cn/Category_59/Index.aspx
 	分为市局、龙湖、金平
 茂名规划局：http://csgh.maoming.gov.cn/certSearch.aspx
