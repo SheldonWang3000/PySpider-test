@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 from pyspider.libs.base_handler import *
-from pyquery import PyQuery as pq
 from bs4 import BeautifulSoup
 from itertools import repeat
 import md5
@@ -39,12 +38,13 @@ class Handler(BaseHandler):
     }
     @every(minutes=24 * 60)
     def on_start(self):
+        '''url编码问题'''
         self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9&1', 
-        #     fetch_type='js', callback=self.index_page, save=1)
+            fetch_type='js', callback=self.index_page, save=1)
         # self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%D3%C3%B5%D8%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&1', 
         #     fetch_type='js', callback=self.index_page, save=1)
         # self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%B9%A4%B3%CC%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&1', 
-            fetch_type='js', callback=self.index_page, save=1)
+        #     fetch_type='js', callback=self.index_page, save=1)
 
     # @config(age=10 * 24 * 60 * 60)
     @config(age = 1)
@@ -61,7 +61,14 @@ class Handler(BaseHandler):
             parmas['GridView1$ctl23$tbPage'] = str(response.save)
 
             data = urllib.urlencode(parmas)
+            # import chardet
+            # print response.url
+            # print response.url.encode('utf-8')
+            # print chardet.detect(str(response.url))
             url = 'http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9'
+            # url = response.url.encode('GB18030')
+            # url = url[:-1]
+            # print url
             url = url + '&' + str(response.save + 1)
             self.crawl(url, method='POST', data=data, callback=self.index_page, save=int(response.save) + 1)
 
@@ -89,7 +96,7 @@ class Handler(BaseHandler):
 
     @config(priority=2)
     def content_page(self, response):
-        attachment = response.doc('a[href$="doc"]') + response.doc('a[href$="pdf"]') + response.doc('a[href$="jpg"]') + response.doc('a[href$="png"]') + response.doc('a[href$="gif"]')
+        attachment = response.doc('a[href*=".doc"]') + response.doc('a[href*=".pdf"]') + response.doc('a[href*=".jpg"]') + response.doc('a[href*=".png"]') + response.doc('a[href*=".gif"]')
         images = response.doc('img')
 
         url = response.url
@@ -116,17 +123,6 @@ class Handler(BaseHandler):
                 d['path'] = path
                 d['type'] = 'attachment'
                 self.r.rpush(self.key, str(d))
-                # self.crawl(i, callback=self.attachment_page, save=path)
-                # self.download_attachment(i, path)
-                # t = threading.Thread(target=self.download_attachment, args=(i, path))
-                # t.setDaemon(False)
-                # t.start()
-            # for link in attachment_list:
-            # for link in attachment_list:
-            #     self.crawl(link, callback=self.attachment_page, save=path)
-            # pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
-            # pool.map_async(self.download_attachment, zip(attachment_list, repeat(path)))
-            # pool.close()
 
         image_list = []
         if images is not None:
@@ -139,54 +135,11 @@ class Handler(BaseHandler):
                 d['path'] = path
                 d['type'] = 'image'
                 self.r.rpush(self.key, str(d))
-                # self.crawl(i, callback=self.image_page, save=path)
-                # self.download_image(i, path)
-                # t = threading.Thread(target=self.download_image, args=(i, path))
-                # t.setDaemon(False)
-                # t.start() 
-            # for link in image_list:
-            #     self.crawl(link, callback=self.image_page, save=path)
-            # pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
-            # pool.map_async(self.download_image, zip(image_list, repeat(path)))
-            # pool.close()
 
         return {
             "url": response.url,
             "html": response.text,
         }
-
-    def attachment_page(self, response):
-        path = response.save
-        url = response.url
-        try:
-            attachment_path = path + os.path.basename(url)
-            f = urllib2.urlopen(url)
-            with open(attachment_path, 'wb') as code:
-                code.write(f.read())
-        except urllib2.HTTPError:
-            print '404'
-
-    def image_page(self, response):
-        url = response.url
-        path = response.save
-        try:
-            if self.height * self.width == 0:
-                image_path = path + os.path.basename(url)
-                with open(image_path, 'wb') as code:
-                    code.write(response.content)
-            else:
-                i = Image.open(StringIO(response.content))
-                temp_width, temp_height = i.size
-                if temp_width >= self.width and temp_height >= self.height:
-                    image_path = path + os.path.basename(url)
-                    try:
-                        i.save(image_path)
-                    except KeyError:
-                        m = md5.new()
-                        m.update(os.path.basename(url))
-                        i.save(path + m.hexdigest() + '.' + i.format)
-        except urllib2.HTTPError:
-            print '404'
 
     def on_result(self, result):
         if result is not None: 
@@ -217,36 +170,3 @@ class Handler(BaseHandler):
             f.write(result['url'].encode('utf-8'))
             f.close()
         super(Handler, self).on_result(result)
-
-    # def download_attachment(self, (url, path)):
-    def download_attachment(self, url, path):
-        try:
-            attachment_path = path + os.path.basename(url)
-            f = urllib2.urlopen(url)
-            with open(attachment_path, 'wb') as code:
-                code.write(f.read())
-        except urllib2.HTTPError:
-            print '404'
-
-    # def download_image(self, (url, path)):
-    def download_image(self, url, path):
-        try:
-            f = urllib2.urlopen(url)
-            
-            if self.height * self.width == 0:
-                image_path = path + os.path.basename(url)
-                with open(image_path, 'wb') as code:
-                    code.write(f.read())
-            else:
-                i = Image.open(StringIO(f.read()))
-                temp_width, temp_height = i.size
-                if temp_width >= self.width and temp_height >= self.height:
-                    image_path = path + os.path.basename(url)
-                    try:
-                        i.save(image_path)
-                    except KeyError:
-                        m = md5.new()
-                        m.update(os.path.basename(url))
-                        i.save(path + m.hexdigest() + '.' + i.format)
-        except urllib2.HTTPError:
-            print '404'

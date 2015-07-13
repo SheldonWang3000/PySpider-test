@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 from pyspider.libs.base_handler import *
-from pyquery import PyQuery as pq
 from bs4 import BeautifulSoup
-from itertools import repeat
 import md5
 import re
 import urllib
@@ -10,15 +8,16 @@ import urllib2
 import os
 from cStringIO import StringIO
 '''on CentOS'''
-from PIL import Image
+# from PIL import Image
 '''on Ubuntu'''
-# import Image
+import Image
+import redis
 import urlparse
-from multiprocessing.dummy import Pool as ThreadPool 
-import threading
 '''佛山'''
 
 class Handler(BaseHandler):
+    r = redis.Redis()
+    key = 'download'
     height = 250
     width = 250
     thread_num = 14
@@ -39,7 +38,15 @@ class Handler(BaseHandler):
     def on_start(self):
         params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
         data = urllib.urlencode(params)
-        self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData', 
+        self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/xzyjs', 
+            method='POST',data=data, callback=self.index_page)
+        params = {'strWhere' : '%2C%2C%2C', 'action': 'ydgh', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
+        data = urllib.urlencode(params)
+        self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/ydgh', 
+            method='POST',data=data, callback=self.index_page)
+        params = {'strWhere' : '%2C%2C%2C', 'action': 'gcgh', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
+        data = urllib.urlencode(params)
+        self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/gcgh', 
             method='POST',data=data, callback=self.index_page)
 
     # @config(age=10 * 24 * 60 * 60)
@@ -86,15 +93,15 @@ class Handler(BaseHandler):
 
     @config(priority=2)
     def content_page(self, response):
-        attachment = response.doc('a[href$="doc"]') + response.doc('a[href$="pdf"]') + response.doc('a[href$="jpg"]') + response.doc('a[href$="png"]') + response.doc('a[href$="gif"]')
+        attachment = response.doc('a[href*=".doc"]') + response.doc('a[href*=".pdf"]') + response.doc('a[href*=".jpg"]') + response.doc('a[href*=".png"]') + response.doc('a[href*=".gif"]')
         images = response.doc('img')
-
+        
         url = response.url
         m = md5.new()
         m.update(url)
         web_name = m.hexdigest()
-        path = 'D:/web/' + web_name + '/'
-        # path = '/root/web2/' + web_name + '/'
+        # path = 'D:/web/' + web_name + '/'
+        path = '/home/teer/web/FS/' + web_name + '/'
         if not os.path.exists(path):
             os.makedirs(path)           
 
@@ -103,14 +110,11 @@ class Handler(BaseHandler):
             for each in attachment.items():
                 attachment_list.append(each.attr.href)
             for i in attachment_list:
-                t = threading.Thread(target=self.download_attachment, args=(i, path))
-                t.setDaemon(False)
-                t.start()
-            # for link in attachment_list:
-            #     self.crawl(link, callback=self.attachment_page, save=path)
-            # pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
-            # pool.map_async(self.download_attachment, zip(attachment_list, repeat(path)))
-            # pool.close()
+                d = {}
+                d['url'] = i
+                d['type'] = 'attachment'
+                d['path'] = 'path'
+                self.r.rpush(self.key, str(d))
 
         image_list = []
         if images is not None:
@@ -118,14 +122,11 @@ class Handler(BaseHandler):
                 image_url = urlparse.urljoin(url, each.attr.src)
                 image_list.append(image_url)
             for i in image_list:
-                t = threading.Thread(target=self.download_image, args=(i, path))
-                t.setDaemon(False)
-                t.start()
-            # for link in image_list:
-            #     self.crawl(link, callback=self.image_page, save=path)
-            # pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
-            # pool.map_async(self.download_image, zip(image_list, repeat(path)))
-            # pool.close()
+                d = {}
+                d['url'] = i
+                d['type'] = 'image'
+                d['path'] = 'path'
+                self.r.rpush(self.key, str(d))
 
         return {
             "url": response.url,
@@ -137,8 +138,8 @@ class Handler(BaseHandler):
             m = md5.new()
             m.update(result['url'])
             web_name = m.hexdigest()
-            path = 'D:/web/' + web_name + '/'
-            # path = '/root/web2/' + web_name + '/'
+            # path = 'D:/web/' + web_name + '/'
+            path = '/home/teer/web/FS/' + web_name + '/'
             if not os.path.exists(path):
                 os.makedirs(path)           
 
@@ -161,30 +162,3 @@ class Handler(BaseHandler):
             f.write(result['url'].encode('utf-8'))
             f.close()
         super(Handler, self).on_result(result)
-
-    # def download_attachment(self, (url, path)):
-    def download_attachment(self, url, path):
-        try:
-            attachment_path = path + os.path.basename(url)
-            f = urllib2.urlopen(url)
-            with open(attachment_path, 'wb') as code:
-                code.write(f.read())
-        except urllib2.HTTPError:
-            print '404'
-
-    # def download_image(self, (url, path)):
-    def download_image(self, url, path):
-        try:
-            f = urllib2.urlopen(url)
-            if self.height * self.width == 0:
-                image_path = path + os.path.basename(url)
-                with open(image_path, 'wb') as code:
-                    code.write(f.read())
-            else:
-                i = Image.open(StringIO(f.read()))
-                temp_width, temp_height = i.size
-                if temp_width >= self.width and temp_height >= self.height:
-                    image_path = path + os.path.basename(url)
-                    i.save(image_path)
-        except urllib2.HTTPError:
-            print '404'
