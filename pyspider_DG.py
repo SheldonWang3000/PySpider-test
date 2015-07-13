@@ -10,15 +10,18 @@ import urllib2
 import os
 from cStringIO import StringIO
 '''on CentOS'''
-from PIL import Image
+# from PIL import Image
 '''on Ubuntu'''
-# import Image
+import Image
 import urlparse
 from multiprocessing.dummy import Pool as ThreadPool 
 import threading
+import redis
 '''东莞'''
 
 class Handler(BaseHandler):
+    r = redis.Redis()
+    key = 'download'
     height = 250
     width = 250
     thread_num = 14
@@ -37,29 +40,37 @@ class Handler(BaseHandler):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9&1', 
+        #     fetch_type='js', callback=self.index_page, save=1)
+        # self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%D3%C3%B5%D8%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&1', 
+        #     fetch_type='js', callback=self.index_page, save=1)
+        # self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%B9%A4%B3%CC%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&1', 
             fetch_type='js', callback=self.index_page, save=1)
 
     # @config(age=10 * 24 * 60 * 60)
     @config(age = 1)
     def index_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
+      
+        last_page = int(soup.find(id=re.compile(r'LabelPageCount')).get_text())
+        if last_page != response.save:
+            parmas = {'__EVENTTARGET': 'GridView1$ctl23$LinkButtonNextPage',
+            '__EVENTARGUMENT': '', 
+            }
+            parmas['__VIEWSTATE'] = soup.find('input', {'name': '__VIEWSTATE'})['value']
+            parmas['__EVENTVALIDATION'] = soup.find('input', {'name': '__EVENTVALIDATION'})['value']
+            parmas['GridView1$ctl23$tbPage'] = str(response.save)
+
+            data = urllib.urlencode(parmas)
+            url = 'http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9'
+            url = url + '&' + str(response.save + 1)
+            self.crawl(url, method='POST', data=data, callback=self.index_page, save=int(response.save) + 1)
+
         content = response.doc('a[href^=http]')
         for i in content.items():
             link = i.attr.href
             link = link.encode('GB18030')
-            # link = link.decode('gbk')
+            # print link
             self.crawl(link, callback=self.content_page)
-        parmas = {'__EVENTTARGET': 'GridView1$ctl23$LinkButtonNextPage',
-        '__EVENTARGUMENT': '', 
-        }
-        parmas['__VIEWSTATE'] = soup.find('input', {'name': '__VIEWSTATE'})['value']
-        parmas['__EVENTVALIDATION'] = soup.find('input', {'name': '__EVENTVALIDATION'})['value']
-        parmas['GridView1$ctl23$tbPage'] = str(response.save)
-
-        data = urllib.urlencode(parmas)
-        url = 'http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9'
-        url = url + '&' + str(response.save + 1)
-        self.crawl(url, method='POST', data=data, callback=self.index_page, save=int(response.save) + 1)
 
     @config(priority=2)
     def next_list(self, response):
@@ -82,11 +93,16 @@ class Handler(BaseHandler):
         images = response.doc('img')
 
         url = response.url
+        # f = open('/home/teer/urls.txt', 'a')
+        # f.write(url)
+        # f.write('\n')
+        # f.close()
+        # print url
         m = md5.new()
         m.update(url)
         web_name = m.hexdigest()
-        path = 'D:/web/' + web_name + '/'
-        # path = '/root/web2/' + web_name + '/'
+        # path = 'D:/web/' + web_name + '/'
+        path = '/home/teer/web/' + web_name + '/'
         if not os.path.exists(path):
             os.makedirs(path)           
 
@@ -95,7 +111,13 @@ class Handler(BaseHandler):
             for each in attachment.items():
                 attachment_list.append(each.attr.href)
             for i in attachment_list:
-                self.download_attachment(i, path)
+                d = {}
+                d['url'] = i
+                d['path'] = path
+                d['type'] = 'attachment'
+                self.r.rpush(self.key, str(d))
+                # self.crawl(i, callback=self.attachment_page, save=path)
+                # self.download_attachment(i, path)
                 # t = threading.Thread(target=self.download_attachment, args=(i, path))
                 # t.setDaemon(False)
                 # t.start()
@@ -112,8 +134,13 @@ class Handler(BaseHandler):
                 image_url = urlparse.urljoin(url, each.attr.src)
                 image_list.append(image_url)
             for i in image_list:
-                print i
-                self.download_image(i, path)
+                d = {}
+                d['url'] = i
+                d['path'] = path
+                d['type'] = 'image'
+                self.r.rpush(self.key, str(d))
+                # self.crawl(i, callback=self.image_page, save=path)
+                # self.download_image(i, path)
                 # t = threading.Thread(target=self.download_image, args=(i, path))
                 # t.setDaemon(False)
                 # t.start() 
@@ -128,13 +155,46 @@ class Handler(BaseHandler):
             "html": response.text,
         }
 
+    def attachment_page(self, response):
+        path = response.save
+        url = response.url
+        try:
+            attachment_path = path + os.path.basename(url)
+            f = urllib2.urlopen(url)
+            with open(attachment_path, 'wb') as code:
+                code.write(f.read())
+        except urllib2.HTTPError:
+            print '404'
+
+    def image_page(self, response):
+        url = response.url
+        path = response.save
+        try:
+            if self.height * self.width == 0:
+                image_path = path + os.path.basename(url)
+                with open(image_path, 'wb') as code:
+                    code.write(response.content)
+            else:
+                i = Image.open(StringIO(response.content))
+                temp_width, temp_height = i.size
+                if temp_width >= self.width and temp_height >= self.height:
+                    image_path = path + os.path.basename(url)
+                    try:
+                        i.save(image_path)
+                    except KeyError:
+                        m = md5.new()
+                        m.update(os.path.basename(url))
+                        i.save(path + m.hexdigest() + '.' + i.format)
+        except urllib2.HTTPError:
+            print '404'
+
     def on_result(self, result):
         if result is not None: 
             m = md5.new()
             m.update(result['url'])
             web_name = m.hexdigest()
-            path = 'D:/web/' + web_name + '/'
-            # path = '/root/web2/' + web_name + '/'
+            # path = 'D:/web/' + web_name + '/'
+            path = '/home/teer/web/' + web_name + '/'
             if not os.path.exists(path):
                 os.makedirs(path)           
 

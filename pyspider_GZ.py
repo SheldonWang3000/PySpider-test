@@ -9,10 +9,11 @@ import urllib2
 import os
 from cStringIO import StringIO
 '''on CentOS'''
-from PIL import Image
+# from PIL import Image
 '''on Ubuntu'''
-# import Image
+import Image
 import urlparse
+import redis
 from multiprocessing.dummy import Pool as ThreadPool 
 import threading
 '''广州市国土资源和规划委员会'''
@@ -21,6 +22,8 @@ class Handler(BaseHandler):
     height = 250
     width = 250
     thread_num = 14
+    r = redis.Redis()
+    key = 'download'
     headers= {
         "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         "Accept-Encoding":"gzip, deflate, sdch",
@@ -50,7 +53,7 @@ class Handler(BaseHandler):
         false = 'false'
         response_json = eval(json)
         json_list = response_json['list']
-        print type(json_list)
+        # print type(json_list)
         domain = 'http://www.upo.gov.cn'
         content_list = [domain + i['Url'] for i in json_list]
         page_count = response_json['pagecount']
@@ -60,7 +63,7 @@ class Handler(BaseHandler):
             self.crawl(each, callback=self.content_page)
 
         ajax_url = response.url[:-1]
-        # page_count = 10
+        page_count = 100
         for i in range(2, page_count + 1):
             next_page = ajax_url + str(i)
             self.crawl(next_page, callback=self.next_list)
@@ -89,19 +92,24 @@ class Handler(BaseHandler):
         m = md5.new()
         m.update(url)
         web_name = m.hexdigest()
-        path = 'D:/web/' + web_name + '/'
-        # path = '/root/web2/' + web_name + '/'
+        # path = 'D:/web/' + web_name + '/'
+        path = '/home/teer/web2/' + web_name + '/'
         if not os.path.exists(path):
             os.makedirs(path)           
 
         attachment_list = []
         if attachment is not None:
             for each in attachment.items():
-                attachment_list.append(each.attr.href)
+                attachment_list.append("".join([i for i in each.attr.href if 31 < ord(i) < 127]))
             for i in attachment_list:
-                t = threading.Thread(target=self.download_attachment, args=(i, path))
-                t.setDaemon(False)
-                t.start()
+                d = {}
+                d['url'] = i
+                d['type'] = 'attachment'
+                d['path'] = 'path'
+                self.r.rpush(self.key, str(d))
+                # t = threading.Thread(target=self.download_attachment, args=(i, path))
+                # t.setDaemon(False)
+                # t.start()
             # for link in attachment_list:
             #     self.crawl(link, callback=self.attachment_page, save=path)
             # pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
@@ -112,11 +120,16 @@ class Handler(BaseHandler):
         if images is not None:
             for each in images.items():
                 image_url = urlparse.urljoin(url, each.attr.src)
-                image_list.append(image_url)
+                image_list.append("".join([i for i in image_url if 31 < ord(i) < 127]))
             for i in image_list:
-                t = threading.Thread(target=self.download_image, args=(i, path))
-                t.setDaemon(False)
-                t.start()
+                d = {}
+                d['url'] = i
+                d['type'] = 'image'
+                d['path'] = 'path'
+                self.r.rpush(self.key, str(d))
+                # t = threading.Thread(target=self.download_image, args=(i, path))
+                # t.setDaemon(False)
+                # t.start()
             # for link in image_list:
             #     self.crawl(link, callback=self.image_page, save=path)
             # pool = ThreadPool(len(attachment_list) if len(attachment_list) < self.thread_num else self.thread_num)
@@ -133,8 +146,8 @@ class Handler(BaseHandler):
             m = md5.new()
             m.update(result['url'])
             web_name = m.hexdigest()
-            path = 'D:/web/' + web_name + '/'
-            # path = '/root/web2/' + web_name + '/'
+            # path = 'D:/web/' + web_name + '/'
+            path = '/home/teer/web2/' + web_name + '/'
             if not os.path.exists(path):
                 os.makedirs(path)           
 

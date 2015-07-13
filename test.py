@@ -1,29 +1,10 @@
-# coding=gbk
-import threading
-import time
-def te(num):
-	time.sleep(0.5)
-	print 'te'
-if __name__ == '__main__':
-	threads = []
-	for i in range(10):
-		t = threading.Thread(target=te, args=([100]))
-		t.setDaemon(False)
-		threads.append(t)
-	for i in range(10):
-		threads[i].start()
-	print 'tttt'
-	# time.sleep(1)
-# from itertools import repeat
-# def testt(a):
-# 	print a
-# def test((a, b)):
-# 	print str(a) + '+' + str(b) + '=' + str(a + b)
-# if __name__ == '__main__':
-#     pool = multiprocessing.Pool(processes=6)
-#     l = [1, 2, 3]
-#     ll = 100
-#     # map(test, l, ll)
-#     pool.map(test, zip(l, repeat(ll)))
-#     pool.close()
-#     pool.join()
+import os
+import md5
+d = '/home/teer/web'
+names = os.listdir(d)
+print len(names)
+d = '/home/teer/web1'
+names_old = os.listdir(d)
+for i in names_old:
+	if i not in names:
+		print i

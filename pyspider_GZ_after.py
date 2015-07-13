@@ -9,18 +9,21 @@ import urllib2
 import os
 from cStringIO import StringIO
 '''on CentOS'''
-from PIL import Image
+# from PIL import Image
 '''on Ubuntu'''
-# import Image
+import Image
 import urlparse
 from multiprocessing.dummy import Pool as ThreadPool 
 import threading
+import redis
 '''广州市国土资源和规划委员会'''
 
 class Handler(BaseHandler):
     height = 250
     width = 250
     thread_num = 14
+    r =redis.Redis()
+    key = 'download'
     headers= {
         "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         "Accept-Encoding":"gzip, deflate, sdch",
@@ -88,7 +91,7 @@ class Handler(BaseHandler):
         m.update(url)
         web_name = m.hexdigest()
         # path = 'D:/web/' + web_name + '/'
-        path = '/root/web2/' + web_name + '/'
+        path = '/home/teer/web2/' + web_name + '/'
         if not os.path.exists(path):
             os.makedirs(path)           
 
@@ -97,7 +100,13 @@ class Handler(BaseHandler):
             for each in attachment.items():
                 attachment_list.append(each.attr.href)
             for i in attachment_list:
-                self.download_attachment(i, path)
+                d = {}
+                d['url'] = i
+                d['type'] = 'attachment'
+                d['path'] = path
+                self.r.rpush(self.key, str(d))
+                # self.crawl(i, callback=self.attachment_page, save=path)
+                # self.download_attachment(i, path)
                 # t = threading.Thread(target=self.download_attachment, args=(i, path))
                 # t.setDaemon(False)
                 # t.start()
@@ -114,7 +123,13 @@ class Handler(BaseHandler):
                 image_url = urlparse.urljoin(url, each.attr.src)
                 image_list.append(image_url)
             for i in image_list:
-                self.download_image(i, path)
+                d = {}
+                d['url'] = i
+                d['type'] = 'image'
+                d['path'] = path
+                self.r.rpush(self.key, str(d))
+                # self.crawl(i, callback=self.image_page, save=path)
+                # self.download_image(i, path)
                 # t = threading.Thread(target=self.download_image, args=(i, path))
                 # t.setDaemon(False)
                 # t.start() 
@@ -128,6 +143,33 @@ class Handler(BaseHandler):
             "url": response.url,
             "html": response.text,
         }
+    def attachment_page(self, response):
+        url = response.url
+        path = response.save
+        try:
+            attachment_path = path + os.path.basename(url)
+            f = urllib2.urlopen(url)
+            with open(attachment_path, 'wb') as code:
+                code.write(f.read())
+        except urllib2.HTTPError:
+            print '404'
+
+    def image_page(self, response):
+        url = response.url
+        path = response.save
+        try:
+            if self.height * self.width == 0:
+                image_path = path + os.path.basename(url)
+                with open(image_path, 'wb') as code:
+                    code.write(response.content)
+            else:
+                i = Image.open(StringIO(response.content))
+                temp_width, temp_height = i.size
+                if temp_width >= self.width and temp_height >= self.height:
+                    image_path = path + os.path.basename(url)
+                    i.save(image_path)
+        except urllib2.HTTPError:
+            print '404'
 
     def on_result(self, result):
         if result is not None: 
@@ -135,7 +177,7 @@ class Handler(BaseHandler):
             m.update(result['url'])
             web_name = m.hexdigest()
             # path = 'D:/web/' + web_name + '/'
-            path = '/root/web2/' + web_name + '/'
+            path = '/home/teer/web2/' + web_name + '/'
             if not os.path.exists(path):
                 os.makedirs(path)           
 
