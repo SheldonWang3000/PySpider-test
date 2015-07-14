@@ -1,20 +1,12 @@
 #!/usr/bin/env python
 from pyspider.libs.base_handler import *
 from bs4 import BeautifulSoup
-from itertools import repeat
-import md5
-import re
+# import md5
+import hashlib
 import urllib
-import urllib2
+import re
 import os
-from cStringIO import StringIO
-'''on CentOS'''
-# from PIL import Image
-'''on Ubuntu'''
-import Image
-import urlparse
-from multiprocessing.dummy import Pool as ThreadPool 
-import threading
+from html.parser import HTMLParser
 import redis
 '''东莞'''
 
@@ -60,9 +52,12 @@ class Handler(BaseHandler):
             parmas['__EVENTVALIDATION'] = soup.find('input', {'name': '__EVENTVALIDATION'})['value']
             parmas['GridView1$ctl23$tbPage'] = str(response.save)
 
-            data = urllib.urlencode(parmas)
+            data = urllib.parse.urlencode(parmas)
             # import chardet
-            # print response.url
+            print(response.url)
+            # print(response.url.encode('GB18030').decode('gbk'))
+            # print(response.url.encode('gbk'))
+            # print((urllib.parse.quote(response.url.encode('utf-8'))))
             # print response.url.encode('utf-8')
             # print chardet.detect(str(response.url))
             url = 'http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9'
@@ -75,38 +70,30 @@ class Handler(BaseHandler):
         content = response.doc('a[href^=http]')
         for i in content.items():
             link = i.attr.href
-            link = link.encode('GB18030')
-            # print link
+            h = HTMLParser()
+            link = h.unescape(link)
+            parmas = link.split('?')[1]
+            parmas = parmas.split('&')
+            link = ''
+            link += urllib.parse.quote('项目受理编号'.encode('gbk')) + '=' + urllib.parse.quote(parmas[0].split('=')[1].encode('gbk')) + '&' + urllib.parse.quote('公示'.encode('gbk')) + '=' + urllib.parse.quote(parmas[1].split('=')[1].encode('gbk'))
+            domain = 'http://121.10.6.230/dggsweb/PHGSFJ/PHjsxmxzFJ.aspx?'
+            link = domain + link
+            # print(link)
             self.crawl(link, callback=self.content_page)
-
-    @config(priority=2)
-    def next_list(self, response):
-        r = BeautifulSoup(response.text)
-        json = r.body.text
-        null = ''
-        true = 'true'
-        false = 'false'
-        response_json = eval(json)
-        json_list = response_json['list']
-        domain = 'http://www.upo.gov.cn'
-        content_list = [domain + i['Url'] for i in json_list]
-
-        for each in content_list:
-            self.crawl(each, callback=self.content_page)
 
     @config(priority=2)
     def content_page(self, response):
         attachment = response.doc('a[href*=".doc"]') + response.doc('a[href*=".pdf"]') + response.doc('a[href*=".jpg"]') + response.doc('a[href*=".png"]') + response.doc('a[href*=".gif"]')
         images = response.doc('img')
-
+        print(len(images))
         url = response.url
         # f = open('/home/teer/urls.txt', 'a')
         # f.write(url)
         # f.write('\n')
         # f.close()
         # print url
-        m = md5.new()
-        m.update(url)
+        m = hashlib.md5()
+        m.update(url.encode())
         web_name = m.hexdigest()
         # path = 'D:/web/' + web_name + '/'
         path = '/home/teer/web/DG/' + web_name + '/'
@@ -118,6 +105,7 @@ class Handler(BaseHandler):
             for each in attachment.items():
                 attachment_list.append(each.attr.href)
             for i in attachment_list:
+                print(i)
                 d = {}
                 d['url'] = i
                 d['path'] = path
@@ -127,9 +115,10 @@ class Handler(BaseHandler):
         image_list = []
         if images is not None:
             for each in images.items():
-                image_url = urlparse.urljoin(url, each.attr.src)
+                image_url = urllib.parse.urljoin(url, each.attr.src)
                 image_list.append(image_url)
             for i in image_list:
+                print(i)
                 d = {}
                 d['url'] = i
                 d['path'] = path
@@ -143,8 +132,8 @@ class Handler(BaseHandler):
 
     def on_result(self, result):
         if result is not None: 
-            m = md5.new()
-            m.update(result['url'])
+            m = hashlib.md5()
+            m.update(result['url'].encode())
             web_name = m.hexdigest()
             # path = 'D:/web/' + web_name + '/'
             path = '/home/teer/web/DG/' + web_name + '/'

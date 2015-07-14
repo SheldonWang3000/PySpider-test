@@ -1,16 +1,10 @@
 #!/usr/bin/env python
 from pyspider.libs.base_handler import *
 from bs4 import BeautifulSoup
-import md5
+import hashlib
 import re
-import urllib2
 import os
-from cStringIO import StringIO
-'''on CentOS'''
-# from PIL import Image
-'''on Ubuntu'''
-import Image
-import urlparse
+from urllib.parse import urljoin
 import redis
 '''广州市国土资源和规划委员会'''
 
@@ -49,13 +43,11 @@ class Handler(BaseHandler):
     def index_page(self, response):
         r = BeautifulSoup(response.text)
         json = r.body.text
-        # print json
         null = ''
         true = 'true'
         false = 'false'
         response_json = eval(json)
         json_list = response_json['list']
-        # print type(json_list)
         domain = 'http://www.upo.gov.cn'
         content_list = [domain + i['Url'] for i in json_list]
         page_count = response_json['pagecount']
@@ -63,7 +55,6 @@ class Handler(BaseHandler):
 
         for each in content_list:
             self.crawl(each, callback=self.content_page)
-        print type(response.url)
         ajax_url = response.url[:-1]
         page_count = 100
         for i in range(2, page_count + 1):
@@ -91,8 +82,8 @@ class Handler(BaseHandler):
         images = response.doc('img')
 
         url = response.url
-        m = md5.new()
-        m.update(url)
+        m = hashlib.md5()
+        m.update(url.encode())
         web_name = m.hexdigest()
         # path = 'D:/web/' + web_name + '/'
         path = '/home/teer/web/GZ/' + web_name + '/'
@@ -105,7 +96,7 @@ class Handler(BaseHandler):
                 attachment_list.append(each.attr.href)
                 # attachment_list.append("".join([i for i in each.attr.href if 31 < ord(i) < 127]))
             for i in attachment_list:
-                print i
+                print(i)
                 d = {}
                 d['url'] = i
                 d['type'] = 'attachment'
@@ -115,11 +106,11 @@ class Handler(BaseHandler):
         image_list = []
         if images is not None:
             for each in images.items():
-                image_url = urlparse.urljoin(url, each.attr.src)
+                image_url = urljoin(url, each.attr.src)
                 # image_list.append("".join([i for i in image_url if 31 < ord(i) < 127]))
                 image_list.append(image_url)
             for i in image_list:
-                print i
+                print(i)
                 d = {}
                 d['url'] = i
                 d['type'] = 'image'
@@ -133,8 +124,8 @@ class Handler(BaseHandler):
 
     def on_result(self, result):
         if result is not None: 
-            m = md5.new()
-            m.update(result['url'])
+            m = hashlib.md5()
+            m.update(result['url'].encode())
             web_name = m.hexdigest()
             # path = 'D:/web/' + web_name + '/'
             path = '/home/teer/web/GZ/' + web_name + '/'

@@ -1,18 +1,12 @@
 #!/usr/bin/env python
 from pyspider.libs.base_handler import *
 from bs4 import BeautifulSoup
-import md5
+# import md5
+import hashlib
 import re
 import urllib
-import urllib2
 import os
-from cStringIO import StringIO
-'''on CentOS'''
-# from PIL import Image
-'''on Ubuntu'''
-import Image
 import redis
-import urlparse
 '''佛山'''
 
 class Handler(BaseHandler):
@@ -37,15 +31,15 @@ class Handler(BaseHandler):
     @every(minutes=24 * 60)
     def on_start(self):
         params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-        data = urllib.urlencode(params)
+        data = urllib.parse.urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/xzyjs', 
             method='POST',data=data, callback=self.index_page)
         params = {'strWhere' : '%2C%2C%2C', 'action': 'ydgh', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-        data = urllib.urlencode(params)
+        data = urllib.parse.urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/ydgh', 
             method='POST',data=data, callback=self.index_page)
         params = {'strWhere' : '%2C%2C%2C', 'action': 'gcgh', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-        data = urllib.urlencode(params)
+        data = urllib.parse.urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/gcgh', 
             method='POST',data=data, callback=self.index_page)
 
@@ -64,16 +58,17 @@ class Handler(BaseHandler):
 
         page_count = response_json['pageCount']
         page_count = int(page_count)
-        print page_count
+        print(page_count)
 
         for each in content_list:
+            print(each)
             self.crawl(each, callback=self.content_page)
 
         for i in range(2, page_count + 1):
             temp_url = response.url + '/' + str(i)
             params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
             params['pageIndex'] = str(i)
-            temp_data = urllib.urlencode(params)
+            temp_data = urllib.parse.urlencode(params)
             self.crawl(temp_url, method='POST', data=temp_data, callback=self.next_list)
 
     @config(priority=2)
@@ -97,8 +92,8 @@ class Handler(BaseHandler):
         images = response.doc('img')
         
         url = response.url
-        m = md5.new()
-        m.update(url)
+        m = hashlib.md5()
+        m.update(url.encode())
         web_name = m.hexdigest()
         # path = 'D:/web/' + web_name + '/'
         path = '/home/teer/web/FS/' + web_name + '/'
@@ -119,7 +114,7 @@ class Handler(BaseHandler):
         image_list = []
         if images is not None:
             for each in images.items():
-                image_url = urlparse.urljoin(url, each.attr.src)
+                image_url = urllib.parse.urljoin(url, each.attr.src)
                 image_list.append(image_url)
             for i in image_list:
                 d = {}
@@ -135,8 +130,8 @@ class Handler(BaseHandler):
 
     def on_result(self, result):
         if result is not None: 
-            m = md5.new()
-            m.update(result['url'])
+            m = hashlib.md5()
+            m.update(result['url'].encode())
             web_name = m.hexdigest()
             # path = 'D:/web/' + web_name + '/'
             path = '/home/teer/web/FS/' + web_name + '/'
