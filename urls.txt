@@ -7,9 +7,9 @@
 ^*中山规划局：http://www.zsghj.gov.cn/list/p-1.html
 	无表格
 ^清远规划局_不分批前批后：http://www.qyup.gov.cn/qysghj/szls/201309/aa743ec8c82142f1bc99b55eac6521fc.shtml
-汕头规划局：http://www.stghj.gov.cn/Category_59/Index.aspx
+^汕头规划局：http://www.stghj.gov.cn/Category_59/Index.aspx
 	分为市局、龙湖、金平
-茂名规划局：http://csgh.maoming.gov.cn/certSearch.aspx
+^茂名规划局：http://csgh.maoming.gov.cn/certSearch.aspx
 潮州规划局：http://czcsgh.gov.cn/jsyd_s.asp
 肇庆规划局：http://www.zqplan.gov.cn/ghxk.aspx?flag=1
 	有的地方只有图

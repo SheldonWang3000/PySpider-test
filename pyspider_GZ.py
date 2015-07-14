@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 from pyspider.libs.base_handler import *
 from bs4 import BeautifulSoup
 import hashlib
@@ -9,9 +8,6 @@ import redis
 '''广州市国土资源和规划委员会'''
 
 class Handler(BaseHandler):
-    height = 250
-    width = 250
-    thread_num = 14
     r = redis.Redis()
     key = 'download'
     headers= {
@@ -100,7 +96,7 @@ class Handler(BaseHandler):
                 d = {}
                 d['url'] = i
                 d['type'] = 'attachment'
-                d['path'] = 'path'
+                d['path'] = path
                 self.r.rpush(self.key, str(d))
 
         image_list = []
@@ -114,7 +110,7 @@ class Handler(BaseHandler):
                 d = {}
                 d['url'] = i
                 d['type'] = 'image'
-                d['path'] = 'path'
+                d['path'] = path
                 self.r.rpush(self.key, str(d))
 
         return {

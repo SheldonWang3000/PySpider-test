@@ -1,7 +1,5 @@
-#!/usr/bin/env python
 from pyspider.libs.base_handler import *
 from bs4 import BeautifulSoup
-# import md5
 import hashlib
 import re
 import urllib
@@ -12,9 +10,6 @@ import redis
 class Handler(BaseHandler):
     r = redis.Redis()
     key = 'download'
-    height = 250
-    width = 250
-    thread_num = 14
     headers= {
         "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         "Accept-Encoding":"gzip, deflate, sdch",
@@ -108,7 +103,7 @@ class Handler(BaseHandler):
                 d = {}
                 d['url'] = i
                 d['type'] = 'attachment'
-                d['path'] = 'path'
+                d['path'] = path
                 self.r.rpush(self.key, str(d))
 
         image_list = []
@@ -120,7 +115,7 @@ class Handler(BaseHandler):
                 d = {}
                 d['url'] = i
                 d['type'] = 'image'
-                d['path'] = 'path'
+                d['path'] = path
                 self.r.rpush(self.key, str(d))
 
         return {
