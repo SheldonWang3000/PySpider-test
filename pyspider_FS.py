@@ -2,9 +2,12 @@ from pyspider.libs.base_handler import *
 from bs4 import BeautifulSoup
 import hashlib
 import re
-import urllib
 import os
 import redis
+from urllib.parse import urljoin
+from urllib.parse import urlencode
+from urllib.parse import urlparse
+from urllib.parse import urlunparse
 '''佛山'''
 
 class Handler(BaseHandler):
@@ -28,15 +31,15 @@ class Handler(BaseHandler):
     @every(minutes=24 * 60)
     def on_start(self):
         params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-        data = urllib.parse.urlencode(params)
+        data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/xzyjs', 
             method='POST',data=data, callback=self.index_page)
         params = {'strWhere' : '%2C%2C%2C', 'action': 'ydgh', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-        data = urllib.parse.urlencode(params)
+        data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/ydgh', 
             method='POST',data=data, callback=self.index_page)
         params = {'strWhere' : '%2C%2C%2C', 'action': 'gcgh', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-        data = urllib.parse.urlencode(params)
+        data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/gcgh', 
             method='POST',data=data, callback=self.index_page)
 
@@ -65,8 +68,13 @@ class Handler(BaseHandler):
             temp_url = response.url + '/' + str(i)
             params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
             params['pageIndex'] = str(i)
-            temp_data = urllib.parse.urlencode(params)
+            temp_data = urlencode(params)
             self.crawl(temp_url, method='POST', data=temp_data, callback=self.next_list)
+
+    def real_path(self, path):
+        arr = urlparse(path)
+        real_path = os.path.normpath(arr[2])
+        return urlunparse((arr.scheme, arr.netloc, real_path, arr.params, arr.query, arr.fragment))
 
     @config(priority=2)
     def next_list(self, response):
@@ -96,10 +104,24 @@ class Handler(BaseHandler):
         if not os.path.exists(path):
             os.makedirs(path)           
 
+        image_list = []
+        if images is not None:
+            for each in images.items():
+                image_url = self.real_path(urljoin(url, each.attr.src))
+                if image_url not in image_list:
+                    image_list.append(image_url)
+            for i in image_list:
+                d = {}
+                d['url'] = i
+                d['type'] = 'image'
+                d['path'] = path
+                self.r.rpush(self.key, str(d))
+
         attachment_list = []
         if attachment is not None:
             for each in attachment.items():
-                attachment_list.append(each.attr.href)
+                if each.attr.href not in attachment_list and each.attr.href not in image_list:
+                    attachment_list.append(each.attr.href)
             for i in attachment_list:
                 d = {}
                 d['url'] = i
@@ -107,17 +129,7 @@ class Handler(BaseHandler):
                 d['path'] = path
                 self.r.rpush(self.key, str(d))
 
-        image_list = []
-        if images is not None:
-            for each in images.items():
-                image_url = urllib.parse.urljoin(url, each.attr.src)
-                image_list.append(image_url)
-            for i in image_list:
-                d = {}
-                d['url'] = i
-                d['type'] = 'image'
-                d['path'] = path
-                self.r.rpush(self.key, str(d))
+        
 
         return {
             "url": response.url,

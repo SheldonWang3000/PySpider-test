@@ -1,643 +1,246 @@
 
 
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>韶关市城乡规划局</title>
-<link rel="stylesheet" type="text/css" href="sggh/greenimages/style.css" title="CSS1" ID="CSS1" DISABLED>
-<link rel="stylesheet" type="text/css" href="sggh/blueimages/style.css" title="CSS2" ID="CSS2" >
-<script type="text/javascript" src="sggh/js/headfoot.js"></script>
-<script type="text/javascript" src="sggh/js/MSClass.js"></script>
-<script type="text/javascript" src="sggh/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="sggh/js/main.js"></script>
-
-</head>
-
-<body>
-
-    <!--<link rel="stylesheet" type="text/css" href="sggh/greenimages/style.css" title="CSS1" ID="CSS1" DISABLED>
-<link rel="stylesheet" type="text/css" href="sggh/blueimages/style.css" title="CSS2" ID="CSS2" >
-
-<script type="text/javascript" src="sggh/js/headfoot.js"></script>
-<script type="text/javascript" src="sggh/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="sggh/js/main.js"></script>
-<script type="text/javascript" src="sggh/js/MSClass.js"></script>
-<script type="text/javascript" src="sggh/js/WdatePicker.js"></script>
--->
-
-<script type="text/javascript">
-//写cookies函数
-function SetCookie(name,value)//两个参数，一个是cookie的名子，一个是值
-{
-    var Days = 30; //此 cookie 将被保存 30 天
-    var exp  = new Date();    //new Date("December 31, 9998");
-    exp.setTime(exp.getTime() + Days*24*60*60*1000);
-    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
-}
-function getCookie(name)//取cookies函数        
-{
-    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
-     if(arr != null) return unescape(arr[2]); return null;
-
-}
-function delCookie(name)//删除cookie
-{
-    var exp = new Date();
-    exp.setTime(exp.getTime() - 1);
-    var cval=getCookie(name);
-    if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();
-}
-</script>
-
-<script type="text/javascript">
-//选择应显示的css
-if(getCookie("cssindex") != null)
-{
-//alert(getCookie("cssindex"));
-    for(var i=1;i<3;i++)
-    {
-        if(i==getCookie("cssindex"))
-        {
-          document.getElementById("CSS"+i).disabled= false;
-        }
-        else
-        {
-          document.getElementById("CSS"+i).disabled= true;
-        }
-    }
-}
-</script>
-
-<script type="text/javascript">
-function changeCss(id)
-{
-  for(var i=1;i<3;i++)
-  {
-      if(i==id)
-      {
-        document.getElementById("CSS"+i).disabled= false;
-        SetCookie("cssindex",i)
-      }
-      else
-      {
-        document.getElementById("CSS"+i).disabled= true;
-      }
-  }
-}
-
-function write_date(){
-var week;
-if(new Date().getDay()==0)          week="星期日"
-if(new Date().getDay()==1)          week="星期一"
-if(new Date().getDay()==2)          week="星期二" 
-if(new Date().getDay()==3)          week="星期三"
-if(new Date().getDay()==4)          week="星期四"
-if(new Date().getDay()==5)          week="星期五"
-if(new Date().getDay()==6)          week="星期六"
-document.write(new Date().getFullYear()+"年"+(new Date().getMonth()+1)+"月"+new Date().getDate()+"日"+"   "+week);
-}
-</script>
-
-<!-- -->
-<div class="head">
-  <table width="960" border="0" cellspacing="0" cellpadding="0" style="font-size:12px;">
-    <tr>
-      <td height="42" align="right"><a onclick="SetHome(window.location)" href="javascript:void(0)">设为首页</a> ｜ 
-          <a onclick="AddFavorite(window.location,document.title)" href="javascript:void(0)">加入收藏</a> ｜ 
-          <a href="http://t.qq.com/sgscxghj" target="_blank" title="韶关市城乡规划局官方政务微博">政务微博</a>  ｜ 
-          <a href="http://wz.sgmsw.cn/website/wlwz/wlwzSiteAction!unitWlwz.action?orgid=547&areaCode=440200&deptTypeCode=02" target="_blank" title="韶关市城乡规划局网络问政专栏">网络问政</a> </td>
-    </tr>
-    <tr>
-      <td align="left" class="h18 pad_t1">
-      <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0" width="800" height="150">
-        <param name=movie value="sggh/top1_10.swf">
-        <param name=quality value=high>
-        <param name="wmode" value="transparent">
-        <param name="menu" value="false">
-        <embed src="sggh/top1_10.swf" quality=high pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="800" height="150" wmode="transparent" menu="false">
-        </embed>
-        </object> 
-      </td>
-    </tr>
-  </table>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+  <HEAD>
+    <title>珠海市住房和城乡规划建设信息网 - 业务公示</title>
+    <LINK href="css/Style.css" type="text/css" rel="stylesheet">
+  </HEAD>
+  <body MS_POSITIONING="GridLayout">
+    <form name="Form1" method="post" action="WxList.aspx?WstName=%u4e1a%u52a1%u516c%u793a&amp;MdlName=%u5efa%u7b51%u5de5%u7a0b%u89c4%u5212%u516c%u793a&amp;page=2" id="Form1">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTEyMzY2MDQyNzMPZBYCZg9kFgICBw9kFgICAQ9kFgICAQ8PFgIeB1Zpc2libGVoZGRkcS2DduQWUjFguRwEddVA878LLXC4hYi5RQ4ern6Ay7I=" />
 </div>
-<table width="1000" border="0" cellspacing="0" cellpadding="0" class="menu" style="font-size:12px;">
+
+      
+<script type="text/javascript" src="script/jquery-1.7.1.min.js"></script>
+<table style="width:980px;" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td width="10" class="menu_l">&nbsp;</td>
-    <td>
-      <table width="955" border="0" cellspacing="0" cellpadding="0" class="menu_line twhite1">
-        <tr>
-          <td><a style="line-height: 35px;" class="bar" href="index.asp" id="td_01" onmouseover="tabsb.change(0,10,1,{c1:'bar',c2:''});">首&nbsp;&nbsp;页</a></td>
-          <td><a style="line-height: 35px;" href="article_Class_Item.asp?isParent=true&ClassID=84" id="td_02" onmouseover="tabsb.change(0,10,2,{c1:'bar',c2:''});">机构信息</a></td>
-          <td><a style="line-height: 35px;" href="http://zwgk.shaoguan.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&deptName=&#22478;&#20065;&#35268;&#21010;&#23616;&siteOrgCode=440200" target="_blank" id="td_03" onmouseover="tabsb.change(0,10,3,{c1:'bar',c2:''});">政务公开</a></td>
-          <td><a style="line-height: 35px;" href="article_Class_Item.asp?isParent=true&ClassID=268" id="td_04" onmouseover="tabsb.change(0,10,4,{c1:'bar',c2:''});">规划展示</a></td>
-          <td><a style="line-height: 35px;" href="article_Class_Item.asp?isParent=true&ClassID=148" id="td_05" onmouseover="tabsb.change(0,10,5,{c1:'bar',c2:''});">规划公示</a></td>
-          <td><a style="line-height: 35px;" href="http://wsbs.sg.gov.cn/website/onlineService/onlineService!list.action?department=006946462&departmentName=市城乡规划局&hot=4&typecode=0103" target="_blank" id="td_06" onmouseover="tabsb.change(0,10,6,{c1:'bar',c2:''});">网上办事</a></td>
-          <td><a style="line-height: 35px;" target="_blank" id="td_07" onmouseover="tabsb.change(0,10,7,{c1:'bar',c2:''});">公众互动</a></td>
-          <td><a style="line-height: 35px;" href="article_Class_Item.asp?ClassID=300&ChildClassID=301" id="td_08" onmouseover="tabsb.change(0,10,8,{c1:'bar',c2:''});">政策法规</a></td>
-          <td><a style="line-height: 35px;" id="td_09" onmouseover="tabsb.change(0,10,9,{c1:'bar',c2:''});">专题专栏</a></td>
-          <td><a style="line-height: 35px;" href="article_Class_Item.asp?isParent=true&ClassID=164" id="td_010" onmouseover="tabsb.change(0,10,10,{c1:'bar',c2:''});">规划委员会</a></td>
-        </tr>
-      </table>
+    <td style="width:980px; height="120" style=" background-color:#E65F03">
+            <img src="Imgs/top2.gif" style="width:980px;height:152px;" border=0/>
     </td>
-    <td class="menu_r" width="10">&nbsp;</td>
   </tr>
-</table>
-<table id="table_01" border="0" cellspacing="0" cellpadding="0" class="tit">
   <tr>
-    <td class="tit_l" width="10">&nbsp;</td>
-    <td>
-    
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:12px;">
-    <tr>
-      <td style="width:500px;" class="pad_l30 tblue1">欢迎光临韶关规划信息网！&nbsp;&nbsp;&nbsp;&nbsp;今天是：<script language="javascript">write_date();</script></td>
-      <td> </td>
-      <td style="width:100px;" class="pad_l30 tblue1" align="right">配色: 
-        <a href="javascript:changeCss(2)"><img style="width:12px; height:12px; vertical-align:middle;" src='sggh/img/blue-1.png' border="0" /></a>&nbsp;
-        <a href="javascript:changeCss(1)"><img style="width:12px; height:12px; vertical-align:middle;" src='sggh/img/green-1.png' border="0" /></a></td>
-    </tr>
-  </table>
-    </td>
-    <td class="tit1_r" width="10">&nbsp;</td>
-  </tr>
-</table>
-<table id="table_02" style="display:none;font-size:12px;" width="1000" border="0" cellspacing="0" cellpadding="0" class="tit">
-  <tr>
-    <td class="tit_l" width="10">&nbsp;</td>
-    <td class="tblue1" style="padding-left:25px;">
-        <a href="article_Class_Item.asp?ClassID=84&ChildClassID=87">机构职能</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="article_Class_Item.asp?ClassID=84&ChildClassID=88">机构领导</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="article_Class_Item.asp?ClassID=84&ChildClassID=86">机构设置</a>
-    </td>
-    <td class="tit1_r" width="10">&nbsp;</td>
-  </tr>
-</table>
- <table id="table_03" style="display:none;font-size:12px;" width="1000" border="0" cellspacing="0" cellpadding="0" class="tit">
-  <tr>
-    <td class="tit_l" width="10">&nbsp;</td>
-    <td class="tblue1" style="padding-left:79px;">
-        <a href="http://zwgk.shaoguan.gov.cn/website/govPublic/govPublicSiteAction!findByDeptId.action?deptId=547&siteOrgCode=440200" target="_blank">公开规定</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="http://zwgk.shaoguan.gov.cn/website/govPublic/govPublicSiteAction!openbyapply_msg.action?areaCode=440200&deptId=547" target="_blank">公开流程</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="http://zwgk.shaoguan.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&deptName=&#22478;&#20065;&#35268;&#21010;&#23616;&siteOrgCode=440200" target="_blank">公开目录</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=4&siteOrgCode=440200" target="_blank">工作动态</a>
-    </td>
-    <td class="tit1_r" width="10">&nbsp;</td>
-  </tr>
-</table>
-<table id="table_04" style="display:none;font-size:12px;" width="1000" border="0" cellspacing="0" cellpadding="0" class="tit">
-  <tr>
-    <td class="tit_l" width="10">&nbsp;</td>
-    <td class="tblue1" style="padding-left:215px;">
-        <a href="article_Class_Item.asp?ClassID=268&ChildClassID=306">总体规划</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="article_Class_Item.asp?ClassID=268&ChildClassID=307">专项规划</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="article_Class_Item.asp?ClassID=268&ChildClassID=308">详细规划</a>
-    </td>
-    <td class="tit1_r" width="10">&nbsp;</td>
-  </tr>
-</table>
-<table id="table_05" style="display:none;font-size:12px;" width="1000" border="0" cellspacing="0" cellpadding="0" class="tit">
-  <tr>
-    <td class="tit_l" width="10">&nbsp;</td>
-    <td class="tblue1" style="padding-left:355px;">
-        <!--
-  <a href="article_Class_Item.asp?ClassID=148&ChildClassID=201">草案公示</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  -->
-        <a href="article_Class_Item.asp?ClassID=148&ChildClassID=204">批前公示</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="article_Class_Item.asp?ClassID=148&ChildClassID=219">批后公告</a>
-    </td>
-    <td class="tit1_r" width="10">&nbsp;</td>
-  </tr>
-</table>
-<table id="table_06" style="display:none;font-size:12px;" width="1000" border="0" cellspacing="0" cellpadding="0" class="tit">
-  <tr>
-    <td class="tit_l" width="10">&nbsp;</td>
-    <td class="tblue1" style="padding-left:452px;">
-        <a href="http://wsbs.sg.gov.cn/website/onlineService/onlineService!list.action?department=006946462&departmentName=市城乡规划局&hot=4&typecode=0103" target="_blank">办事指南</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="article_Class_Item.asp?isParent=true&ClassID=157">表格下载</a>&nbsp;&nbsp;
-  <!-- 
-  |&nbsp;&nbsp;<a>规划许可查询</a>
-  -->
-    </td>
-    <td class="tit1_r" width="10">&nbsp;</td>
-  </tr>
-</table>
-<table id="table_07" style="display:none;font-size:12px;" width="1000" border="0" cellspacing="0" cellpadding="0" class="tit">
-  <tr>
-    <td class="tit_l" width="10">&nbsp;</td>
-    <td class="tblue1" style="padding-left:545px;">
-        <a href="http://wz.sgmsw.cn/website/wlwz/wlwzSiteAction!unitWlwz.action?orgid=547&areaCode=440200&deptTypeCode=02" target="_blank">网络问政</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="http://t.qq.com/sgscxghj" target="_blank">政务微博</a></td>
-    <td class="tit1_r" width="10">&nbsp;</td>
-  </tr>
-</table>
-<table id="table_08" style="display:none;font-size:12px;" width="1000" border="0" cellspacing="0" cellpadding="0" class="tit">
-  <tr>
-    <td class="tit_l" width="10">&nbsp;</td>
-    <td class=" tblue1" style="padding-left:680px;">
-        <a href="article_Class_Item.asp?ClassID=300&ChildClassID=301">法律法规</a><!--&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="/news">政策法规</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="/news">政策法规</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="/news">政策法规</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="/news">政策法规</a>-->
-    </td>
-    <td class="tit1_r" width="10">&nbsp;</td>
-  </tr>
-</table>
-<table id="table_09" style="display:none;font-size:12px;" width="1000" border="0" cellspacing="0" cellpadding="0" class="tit">
-  <tr>
-    <td class="tit_l" width="10">&nbsp;</td>
-    <td class="pad_l30 tblue1" style="padding-left:710px;">
-    <a href="article_Class_Item.asp?isParent=true&ClassID=323">电子报批专栏</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-    <a href="article_Class_Item.asp?isParent=true&ClassID=302">规划知识专栏</a>
-    <!--&nbsp;&nbsp;|&nbsp;&nbsp;
-    <a href="article_Class_Item.asp?isParent=true&ClassID=290">保密宣传专栏</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-    <a href="Article_Show.asp?ArticleID=2351">局长接待日</a>-->
-    </td>
-    <td class="tit1_r" width="1">&nbsp;</td>
-  </tr>
-</table>
-<table id="table_010" style="display:none;font-size:12px;" width="1000" border="0" cellspacing="0" cellpadding="0" class="tit">
-  <tr>
-    <td class="tit_l" width="10">&nbsp;</td>
-    <td class="pad_l30 tblue1" style="padding-left:877px;">
-       <!-- <a href="article_Class_Item.asp?ClassID=164&ChildClassID=165">规委会动态</a>
-&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="article_Class_Item.asp?ClassID=164&ChildClassID=165">动态/通知/纪要</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="article_Class_Item.asp?ClassID=164&ChildClassID=165">专委会名单/职责</a>-->
-    </td>
-    <td class="tit1_r" width="10">&nbsp;</td>
-  </tr>
-</table>
-<table width="1000" border="0" cellspacing="0" cellpadding="0" class="tit_bg" height="40" bgcolor="#ffffff" style="font-size:12px;">
-  <tr>
-    <td width="15" class="pad_l15"><div class="icon1" align="absmiddle" /> </td>
-    <td width="90" class="pad_l15"><strong class="tblue2">热点新闻：</strong></td>
-    <td width="590" class="line">
-    
-      <div id="rdxw" style="width:590px; height:20px; overflow:hidden; text-align:left;">
-        <ul id="rdxwtitle">
-          <li style="line-height:30px; font-weight:bold; font-size:12px;" class="tred1"><a href="Article_Show.asp?ArticleID=2794">市城乡规划局召开“三严三实”专题教育动员大会</a></li>
-          <li style="line-height:30px; font-weight:bold; font-size:12px;" class="tred1"><a href="Article_Show.asp?ArticleID=2781">偏远小山村三年大变样</a></li>
-          <li style="line-height:30px; font-weight:bold; font-size:12px;" class="tred1"><a href="Article_Show.asp?ArticleID=2764">一盘读懂城市规划与发展</a></li>
+    <td height="32" align="center" background="Imgs/Menu_bg.jpg"> 
+      <div id="nav">
+        <ul id="nav">
+          <li><a href="Default.aspx">首页</a></li> 
+          <li><a href="WxList.aspx?WstName=%b5%b3%ce%f1%d5%fe%ce%f1%b9%ab%bf%aa&MdlName=%be%d6%b7%a2%ce%c4%bc%fe">党务政务公开</a></li>
+          <li><a href="WxList.aspx?WstName=%d5%fe%b2%df%b7%a8%b9%e6%d3%eb%d0%d0%d5%fe%b4%a6%b7%a3&MdlName=%d7%a1%b7%bf%b7%a8%b9%e6">政策法规与行政处罚</a></li>
+          <li><a href="WxList.aspx?WstName=%bc%cd%bc%ec%bc%e0%b2%ec&MdlName=%c1%ae%d5%fe%b6%af%cc%ac#">纪检监察</a></li>
+          <li><a href="WxList.aspx?WstName=%b3%c7%cf%e7%b9%e6%bb%ae&MdlName=%bd%fc%c6%da%bd%a8%c9%e8%b9%e6%bb%ae">城乡规划</a></li>
+          <li><a href="WxList.aspx?WstName=%b9%ab%d3%c3%c0%b8%c4%bf&MdlName=%cd%a8%d6%aa%b9%ab%b8%e6&padWstName=%b7%bf%b5%d8%b2%fa%d2%b5&padMdlName=%cd%a8%d6%aa%b9%ab%b8%e6&AcsId=41">房地产业</a></li>
+          <li><a href="WxList.aspx?WstName=%b9%ab%d3%c3%c0%b8%c4%bf&MdlName=%cd%a8%d6%aa%b9%ab%b8%e6&padWstName=%b4%e5%d5%f2%bd%a8%c9%e8&padMdlName=%cd%a8%d6%aa%b9%ab%b8%e6&AcsId=40">村镇建设</a></li>
+          <li><a href="WxList.aspx?WstName=%b3%c7%ca%d0%b8%fc%d0%c2&MdlName=%cd%a8%d6%aa%b9%ab%b8%e6">城市更新</a></li>
+          <li><a href="WxList.aspx?WstName=%b9%ab%d3%c3%c0%b8%c4%bf&MdlName=%cd%a8%d6%aa%b9%ab%b8%e6&padWstName=%d0%d0%d5%fe%c9%f3%c5%fa&padMdlName=%cd%a8%d6%aa%b9%ab%b8%e6&AcsId=39">行政审批</a></li>
+          <li><a href="WxList.aspx?WstName=%b9%ab%d3%c3%c0%b8%c4%bf&MdlName=%cd%a8%d6%aa%b9%ab%b8%e6&padWstName=%bd%a8%d6%fe%d2%b5&padMdlName=%cd%a8%d6%aa%b9%ab%b8%e6&AcsId=42">建筑业</a></li>
+          <li><a href="WxList.aspx?WstName=%b9%ab%d3%c3%c0%b8%c4%bf&MdlName=%cd%a8%d6%aa%b9%ab%b8%e6&padWstName=%d6%ca%c1%bf%b0%b2%c8%ab&padMdlName=%cd%a8%d6%aa%b9%ab%b8%e6&AcsId=43">质量安全</a></li>
+          <li><a href="WxList.aspx?WstName=%b9%ab%d3%c3%c0%b8%c4%bf&MdlName=%cd%a8%d6%aa%b9%ab%b8%e6&padWstName=%d5%d0%b1%ea%cd%b6%b1%ea&padMdlName=%cd%a8%d6%aa%b9%ab%b8%e6&AcsId=44">招标投标</a></li>
+          <li><a href="WxList.aspx?WstName=%b9%ab%d3%c3%c0%b8%c4%bf&MdlName=%cd%a8%d6%aa%b9%ab%b8%e6&padWstName=%bd%a8%d6%fe%bd%da%c4%dc&padMdlName=%cd%a8%d6%aa%b9%ab%b8%e6&AcsId=122">建筑节能</a></li>
+          <li><a href="WxSiteMap.aspx?UntClass=%d5%be%b5%e3%b5%d8%cd%bc">站点地图</a></li>
         </ul>
       </div>
-      <script type="text/javascript">new Marquee(["rdxw","rdxwtitle"],0,1,480,30,20,3000,0)</script>
-      
-    </td>
-    <td>
-      <table width="310" border="0" cellspacing="0" cellpadding="0"  style="font-size:12px;">
-        <tr>
-        <form name="searchform" action="Article_Class_Search.asp" method="get" target="_blank" onsubmit="return submitFunction();">
-          <input name="clz" value="SearchSite" type="hidden" />
-          <input name="res" value="site" type="hidden" />
-          <input name="siteid" value="3" type="hidden" />
-          <td width="15" class="pad_l10"><div class="icon2" align="absmiddle" /> </td>
-          <td width="75" class="pad_l10">站内检索：</td>
-          <td width="155"><input name="keywords" id="keywords" value="请输入关键字" onfocus="clsu()" onblur="resu()" type="text" style="width:150px;"  maxlength="20" /></td>
-          <td width="65" align="center"><input type="submit" class="btn1" value=" " align="absmiddle" /></td>
-        </tr>
-        </form>
-      </table>
     </td>
   </tr>
 </table>
-<!--top -->
-    <!------------------------------------------------------------->
-<!--top -->
-
-
-    <table name="top" width="1000" border="0" cellspacing="0" cellpadding="0" class="mar_t10">
+      <table align="center" cellpadding="0" cellspacing="0" border="0">
       <tr>
-        <td height="10"><img src="sggh/greenimages/con1_t.jpg" /></td>
-      </tr>
-    </table>
-    <div class="con">
-    <table width="978" border="0" cellspacing="0" cellpadding="0" height="26" class="bor_b4">
-      <tr>
-        <td class="pad_l5">当前位置：&nbsp;<a href='index.asp'>首页</a>&nbsp;&gt;&nbsp;
+      <td>
+      <div class="wxMain">
         
-<a href='article_Class_Item.asp?isParent=true&ClassID=148'>规划公示</a>&nbsp;&gt;&nbsp;<a href='article_Class_Item.asp?ClassID=148&ChildClassID=219'>批后公告</a>&nbsp;&gt;&nbsp;<!--a href='article_class.asp?ArticleID=2892'-->韶关市浈江区犁市镇原犁市船厂旁地块用地证批后公告<!--/a-->
-        
-        </td>
-      </tr>
-    </table>
-    <table width="978" border="0" cellspacing="0" cellpadding="0" height="64" class="mar_t10">
-      <tr>
-        <td class="xl_t1">韶关市浈江区犁市镇原犁市船厂旁地块用地证批后公告</td>
-      </tr>
-    </table>
-    <table width="978" border="0" cellspacing="0" cellpadding="0" height="24" bgcolor="#f6f6f6">
-      <tr>
-        <td align="center" class="tgray1">发布时间：2015-7-2    字体：<a href="javascript:fontZoomC();" >大</a> <a href="javascript:fontZoomB();" >中</a> <a href="javascript:fontZoomA();" >小</a>    作者：系统管理员    浏览数：74</td>
-      </tr>
-    </table>
-    <table width="914" border="0" cellspacing="0" cellpadding="0" class="xl_con1">
-      <tr>
-        <td height="500" valign="top"><span id="fontzoom" class="t12">
-
-
-<script language="javascript">
-function smallit(){            
-  var height1=PhotoViewer.images1.height;            
-  var width1=PhotoViewer.images1.width;            
-  PhotoViewer.images1.height=height1/1.2;            
-  PhotoViewer.images1.width=width1/1.2;           
-}             
+<div style="margin:6px;padding-bottom:4px;">
+    <div style="background:url(imgs/loc_m.gif);">
+        <div style="padding-left:5px;background:url(imgs/loc_l.gif) no-repeat left;">
+            <div style="padding-right:5px;background:url(imgs/loc_r.gif) no-repeat right;">
+                <div style="background:url(imgs/loc_bg.gif) no-repeat center right;height:38px;vertical-align:middle;line-height:38px;text-align:left;text-indent:40px;">
+                    当前位置：<a href="default.aspx">首页</a>
+                    <!-- 站点 -->
+                    &nbsp;>&nbsp;<a href="WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be">业务公示</a>
+                    
+                    
+                    <!-- 栏目 -->
+                    &nbsp;>&nbsp;<a class="linkMdl" href="WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be">建筑工程规划公示</a>
           
-function bigit(){            
-  var height1=PhotoViewer.images1.height;            
-  var width1=PhotoViewer.images1.width;            
-  PhotoViewer.images1.height=height1*1.2;          
-  PhotoViewer.images1.width=width1*1.2;           
-}             
-function fullit(url)
-{
-  var width_s=screen.width-10;
-  var height_s=screen.height-30;
-  var obj=window.open("", "", "width="+width_s+",height="+height_s+",left=0,top=0,location=no,toolbar=no,status=no,resizable=no,scrollbars=yes,menubar=no,directories=no");
-  var SendDate="<img src="+url+">";
-  obj.document.write(SendDate);
-}
-function realsize()
-{
-  PhotoViewer.images1.height=PhotoViewer.images2.height;     
-  PhotoViewer.images1.width=PhotoViewer.images2.width;
-  PhotoViewer.block1.style.left = 0;
-  PhotoViewer.block1.style.top = 0;
-}
-function featsize()
-{
-  var width1=PhotoViewer.images2.width;            
-  var height1=PhotoViewer.images2.height;            
-  var width2=760;            
-  var height2=500;            
-  var h=height1/height2;
-  var w=width1/width2;
-  if(height1<height2&&width1<width2)
-  {
-    PhotoViewer.images1.height=height1;            
-    PhotoViewer.images1.width=width1;           
-  }
-  else
-  {
-    if(h>w)
-    {
-      PhotoViewer.images1.height=height2;          
-      PhotoViewer.images1.width=width1*height2/height1;           
-    }
-    else
-    {
-      PhotoViewer.images1.width=width2;           
-      PhotoViewer.images1.height=height1*width2/width1;          
-    }
-  }
-  PhotoViewer.block1.style.left = 0;
-  PhotoViewer.block1.style.top = 0;
-}
 
-
-</script>
-
-   
-    <table width="900" border="0" align="center" cellpadding="0" cellspacing="0" class="border2">
-  <tr>
-    <td height="30" align="center" valign="middle" class="tdbg_leftall"><input name="smallit" type="button" id="smallit" onClick="smallit();" value="- 缩小 -">    
-&nbsp;&nbsp;
-<input name="bigit" type="button" id="bigit" onClick="bigit();" value="+ 放大 +">              
+          <!-- 类别 -->
           
-&nbsp;
-<input name="fullit" type="button" id="fullit" value="全屏显示" onClick="fullit('UploadFiles/201572102646928.jpg');">
-&nbsp;
-<input name="realsize" type="button" id="realsize" value="实际大小" onClick="realsize();">
-&nbsp;
-<input name="featsize" type="button" id="featsize" value="最合适大小" onClick="featsize();">
-&nbsp;
-</td>
-  </tr>
-  <tr> 
-    <td align="center" valign="middle" class="tdbg_leftall"><iframe id='PhotoViewer' width='100%' height='600' scrolling='no' src='Article_Photo_View.asp?id=2892&uf=UploadFiles/201572102646928.jpg'></iframe></td>
-  </tr>
-</table>
 
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        </span></td>
-      </tr>
-      <tr>
-       <td align="center">
-       <div align="center" style="height:30px; font-size:14px; margin-top:5px;">
-       
-       </div>
-       </td>
-      </tr>
-    </table>
-    
-    <!-- div style="border-top:1px dashed #333; margin:20px auto 0px auto; width:914px; height:1px;"></div>
-    <table width="914" border="0" cellspacing="0" cellpadding="0" class="mar_t10">
-      <tr>
-        <td class="tb t16 h28 tred1">相关新闻：</td>
-      </tr>
-      
-    </table -->
-    <table width="914" border="0" cellspacing="0" cellpadding="0" height="80" class="xl_tit1">
-      <tr>
-        <td><a href="javascript:window.external.AddFavorite(location.href,document.title);">【收藏本页】</a> <a href="javascript:printPage();">【打印本页】</a> <a href="javascript:window.close();">【关闭窗口】</a> <a href="#top">【返回顶部】</a></td>
-      </tr>
-    </table>
-    </div>
-    <table width="1000" border="0" cellspacing="0" cellpadding="0" class="con_bc2">
-      <tr>
-        <td width="10" class="con_bl2" height="10"></td>
-        <td width="990" class="con_br2"></td>
-      </tr>
-    </table>
-
-<!--foot -->
-<!--<link rel="stylesheet" type="text/css" href="sggh/greenimages/style.css" title="CSS1" ID="CSS1" DISABLED>
-<link rel="stylesheet" type="text/css" href="sggh/blueimages/style.css" title="CSS2" ID="CSS2" >-->
-<table width="1000" border="0" cellspacing="0" cellpadding="0" class="tit12" height="35">
-    <tr>
-        <td width="15">
-        </td>
-        <td>
-            <select name="select1" style="width: 170px;" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0">
-                <option selected="selected">--国家部委各部门网站--</option>
-                <option value="http://www.miit.gov.cn/">中华人民共和国工业和信息化部</option>
-                <option value="http://www.most.gov.cn/">中华人民共和国科学技术部</option>
-                <option value="http://www.mlr.gov.cn/">中华人民共和国国土资源部</option>
-                <option value="http://www.mwr.gov.cn/">中华人民共和国水利部</option>
-                <option value="http://www.moc.gov.cn/">中华人民共和国交通运输部</option>
-                <option value="http://www.cecs.org.cn/">中国工程建设标准化网</option>
-                <option value="http://www.realestate.cei.gov.cn/">中国房地产信息网</option>
-                <option value="http://www.nrscc.gov.cn/">国家遥感中心</option>
-                <option value="http://www.sbsm.gov.cn/">国家测绘局</option>
-                <option value="http://www.cas.cn/">中国科学院</option>
-                <option value="http://www.cea.gov.cn/">中国地震局</option>
-            </select>
-        </td>
-        <td>
-            <select name="select2" style="width: 170px;" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0">
-                <option selected="selected">--各省(市)规划部门网站--</option>
-                <option value="http://www.bjghw.gov.cn/">北京市规划委员会</option>
-                <option value="http://www.njghj.gov.cn/NGWeb/Template/TemplateA/Default/Index.aspx">
-                    南京市规划局</option>
-                <option value="http://ghj.zhenjiang.gov.cn/">镇江规划局</option>
-                <option value="http://www.wxgh.gov.cn/">无锡规划局</option>
-                <option value="http://www.szghj.gov.cn/">苏州市规划局</option>
-                <option value="http://www.nbplan.gov.cn/">宁波规划局</option>
-                <option value="http://www.hzplanning.gov.cn/winstarFrameWork/DesktopDefault.aspx">杭州市规划局</option>
-                <option value="http://www.wzup.gov.cn/">温州市规划局</option>
-                <option value="http://www.czghj.gov.cn/">常州市规划局</option>
-                <option value="http://www.ntgh.gov.cn/">南通规划管理局</option>
-                <option value="http://www.cqupb.gov.cn/">重庆市规划局</option>
-                <option value="http://www.upo.gov.cn/">广州市规划局</option>
-                <option value="http://www.szpl.gov.cn/">深圳市规划和国土资源委员会(市海洋局)</option>
-                <option value="http://www.zhzgj.gov.cn/">珠海市住房和城乡规划建设局</option>
-                <option value="http://www.zsghj.gov.cn/">中山市规划局</option>
-            </select>
-        </td>
-        <td>
-            <select name="select3" style="width: 170px;" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0">
-                <option selected="selected">--省内市区政府网站--</option>
-                <option value="http://www.gz.gov.cn/">广州</option>
-                <option value="http://www.sz.gov.cn/">深圳</option>
-                <option value="http://www.zhuhai.gov.cn/">珠海</option>
-                <option value="http://www.shantou.gov.cn/">汕头</option>
-                <option value="http://www.foshan.gov.cn/">佛山</option>
-                <option value="http://www.shaoguan.gov.cn/">韶关</option>
-                <option value="http://www.heyuan.gov.cn/">河源</option>
-                <option value="http://www.huizhou.gov.cn/">惠州</option>
-                <option value="http://www.meizhou.gov.cn/">梅州</option>
-                <option value="http://www.shanwei.gov.cn/">汕尾</option>
-                <option value="http://www.zs.gov.cn/">中山</option>
-                <option value="http://www.dongguan.gov.cn/">东莞</option>
-                <option value="http://www.jiangmen.gov.cn/">江门</option>
-                <option value="http://www.yangjiang.gov.cn/">阳江</option>
-                <option value="http://www.zhanjiang.gov.cn/">湛江</option>
-                <option value="http://www.maoming.gov.cn/">茂名</option>
-                <option value="http://www.zhaoqing.gov.cn/">肇庆</option>
-                <option value="http://www.gdqy.gov.cn/">清远</option>
-                <option value="http://www.chaozhou.gov.cn/">潮州</option>
-                <option value="http://www.jieyang.gov.cn/">揭阳</option>
-                <option value="http://www.yunfu.gov.cn/">云浮</option>
-            </select>
-        </td>
-        <td>
-            <select name="select4" style="width: 170px;" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0">
-                <option selected="selected">--市政府部门网站--</option>
-                <option title="韶关市人民政府门户网" value="http://www.shaoguan.gov.cn" />韶关市人民政府门户网</option>
-                <option title="韶关市政协办" value="http://www.sgzxb.gov.cn">韶关市政协办</option>
-                <option title="韶关廉政网" value="http://www.sglz.gov.cn">韶关廉政网</option>
-                <option title="韶关市编办" value="http://www.sgbb.gov.cn">韶关市编办</option>
-                <option title="韶关市直属机关工委" value="http://www.sgjgdj.org.cn">韶关市直属机关工..</option>
-                <option title="韶关市国家保密局" value="http://www.sgbmj.gov.cn">韶关市国家保密局</option>
-                <option title="韶关市发展和改革局" value="http://www.sgdrb.gov.cn">韶关市发展和改革..</option>
-                <option title="韶关市经济和信息化局" value="http://www.sgjm.gov.cn">韶关市经济和信息..</option>
-                <option title="韶关市教育局" value="http://www.sgedu.gov.cn" />韶关市教育局</option>
-                <option title="市民族宗教事务局" value="http://www.sgmzzjj.gov.cn" />市民族宗教事务局</option>
-                <option title="韶关市公安局" value="http://www.gdsg110.gov.cn">韶关市公安局</option>
-                <option title="市食品药品监督管理局" value="http://sg.gdda.gov.cn" />市食品药品监督管..</option>
-                <option title="韶关市科技局" value="http://www.sgkj.gov.cn">韶关市科技局</option>
-                <option title="韶关市民政局" value="http://www.sgmz.gov.cn">韶关市民政局</option>
-                <option title="韶关市司法局" value="http://www.sgsf.gov.cn">韶关市司法局</option>
-                <option title="韶关市财政局" value="http://www.sgczj.gov.cn">韶关市财政局</option>
-                <option title="韶关市政府采购网" value="http://shaoguan.gdgpo.com">韶关市政府采购网</option>
-                <option title="韶关市旅游局" value="http://www.sgta.gov.cn" />韶关市旅游局</option>
-                <option title="韶关市人力资源和社会保障局" value="http://www.e12345.gov.cn">韶关市人力资源和..</option>
-                <option title="韶关市外事侨务局" value="http://www.sgwsqw.gov.cn">韶关市外事侨务局</option>
-                <option title="韶关市文化广电新闻出版局" value="http://www.sgwgxj.gov.cn">韶关市文化广电新..</option>
-                <option title="韶关市国土资源局" value="http://www.sglr.gov.cn">韶关市国土资源局</option>
-                <option title="韶关市水务局" value="http://www.sgwater.gov.cn">韶关市水务局</option>
-                <option title="韶关市审计局" value="http://www.sgaudit.gov.cn">韶关市审计局</option>
-                <option title="韶关市环境保护局" value="http://www.sgepb.gov.cn">韶关市环境保护局</option>
-                <option title="韶关市体育局" value="http://www.sgsport.gov.cn">韶关市体育局</option>
-                <option title="韶关市统计局" value="http://www.sgtjj.gov.cn">韶关市统计局</option>
-                <option title="韶关市住房和城乡建设局" value="http://www.sgjsj.gov.cn" />韶关市住房和城乡..</option>
-                <option title="韶关市林业局" value="http://www.sgly.gov.cn">韶关市林业局</option>
-                <option title="韶关市城市综合管理局" value="http://www.sgscsglj.gov.cn">韶关市城市综合管..</option>
-                <option title="韶关市人防办" value="http://www.sgccad.com">韶关市人防办</option>
-                <option title="韶关市人民政府国有资产监督管理委员会" value="http://www.sggz.gov.cn">韶关市人民政府国..</option>
-                <option title="丹霞山管委会" value="http://www.danxiashan.org.cn">丹霞山管委会</option>
-                <option title="民建韶关市委员会" value="http://www.sgmj.org.cn">民建韶关市委员会</option>
-                <option title="韶关市粮食局" value="http://www.sgls.gov.cn" />韶关市粮食局</option>
-                <option title="韶关市代建局" value="http://www.sgdjj.com" />韶关市代建局</option>
-            </select>
-        </td>
-        <td>
-            <select name="select5" style="width: 170px;" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0">
-                <option selected="selected">--下属单位网站--</option>
-                <option value="http://www.sgcjda.com/index.asp">韶关市城建档案馆</option>
-                <option value="http://www.sgghszy.com.cn/">韶关市城乡规划市政设计研究院</option>
-                <option value="http://www.sggh.gov.cn/sgchy/index.asp">韶关市测绘院</option>
-                <option value="http://www.sggh.gov.cn/sgghshow/index.asp">韶关市规划信息中心</option>
-            </select>
-        </td>
-        <td width="15">
-        </td>
-    </tr>
-</table>
-<!-- -->
-<table width="1000" border="0" cellspacing="0" cellpadding="0" class="bot" height="150">
-    <tr>
-        <td class="bot_l" width="10">
-            &nbsp;
-        </td>
-        <td valign="top" align="center">
-            <div style="position: relative;">
-                <p style="position: absolute; left: 850px; top: 20px;">
-
-                    <script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript src='http://dcs.conac.cn/js/20/307/0000/60420614/CA203070000604206140001.js' type='text/javascript'%3E%3C/script%3E"));</script>
-
-                </p>
-                <p style="position: absolute; left: 60px; top: 20px;">
-                    <a href="http://210.76.65.188/netalarm/index.jsp" target="_blank">
-                        <img src="http://www.sggh.gov.cn/images/bjgt.png" width="50" height="66" border="0" /></a>&nbsp;&nbsp;<a
-                            href="http://210.76.65.188/webrecord/innernet/Welcome.jsp?bano=4402013010578"
-                            target="_blank"><img src="http://www.sggh.gov.cn/images/waicon.png" width="50" height="63"
-                                border="0" /></a>
-                </p>
+          <!-- 其他自定义 -->
+          
+            
+          
+            
+          
+                </div>
             </div>
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="h25" style="font-size: 12px;">
-                <tr>
-                    <td align="center">
-                        <strong class="tblue2">&nbsp;</strong>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">
-                        Copyright 2014 <a href="http://www.sggh.gov.cn">www.sggh.gov.cn</a> 韶关市城乡规划局 All Rights Reserved
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">
-                        地址：韶关市芙蓉新城芙蓉园7、8栋 邮编：512029 联系电话：0751-8963139 联系信箱：sgcxghj@163.com
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">
-                        <a href="http://www.miibeian.gov.cn/" target="_blank">粤ICP备14053020号</a>&nbsp;&nbsp;技术支持：韶关市规划信息中心
-                    </td>
-                </tr>
-            </table>
-        </td>
-        <td class="bot_r" width="10">
-            &nbsp;
-        </td>
-    </tr>
+        </div>
+    </div>
+</div>
+        <div class="wxMainContent">
+          <div class="wxLeft">
+            
+<script>
+  function f_show(id)
+  {
+    var obj = document.getElementById(id);
+    if (obj.style.display == "none")
+      obj.style.display = "block";
+    else
+      obj.style.display = "none";
+  }
+</script>
+<div style="width:212px;float:left;">
+    <div style="height:3px;padding-left:4px;overflow:hidden;background:url(imgs/ctrl_t_l.gif) top left no-repeat;">
+        <div style="height:3px;padding-right:4px;overflow:hidden;background:url(imgs/ctrl_t_r.gif) top right no-repeat;">
+            <div style="height:2px;border-top:solid 1px #CCCCCC;overflow:hidden;background-color:White;"></div>
+        </div>
+    </div>
+    
+    <div style="border-left:solid 1px #CCCCCC;border-right:solid 1px #CCCCCC;background-color:White;">
+        <div style="background:url(imgs/ctrl_top.gif) repeat-x top;margin-left:4px;margin-right:4px;">
+            <div style="background-image: url(imgs/ctrl_bg.jpg);background-position: bottom;background-repeat: no-repeat ;padding:7px 0 7px 0;">
+                <div style="width:200px;">
+          <div class="ctrl_title">业务公示</div><div class="ctrl_item ctrl_item5"><a class="notFocus3">规划实施类</a></div><div class="ctrl_item2" align="left"><a class="notFocus"  href="WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%d3%c3%b5%d8%c0%e0%b9%ab%ca%be">用地类公示</a></div><div class="ctrl_item2" align="left"><a class="onFocus" href="#">建筑工程规划公示</a></div><div class="ctrl_item2" align="left"><a class="notFocus"  href="WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%bb%cd%a8%d3%eb%ca%d0%d5%fe%b9%a4%b3%cc%b9%e6%bb%ae%c0%e0">交通与市政工程规划类</a></div><div class="ctrl_item2" align="left"><a class="notFocus"  href="WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%b9%e6%bb%ae%cc%f5%bc%fe%ba%cb%ca%b5">规划条件核实</a></div><div class="ctrl_item ctrl_item5"><a class="notFocus3">建筑业类</a></div><div class="ctrl_item2" align="left"><a class="notFocus"  href="WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bf%b1%b2%ec%c9%e8%bc%c6%c6%f3%d2%b5%d7%ca%d6%ca">勘察设计企业资质</a></div><div class="ctrl_item2" align="left"><a class="notFocus"  href="WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%d2%b5%c6%f3%d2%b5%c8%fd%bc%b6%d7%ca%d6%ca%a1%a2%c0%cd%ce%f1%b7%d6%b0%fc%d7%ca%d6%ca">建筑业企业三级资质、劳务分包资质</a></div><div class="ctrl_item2" align="left"><a class="notFocus"  href="WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%d2%b5%c6%f3%d2%b5%b9%a4%b3%cc%d7%a8%d2%b5%b3%d0%b0%fc%b6%fe%bc%b6%d7%ca%d6%ca">建筑业企业工程专业承包二级资质</a></div><div class="ctrl_item2" align="left"><a class="notFocus"  href="WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%c9%e8%b9%a4%b3%cc%d6%ca%c1%bf%bc%ec%b2%e2%bb%fa%b9%b9%d7%ca%d6%ca">建设工程质量检测机构资质</a></div><div class="ctrl_item2" align="left"><a class="notFocus"  href="WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%b9%a4%b3%cc%c9%e8%bc%c6%d3%eb%ca%a9%b9%a4%d7%ca%d6%ca">工程设计与施工资质</a></div>
+                </div>
+            </div>
+    </div>
+    </div>
+
+  <div>
+    <div style="height:3px;float:left;padding-left:4px;overflow:hidden;background:url(imgs/ctrl_b_l.gif) top left no-repeat;">              
+    </div>
+    <div style="height:3px;float:right;padding-right:4px;overflow:hidden;background:url(imgs/ctrl_b_r.gif) top right no-repeat;">
+    </div>  
+    <div style="clear:both;"></div>
+    <div style="margin:0 4px 0 4px;border-bottom:solid 1px #CCCCCC;overflow:hidden;background-color:White;"></div>
+  </div>
+</div>
+
+          <div style="clear:both;"></div>
+          </div>
+          <div class="wxRight">
+            <div id="divList" style="width:730px;width:720px !ie;FLOAT:left;">
+              
+<div style="WIDTH:100%;background:url(imgs/bg4.gif) repeat-x top left white;border-right:solid 1px #E5C48F;">
+  <div style="WIDTH:100%;">
+    <div style="height:24px;FLOAT:left;BACKGROUND:url(imgs/mdl_bg.gif) repeat-x left top;">
+      <div style="PADDING-left:15px;BACKGROUND:url(imgs/mdl_l.gif) no-repeat left top">
+        <div style="margin-right:12px;padding-top:5px;padding-bottom:10px;BACKGROUND:url(imgs/mdl_arror.gif) no-repeat center bottom; COLOR:white; FONT-SIZE:13px; FONT-WEIGHT:bold;">
+                    建筑工程规划公示
+          
+        </div>
+      </div>
+    </div>
+    <div style="FLOAT:left;margin-left:5px;">
+      
+
+    </div>
+    <div style="clear:both;"></div>
+  </div>
+  <div class="artlist" style="height:auto;">
+    <div style="padding-left:15px;">
+<script language="javascript">
+  function f_btnClick() {
+    var url = "";
+    
+  
+    if (window.document.all.ArtTitle.value == "") {
+      alert("请输入关键字。");
+      window.document.all.ArtTitle.focus();
+      return;
+    }
+    url += "&ArtTitle=" + eval("window.document.all.ArtTitle").value
+  
+    
+    var re1 = /&Page=.*$/gi;
+    var re2 = /&ArtTitle=.*$/gi;
+    var re3 = /&ArtContent=.*$/gi;
+    var re4 = /&searchOther=.*$/gi;
+    var re5 = /&sesarchType=.*$/gi;
+    var url = window.location.href.replace(re1, "").replace(re2, "").replace(re3, "").replace(re4, "").replace(re5, "") + url;
+    window.location = url;
+  }
+
+  function f_btnClickGJ() {
+    var url = "&sesarchType=GJ";
+    
+  
+    if (window.document.all.ArtTitle.value != "") {
+      url += "&ArtTitle=" + eval("window.document.all.ArtTitle").value
+    }
+  
+    
+    var re1 = /&Page=.*$/gi;
+    var re2 = /&ArtTitle=.*$/gi;
+    var re3 = /&ArtContent=.*$/gi;
+    var re4 = /&searchOther=.*$/gi;
+    var re5 = /&sesarchType=.*$/gi;
+    var url = window.location.href.replace(re1, "").replace(re2, "").replace(re3, "").replace(re4, "").replace(re5, "") + url;
+    window.location = url;
+  }
+  
+  function wxf_calendar(current) {
+    var transcal
+    var cdvalue
+    try{ cdvalue=current.parentElement.children(0).innerText } catch(e){}
+    try{ cdvalue=eval("window.document.all."+current).value } catch(e){}
+    transcal=window.showModalDialog("../lib/calendar.aspx?cdvalue=" + cdvalue ,cdvalue,"dialogheight:14.8em;dialogwidth:17.5em;status:no")
+    if (transcal!=null)
+    {
+      try{   current.parentElement.children(0).innerText=transcal   }catch(e){}
+      try{   eval("window.document.all."+current).value=transcal
+            eval("window.document.all."+current).focus()
+        }catch(e){}
+        }
+  }
+</script>
+<div align="">搜索:
+<input type="text" name="ArtTitle" class="wenbenkuang" style="width:120px;" value=>
+<input class="btnSearch" type="button" name="btnOk" class="go-wenbenkuang2" value="" onclick="f_btnClick();"><input class="btnSearch_GJ" type="button" name="btnOk" class="go-wenbenkuang2" value="" onclick="f_btnClickGJ();">&nbsp;&nbsp;</div>
+</div>    
+    <table width="100%" style="border:solid 8px white" align="center" border="0" cellspacing="0" cellpadding="2"><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23202" title="珠海天威飞马“厂房二期”施工图批后公告" target="_blank">珠海天威飞马“厂房二期”施工图批后公告<img src='Imgs/new.gif' align='absmiddle' border='0'></a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-07-08</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23158" title="“建星装备物流园”项目设计变更批前公示" target="_blank">“建星装备物流园”项目设计变更批前公示<img src='Imgs/new.gif' align='absmiddle' border='0'></a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-07-07</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23156" title="珠海市平沙镇人民政府 连湾新村市场 受理公示" target="_blank">珠海市平沙镇人民政府 连湾新村市场 受理公示<img src='Imgs/new.gif' align='absmiddle' border='0'></a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-07-06</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23132" title="“厂房加建工程”施工图批后公告" target="_blank">“厂房加建工程”施工图批后公告</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-07-02</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23140" title="斗门区“蓝湾半岛六至十期”项目建设工程规划调整批前公示" target="_blank">斗门区“蓝湾半岛六至十期”项目建设工程规划调整批前公示</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-07-02</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23138" title="安联锐视宿舍及精工车间方案批前公示" target="_blank">安联锐视宿舍及精工车间方案批前公示</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-07-01</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23102" title="珠海界涌市场“外立面装修”方案批前公示" target="_blank">珠海界涌市场“外立面装修”方案批前公示</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-30</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23101" title="“综合办公楼”施工图批后公告" target="_blank">“综合办公楼”施工图批后公告</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-30</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23120" title="建字第（高栏港）2015-035号 珠海中玻玻璃制品有限公司 中玻-厂区" target="_blank">建字第（高栏港）2015-035号 珠海中玻玻璃制品有限公司 中玻-厂区</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-30</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23116" title="建字第（高栏港）2015-033号 长兴化学工业（广东）有限公司 扩建工程（储槽区）" target="_blank">建字第（高栏港）2015-033号 长兴化学工业（广东）有限公司 扩建工程（储槽区）</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-30</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23115" title="建字第（高栏港）2015-034号 长兴化学工业（广东）有限公司 厌氧废水处理系统扩建" target="_blank">建字第（高栏港）2015-034号 长兴化学工业（广东）有限公司 厌氧废水处理系统扩建</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-30</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23127" title="三鑫小学方案批前公示" target="_blank">三鑫小学方案批前公示</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-30</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23105" title="珠海万科城市中心建设工程项目批前公示" target="_blank">珠海万科城市中心建设工程项目批前公示</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-30</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23104" title="珠海市平沙房地产开发公司 平沙振平控股商业中心 批前公示" target="_blank">珠海市平沙房地产开发公司 平沙振平控股商业中心 批前公示</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-29</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23103" title="建字第（高栏港）2015-032号 路博润添加剂（珠海）有限公司 废水处理系统" target="_blank">建字第（高栏港）2015-032号 路博润添加剂（珠海）有限公司 废水处理系统</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-29</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23086" title="斗门区“蓝湾半岛十一期”项目建设工程规划调整批前公示" target="_blank">斗门区“蓝湾半岛十一期”项目建设工程规划调整批前公示</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-26</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23227" title="翠湖地块三83#、86#门廊调整批后公告" target="_blank">翠湖地块三83#、86#门廊调整批后公告</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-24</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23053" title="珠海博爱幼儿园重建工程项目批前公示" target="_blank">珠海博爱幼儿园重建工程项目批前公示</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-24</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23041" title="唐家住宅小区项目方案批前公示" target="_blank">唐家住宅小区项目方案批前公示</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-20</td></tr><tr><td width="100%" style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">·<a href="WxContent.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&ArtId=23039" title="珠海市第七中学实验楼、宿舍楼拆除重建工程批前公示" target="_blank">珠海市第七中学实验楼、宿舍楼拆除重建工程批前公示</a></td><td nowrap style="padding:4px 0px;4px 0px;" height="22" bgcolor="#FFFFFF">2015-06-19</td></tr></table>
+      
+    
+    <div style="clear:both"></div>
+  </div>
+  <div class="listFoot"><div align="right" style="padding:2px;">&gt;&gt;&nbsp;<a href="?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&page=1" onclick="">首页</a>&nbsp;<a href="?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&page=1" onclick="">前页</a>&nbsp;<a href="?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&page=3" onclick="">后页</a>&nbsp;<a href="?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&page=236" onclick="">末页</a>&nbsp;&nbsp;转到 <select onchange="location.href=this.value"><option value="?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&Page=1">1</option><option selected>2</option><option value="?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&Page=3">3</option><option value="?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&Page=4">4</option><option value="?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&Page=5">5</option><option value="?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&Page=6">6</option><option value="?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&Page=7">7</option><option value="?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&Page=8">8</option><option value="?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&Page=9">9</option><option value="?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&Page=10">10</option></select> 页&nbsp;&nbsp;共 10 页&nbsp;</div></div>
+  <!-- 小区管理咨询委员会 链接 -->
+  
+</div>
+            </div>
+          <div style="clear:both;"></div>
+          </div>
+          <div style="clear:both;"></div>
+        </div>
+      </div>
+      </td>
+      </tr>
+      </table>
+      
+
+<table width="980" border="0" align="center" cellpadding="5" cellspacing="0" style="margin-top:7px">
+  <tr bgcolor="#F7F7F7">
+  <td style="line-height:19px">
+  <a target="_blank" href="http://210.76.65.188/webrecord/innernet/Welcome.jsp?bano=4404024022240">
+        <img border="0"  src="../Imgs/anwang.gif" style="height: 54px; width: 47px" />
+        </a>
+  </td>
+    <td height="70" align="center" valign="top"  style="line-height:19px">
+    <hr size="1" color="#D1D1D1" />
+    <a href="WxDeclare.aspx" target="_blank"><b>网站说明</b></a>
+    版权所有&nbsp;&copy;&nbsp;2015 珠海市住房和城乡规划建设局&nbsp;&nbsp;粤ICP备<a href="http://www.miibeian.gov.cn" target="_blank"><u>10087398 </u></a>号<br />
+    联系电话：(0756)2222483&nbsp;&nbsp;地址：珠海市海城路32号&nbsp;&nbsp;电子信箱：zhzgj@zhuhai.gov.cn<br />
+    推荐使用分辨率1024*768，IE6.0以上版本浏览器浏览本站<br /><br />
+    </td>
+    <td style="line-height:19px">
+    <a target="_blank" href="http://210.76.65.188">
+            <img border="0" src="../Imgs/baojing.gif" style="height: 54px; width: 47px" />
+            </a>
+    </td>
+  </tr>
 </table>
-
-
-
-</body>
-</html>
+<script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript src='http://dcs.conac.cn/js/20/311/0000/45004148/CA203110000450041480002.js' type='text/javascript'%3E%3C/script%3E"));</script>
+    
+    </form>
+  </body>
+</HTML>

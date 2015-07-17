@@ -6,6 +6,8 @@ import os
 import time
 import redis
 from urllib.parse import urljoin
+from urllib.parse import urlparse
+from urllib.parse import urlunparse
 import xmltodict
 '''惠州'''
 
@@ -53,6 +55,11 @@ class Handler(BaseHandler):
             self.crawl(link, callback=self.content_page)
             time.sleep(0.1)
 
+    def real_path(self, path):
+        arr = urlparse(path)
+        real_path = os.path.normpath(arr[2])
+        return urlunparse((arr.scheme, arr.netloc, real_path, arr.params, arr.query, arr.fragment))
+
     @config(priority=2)
     def content_page(self, response):
         attachment = response.doc('a[href*=".doc"]') + response.doc('a[href*=".pdf"]') + response.doc('a[href*=".jpg"]') + response.doc('a[href*=".png"]') + response.doc('a[href*=".gif"]')
@@ -69,7 +76,7 @@ class Handler(BaseHandler):
         image_list = []
         if images is not None:
             for each in images.items():
-                image_url = urljoin(url, each.attr.src)
+                image_url = self.real_path(urljoin(url, each.attr.src))
                 if image_url not in image_list:
                     image_list.append(image_url)
             for i in image_list:

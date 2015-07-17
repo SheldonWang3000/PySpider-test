@@ -1,10 +1,14 @@
 from pyspider.libs.base_handler import *
 from bs4 import BeautifulSoup
 import hashlib
-import urllib
 import re
 import os
 from html.parser import HTMLParser
+from urllib.parse import urljoin
+from urllib.parse import urlencode
+from urllib.parse import urlparse
+from urllib.parse import urlunparse
+from urllib.parse import quote
 import redis
 '''东莞'''
 
@@ -48,7 +52,7 @@ class Handler(BaseHandler):
             parmas['__EVENTVALIDATION'] = soup.find('input', {'name': '__EVENTVALIDATION'})['value']
             parmas['GridView1$ctl23$tbPage'] = str(response.save)
 
-            data = urllib.parse.urlencode(parmas)
+            data = urlencode(parmas)
             print(response.orig_url)
             url = response.orig_url[:-2]
             print(url)
@@ -63,11 +67,16 @@ class Handler(BaseHandler):
             parmas = link.split('?')[1]
             parmas = parmas.split('&')
             link = ''
-            link += urllib.parse.quote('项目受理编号'.encode('gbk')) + '=' + urllib.parse.quote(parmas[0].split('=')[1].encode('gbk')) + '&' + urllib.parse.quote('公示'.encode('gbk')) + '=' + urllib.parse.quote(parmas[1].split('=')[1].encode('gbk'))
+            link += quote('项目受理编号'.encode('gbk')) + '=' + quote(parmas[0].split('=')[1].encode('gbk')) + '&' + quote('公示'.encode('gbk')) + '=' + quote(parmas[1].split('=')[1].encode('gbk'))
             domain = 'http://121.10.6.230/dggsweb/PHGSFJ/PHjsxmxzFJ.aspx?'
             link = domain + link
             # print(link)
             self.crawl(link, callback=self.content_page)
+
+    def real_path(self, path):
+        arr = urlparse(path)
+        real_path = os.path.normpath(arr[2])
+        return urlunparse((arr.scheme, arr.netloc, real_path, arr.params, arr.query, arr.fragment))
 
     @config(priority=2)
     def content_page(self, response):
@@ -82,10 +91,25 @@ class Handler(BaseHandler):
         if not os.path.exists(path):
             os.makedirs(path)           
 
+        image_list = []
+        if images is not None:
+            for each in images.items():
+                image_url = self.real_path(urljoin(url, each.attr.src))
+                if image_url not in image_list:
+                    image_list.append(image_url)
+            for i in image_list:
+                print(i)
+                d = {}
+                d['url'] = i
+                d['path'] = path
+                d['type'] = 'image'
+                self.r.rpush(self.key, str(d))
+
         attachment_list = []
         if attachment is not None:
             for each in attachment.items():
-                attachment_list.append(each.attr.href)
+                if each.attr.href not in attachment_list and each.attr.href not in image_list:
+                    attachment_list.append(each.attr.href)
             for i in attachment_list:
                 print(i)
                 d = {}
@@ -94,18 +118,7 @@ class Handler(BaseHandler):
                 d['type'] = 'attachment'
                 self.r.rpush(self.key, str(d))
 
-        image_list = []
-        if images is not None:
-            for each in images.items():
-                image_url = urllib.parse.urljoin(url, each.attr.src)
-                image_list.append(image_url)
-            for i in image_list:
-                print(i)
-                d = {}
-                d['url'] = i
-                d['path'] = path
-                d['type'] = 'image'
-                self.r.rpush(self.key, str(d))
+        
 
         return {
             "url": response.url,

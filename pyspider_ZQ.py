@@ -5,6 +5,8 @@ import re
 import os
 import redis
 from urllib.parse import urljoin
+from urllib.parse import urlparse
+from urllib.parse import urlunparse
 '''肇庆'''
 
 class Handler(BaseHandler):
@@ -60,6 +62,11 @@ class Handler(BaseHandler):
             print(link)
             self.crawl(link, callback=self.content_page)
 
+    def real_path(self, path):
+        arr = urlparse(path)
+        real_path = os.path.normpath(arr[2])
+        return urlunparse((arr.scheme, arr.netloc, real_path, arr.params, arr.query, arr.fragment))
+
     @config(priority=2)
     def content_page(self, response):
         attachment = response.doc('a[href*=".doc"]') + response.doc('a[href*=".pdf"]') + response.doc('a[href*=".jpg"]') + response.doc('a[href*=".png"]') + response.doc('a[href*=".gif"]')
@@ -73,26 +80,28 @@ class Handler(BaseHandler):
         if not os.path.exists(path):
             os.makedirs(path)           
 
-        attachment_list = []
-        if attachment is not None:
-            for each in attachment.items():
-                attachment_list.append(each.attr.href)
-            for i in attachment_list:
-                d = {}
-                d['url'] = i
-                d['type'] = 'attachment'
-                d['path'] = path
-                self.r.rpush(self.key, str(d))
-
         image_list = []
         if images is not None:
             for each in images.items():
-                image_url = urljoin(url, each.attr.src)
-                image_list.append(image_url)
+                image_url = self.real_parse(urljoin(url, each.attr.src))
+                if image_url not in image_list:
+                    image_list.append(image_url)
             for i in image_list:
                 d = {}
                 d['url'] = i
                 d['type'] = 'image'
+                d['path'] = path
+                self.r.rpush(self.key, str(d))
+
+        attachment_list = []
+        if attachment is not None:
+            for each in attachment.items():
+                if each.attr.href not in attachment_list and each.attr.href not in image_list:
+                    attachment_list.append(each.attr.href)
+            for i in attachment_list:
+                d = {}
+                d['url'] = i
+                d['type'] = 'attachment'
                 d['path'] = path
                 self.r.rpush(self.key, str(d))
 

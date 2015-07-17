@@ -7,10 +7,10 @@ import redis
 from urllib.parse import urljoin
 from urllib.parse import urlparse
 from urllib.parse import urlunparse
-'''河源'''
+'''珠海'''
 
 class Handler(BaseHandler):
-    name = "HY"
+    name = "ZH"
     mkdir = '/home/sheldon/web/'
     r = redis.Redis()
     key = 'download'
@@ -29,22 +29,33 @@ class Handler(BaseHandler):
 
     @every(minutes=24 * 60)
     def on_start(self):
-        self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=282&page=1', callback=self.index_page)
-        self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=301&page=1', callback=self.index_page)
-        self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=403&page=1', callback=self.index_page)
+        self.crawl('http://www.zhzgj.gov.cn/WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&page=1', callback=self.index_page)
 
     # @config(age=10 * 24 * 60 * 60)
     @config(age = 1)
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
-        page_count = int(soup('a', {'href': re.compile(r'certificate')})[-1]['href'].split('=')[-1])
+        page_count = int(soup('div', {'class':'listFoot'})[0].find_all('a')[-1]['href'].split('&')[-1].split('=')[-1])
 
         url = response.url[:-1]
         for i in range(2, page_count + 1):
             link = url + str(i)
+            self.crawl(link, callback=self.next_list)
+
+        lists = soup('table')[2].find_all('a')
+        domain = 'http://www.zhzgj.gov.cn/'
+        for i in lists:
+            link = domain + i['href']
             self.crawl(link, callback=self.content_page)
 
-        self.crawl(response.url, callback=self.content_page)
+    @config(priority=2)
+    def next_list(self, response):
+        soup = BeautifulSoup(response.text)
+        lists = soup('table')[2].find_all('a')
+        domain = 'http://www.zhzgj.gov.cn/'
+        for i in lists:
+            link = domain + i['href']
+            self.crawl(link, callback=self.content_page)
 
     def real_path(self, path):
         arr = urlparse(path)
@@ -67,7 +78,7 @@ class Handler(BaseHandler):
         image_list = []
         if images is not None:
             for each in images.items():
-                image_url = self.real_parse(urljoin(url, each.attr.src))
+                image_url = self.real_path(urljoin(url, each.attr.src))
                 if image_url not in image_list:
                     image_list.append(image_url)
             for i in image_list:
@@ -93,7 +104,7 @@ class Handler(BaseHandler):
             "url": response.url,
             "html": response.text,
         }
-
+    
     def on_result(self, result):
         if result is not None: 
             m = hashlib.md5()
