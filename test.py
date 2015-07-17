@@ -1,9 +1,13 @@
 from bs4 import BeautifulSoup
+import xmltodict
+import re
 from html.parser import HTMLParser
-with open('/home/teer/2.html', 'r') as f:
+with open('/home/sheldon/PySpider-test/test.html', 'r') as f:
 	html = f.read()
 soup = BeautifulSoup(html, 'html.parser')
-t = soup('table', {'id':'bookindex'})[0].find_all('a')
-# print(len(t))
+t = soup('iframe')[0]['src'].split('?')[-1].split('&')
+k = {}
 for i in t:
-	print(i['href'])
+	temp = i.split('=')
+	k[temp[0]] = temp[1]
+print(k['uf'])

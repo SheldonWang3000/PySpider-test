@@ -8,6 +8,8 @@ import redis
 '''广州市国土资源和规划委员会'''
 
 class Handler(BaseHandler):
+    name = "GZ_after"
+    mkdir = '/home/sheldon/web/'
     r =redis.Redis()
     key = 'download'
     headers= {
@@ -75,9 +77,8 @@ class Handler(BaseHandler):
         url = response.url
         m = hashlib.md5()
         m.update(url.encode())
-        web_name = m.hexdigest()
-        # path = 'D:/web/' + web_name + '/'
-        path = '/home/teer/web/GZ_after/' + web_name + '/'
+        web_name = '/' + m.hexdigest() + '/'
+        path = self.mkdir + self.name + web_name
         if not os.path.exists(path):
             os.makedirs(path)           
 
@@ -118,9 +119,8 @@ class Handler(BaseHandler):
         if result is not None: 
             m = hashlib.md5()
             m.update(result['url'].encode())
-            web_name = m.hexdigest()
-            # path = 'D:/web/' + web_name + '/'
-            path = '/home/teer/web/GZ_after/' + web_name + '/'
+            web_name = '/' + m.hexdigest() + '/'
+            path = self.mkdir + self.name + web_name
             if not os.path.exists(path):
                 os.makedirs(path)           
 

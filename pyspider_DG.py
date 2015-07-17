@@ -9,6 +9,8 @@ import redis
 '''东莞'''
 
 class Handler(BaseHandler):
+    name = "DG"
+    mkdir = '/home/sheldon/web/'
     r = redis.Redis()
     key = 'download'
     headers= {
@@ -25,7 +27,6 @@ class Handler(BaseHandler):
     }
     @every(minutes=24 * 60)
     def on_start(self):
-        '''url编码问题'''
         self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9&1', 
             fetch_type='js', callback=self.index_page, save=1)
         # self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%D3%C3%B5%D8%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&1', 
@@ -48,17 +49,9 @@ class Handler(BaseHandler):
             parmas['GridView1$ctl23$tbPage'] = str(response.save)
 
             data = urllib.parse.urlencode(parmas)
-            # import chardet
-            print(response.url)
-            # print(response.url.encode('GB18030').decode('gbk'))
-            # print(response.url.encode('gbk'))
-            # print((urllib.parse.quote(response.url.encode('utf-8'))))
-            # print response.url.encode('utf-8')
-            # print chardet.detect(str(response.url))
-            url = 'http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9'
-            # url = response.url.encode('GB18030')
-            # url = url[:-1]
-            # print url
+            print(response.orig_url)
+            url = response.orig_url[:-2]
+            print(url)
             url = url + '&' + str(response.save + 1)
             self.crawl(url, method='POST', data=data, callback=self.index_page, save=int(response.save) + 1)
 
@@ -84,9 +77,8 @@ class Handler(BaseHandler):
         url = response.url
         m = hashlib.md5()
         m.update(url.encode())
-        web_name = m.hexdigest()
-        # path = 'D:/web/' + web_name + '/'
-        path = '/home/teer/web/DG/' + web_name + '/'
+        web_name = '/' + m.hexdigest() + '/'
+        path = self.mkdir + self.name + web_name
         if not os.path.exists(path):
             os.makedirs(path)           
 
@@ -124,9 +116,8 @@ class Handler(BaseHandler):
         if result is not None: 
             m = hashlib.md5()
             m.update(result['url'].encode())
-            web_name = m.hexdigest()
-            # path = 'D:/web/' + web_name + '/'
-            path = '/home/teer/web/DG/' + web_name + '/'
+            web_name = '/' + m.hexdigest() + '/'
+            path = self.mkdir + self.name + web_name
             if not os.path.exists(path):
                 os.makedirs(path)           
 

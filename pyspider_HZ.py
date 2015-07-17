@@ -2,13 +2,15 @@ from pyspider.libs.base_handler import *
 from bs4 import BeautifulSoup
 import hashlib
 import re
-import urllib
 import os
+import time
 import redis
-'''佛山'''
+from urllib.parse import urljoin
+import xmltodict
+'''惠州'''
 
 class Handler(BaseHandler):
-    name = "FS"
+    name = "HZ"
     mkdir = '/home/sheldon/web/'
     r = redis.Redis()
     key = 'download'
@@ -27,61 +29,29 @@ class Handler(BaseHandler):
 
     @every(minutes=24 * 60)
     def on_start(self):
-        params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-        data = urllib.parse.urlencode(params)
-        self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/xzyjs', 
-            method='POST',data=data, callback=self.index_page)
-        params = {'strWhere' : '%2C%2C%2C', 'action': 'ydgh', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-        data = urllib.parse.urlencode(params)
-        self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/ydgh', 
-            method='POST',data=data, callback=self.index_page)
-        params = {'strWhere' : '%2C%2C%2C', 'action': 'gcgh', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-        data = urllib.parse.urlencode(params)
-        self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/gcgh', 
-            method='POST',data=data, callback=self.index_page)
+        self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/ph_xzyjs/index.html', callback=self.index_page)
+        # self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/ph_ydghxkz/index.html', callback=self.index_page)
+        # self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/ph_gcghxkz/index.html', callback=self.index_page)
 
     # @config(age=10 * 24 * 60 * 60)
     @config(age = 1)
     def index_page(self, response):
-        r = BeautifulSoup(response.text)
-        json_text = r.body.text
-        null = ''
-        true = 'true'
-        false = 'false'
-        response_json = eval(json_text)
-        json_list = eval(response_json['datas'])
-        domain = 'http://www.fsgh.gov.cn/GTGHService/ViewCase/jsxmghxzyjs/'
-        content_list = [domain + i['4'] for i in json_list]
+        soup = BeautifulSoup(response.text, 'html.parser')
 
-        page_count = response_json['pageCount']
-        page_count = int(page_count)
-        print(page_count)
-
-        for each in content_list:
-            print(each)
-            self.crawl(each, callback=self.content_page)
-
-        for i in range(2, page_count + 1):
-            temp_url = response.url + '/' + str(i)
-            params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-            params['pageIndex'] = str(i)
-            temp_data = urllib.parse.urlencode(params)
-            self.crawl(temp_url, method='POST', data=temp_data, callback=self.next_list)
-
-    @config(priority=2)
-    def next_list(self, response):
-        r = BeautifulSoup(response.text)
-        json_text = r.body.text
-        null = ''
-        true = 'true'
-        false = 'false'
-        response_json = eval(json_text)
-        json_list = eval(response_json['datas'])
-        domain = 'http://www.fsgh.gov.cn/GTGHService/ViewCase/jsxmghxzyjs/'
-        content_list = [domain + i['4'] for i in json_list]
-
-        for each in content_list:
-            self.crawl(each, callback=self.content_page)
+        t = soup('script', {'language':'JavaScript'})
+        l = t[1].get_text().split('\'')
+        x = l[13]
+        d = xmltodict.parse(x)
+        k = d['xml']['RECS']['INFO']
+        links = []
+        for i in k:
+            links.append(i['InfoURL'])
+        url = "http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/"
+        for i in links:
+            link = url + i
+            # print(link)
+            self.crawl(link, callback=self.content_page)
+            time.sleep(0.1)
 
     @config(priority=2)
     def content_page(self, response):
@@ -96,22 +66,12 @@ class Handler(BaseHandler):
         if not os.path.exists(path):
             os.makedirs(path)           
 
-        attachment_list = []
-        if attachment is not None:
-            for each in attachment.items():
-                attachment_list.append(each.attr.href)
-            for i in attachment_list:
-                d = {}
-                d['url'] = i
-                d['type'] = 'attachment'
-                d['path'] = path
-                self.r.rpush(self.key, str(d))
-
         image_list = []
         if images is not None:
             for each in images.items():
-                image_url = urllib.parse.urljoin(url, each.attr.src)
-                image_list.append(image_url)
+                image_url = urljoin(url, each.attr.src)
+                if image_url not in image_list:
+                    image_list.append(image_url)
             for i in image_list:
                 d = {}
                 d['url'] = i
@@ -119,6 +79,19 @@ class Handler(BaseHandler):
                 d['path'] = path
                 self.r.rpush(self.key, str(d))
 
+        attachment_list = []
+        if attachment is not None:
+            for each in attachment.items():
+                if each.attr.href not in attachment_list and each.attr.href not in image_list:
+                    attachment_list.append(each.attr.href)
+            for i in attachment_list:
+                d = {}
+                d['url'] = i
+                d['type'] = 'attachment'
+                d['path'] = path
+                self.r.rpush(self.key, str(d))
+
+       
         return {
             "url": response.url,
             "html": response.text,

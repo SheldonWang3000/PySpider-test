@@ -1,11 +1,9 @@
 import os
 import hashlib
 import redis
+import http
 import urllib.request
-'''on CentOS'''
 from PIL import Image
-'''on Ubuntu'''
-# import Image
 from io import BytesIO
 def download_attachment(url, path):
 	try:
@@ -17,10 +15,23 @@ def download_attachment(url, path):
 		print('404')
 
 def download_image(url, path):
-	height = 300
-	width = 300
+	height = 400
+	width = 400
 	try:
-		f = urllib.request.urlopen(url)
+		try:
+			f = urllib.request.urlopen(url)
+		except http.client.HTTPException:
+			opener = urllib.request.build_opener()
+			headers= {
+			"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+			"Accept-Encoding":"gzip, deflate, sdch",
+			"Accept-Language":"zh-CN,zh;q=0.8",
+			"Cache-Control":"max-age=0",
+			"Connection":"keep-alive",
+			"User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36"
+			}
+			opener.addheaders = headers.items()
+			f = opener.open(url)
 		if height * width == 0:
 			image_path = path + os.path.basename(url)
 			with open(image_path, 'wb') as code:

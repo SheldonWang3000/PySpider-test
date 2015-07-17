@@ -2,13 +2,13 @@ from pyspider.libs.base_handler import *
 from bs4 import BeautifulSoup
 import hashlib
 import re
-import urllib
 import os
 import redis
-'''佛山'''
+from urllib.parse import urljoin
+'''河源'''
 
 class Handler(BaseHandler):
-    name = "FS"
+    name = "HY"
     mkdir = '/home/sheldon/web/'
     r = redis.Redis()
     key = 'download'
@@ -27,61 +27,22 @@ class Handler(BaseHandler):
 
     @every(minutes=24 * 60)
     def on_start(self):
-        params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-        data = urllib.parse.urlencode(params)
-        self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/xzyjs', 
-            method='POST',data=data, callback=self.index_page)
-        params = {'strWhere' : '%2C%2C%2C', 'action': 'ydgh', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-        data = urllib.parse.urlencode(params)
-        self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/ydgh', 
-            method='POST',data=data, callback=self.index_page)
-        params = {'strWhere' : '%2C%2C%2C', 'action': 'gcgh', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-        data = urllib.parse.urlencode(params)
-        self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/gcgh', 
-            method='POST',data=data, callback=self.index_page)
+        self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=282&page=1', callback=self.index_page)
+        self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=301&page=1', callback=self.index_page)
+        self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=403&page=1', callback=self.index_page)
 
     # @config(age=10 * 24 * 60 * 60)
     @config(age = 1)
     def index_page(self, response):
-        r = BeautifulSoup(response.text)
-        json_text = r.body.text
-        null = ''
-        true = 'true'
-        false = 'false'
-        response_json = eval(json_text)
-        json_list = eval(response_json['datas'])
-        domain = 'http://www.fsgh.gov.cn/GTGHService/ViewCase/jsxmghxzyjs/'
-        content_list = [domain + i['4'] for i in json_list]
+        soup = BeautifulSoup(response.text)
+        page_count = int(soup('a', {'href': re.compile(r'certificate')})[-1]['href'].split('=')[-1])
 
-        page_count = response_json['pageCount']
-        page_count = int(page_count)
-        print(page_count)
-
-        for each in content_list:
-            print(each)
-            self.crawl(each, callback=self.content_page)
-
+        url = response.url[:-1]
         for i in range(2, page_count + 1):
-            temp_url = response.url + '/' + str(i)
-            params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
-            params['pageIndex'] = str(i)
-            temp_data = urllib.parse.urlencode(params)
-            self.crawl(temp_url, method='POST', data=temp_data, callback=self.next_list)
+            link = url + str(i)
+            self.crawl(link, callback=self.content_page)
 
-    @config(priority=2)
-    def next_list(self, response):
-        r = BeautifulSoup(response.text)
-        json_text = r.body.text
-        null = ''
-        true = 'true'
-        false = 'false'
-        response_json = eval(json_text)
-        json_list = eval(response_json['datas'])
-        domain = 'http://www.fsgh.gov.cn/GTGHService/ViewCase/jsxmghxzyjs/'
-        content_list = [domain + i['4'] for i in json_list]
-
-        for each in content_list:
-            self.crawl(each, callback=self.content_page)
+        self.crawl(response.url, callback=self.content_page)
 
     @config(priority=2)
     def content_page(self, response):
@@ -110,7 +71,7 @@ class Handler(BaseHandler):
         image_list = []
         if images is not None:
             for each in images.items():
-                image_url = urllib.parse.urljoin(url, each.attr.src)
+                image_url = urljoin(url, each.attr.src)
                 image_list.append(image_url)
             for i in image_list:
                 d = {}
