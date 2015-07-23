@@ -14,9 +14,6 @@ class Handler(BaseHandler):
     mkdir = '/home/sheldon/web/'
     r = redis.Redis()
     key = 'download'
-    height = 250
-    width = 250
-    thread_num = 14
     headers= {
         "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         "Accept-Encoding":"gzip, deflate, sdch",

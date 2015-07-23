@@ -33,8 +33,8 @@ class Handler(BaseHandler):
             fetch_type='js', callback=self.index_page)
         self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=005&area=all&page=1', 
             fetch_type='js', callback=self.index_page)
-        self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=006&area=all&page=1', 
-            fetch_type='js', callback=self.index_page)
+        # self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=006&area=all&page=1', 
+        #     fetch_type='js', callback=self.index_page)
         self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=007&area=all&page=1', 
             fetch_type='js', callback=self.index_page)
 
@@ -56,7 +56,7 @@ class Handler(BaseHandler):
         for each in content_list:
             self.crawl(each, callback=self.content_page)
         ajax_url = response.url[:-1]
-        page_count = 100
+        # page_count = 100
         for i in range(2, page_count + 1):
             next_page = ajax_url + str(i)
             self.crawl(next_page, callback=self.next_list)
