@@ -40,11 +40,13 @@ class A(object):
 
 class B(A):
 	def foo(self):
-		print('B')
+		pass
+		# super(B, self).foo()
+		# print('B')
 
 class C(B):
 	def foo(self):
-		super(C, self).foo()
+		# super(C, self).foo()
 		print('C')
 
 if __name__ == '__main__':
