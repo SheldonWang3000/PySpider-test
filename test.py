@@ -28,5 +28,7 @@ import os
 with open('/home/sheldon/PySpider-test/test.html', 'r') as f:
 	html = f.read()
 soup = BeautifulSoup(html, 'html.parser')
-t = soup.find('select', {'name': 'search$ColumnIDDDL'}).find('option', {'selected':'selected'})['value']
-print(t)
+t = soup('a', {'target':'_blank'})[:-3]
+print(len(t))
+for i in t:
+	print(i['href'])

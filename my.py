@@ -59,7 +59,10 @@ class My(BaseHandler):
             for each in images.items():
                 image_url = self.real_path(urljoin(url, each.attr.src))
                 if image_url not in image_list:
-                    image_list.append(image_url)
+                    '''此处需要处理,asp结尾也可能是需要的链接'''
+                    t = re.search('.asp', image_url)
+                    if t is None:
+                        image_list.append(image_url)
             for i in image_list:
                 d = {}
                 k = i.split('/')
