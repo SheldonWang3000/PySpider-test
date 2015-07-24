@@ -7,6 +7,7 @@ import redis
 from urllib.parse import urljoin
 from urllib.parse import urlparse
 from urllib.parse import urlunparse
+from urllib.parse import quote
 '''放到python环境目录的site-packages下'''
 class My(BaseHandler):
 
@@ -42,7 +43,7 @@ class My(BaseHandler):
 
     @config(priority=2)
     def content_page(self, response):
-        attachment = response.doc('a[href*=".doc"]') + response.doc('a[href*=".pdf"]') + response.doc('a[href*=".jpg"]') + response.doc('a[href*=".png"]') + response.doc('a[href*=".gif"]')
+        attachment = response.doc('a[href*=".doc"]') + response.doc('a[href*=".pdf"]') + response.doc('a[href*=".jpg"]') + response.doc('a[href*=".png"]') + response.doc('a[href*=".gif"]') + response.doc('a[href*=".zip"]') + response.doc('a[href*=".rar"]') 
         images = response.doc('img')
         
         url = response.url
@@ -61,7 +62,12 @@ class My(BaseHandler):
                     image_list.append(image_url)
             for i in image_list:
                 d = {}
-                d['url'] = i
+                k = i.split('/')
+                link = k[0]
+                for i in k[1:]:
+                    link += '/'+ quote(i)
+                # print(link)
+                d['url'] = link
                 d['type'] = 'image'
                 d['path'] = path
                 self.r.rpush(self.key, str(d))
@@ -73,15 +79,22 @@ class My(BaseHandler):
                     attachment_list.append(each.attr.href)
             for i in attachment_list:
                 d = {}
-                d['url'] = i
+                # print(i)
                 d['type'] = 'attachment'
                 d['path'] = path
+                k = i.split('/')
+                link = k[0]
+                for i in k[1:]:
+                    link += '/'+ quote(i)
+                # print(link)
+                d['url'] = link
                 self.r.rpush(self.key, str(d))
 
         return {
             "url": response.url,
             "html": response.text,
         }
+
 
     def on_result(self, result):
         if result is not None: 
@@ -98,7 +111,7 @@ class My(BaseHandler):
             f.close()
             content_path = path + 'content.txt'
             f = open(content_path, 'wb')
-            soup = BeautifulSoup(result['html'])
+            soup = BeautifulSoup(result['html'], 'html.parser')
             for i in soup('style') + soup('script'):
                 i.extract()
             content = soup.decode('utf-8')

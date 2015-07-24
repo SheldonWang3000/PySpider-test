@@ -20,7 +20,7 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9&1', 
-            fetch_type='js', callback=self.index_page, save=1)
+            callback=self.index_page, save=1)
         # self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%D3%C3%B5%D8%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&1', 
         #     fetch_type='js', callback=self.index_page, save=1)
         # self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%B9%A4%B3%CC%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&1', 
@@ -42,7 +42,12 @@ class Handler(My):
 
             data = urlencode(parmas)
             print(response.orig_url)
-            url = response.orig_url[:-2]
+            temp = response.orig_url.split('&')
+            print(temp)
+            # url = response.orig_url[:-2]
+            url = temp[0]
+            for i in temp[1:-1]:
+                url += '&' + i
             print(url)
             url = url + '&' + str(response.save + 1)
             self.crawl(url, method='POST', data=data, callback=self.index_page, save=int(response.save) + 1)
