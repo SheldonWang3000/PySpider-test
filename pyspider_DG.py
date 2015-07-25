@@ -26,8 +26,6 @@ class Handler(My):
         # self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%B9%A4%B3%CC%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&1', 
         #     fetch_type='js', callback=self.index_page, save=1)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 1)
     def index_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
       

@@ -22,8 +22,6 @@ class Handler(My):
         self.crawl('http://www.szpl.gov.cn/xxgk/tzgg/csghgg/index.html', 
             fetch_type='js', callback=self.index_page)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 1)
     def index_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
      

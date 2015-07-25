@@ -20,8 +20,6 @@ class Handler(My):
         self.crawl('http://ghj.jiangmen.gov.cn/spcs.asp?rstype=2&page=1', fetch_type='js', callback=self.index_page)
         self.crawl('http://ghj.jiangmen.gov.cn/spcs.asp?rstype=3&page=1', fetch_type='js', callback=self.index_page)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 1)
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
         t = soup('a', {'href': re.compile(r'spcs.asp')})[-1]['href'].split('?')[-1].split('&')

@@ -18,8 +18,6 @@ class Handler(My):
     def on_start(self):
         self.crawl('http://www.zhzgj.gov.cn/WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&page=1', callback=self.index_page)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 1)
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
         page_count = int(soup('div', {'class':'listFoot'})[0].find_all('a')[-1]['href'].split('&')[-1].split('=')[-1])

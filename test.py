@@ -27,8 +27,9 @@ from pyquery import PyQuery as pq
 import os
 with open('/home/sheldon/PySpider-test/test.html', 'r') as f:
 	html = f.read()
-soup = BeautifulSoup(html, 'html.parser')
-t = soup('a', {'target':'_blank'})[:-3]
-print(len(t))
-for i in t:
-	print(i['href'])
+print(None or 1)
+# soup = BeautifulSoup(html, 'html.parser')
+# t = soup('img')
+# print(len(t))
+# for i in t:
+# 	print(i['src'])

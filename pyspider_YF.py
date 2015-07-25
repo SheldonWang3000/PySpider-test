@@ -23,8 +23,6 @@ class Handler(My):
         # 爬取 url 网页，回调index_page 函数 ，页面类型为：1 目录页
         self.crawl(url, fetch_type='js', callback=self.index_page)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 1)
     def index_page(self, response):
         contentPageList = []
         if response.save == 1:

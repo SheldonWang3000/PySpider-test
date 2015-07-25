@@ -18,8 +18,6 @@ class Handler(My):
     def on_start(self):
         self.crawl('http://www.zsghj.gov.cn/list/p-5.html', callback=self.index_page)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 1)
     def index_page(self, response):
         r = BeautifulSoup(response.text)
         page_count = int(r.find_all('span', 'pageinfo')[0].find_all('strong')[0].get_text())

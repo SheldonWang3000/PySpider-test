@@ -25,11 +25,9 @@ class Handler(My):
         self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=007&area=all&page=1', 
             fetch_type='js', callback=self.index_page)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 0)
     def index_page(self, response):
-        r = BeautifulSoup(response.text)
-        json = r.body.text
+        soup = BeautifulSoup(response.text)
+        json = soup.body.text
         null = ''
         true = 'true'
         false = 'false'
@@ -49,8 +47,8 @@ class Handler(My):
 
     @config(priority=2)
     def next_list(self, response):
-        r = BeautifulSoup(response.text)
-        json = r.body.text
+        soup = BeautifulSoup(response.text)
+        json = soup.body.text
         null = ''
         true = 'true'
         false = 'false'

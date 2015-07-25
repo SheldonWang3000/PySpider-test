@@ -21,8 +21,6 @@ class Handler(My):
         self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=3', callback=self.index_page)
         # self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=5', callback=self.index_page)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 1)
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
         page_count = int(soup('div', {'class':'badoo'})[0].find_all('a')[-1]['href'].split('_')[1])

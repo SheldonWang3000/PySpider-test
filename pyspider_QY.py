@@ -22,8 +22,6 @@ class Handler(My):
         # self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=village_project_planning_permit&page=1', callback=self.index_page)
         # self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=project_planning_acceptance&page=1', callback=self.index_page)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 1)
     def index_page(self, response):
         r = BeautifulSoup(response.text)
         page_count = int(r('table', {'class':'p-table'})[0].find_all('td')[0].get_text().split('\n')[1][5:])

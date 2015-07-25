@@ -18,8 +18,6 @@ class Handler(My):
     def on_start(self):
         self.crawl('http://www.meizhou.gov.cn/open/index.php?NodeID=872&u=19&page=1', callback=self.index_page)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 0)
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
         page_count = int(soup('div', {'class':'pages'})[0].find_all('a')[-1]['href'].split('&')[-1].split('=')[-1])

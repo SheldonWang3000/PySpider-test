@@ -20,8 +20,6 @@ class Handler(My):
         self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=301&page=1', callback=self.index_page)
         self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=403&page=1', callback=self.index_page)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 1)
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
         page_count = int(soup('a', {'href': re.compile(r'certificate')})[-1]['href'].split('=')[-1])
@@ -31,4 +29,4 @@ class Handler(My):
             link = url + str(i)
             self.crawl(link, callback=self.content_page)
 
-        self.crawl(response.url, callback=self.content_page) 
+        self.content_page(response) 

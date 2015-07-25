@@ -30,11 +30,9 @@ class Handler(My):
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/gcgh', 
             method='POST',data=data, callback=self.index_page)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 1)
     def index_page(self, response):
-        r = BeautifulSoup(response.text)
-        json_text = r.body.text
+        soup = BeautifulSoup(response.text)
+        json_text = soup.body.text
         null = ''
         true = 'true'
         false = 'false'
@@ -60,8 +58,8 @@ class Handler(My):
 
     @config(priority=2)
     def next_list(self, response):
-        r = BeautifulSoup(response.text)
-        json_text = r.body.text
+        soup = BeautifulSoup(response.text)
+        json_text = soup.body.text
         null = ''
         true = 'true'
         false = 'false'

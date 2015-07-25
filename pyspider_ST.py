@@ -24,8 +24,6 @@ class Handler(My):
         self.crawl('http://www.stghj.gov.cn/Category_276/Index.aspx', callback=self.index_page)
         self.crawl('http://www.stghj.gov.cn/Category_279/Index.aspx', callback=self.index_page)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 1)
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
 

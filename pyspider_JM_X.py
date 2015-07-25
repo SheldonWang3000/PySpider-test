@@ -18,8 +18,6 @@ class Handler(My):
     def on_start(self):
         self.crawl('http://www.xhplan.com/ghgs.asp?Page=1', callback=self.index_page)
 
-    # @config(age=10 * 24 * 60 * 60)
-    @config(age = 1)
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
         page_count = int(soup('td', {'class':'numindex'})[0].find_all('a')[-1]['href'].split('?')[-1].split('=')[-1])
