@@ -20,15 +20,15 @@ class Handler(My):
         params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
         data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/xzyjs', 
-            method='POST',data=data, callback=self.index_page)
+            method='POST',data=data, callback=self.index_page, save={'type':self.table_name[0]})
         params = {'strWhere' : '%2C%2C%2C', 'action': 'ydgh', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
         data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/ydgh', 
-            method='POST',data=data, callback=self.index_page)
+            method='POST',data=data, callback=self.index_page, save={'type':self.table_name[1]})
         params = {'strWhere' : '%2C%2C%2C', 'action': 'gcgh', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
         data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/gcgh', 
-            method='POST',data=data, callback=self.index_page)
+            method='POST',data=data, callback=self.index_page, save={'type':self.table_name[2]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -47,14 +47,14 @@ class Handler(My):
 
         for each in content_list:
             # print(each)
-            self.crawl(each, callback=self.content_page)
+            self.crawl(each, callback=self.content_page, save=response.save)
 
         for i in range(2, page_count + 1):
             temp_url = response.url + '/' + str(i)
             params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'area': '', 'pageIndex': '1', 'pageSize': '15'}
             params['pageIndex'] = str(i)
             temp_data = urlencode(params)
-            self.crawl(temp_url, method='POST', data=temp_data, callback=self.next_list)
+            self.crawl(temp_url, method='POST', data=temp_data, callback=self.next_list, save=response.save)
 
     @config(priority=2)
     def next_list(self, response):
@@ -69,4 +69,4 @@ class Handler(My):
         content_list = [domain + i['4'] for i in json_list]
 
         for each in content_list:
-            self.crawl(each, callback=self.content_page) 
+            self.crawl(each, callback=self.content_page, save=response.save) 

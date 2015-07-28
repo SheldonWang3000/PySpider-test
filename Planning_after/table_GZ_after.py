@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
 html = urlopen('http://www.upo.gov.cn/gs/Content.aspx?cid=29301').read().decode('utf-8', 'ignore')
-soup = BeautifulSoup(html, 'html.parser', from_encoding='gbk')
+soup = BeautifulSoup(html, 'html.parser')
 table = soup.find_all('table')
 table = table[6]
 td = table.find_all('td')

@@ -16,7 +16,8 @@ class Handler(My):
 
     @every(minutes=24 * 60)
     def on_start(self):
-        self.crawl('http://www.zsghj.gov.cn/list/p-5.html', callback=self.index_page)
+        self.crawl('http://www.zsghj.gov.cn/list/p-5.html', 
+            callback=self.index_page, save={'type':'Unkonw'})
 
     def index_page(self, response):
         r = BeautifulSoup(response.text)
@@ -30,7 +31,7 @@ class Handler(My):
         lists = r.find_all('div', 'artlist')[0].find_all('li')
         for i in lists:
             link = domain + i.a['href']
-            self.crawl(link, callback=self.content_page)
+            self.crawl(link, callback=self.content_page, save=response.save)
 
     @config(priority=2)
     def next_list(self, response):
@@ -39,4 +40,4 @@ class Handler(My):
         lists = r.find_all('div', 'artlist')[0].find_all('li')
         for i in lists:
             link = domain + i.a['href']
-            self.crawl(link, callback=self.content_page) 
+            self.crawl(link, callback=self.content_page, save=response.save) 

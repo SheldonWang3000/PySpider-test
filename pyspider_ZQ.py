@@ -16,10 +16,14 @@ class Handler(My):
 
     @every(minutes=24 * 60)
     def on_start(self):
-        self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=1', callback=self.index_page)
-        self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=2', callback=self.index_page)
-        self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=3', callback=self.index_page)
-        # self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=5', callback=self.index_page)
+        self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=1', 
+            callback=self.index_page, save={'type':'项目选址意见书'})
+        self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=2', 
+            callback=self.index_page, save={'type':'用地规划许可证'})
+        self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=3',
+            callback=self.index_page, save={'type':'工程规划许可证'})
+        self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=5',
+            callback=self.index_page, save={'type':'工程规划验收合格证'})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -35,7 +39,7 @@ class Handler(My):
         for i in lists:
             link = domain + i['href']
             print(link)
-            self.crawl(link, callback=self.content_page)
+            self.crawl(link, callback=self.content_page, save=response.save)
 
     @config(priority=2)
     def next_list(self, response):
@@ -45,4 +49,4 @@ class Handler(My):
         for i in lists:
             link = domain + i['href']
             print(link)
-            self.crawl(link, callback=self.content_page) 
+            self.crawl(link, callback=self.content_page, save=response.save) 

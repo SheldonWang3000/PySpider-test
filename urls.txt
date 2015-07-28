@@ -36,3 +36,9 @@
 *珠海规划局：http://www.zhzgj.gov.cn/WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be
 	无表格，只有图
 
+梅州
+http://www.meizhou.gov.cn/open/index.php?NodeID=872&u=19&page=1
+http://www.mzghj.gov.cn/index.html
+深圳,待处理
+http://www.szpl.gov.cn/main/zwgk/szys/xzyjs/index.shtml
+http://www.szpl.gov.cn/xxgk/tzgg/csghgg/index.html
