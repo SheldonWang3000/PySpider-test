@@ -1,6 +1,8 @@
 from pyspider.libs.base_handler import *
 from bs4 import BeautifulSoup
+import mysql.connector
 import hashlib
+import time
 import re
 import os
 import redis
@@ -12,7 +14,20 @@ from urllib.parse import quote
 class My(BaseHandler):
 
     r = redis.Redis()
-    key = 'download'
+    download_key = 'download'
+    analysis_key = 'analysis'
+
+    conn = mysql.connector.connect(user='root', password='254478_a', database='mydb')
+    cursor = conn.cursor(dictionary=True)
+
+    table_name = ['选址意见书', '建设用地规划许可证', '建设工程规划许可证', '乡村建设规划许可证',
+                '规划验收合格证', '工程规划验收合格通知书', '批前公示', '批后公布']
+
+    city_name = {'CZ':'潮州', 'DG':'东莞', 'FS':'佛山', 'GZ':'广州', 'GZ_after':'广州',
+                 'HY':'河源', 'HZ':'惠州', 'JM':'江门', 'JM_X':'江门', 'JY':'揭阳', 'MM':'茂名',
+                 'MZ':'梅州', 'QY':'清远', 'SG':'韶关', 'ST':'汕头', 'SW':'汕尾', 'SZ':'深圳', 
+                 'YF':'云浮', 'YJ':'阳江', 'ZH':'珠海', 'ZJ':'湛江', 'ZQ':'肇庆', 'ZS':'中山'}
+
     headers= {
         "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         "Accept-Encoding":"gzip, deflate, sdch",
@@ -35,6 +50,8 @@ class My(BaseHandler):
 
     # def next_list(self, response):
     #     pass
+    def get_date(self):
+        return time.strftime("%Y-%m-%d", time.localtime())
 
     def real_path(self, path):
         arr = urlparse(path)
@@ -53,9 +70,6 @@ class My(BaseHandler):
 
     @config(priority=2)
     def content_page(self, response):
-        attachment = response.doc('a[href*=".doc"]') + response.doc('a[href*=".pdf"]') + response.doc('a[href*=".jpg"]') + response.doc('a[href*=".png"]') + response.doc('a[href*=".gif"]') + response.doc('a[href*=".zip"]') + response.doc('a[href*=".rar"]') 
-        images = response.doc('img')
-        
         url = response.url
         m = hashlib.md5()
         m.update(url.encode())
@@ -72,7 +86,7 @@ class My(BaseHandler):
             js_m.update(each['src'].encode())
             js_name = js_m.hexdigest()
             # 获取访问地址
-            request_url = self.real_path(urljoin(response.url, each['src']))
+            request_url = self.real_path(urljoin(url, each['src']))
             # 改动网页 css 地址为相对地址
             each['src'] = js_name + '.js'
             # 爬取css文件
@@ -84,7 +98,7 @@ class My(BaseHandler):
             css_m.update(each['href'].encode())
             css_name = css_m.hexdigest()
             # 获取访问地址
-            request_url = self.real_path(urljoin(response.url, each['href']))
+            request_url = self.real_path(urljoin(url, each['href']))
             # 改动网页 css 地址为相对地址
             each['href'] = css_name + '.css'
             # 爬取css文件
@@ -117,9 +131,9 @@ class My(BaseHandler):
                     elif re.search('.gif', image_url) is not None:
                         each['src'] = m.hexdigest() + '.gif'
                     d['name'] = each['src']
-                    self.r.rpush(self.key, str(d))
+                    self.r.rpush(self.download_key, str(d))
 
-        attachments = soup('a', href=True)
+        attachments = soup('a', {'href': re.compile(r'^http')})
         attachment_list = []
         if attachments is not None:
             for each in attachments:
@@ -156,11 +170,11 @@ class My(BaseHandler):
                        m.update(attachment_url.encode())
                        each['href'] = m.hexdigest() + '.' + type_name
                        d['name'] = each['href']
-                       self.r.rpush(self.key, str(d))
+                       self.r.rpush(self.download_key, str(d))
 
         # 针对 background 属性
         for key in soup.find_all(background=True):
-            image_url = self.real_path(urljoin(response.url, key['background']))
+            image_url = self.real_path(urljoin(url, key['background']))
             k = image_url.split('/')
             link = k[0]
             for i in k[1:]:
@@ -181,11 +195,12 @@ class My(BaseHandler):
                 elif re.search('.gif', image_url) is not None:
                     each['src'] = m.hexdigest() + '.gif'
                 d['name'] = each['src']
-                self.r.rpush(self.key, str(d))
+                self.r.rpush(self.download_key, str(d))
 
         return {
-            "url": response.url,
+            "url": url,
             "html": str(soup),
+            "type": response.save['type']
         }
 
 
@@ -204,19 +219,32 @@ class My(BaseHandler):
             f.close()
 
             content_path = path + 'content.txt'
-            f = open(content_path, 'wb')
             soup = BeautifulSoup(result['html'], 'html.parser')
             for i in soup('style') + soup('script'):
                 i.extract()
             content = soup.decode('utf-8')
-            content = re.sub(r'<[/!]?\w+[^>]*>', '', content)
-            content = re.sub(r'\s+', '', content)
-            f.write(content.encode('utf-8'))
-            f.close()
+            content = re.sub(r'<[/!]?\w+[^>]*>', '\n', content)
+            content = re.sub(r'<!--[\w\W\r\n]*?-->', '\n', content)
+            content = re.sub(r'\s+', '\n', content)
 
-            url_path = path + 'url.txt'
-            f = open(url_path, 'wb')
-            f.write(result['url'].encode('utf-8'))
-            f.close()
+            # url_path = path + 'url.txt'
+            # f = open(url_path, 'wb')
+            # f.write(result['url'].encode('utf-8'))
+            # f.close()
+
+            print(self.get_date())
+            values = [result['url'].encode('utf-8'), path, 
+                    self.get_date(), self.city_name[self.name].encode('utf-8'), 
+                    result['type'].encode('utf-8'), content.encode('utf-8')]
+            self.cursor.execute('''insert into tbl_OrglPblc values ('', %s, %s, 0, 2, %s, %s, %s, %s)''', values)
+
+            # print(self.cursor.lastrowid)
+            d = {}
+            d['rowid'] = self.cursor.lastrowid
+            d['path'] = path
+            d['city'] = self.name
+            d['type'] = result['type'].encode('utf-8')
+            self.conn.commit()
+            self.r.rpush(self.analysis_key, str(d))
 
         super(My, self).on_result(result)
