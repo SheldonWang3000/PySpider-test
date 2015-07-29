@@ -54,11 +54,23 @@
 # f = open('con.txt', 'wb')
 # f.write(content.encode('utf-8'))
 # f.close()
-from datetime import datetime, date
-print(datetime.now().date())
-import mysql.connector
-conn = mysql.connector.connect(user='root', password='254478_a', database='mydb')
-cursor = conn.cursor(dictionary=True)
-values = ['url', 'path', datetime.now().date(), 'city', 'type', 'content']
-cursor.execute('''insert into tbl_OrglPblc values ('', %s, %s, B'1', 2, %s, %s, %s, %s)''', values)
-conn.commit()
+# from datetime import datetime, date
+# print(datetime.now().date())
+# import mysql.connector
+# conn = mysql.connector.connect(user='root', password='254478_a', database='mydb')
+# cursor = conn.cursor(dictionary=True)
+# values = ['url', 'path', datetime.now().date(), 'city', 'type', 'content']
+# cursor.execute('''insert into tbl_OrglPblc values ('', %s, %s, B'1', 2, %s, %s, %s, %s)''', values)
+# conn.commit()
+class A:
+	def a(self, a, b):
+		print(a + b)
+	def a(self, a):
+		print(a + a)
+if __name__ == '__main__':
+	try:
+		print('ss')
+		raise IndexError
+	except IndexError:
+		break
+	print('done')

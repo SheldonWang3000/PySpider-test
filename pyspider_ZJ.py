@@ -1,16 +1,9 @@
 from pyspider.libs.base_handler import *
 from my import My
 from bs4 import BeautifulSoup
-import hashlib
 import re
-import os
-from html.parser import HTMLParser
-from urllib.parse import urljoin
 from urllib.parse import urlencode
-from urllib.parse import urlparse
-from urllib.parse import urlunparse
-from urllib.parse import quote
-import redis
+
 '''湛江'''
 
 class Handler(My):
@@ -20,13 +13,13 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=21&1', 
-            callback=self.index_page, save={'page':1, 'type':'项目选址意见书'})
+            callback=self.index_page, save={'page':1, 'type':self.table_name[0]})
         self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=21&1', 
-            callback=self.index_page, save={'page':1, 'type':'用地规划许可证'})
+            callback=self.index_page, save={'page':1, 'type':self.table_name[1]})
         self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=21&1', 
-            callback=self.index_page, save={'page':1, 'type':'工程规划许可证'})
+            callback=self.index_page, save={'page':1, 'type':self.table_name[2]})
         self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=21&1', 
-            callback=self.index_page, save={'page':1, 'type':'乡村规划许可证'})
+            callback=self.index_page, save={'page':1, 'type':self.table_name[3]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')

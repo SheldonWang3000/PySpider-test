@@ -1,13 +1,7 @@
 from pyspider.libs.base_handler import *
 from my import My
 from bs4 import BeautifulSoup
-import hashlib
-import re
-import os
-import redis
-from urllib.parse import urljoin
-from urllib.parse import urlparse
-from urllib.parse import urlunparse
+
 '''珠海'''
 
 class Handler(My):
@@ -16,7 +10,14 @@ class Handler(My):
 
     @every(minutes=24 * 60)
     def on_start(self):
-        self.crawl('http://www.zhzgj.gov.cn/WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&page=1', callback=self.index_page)
+        self.crawl('http://www.zhzgj.gov.cn/WxList.aspx?WstName=%D2%B5%CE%F1%B9%AB%CA%BE&MdlName=%D3%C3%B5%D8%C0%E0%B9%AB%CA%BE&page=1', 
+            callback=self.index_page, save={'type':self.table_name[1]})
+        self.crawl('http://www.zhzgj.gov.cn/WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%bd%a8%d6%fe%b9%a4%b3%cc%b9%e6%bb%ae%b9%ab%ca%be&page=1', 
+            callback=self.index_page, save={'type':self.table_name[2]})
+        self.crawl('http://www.zhzgj.gov.cn/WxList.aspx?WstName=%D2%B5%CE%F1%B9%AB%CA%BE&MdlName=%BD%BB%CD%A8%D3%EB%CA%D0%D5%FE%B9%A4%B3%CC%B9%E6%BB%AE%C0%E0&page=1', 
+            callback=self.index_page, save={'type':self.table_name[2]})
+        self.crawl('http://www.zhzgj.gov.cn/WxList.aspx?WstName=%d2%b5%ce%f1%b9%ab%ca%be&MdlName=%b9%e6%bb%ae%cc%f5%bc%fe%ba%cb%ca%b5&page=1', 
+            callback=self.index_page, save={'type':self.table_name[4]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -25,13 +26,13 @@ class Handler(My):
         url = response.url[:-1]
         for i in range(2, page_count + 1):
             link = url + str(i)
-            self.crawl(link, callback=self.next_list)
+            self.crawl(link, callback=self.next_list, save=response.save)
 
         lists = soup('table')[2].find_all('a')
         domain = 'http://www.zhzgj.gov.cn/'
         for i in lists:
             link = domain + i['href']
-            self.crawl(link, callback=self.content_page)
+            self.crawl(link, callback=self.content_page, save=response.save)
 
     @config(priority=2)
     def next_list(self, response):
@@ -40,4 +41,4 @@ class Handler(My):
         domain = 'http://www.zhzgj.gov.cn/'
         for i in lists:
             link = domain + i['href']
-            self.crawl(link, callback=self.content_page) 
+            self.crawl(link, callback=self.content_page, save=response.save) 

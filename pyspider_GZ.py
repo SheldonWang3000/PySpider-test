@@ -1,13 +1,6 @@
 from pyspider.libs.base_handler import *
 from my import My
 from bs4 import BeautifulSoup
-import hashlib
-import re
-import os
-from urllib.parse import urljoin
-from urllib.parse import urlparse
-from urllib.parse import urlunparse
-import redis
 '''广州市国土资源和规划委员会'''
 
 class Handler(My):
@@ -17,13 +10,17 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=004&area=all&page=1', 
-            fetch_type='js', callback=self.index_page, save={'type':'用地规划许可证'})
+            fetch_type='js', callback=self.index_page, save={'type':self.table_name[1]})
         self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=005&area=all&page=1', 
-            fetch_type='js', callback=self.index_page, save={'type':'项目选址意见书'})
+            fetch_type='js', callback=self.index_page, save={'type':self.table_name[0]})
         self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=006&area=all&page=1', 
-            fetch_type='js', callback=self.index_page, save={'type':'规划验收合格证'})
+            fetch_type='js', callback=self.index_page, save={'type':self.table_name[4]})
         self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=007&area=all&page=1', 
-            fetch_type='js', callback=self.index_page, save={'type':'工程规划许可证'})
+            fetch_type='js', callback=self.index_page, save={'type':self.table_name[2]})
+        self.crawl('http://www.upo.gov.cn/WebApi/GsApi.aspx?do=phlist&lb=null&area=null&page=1', 
+            fetch_type='js', callback=self.index_page, save={'type':self.table_name[7]})
+        self.crawl('http://www.upo.gov.cn/WebApi/GsApi.aspx?do=pclist&lb=null&area=null&page=1', 
+            fetch_type='js', callback=self.index_page, save={'type':self.table_name[6]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -34,12 +31,15 @@ class Handler(My):
         response_json = eval(json)
         json_list = response_json['list']
         domain = 'http://www.upo.gov.cn'
-        content_list = [domain + i['Url'] for i in json_list]
+        content_list = [self.real_path(domain, i['Url']) for i in json_list]
+        # print(content_list)
         page_count = response_json['pagecount']
         page_count = int(page_count)
 
         for each in content_list:
             self.crawl(each, callback=self.content_page, save=response.save)
+        domain = response.url.split('?')[0]
+
         ajax_url = response.url[:-1]
         for i in range(2, page_count + 1):
             next_page = ajax_url + str(i)
@@ -55,7 +55,7 @@ class Handler(My):
         response_json = eval(json)
         json_list = response_json['list']
         domain = 'http://www.upo.gov.cn'
-        content_list = [domain + i['Url'] for i in json_list]
+        content_list = [self.real_path(domain, i['Url']) for i in json_list]
 
         for each in content_list:
             self.crawl(each, callback=self.content_page, save=response.save)

@@ -1,16 +1,7 @@
 from pyspider.libs.base_handler import *
 from my import My
 from bs4 import BeautifulSoup
-import hashlib
-import re
-import os
-from html.parser import HTMLParser
-from urllib.parse import urljoin
-from urllib.parse import urlencode
-from urllib.parse import urlparse
-from urllib.parse import urlunparse
-from urllib.parse import quote
-import redis
+
 '''云浮'''
 
 class Handler(My):

@@ -1,13 +1,7 @@
 from pyspider.libs.base_handler import *
 from my import My
 from bs4 import BeautifulSoup
-import hashlib
-import re
-import os
-import redis
-from urllib.parse import urljoin 
-from urllib.parse import urlparse 
-from urllib.parse import urlunparse
+
 '''茂名'''
 
 class Handler(My):
@@ -17,13 +11,13 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://csgh.maoming.gov.cn/active/show.ashx?action=certList&pwd=&chk=1&key=&no=&sid=1&page=1', 
-            callback=self.index_page, save={'type':'项目选址意见书'})
+            callback=self.index_page, save={'type':self.table_name[0]})
         self.crawl('http://csgh.maoming.gov.cn/active/show.ashx?action=certList&pwd=&chk=1&key=&no=&sid=2&page=1', 
-            callback=self.index_page, save={'type':'用地规划许可证'})
+            callback=self.index_page, save={'type':self.table_name[1]})
         self.crawl('http://csgh.maoming.gov.cn/active/show.ashx?action=certList&pwd=&chk=1&key=&no=&sid=3&page=1', 
-            callback=self.index_page, save={'type':'工程规划许可证'})
+            callback=self.index_page, save={'type':self.table_name[2]})
         self.crawl('http://csgh.maoming.gov.cn/active/show.ashx?action=certList&pwd=&chk=1&key=&no=&sid=4&page=1', 
-            callback=self.index_page, save={'type':'规划验收合格证'})
+            callback=self.index_page, save={'type':self.table_name[4]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -48,7 +42,7 @@ class Handler(My):
     @config(priority=2)
     def next_list(self, response):
         soup = BeautifulSoup(response.text)
-        domain = 'http://csgh.maoming.gov.cn'
+        domain = 'http://csgh.maoming.gov.cn/'
         links = soup('table', {'id':'bookindex'})[0].find_all('a')
         for i in links:
             link = domain + i['href']

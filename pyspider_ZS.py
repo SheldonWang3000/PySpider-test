@@ -1,13 +1,7 @@
 from pyspider.libs.base_handler import *
 from my import My
 from bs4 import BeautifulSoup
-import hashlib
-import re
-import os
-import redis
-from urllib.parse import urljoin
-from urllib.parse import urlparse
-from urllib.parse import urlunparse
+
 '''中山'''
 
 class Handler(My):
@@ -26,7 +20,7 @@ class Handler(My):
         url = 'http://www.zsghj.gov.cn/list/p-5-46-%s.html'
         for i in range(2, page_count + 1):
             link = url % (i)
-            self.crawl(link, callback=self.next_list)
+            self.crawl(link, callback=self.next_list, save=response.save)
         domain = 'http://www.zsghj.gov.cn'
         lists = r.find_all('div', 'artlist')[0].find_all('li')
         for i in lists:

@@ -1,13 +1,7 @@
 from pyspider.libs.base_handler import *
 from my import My
 from bs4 import BeautifulSoup
-import hashlib
-import re
-import os
-import redis
-from urllib.parse import urljoin 
-from urllib.parse import urlparse
-from urllib.parse import urlunparse
+
 '''清远'''
 
 class Handler(My):
@@ -17,15 +11,15 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=project_site_submission&page=1', 
-            callback=self.index_page, save={'type':'项目选址意见书'})
+            callback=self.index_page, save={'type':self.table_name[0]})
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=businesses_project_planning_permit&page=1', 
-            callback=self.index_page, save={'type':'用地规划许可证'})
+            callback=self.index_page, save={'type':self.table_name[1]})
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=project_planning_permit&page=1', 
-            callback=self.index_page, save={'type':'工程规划许可证'})
+            callback=self.index_page, save={'type':self.table_name[2]})
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=village_project_planning_permit&page=1', 
-            callback=self.index_page, save={'type':'用地规划许可证'})
+            callback=self.index_page, save={'type':self.table_name[3]})
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=project_planning_acceptance&page=1', 
-            callback=self.index_page, save={'type':'工程规划验收合格通知书'})
+            callback=self.index_page, save={'type':self.table_name[4]})
 
     def index_page(self, response):
         r = BeautifulSoup(response.text)
