@@ -53,7 +53,8 @@ class My(BaseHandler):
     def get_date(self):
         return time.strftime("%Y-%m-%d", time.localtime())
 
-    def real_path(self, path):
+    def real_path(self, a, b):
+        path = urljoin(a, b)
         arr = urlparse(path)
         real_path = os.path.normpath(arr[2])
         return urlunparse((arr.scheme, arr.netloc, real_path, arr.params, arr.query, arr.fragment))
@@ -86,7 +87,7 @@ class My(BaseHandler):
             js_m.update(each['src'].encode())
             js_name = js_m.hexdigest()
             # 获取访问地址
-            request_url = self.real_path(urljoin(url, each['src']))
+            request_url = self.real_path(url, each['src'])
             # 改动网页 css 地址为相对地址
             each['src'] = js_name + '.js'
             # 爬取css文件
@@ -98,7 +99,7 @@ class My(BaseHandler):
             css_m.update(each['href'].encode())
             css_name = css_m.hexdigest()
             # 获取访问地址
-            request_url = self.real_path(urljoin(url, each['href']))
+            request_url = self.real_path(url, each['href'])
             # 改动网页 css 地址为相对地址
             each['href'] = css_name + '.css'
             # 爬取css文件
@@ -108,7 +109,7 @@ class My(BaseHandler):
         image_list = []
         if images is not None:
             for each in images:
-                image_url = self.real_path(urljoin(url, each['src']))
+                image_url = self.real_path(url, each['src'])
                 k = image_url.split('/')
                 link = k[0]
                 for i in k[1:]:
@@ -154,7 +155,7 @@ class My(BaseHandler):
                 elif re.search('.rar', href) is not None:
                     type_name = '.rar'
                 if type_name is not None:
-                    attachment_url = self.real_path(urljoin(url, href))
+                    attachment_url = self.real_path(url, href)
                     k = attachment_url.split('/')
                     link = k[0]
                     for i in k[1:]:
@@ -174,7 +175,7 @@ class My(BaseHandler):
 
         # 针对 background 属性
         for key in soup.find_all(background=True):
-            image_url = self.real_path(urljoin(url, key['background']))
+            image_url = self.real_path(url, key['background'])
             k = image_url.split('/')
             link = k[0]
             for i in k[1:]:
