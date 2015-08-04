@@ -1,46 +1,2822 @@
-sudo apt-get install automake 
-sudo apt-get install autotools-dev
-sudo apt-get install binutils
-sudo apt-get install bzip2
-sudo apt-get install elfutils
-sudo apt-get install expat
-sudo apt-get install gawk
-sudo apt-get install gcc
-sudo apt-get install gcc-multilib
-sudo apt-get install g++-multilib
-sudo apt-get install ia32-libs
-sudo apt-get install ksh
-sudo apt-get install less
-sudo apt-get install lesstif2
-sudo apt-get install lesstif2-dev
-sudo apt-get install lib32z1
-sudo apt-get install libaio1
-sudo apt-get install libaio-dev
-sudo apt-get install libc6-dev
-sudo apt-get install libc6-dev-i386
-sudo apt-get install libc6-i386 
-sudo apt-get install libelf-dev
-sudo apt-get install libltdl-dev
-sudo apt-get install libmotif4
-sudo apt-get install libodbcinstq4-1 libodbcinstq4-1:i386
-sudo apt-get install libpth-dev
-sudo apt-get install libpthread-stubs0
-sudo apt-get install libpthread-stubs0-dev
-sudo apt-get install libstdc++5
-sudo apt-get install lsb-cxx
-sudo apt-get install make
-sudo apt-get install openssh-server
-sudo apt-get install pdksh
-sudo apt-get install rlwrap
-sudo apt-get install rpm
-sudo apt-get install sysstat
-sudo apt-get install unixodbc
-sudo apt-get install unixodbc-dev
-sudo apt-get install unzip
-sudo apt-get install x11-utils
-sudo apt-get install zlibc
-automake autotools-dev binutils bzip2 elfutils expat gawk gcc gcc-multilib g++-multilib ksh less lib32z1 libaio1 libaio-dev libc6-dev libc6-dev-i386 libc6-i386 libelf-dev libltdl-dev libmotif4 libodbcinstq4-1 libpth-dev libpthread-stubs0-dev libstdc++5 lsb-cxx make openssh-server pdksh rlwrap rpm sysstat unixodbc unixodbc-dev unzip x11-utils zlibc libodbcinstq4-1:i386
 
-ia32-libs lesstif2-dev lesstif2 libpthread-stubs0
 
-/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+		<title>韶关市政府信息公开平台
+		</title>
+		<link href="/website/govPublic/css/body.css" rel="stylesheet"
+			type="text/css" />
+		<link href="/website/govPublic/css/css.css" rel="stylesheet"
+			type="text/css" />
+		<script language="JavaScript" src="/js/calendar/WdatePicker.js"></script>
+		<script type="text/javascript" src="js/menutow.js"></script>
+		<script type="text/javascript" src="js/taggle1.js"></script>
+		<script type="text/javascript">
+		function search(){
+			document.all.searchform.action="/website/govPublic/govPublicSiteAction!deptgovp_list.action?action=search";
+			document.all.searchform.submit();
+		}
+		function opendetails(deptId,filepath){
+			window.open("/website/govPublic/govPublicSiteAction!single.action?deptId="+deptId+"&filePath="+filepath);
+		}
+		function clearf2(){
+			document.getElementById("identifierl2").value="";
+			document.getElementById("issueTimeStart2").value="";
+			document.getElementById("issueTimeEnd2").value="";
+			document.getElementById("title2").value="";
+		}
+		function open_self(url){
+		  alert(url);
+		}
+		</script>
+	</head>
+	
+	<body>
+<div class="new_body">
+		<div class="width100">
+			<div class="backggr_bg">
+				<div class="body_width_top">
+					
+
+  
+  
+  <div class="header_fla" style="background:url(/website/govPublic/images/440200/006946462.jpg)">
+  
+  
+  <table id="top_flash_mindle" width="0" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+	  <td><img src="/website/govPublic/images/flash_left.gif" /></td>
+	  <td class="flash_mindle" >
+	  <a href="/website/govPublic/govPublicSiteAction.action">首页</a> <span>|</span>  
+	  <a href="http://www.shaoguan.gov.cn/">韶关市人民政府门户网</a> <span>|</span>
+	  <a href="#" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://zwgk.shaoguan.gov.cn');">设为首页</a><span>|</span>
+	  <a href="#" onclick="window.external.AddFavorite(location.href,document.title);">收藏本站</a></td>
+	  <td><img src="/website/govPublic/images/flash_right.gif" /></td>
+	</tr>
+  </table>
+  <!--  
+  
+  	<div class="banner">韶关市市城乡规划局<span>韶关市市城乡规划局</span></div>
+  	<div class="banner_tow">政府信息公开专栏<span>政府信息公开专栏</span></div>
+  
+  
+  -->
+  </div>
+
+<div class="top_search loginbar">
+  <iframe src="http://xxgksearch.gd.gov.cn/web/search.htm?a=123456#w=250" frameborder="0" style="width: 100%;height:40px;margin: 0 auto;"></iframe>
+</div>
+<!--DIV1-->
+<script type="text/javascript">
+document.body.onload=bo;
+function bo(){
+//searchContentonload();
+}
+function searchContentonload(){
+	var searchContent="";
+	var title=document.getElementById("title").value;
+	var identifierl=document.getElementById("identifierl").value;
+	var content=document.getElementById("content").value;
+	var index=0;
+	if(""!=title){
+		searchContent=title;
+		index=0;
+	}else if(""!=identifierl){
+		searchContent=identifierl;
+		index=1;
+	}else if(""!=content){
+		searchContent=content;
+		index=2;
+	}
+	document.getElementById("searchCT").selectedIndex=index;
+	document.getElementById("searchContent").value=searchContent;
+}
+function searchHead(){
+	var searchContent=document.getElementById("searchContent").value;
+	var str="";
+	if(searchContent!=null&&searchContent!=""){
+		var index=document.getElementById("searchCT").selectedIndex;
+		if(index==0){
+			str+="&govPubContent.title="+searchContent;
+		}else if(index==1){
+			str+="&govPubContent.identifierl="+searchContent;
+		}else if(index==2){
+			str+="&govPubContent.content="+searchContent;
+		}
+	}
+	var pubtype=document.getElementById("pubtype").value;
+	var issueScope=document.getElementById("issueScope").value;
+	var issueTimeStart=document.getElementById("issueTimeStart").value;
+	
+	str+="&issueTimeStart="+issueTimeStart+"&govPubContent.pubtype="+pubtype+"&govPubContent.issueScope="+issueScope;
+	window.open("/website/govPublic/govPublicSiteAction!searchHead.action?action=search&pagesize=25"+str,"");
+}
+function clearf(){
+	document.getElementById("searchContent").value="";
+	document.getElementById("title").value="";
+	document.getElementById("identifierl").value="";
+	document.getElementById("content").value="";
+	document.getElementById("pubtype").selectedIndex=0;
+	document.getElementById("issueScope").selectedIndex=0;
+	document.getElementById("issueTimeStart").selectedIndex=0;
+	document.getElementById("searchCT").selectedIndex=0;
+}
+</script>
+					<div class="sidebar_nav">
+						<div class="friendlink friend">
+							<ul class="friendlink_ul ">
+								<li class="friendlink_li">
+									<span>政府信息公开目录</span>
+								</li>
+							</ul>
+						</div>
+						<div id="menu">
+							
+								
+									
+									
+										<h1
+											onclick="javascript:ShowMenu(this,0)">
+											<a href="javascript:void(0);"><span
+												onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=1&siteOrgCode=440200'">机构职能
+											</span>
+											</a>
+										</h1>
+										
+										<span class="">
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,0)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=582&siteOrgCode=440200';return false;">机构领导</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,1)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=583&siteOrgCode=440200';return false;">内设机构</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											 </span>
+									
+									
+								
+									
+									
+										<h1
+											onclick="javascript:ShowMenu(this,1)">
+											<a href="javascript:void(0);"><span
+												onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=2&siteOrgCode=440200'">规章文件
+											</span>
+											</a>
+										</h1>
+										
+										<span class="">
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,0)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=587&siteOrgCode=440200';return false;">法律规章文件</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											 </span>
+									
+									
+								
+									
+									
+										<h1
+											onclick="javascript:ShowMenu(this,2)">
+											<a href="javascript:void(0);"><span
+												onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=3&siteOrgCode=440200'">规划计划
+											</span>
+											</a>
+										</h1>
+										
+										<span class="">
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,0)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=593&siteOrgCode=440200';return false;">规划编制情况</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+																<a class="menu_a1" href="javascript:void(0);"><span
+																	onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=598&siteOrgCode=440200';return false;">规划项目简介
+																</span>
+																</a>
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,1)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=594&siteOrgCode=440200';return false;">工作计划</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+																<a class="menu_a1" href="javascript:void(0);"><span
+																	onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=600&siteOrgCode=440200';return false;">年度工作计划、要点
+																</span>
+																</a>
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,2)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=595&siteOrgCode=440200';return false;">工作总结</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+																<a class="menu_a1" href="javascript:void(0);"><span
+																	onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=601&siteOrgCode=440200';return false;">阶段性工作情况总结
+																</span>
+																</a>
+															
+														
+															
+																<a class="menu_a1" href="javascript:void(0);"><span
+																	onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=602&siteOrgCode=440200';return false;">年度工作总结
+																</span>
+																</a>
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											 </span>
+									
+									
+								
+									
+									
+										<h1
+											onclick="javascript:ShowMenu(this,3)">
+											<a href="javascript:void(0);"><span
+												onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=4&siteOrgCode=440200'">工作动态
+											</span>
+											</a>
+										</h1>
+										
+										<span class="">
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,0)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=3083&siteOrgCode=440200';return false;">工作进展情况</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											 </span>
+									
+									
+								
+									
+									
+										<h1
+											onclick="javascript:ShowMenu(this,4)">
+											<a href="javascript:void(0);"><span
+												onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=5&siteOrgCode=440200'">业务工作
+											</span>
+											</a>
+										</h1>
+										
+										<span class="">
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,0)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=603&siteOrgCode=440200';return false;">行政许可事项</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+																<a class="menu_a1" href="javascript:void(0);"><span
+																	onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=604&siteOrgCode=440200';return false;">行政许可服务指南
+																</span>
+																</a>
+															
+														
+															
+																<a class="menu_a1" href="javascript:void(0);"><span
+																	onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=605&siteOrgCode=440200';return false;">核发《建设项目选址意见书》
+																</span>
+																</a>
+															
+														
+															
+																<a class="menu_a1" href="javascript:void(0);"><span
+																	onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=606&siteOrgCode=440200';return false;">核发《建设用地规划许可证》
+																</span>
+																</a>
+															
+														
+															
+																<a class="menu_a1" href="javascript:void(0);"><span
+																	onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=607&siteOrgCode=440200';return false;">核发《建设工程规划许可证》
+																</span>
+																</a>
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,1)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=608&siteOrgCode=440200';return false;">行政事业性收费</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											 </span>
+									
+									
+								
+									
+									
+										<h1
+											onclick="javascript:ShowMenu(this,5)">
+											<a href="javascript:void(0);"><span
+												onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=7&siteOrgCode=440200'">统计信息
+											</span>
+											</a>
+										</h1>
+										
+										<span class="">
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,0)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=610&siteOrgCode=440200';return false;">建成区面积</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,1)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=21887&siteOrgCode=440200';return false;">部门预决算</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,2)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=21859&siteOrgCode=440200';return false;">&ldquo;三公&rdquo;经费</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											 </span>
+									
+									
+								
+									
+									
+										<h1
+											onclick="javascript:ShowMenu(this,6)">
+											<a href="javascript:void(0);"><span
+												onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=14&siteOrgCode=440200'">政府信息公开年度报告
+											</span>
+											</a>
+										</h1>
+										
+										<span class="">
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											 </span>
+									
+									
+								
+									
+									
+										<h1
+											onclick="javascript:ShowMenu(this,7)">
+											<a href="javascript:void(0);"><span
+												onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=9&siteOrgCode=440200'">其他
+											</span>
+											</a>
+										</h1>
+										
+										<span class="">
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,0)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=613&siteOrgCode=440200';return false;">人事任免事项</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+													
+													<h2
+														onclick="javascript:ShowMenu(this,1)">
+														<a class="menu_a" href="javascript:void(0);"><span
+															onclick="window.location.href='/website/govPublic/govPublicSiteAction!deptgovp_list.action?pagesize=15&deptId=547&titleTypeId=961&siteOrgCode=440200';return false;">通知、公示、公告</span>
+														
+														</a>
+													</h2>
+													<ul class="">
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+															
+														
+													</ul>
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											
+												
+											 </span>
+									
+									
+								
+									
+									
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+							
+						</div>
+						<div class="sidebar_container2">
+						
+						     
+								<a href="/website/govPublic/govPublicSiteAction!openbyapply_msg.action?areaCode=440200&deptId=547" target="_blank"><img width="202px" src="images/scroll_g31.jpg" border="0" />
+								</a>
+								<a href="/website/govPublic/govPublicSiteAction!openbyapply_search.action?areaCode=440200" target="_blank"><img src="images/new_zen1.jpg" border="0" /></a>
+																
+								<a href="/website/govPublic/govPublicSiteAction!findByDeptId.action?deptId=547&siteOrgCode=440200" target="_blank"><img src="images/new_zen5.jpg" border="0" /></a>
+								<!-- 添加韶关市市政府办“绩效考评”图标 add by yxh 2012-2-27 -->
+								
+								<a href="http://wsbs.sg.gov.cn/website/onlineService/personalbusiness!yjx.action?hot=2&siteOrgCode=440200"  target="_blank"/><img src="images/new_yjx.jpg" border="0" /></a>
+						</div>
+					</div>
+					<div class="leftside_cont">
+						<div class="friendlink">
+							<ul class="friendlink_ul friendlink_tow">
+								<li class="friendlink_li">
+									<span>部门信息公开</span>
+								</li>
+								<li class="news_hot">
+									当前位置：
+									<a href="/website/govPublic/govPublicSiteAction.action">信息公开首页</a>&nbsp;&gt;&nbsp;
+									市城乡规划局
+									&nbsp;
+									
+										
+										&gt;&nbsp;业务工作
+										
+									
+										
+										&gt;&nbsp;行政许可事项
+										
+									
+										
+											<span>&gt;&nbsp;核发《建设用地规划许可证》
+											</span>
+										
+										
+									
+								</li>
+							</ul>
+						</div>
+						<div class="news_service">
+							<form name="searchform" action="" method="post" onreset="clearf2()">
+								<input name="siteOrgCode" id="siteOrgCode" type="hidden"
+									value="440200" />
+								<input type="hidden" name="deptId"
+									value="547" />
+								<input type="hidden" name="pagesize"
+									value='15' />
+								<ul class="news_serviceul">
+									<li>
+										索引号：
+										<input id="identifierl2" name="govPubContent.identifierl" type="text"
+											value="" />
+									</li>
+									<li>
+										发布时间：
+										<input id="issueTimeStart2" name="issueTimeStart" type="text" size="12"
+											onfocus="new WdatePicker(this,'%y:%m:%d',true)"
+											value=""
+											readonly="readonly" />
+									</li>
+									<li>
+										至
+										<input id="issueTimeEnd2" name="issueTimeEnd" type="text" size="12"
+											onfocus="new WdatePicker(this,'%y:%m:%d',true)"
+											value=""
+											readonly="readonly" />
+									</li>
+								</ul>
+								<ul>
+									<li>
+										信息名称：
+										<input id="title2" name="govPubContent.title" type="text"
+											value="" />
+									</li>
+									<li class="but_butt">
+										<input name="" type="button" onclick="search()" />
+									</li>
+									<li class="but_butt1">
+										<input name="clear" type="button" onclick="clearf2()"/>
+									</li>
+								</ul>
+							</form>
+						</div>
+						<div class="friendlink friend_towli">
+							<ul class="friendlink_ul friendlink_tow">
+								<li class="link_towli">
+									<input name="" type="button"
+										onclick="window.location.href='/website/govPublic/govPublicSiteAction!dept_list.action?&siteOrgCode=440200'" />
+								</li>
+								<li class="friendlink_li">
+									<span>市城乡规划局
+									</span>
+								</li>
+							</ul>
+						</div>
+
+						<table class="service_table" width="100%" border="0"
+							cellspacing="0" cellpadding="0">
+							<tr class="service_tr">
+								<td class="service_tr_td1">
+									信息索取号
+								</td>
+								<td>
+									信息名称
+								</td>
+								<td class="service_tr_td1">
+									发布时间
+								</td>
+								<td class="service_tr_td1">
+									公开类型
+								</td>
+							</tr>
+							
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2011-00024
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(0)"
+												onmouseout="hide(0)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/23082_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2011...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="0"
+												onmousemove="show(0)"
+												onmouseout="hide(0)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														城乡规划局管理员
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-07-14
+														</span><strong>索 引：</strong>
+														006946462/2011-00024
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-07-14
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2011-00021
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(1)"
+												onmouseout="hide(1)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/14771_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2011...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="1"
+												onmousemove="show(1)"
+												onmouseout="hide(1)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														城乡规划局管理员
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-06-10
+														</span><strong>索 引：</strong>
+														006946462/2011-00021
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-06-10
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2010-00019
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(2)"
+												onmouseout="hide(2)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/423_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2010...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="2"
+												onmousemove="show(2)"
+												onmouseout="hide(2)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														城乡规划局管理员
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-06-09
+														</span><strong>索 引：</strong>
+														006946462/2010-00019
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-06-09
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2009-00017
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(3)"
+												onmouseout="hide(3)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/376_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2009...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="3"
+												onmousemove="show(3)"
+												onmouseout="hide(3)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														李文柱
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-04-28
+														</span><strong>索 引：</strong>
+														006946462/2009-00017
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-04-28
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2009-00018
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(4)"
+												onmouseout="hide(4)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/378_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2009...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="4"
+												onmousemove="show(4)"
+												onmouseout="hide(4)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														李文柱
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-04-28
+														</span><strong>索 引：</strong>
+														006946462/2009-00018
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-04-28
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2009-00019
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(5)"
+												onmouseout="hide(5)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/379_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2009...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="5"
+												onmousemove="show(5)"
+												onmouseout="hide(5)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														李文柱
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-04-28
+														</span><strong>索 引：</strong>
+														006946462/2009-00019
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-04-28
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2009-00020
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(6)"
+												onmouseout="hide(6)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/380_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2009...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="6"
+												onmousemove="show(6)"
+												onmouseout="hide(6)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														李文柱
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-04-28
+														</span><strong>索 引：</strong>
+														006946462/2009-00020
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-04-28
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2009-00021
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(7)"
+												onmouseout="hide(7)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/382_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2009...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="7"
+												onmousemove="show(7)"
+												onmouseout="hide(7)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														李文柱
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-04-28
+														</span><strong>索 引：</strong>
+														006946462/2009-00021
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-04-28
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2009-00022
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(8)"
+												onmouseout="hide(8)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/383_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2009...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="8"
+												onmousemove="show(8)"
+												onmouseout="hide(8)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														李文柱
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-04-28
+														</span><strong>索 引：</strong>
+														006946462/2009-00022
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-04-28
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2009-00023
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(9)"
+												onmouseout="hide(9)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/384_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2009...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="9"
+												onmousemove="show(9)"
+												onmouseout="hide(9)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														李文柱
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-04-28
+														</span><strong>索 引：</strong>
+														006946462/2009-00023
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-04-28
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2009-00024
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(10)"
+												onmouseout="hide(10)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/385_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2009...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="10"
+												onmousemove="show(10)"
+												onmouseout="hide(10)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														李文柱
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-04-28
+														</span><strong>索 引：</strong>
+														006946462/2009-00024
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-04-28
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2009-00025
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(11)"
+												onmouseout="hide(11)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/386_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2009...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="11"
+												onmousemove="show(11)"
+												onmouseout="hide(11)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														李文柱
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-04-28
+														</span><strong>索 引：</strong>
+														006946462/2009-00025
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-04-28
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2009-00026
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(12)"
+												onmouseout="hide(12)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/387_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2009...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="12"
+												onmousemove="show(12)"
+												onmouseout="hide(12)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														李文柱
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-04-28
+														</span><strong>索 引：</strong>
+														006946462/2009-00026
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-04-28
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2010-00015
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(13)"
+												onmouseout="hide(13)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/419_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2010...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="13"
+												onmousemove="show(13)"
+												onmouseout="hide(13)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														李文柱
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-04-28
+														</span><strong>索 引：</strong>
+														006946462/2010-00015
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-04-28
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+									<tr onmousemove="this.className='secBarBgB1'"
+										onmouseout="this.className=''">
+										<td>
+											006946462/2010-00016
+										</td>
+										<td class="service_tr_td2">
+										      
+							          		   <a onmousemove="show(14)"
+												onmouseout="hide(14)"
+												href="javascript:void(0);" onclick="javascript:opendetails('547','/website/govPublic/html/547/2011/420_0.html');return false;" target="_blank">核发《建设用地规划许可证》&mdash;&mdash;用地规划科（2010...
+											  </a>
+							          		
+							          		
+							          		<br style="height: 0px;"/>							          	
+											<div class="aplis" id="14"
+												onmousemove="show(14)"
+												onmouseout="hide(14)">
+												<ul>
+													<li>
+														<span><strong>作 者:</strong>
+														李文柱
+														</span><strong>标 题：</strong>
+														核发《建设用地规划许可证》&mdash;&mdash;用地规划科...
+													</li>
+													<li>
+														<span><strong>时 间：</strong>
+														2011-04-28
+														</span><strong>索 引：</strong>
+														006946462/2010-00016
+													</li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											2011-04-28
+										</td>
+										 <td>主动公开</td>
+									</tr>
+								
+							
+						</table>
+						<!-- 列表分页开始 -->
+						<div class="list_page">
+							<form id="pageform" name="pageform" method="post" action="">
+								<!--分页显示模块-->
+								
+								
+									
+									
+									
+									
+									
+									
+									
+										
+
+
+
+
+<style>
+/**超链接样式*/
+a {
+	color: #33597F;
+	text-decoration: none;
+}
+a:hover {
+	color: E5200E;
+
+}
+a:active {
+	color: #F41500;
+}
+
+ .test{
+	 letter-spacing:3px;font-size:14px;line-height:15pt;font-family : "Lucida Grande", Verdana, Lucida, Arial, Helvetica, 宋体,sans-serif;
+ }
+</style>
+
+<script language="JavaScript">
+function pageSetting(pageUrl){//设置每页显示记录数
+document.pageform.action=""+pageUrl;
+document.pageform.submit();
+}
+function op_Linked(pageUrl,pageNumber,pageSize){//链接操作
+document.pageform.action=pageUrl+"&currentpage="+pageNumber+"&pagesize="+pageSize;
+document.pageform.submit();
+}
+
+function op_go(pageUrl,pageSize,totalPage){//跳转
+if(document.all.pageNumber.value==""){
+	alert("请输入跳转页数");
+	document.all.pageNumber.focus();
+	return;
+}
+if(document.all.pageNumber.value>totalPage){
+	alert("输入的跳转页数大于总页数，请重新输入");
+	document.all.pageNumber.value="";
+	document.all.pageNumber.focus();
+	return;
+}
+var pageNumber=document.all.pageNumber.value;
+op_Linked(pageUrl,pageNumber,pageSize);
+}
+</script>
+
+<table  width="100%"  height="35" border="0" cellpadding="0" cellspacing="0" class="test">
+<tr>
+    <td align="right">
+     
+             
+                   <a href="#" onClick="op_Linked('/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=606&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0','1','15')">首页</a>
+                   
+                   <a href="#" onClick="op_Linked('/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=606&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0','1','15')">
+					          <font style='font-family:Arial'>1</font>
+							</a>
+                   <a href="#" onClick="op_Linked('/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=606&siteOrgCode=440200&pagesize=15&action=show&pager.offset=15','2','15')">
+					          <font style='font-family:Arial'>2</font>
+							</a>
+                   <a href="#" onClick="op_Linked('/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=606&siteOrgCode=440200&pagesize=15&action=show&pager.offset=30','3','15')">
+					          <font style='font-family:Arial'>3</font>
+							</a>
+                   <a href="#" onClick="op_Linked('/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=606&siteOrgCode=440200&pagesize=15&action=show&pager.offset=45','4','15')">
+					          <font style='font-family:Arial' color='#FF5501'><b>4</b></font>
+							</a>
+                   <a href="#" onClick="op_Linked('/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=606&siteOrgCode=440200&pagesize=15&action=show&pager.offset=60','5','15')">
+					          <font style='font-family:Arial'>5</font>
+							</a>
+                   
+                   <a href="#" onClick="op_Linked('/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=606&siteOrgCode=440200&pagesize=15&action=show&pager.offset=60','5','15')">尾页</a>
+                   共70条记录&nbsp;&nbsp;第 4/5页
+            
+     
+     </td>
+</tr>
+</table>
+
+
+									
+								
+								
+							</form>
+						</div>
+						<!-- 列表分页结束 -->
+					</div>
+					
+
+
+
+<div id="footer">
+<div class="google">
+ <!-- 
+ <form method="get" action="http://www.google.com/custom" target="google_window">
+	<table width="0" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+		<td><a href="http://www.google.com/"><img src="images/google.gif" /></a></td>
+		<td class="googletd1"><input name="q" type="text" maxlength="255" value=""/></td>
+		<td class="googletd2"><input type="submit" name="sa"   value="搜 索"/></td>
+		<input type="hidden" name="client" value="pub-6854204841389277"></input>
+		<input type="hidden" name="forid" value="1"></input>
+		<input type="hidden" name="ie" value="GB2312"></input>
+		<input type="hidden" name="oe" value="GB2312"></input>
+		<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;LH:32;LW:75;L:http://www.google.com/logos/Logo_25wht.gif;S:http://;LP:1;FORID:1"></input>
+		<input type="hidden" name="hl" value="zh-CN"></input>
+	  </tr>
+	</table>
+ </form>
+  -->
+</div>
+<div class="foot_01">在线统计：您是第 <span class="blue bluetow">3090585</span> 位来访者</div>
+<div class="foot_02"><div style="position: relative;"><p style="position: absolute; left: 800px; top: -20px;"><script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript   src='http://dcs.conac.cn/js/20/307/0000/40704080/CA203070000407040800001.js' type='text/javascript'%3E%3C/script%3E"));</script></p></div><span class="blue"><span class="blue">主办单位：韶关市人民政府<br />
+承办单位：韶关市行政服务中心&nbsp;&nbsp;技术支持：韶关市信息中心
+<br />
+Copyright 2011 <a href="http://www.shaoguan.gov.cn" target="_blank">www.shaoguan.gov.cn</a> All Rights Reserved <a href="http://www.miibeian.gov.cn/" target="_blank">粤ICP备05055572号</a><br />
+</span><span class="span2">(建议使用1024&times;768分辨率 IE6.0以上版本浏览器)</span></span></div>
+</div>
+<div style="display:none;"><script src="http://s9.cnzz.com/stat.php?id=1253630618&web_id=1253630618&show=pic" type="text/javascript" language="JavaScript"></script></div>
+
+				</div>
+			</div>
+		</div></div>
+	</body>
+
+</html>

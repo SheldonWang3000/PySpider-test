@@ -1,6 +1,6 @@
 from pyspider.libs.base_handler import *
 from bs4 import BeautifulSoup
-import mysql.connector
+# import mysql.connector
 import hashlib
 import time
 import re
@@ -17,8 +17,8 @@ class My(BaseHandler):
     download_key = 'download'
     analysis_key = 'analysis'
 
-    conn = mysql.connector.connect(user='root', password='254478_a', database='mydb')
-    cursor = conn.cursor(dictionary=True)
+    # conn = mysql.connector.connect(user='root', password='254478_a', database='mydb')
+    # cursor = conn.cursor(dictionary=True)
 
     table_name = ['选址意见书', '建设用地规划许可证', '建设工程规划许可证', '乡村建设规划许可证',
                 '规划验收合格证', '工程规划验收合格通知书', '批前公示', '批后公布']
@@ -237,7 +237,8 @@ class My(BaseHandler):
             values = [result['url'].encode('utf-8'), path, 
                     self.get_date(), self.city_name[self.name].encode('utf-8'), 
                     result['type'].encode('utf-8'), content.encode('utf-8')]
-            self.cursor.execute('''insert into tbl_OrglPblc values ('', %s, %s, 0, 2, %s, %s, %s, %s)''', values)
+            '''TODO database insert!'''
+            # self.cursor.execute('''insert into tbl_OrglPblc values ('', %s, %s, 0, 2, %s, %s, %s, %s)''', values)
 
             # print(self.cursor.lastrowid)
             d = {}
