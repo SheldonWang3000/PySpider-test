@@ -6,22 +6,22 @@ from bs4 import BeautifulSoup
 
 class Handler(My):
     name = "GZ"
-    mkdir = '/home/sheldon/web/'
+    mkdir = '/opt/web/'
 
     @every(minutes=24 * 60)
     def on_start(self):
-        # self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=004&area=all&page=1', 
-        #     fetch_type='js', callback=self.index_page, save={'type':self.table_name[1]})
-        # self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=005&area=all&page=1', 
-        #     fetch_type='js', callback=self.index_page, save={'type':self.table_name[0]})
+        self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=004&area=all&page=1', 
+            fetch_type='js', callback=self.index_page, save={'type':self.table_name[1]})
+        self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=005&area=all&page=1', 
+            fetch_type='js', callback=self.index_page, save={'type':self.table_name[0]})
         self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=006&area=all&page=1', 
             fetch_type='js', callback=self.index_page, save={'type':self.table_name[4]})
-        # self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=007&area=all&page=1', 
-        #     fetch_type='js', callback=self.index_page, save={'type':self.table_name[2]})
-        # self.crawl('http://www.upo.gov.cn/WebApi/GsApi.aspx?do=phlist&lb=null&area=null&page=1', 
-        #     fetch_type='js', callback=self.index_page, save={'type':self.table_name[7]})
-        # self.crawl('http://www.upo.gov.cn/WebApi/GsApi.aspx?do=pclist&lb=null&area=null&page=1', 
-        #     fetch_type='js', callback=self.index_page, save={'type':self.table_name[6]})
+        self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=007&area=all&page=1', 
+            fetch_type='js', callback=self.index_page, save={'type':self.table_name[2]})
+        self.crawl('http://www.upo.gov.cn/WebApi/GsApi.aspx?do=phlist&lb=null&area=null&page=1', 
+            fetch_type='js', callback=self.index_page, save={'type':self.table_name[7]})
+        self.crawl('http://www.upo.gov.cn/WebApi/GsApi.aspx?do=pclist&lb=null&area=null&page=1', 
+            fetch_type='js', callback=self.index_page, save={'type':self.table_name[6]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)

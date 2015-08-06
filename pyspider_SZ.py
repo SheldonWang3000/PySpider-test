@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 class Handler(My):
     name = "SZ"
-    mkdir = '/home/sheldon/web/'
+    mkdir = '/opt/web/'
     
     @every(minutes=24 * 60)
     def on_start(self):

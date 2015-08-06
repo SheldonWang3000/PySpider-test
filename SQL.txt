@@ -1,0 +1,31 @@
+TBL_RURALLANDUSEPERMIT
+TBL_PREAPPDPBLC
+TBL_PERMSNOTESFORLOCNO
+TBL_ORGLPBLC	原始表
+TBL_LANDUSEPERMITNO
+TBL_CERTFORPLANOFCONSTPRJ
+TBL_BUILDINGPERMIT
+TBL_APPDPBLC
+TBL_ANCECERTPLANCONSTPRJ
+insert into TBL_ORGLPBLC values(1, 'url', 'path', 0, 2, '2015-3-20', 'city', 'type', 'body');
+select ORGLPBLCNO from TBL_ORGLPBLC; 
+select ARCHIVEDATE from TBL_ORGLPBLC;
+select BODY from TBL_ORGLPBLC;
+insert into TBL_ORGLPBLC (ORIGINALADDRESS, STORAGEPATH, ISINDEXED, STRUCTUREDSTATE, ARCHIVEDATE, ASCRIPTIONCITY, DOCUMENTTYPE, BODY) values('url', 'path', 0, 2, '2015-3-4', 'city', 'type', 'body');
+
+SELECT character_set_name FROM information_schema.`COLUMNS` C
+WHERE table_name = "test"
+  AND column_name = "name";
+
+import os  
+import cx_Oracle
+os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'  
+dsn = cx_Oracle.makedsn('localhost', 1521, 'urbandeve')
+conn = cx_Oracle.connect(user='C##WWPA', password='wwpa5678', dsn=dsn)
+cursor = conn.cursor()
+
+os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'  
+
+AMERICAN_AMERICA.AL32UTF8
+
+select userenv('language') from dual;

@@ -1,6 +1,6 @@
 from pyspider.libs.base_handler import *
 from bs4 import BeautifulSoup
-# import mysql.connector
+import cx_Oracle
 import hashlib
 import time
 import re
@@ -15,10 +15,7 @@ class My(BaseHandler):
 
     r = redis.Redis()
     download_key = 'download'
-    analysis_key = 'analysis'
-
-    # conn = mysql.connector.connect(user='root', password='254478_a', database='mydb')
-    # cursor = conn.cursor(dictionary=True)
+    os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'  
 
     table_name = ['选址意见书', '建设用地规划许可证', '建设工程规划许可证', '乡村建设规划许可证',
                 '规划验收合格证', '工程规划验收合格通知书', '批前公示', '批后公布']
@@ -41,8 +38,7 @@ class My(BaseHandler):
         "timeout" : 100
     }
     def on_start(self):
-        print('on_start')
-        print(type(self))
+        print('请重新启动pyspider')
         pass
 
     # def index_page(self, response):
@@ -50,6 +46,7 @@ class My(BaseHandler):
 
     # def next_list(self, response):
     #     pass
+
     def get_date(self):
         return time.strftime("%Y-%m-%d", time.localtime())
 
@@ -91,7 +88,13 @@ class My(BaseHandler):
             # 改动网页 css 地址为相对地址
             each['src'] = js_name + '.js'
             # 爬取css文件
-            self.crawl(request_url, fetch_type='js', callback = self.js_css_download, save = {'path':path, 'name':each['src']})
+            d = {}
+            d['url'] = request_url
+            d['type'] = 'attachment'
+            d['path'] = path
+            d['name'] = each['src']
+            self.r.rpush(self.download_key, str(d))
+            # self.crawl(request_url, fetch_type='js', callback = self.js_css_download, save = {'path':path, 'name':each['src']})
 
         css_tag = soup.find_all('link', type='text/css')
         for each in css_tag:
@@ -103,7 +106,13 @@ class My(BaseHandler):
             # 改动网页 css 地址为相对地址
             each['href'] = css_name + '.css'
             # 爬取css文件
-            self.crawl(request_url, callback = self.js_css_download, save = {'path':path, 'name':each['href']})
+            d = {}
+            d['url'] = request_url
+            d['type'] = 'attachment'
+            d['path'] = path
+            d['name'] = each['href']
+            self.r.rpush(self.download_key, str(d))
+            # self.crawl(request_url, callback = self.js_css_download, save = {'path':path, 'name':each['href']})
 
         images = soup('img')
         image_list = []
@@ -228,25 +237,31 @@ class My(BaseHandler):
             content = re.sub(r'<!--[\w\W\r\n]*?-->', '\n', content)
             content = re.sub(r'\s+', '\n', content)
 
-            # url_path = path + 'url.txt'
-            # f = open(url_path, 'wb')
-            # f.write(result['url'].encode('utf-8'))
-            # f.close()
-
             print(self.get_date())
-            values = [result['url'].encode('utf-8'), path, 
-                    self.get_date(), self.city_name[self.name].encode('utf-8'), 
-                    result['type'].encode('utf-8'), content.encode('utf-8')]
-            '''TODO database insert!'''
-            # self.cursor.execute('''insert into tbl_OrglPblc values ('', %s, %s, 0, 2, %s, %s, %s, %s)''', values)
+            values = (result['url'], path,
+                    self.get_date(), self.city_name[self.name], 
+                    result['type'], content)
 
-            # print(self.cursor.lastrowid)
-            d = {}
-            d['rowid'] = self.cursor.lastrowid
-            d['path'] = path
-            d['city'] = self.name
-            d['type'] = result['type'].encode('utf-8')
-            self.conn.commit()
-            self.r.rpush(self.analysis_key, str(d))
+            conn = None
+            try:
+                dsn = cx_Oracle.makedsn('localhost', 1521, 'urbandeve')
+                conn = cx_Oracle.connect(user='C##WWPA', password='wwpa5678', dsn=dsn)
+                try:
+                    cursor = conn.cursor()
+                    cursor.setinputsizes(cx_Oracle.NCHAR, cx_Oracle.NCHAR,
+                        cx_Oracle.DATETIME, cx_Oracle.NCHAR,
+                        cx_Oracle.NCHAR, cx_Oracle.CLOB)
+                    cursor.prepare('''insert into TBL_ORGLPBLC 
+                        (ORIGINALADDRESS, STORAGEPATH, 
+                        ARCHIVEDATE, ASCRIPTIONCITY, DOCUMENTTYPE, BODY) 
+                        values(:1, :2, to_date(:3, 'yyyy-mm-dd'), :4, :5, :6)''')
+                    cursor.execute(None, values)
+                    conn.commit()
+                finally:
+                    cursor.close()
+            finally:
+                if conn is not None:
+                    conn.close()
+
 
         super(My, self).on_result(result)
