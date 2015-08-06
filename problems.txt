@@ -6,3 +6,6 @@
 		http://www.meizhou.gov.cn/open/index.php?NodeID=872&u=19&page=1
 		http://www.mzghj.gov.cn/index.html
 有的地方三证两书分批前和批后
+
+
+强制爬取目录

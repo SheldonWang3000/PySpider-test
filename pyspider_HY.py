@@ -7,15 +7,14 @@ import re
 class Handler(My):
     name = "HY"
 
-
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=282&page=1', 
-            callback=self.index_page, save={'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
         self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=301&page=1', 
-            callback=self.index_page, save={'type':self.table_name[0]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[0]})
         self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=403&page=1', 
-            callback=self.index_page, save={'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[1]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -33,6 +32,7 @@ class Handler(My):
 
             for i in range(2, page_count + 1):
                 params['page'] = str(i)
-                self.crawl(domain, params=params, callback=self.content_page, save=response.save)
+                self.crawl(domain, params=params, force_update=True, 
+                    callback=self.content_page, save=response.save)
 
             self.crawl(response.url, callback=self.content_page, force_update=True, save=response.save)

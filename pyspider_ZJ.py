@@ -12,13 +12,13 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=21&1', 
-            callback=self.index_page, save={'page':1, 'type':self.table_name[0]})
+            callback=self.index_page, force_update=True, save={'page':1, 'type':self.table_name[0]})
         self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=21&1', 
-            callback=self.index_page, save={'page':1, 'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, save={'page':1, 'type':self.table_name[1]})
         self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=21&1', 
-            callback=self.index_page, save={'page':1, 'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, save={'page':1, 'type':self.table_name[2]})
         self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=21&1', 
-            callback=self.index_page, save={'page':1, 'type':self.table_name[3]})
+            callback=self.index_page, force_update=True, save={'page':1, 'type':self.table_name[3]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -49,6 +49,7 @@ class Handler(My):
             print(url)
             url = url + '&' + str(response.save['page'] + 1)
             response.save['page'] = response.save['page'] + 1
-            self.crawl(url, method='POST', data=data, callback=self.index_page, save=response.save)
+            self.crawl(url, method='POST', data=data, force_update=True, 
+                callback=self.index_page, save=response.save)
 
         

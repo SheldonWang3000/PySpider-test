@@ -10,7 +10,7 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.swghj.gov.cn/gs/gd.htm', 
-            callback=self.index_page, save={'type':'Unknow'})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[8]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -21,7 +21,7 @@ class Handler(My):
             if i.get_text() == '上一页':
                 link = urljoin(response.url, i['href'])
                 next_link = link
-                self.crawl(link, callback=self.index_page, save=response.save) 
+                self.crawl(link, callback=self.index_page, force_update=True, save=response.save) 
 
         lists = soup.find('table', {'width':'100%'}).find_all('a', {'href': re.compile(r'')})
         print(len(lists))

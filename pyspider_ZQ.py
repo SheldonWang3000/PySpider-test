@@ -10,13 +10,13 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=1', 
-            callback=self.index_page, save={'type':self.table_name[0]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[0]})
         self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=2', 
-            callback=self.index_page, save={'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[1]})
         self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=3',
-            callback=self.index_page, save={'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
         self.crawl('http://www.zqplan.gov.cn/ghxk.aspx?flag=5',
-            callback=self.index_page, save={'type':self.table_name[4]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[4]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -26,7 +26,7 @@ class Handler(My):
         url = 'http://www.zqplan.gov.cn/ghxk_%s_%s____0.aspx'
         for i in range(2, page_count + 1):
             link = url % (i, flag)
-            self.crawl(link, callback=self.next_list, save=response.save)
+            self.crawl(link, callback=self.next_list, force_update=True, save=response.save)
         domain = 'http://www.zqplan.gov.cn/'
         lists = soup('table')[0].find_all('a', {'target':'_blank'})
         for i in lists:

@@ -11,7 +11,8 @@ class Handler(My):
     def on_start(self):
         url = 'http://gtzy.yunfu.gov.cn/website/newdeptemps/gtzy/news.jsp?columnid=009001056011&ipage=1'
         # 爬取 url 网页，回调index_page 函数 ，页面类型为：1 目录页
-        self.crawl(url, fetch_type='js', callback=self.index_page, save={'page':1, 'type':'Unknow'})
+        self.crawl(url, fetch_type='js', callback=self.index_page, 
+            force_update=True, save={'page':1, 'type':self.table_name[8]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -25,7 +26,8 @@ class Handler(My):
         url = response.url[:-1]
         for i in range(2, pageAllCount + 1):
             link = url + str(i)
-            self.crawl(link, fetch_type='js', callback=self.next_list, save=response.save)
+            self.crawl(link, fetch_type='js', force_update=True, 
+                callback=self.next_list, save=response.save)
 
         contentPageList = []    
         for li in soup.select('.newslist li'):
@@ -50,5 +52,5 @@ class Handler(My):
             contentPageList.append(pageUrl)
         for uri in contentPageList:
             # 爬取内容页面
-            self.crawl('http://gtzy.yunfu.gov.cn'+uri, callback=self.content_page, 
+            self.crawl('http://gtzy.yunfu.gov.cn'+ uri, callback=self.content_page, 
                 save=response.save)

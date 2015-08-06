@@ -13,11 +13,11 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=605&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0&currentpage=1&pagesize=15', 
-            callback=self.index_page, save={'type':self.table_name[0]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[0]})
         self.crawl('http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=606&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0&currentpage=1&pagesize=15', 
-            callback=self.index_page, save={'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[1]})
         self.crawl('http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=607&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0&currentpage=1&pagesize=15', 
-            callback=self.index_page, save={'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -34,7 +34,8 @@ class Handler(My):
         for i in range(2, page_count + 1):
             link = url.split('?')[0]
             params['currentpage'] = str(i)
-            self.crawl(link, callback=self.next_list, params=params, save=response.save)
+            self.crawl(link, callback=self.next_list, force_update=True, 
+                params=params, save=response.save)
 
         lists = soup('table', 'service_table')[0].find_all('a')
         domain = 'http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!single.action'

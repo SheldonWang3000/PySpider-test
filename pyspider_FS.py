@@ -16,17 +16,17 @@ class Handler(My):
         params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'pageIndex': '1', 'pageSize': '15'}
         data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/xzyjs?page=1', 
-            method='POST',data=data, callback=self.index_page, 
+            method='POST',data=data, callback=self.index_page, force_update=True, 
             save={'action':'xzyjs','type':self.table_name[0]})
         params = {'strWhere' : '%2C%2C%2C', 'action': 'ydgh', 'pageIndex': '1', 'pageSize': '15'}
         data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/ydgh?page=1', 
-            method='POST',data=data, callback=self.index_page, 
+            method='POST',data=data, callback=self.index_page, force_update=True,  
             save={'action':'ydgh','type':self.table_name[1]})
         params = {'strWhere' : '%2C%2C%2C', 'action': 'gcgh', 'pageIndex': '1', 'pageSize': '15'}
         data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/gcgh?page=1', 
-            method='POST',data=data, callback=self.index_page, 
+            method='POST',data=data, callback=self.index_page, force_update=True,  
             save={'action':'gcgh','type':self.table_name[2]})
 
     def index_page(self, response):
@@ -56,7 +56,8 @@ class Handler(My):
             params['action'] = response.save['action']
             params['pageIndex'] = str(i)
             temp_data = urlencode(params)
-            self.crawl(temp_url, method='POST', data=temp_data, callback=self.next_list, save=response.save)
+            self.crawl(temp_url, method='POST', data=temp_data, 
+                callback=self.next_list, save=response.save, force_update=True)
 
     @config(priority=2)
     def next_list(self, response):

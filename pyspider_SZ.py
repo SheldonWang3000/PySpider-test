@@ -10,13 +10,17 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://61.144.226.82/ghweb/main/zwgk/yssz/ysszResultViewAction.do?method=xzyjsQuery&&order=0&sort=desc&pageNo=1', 
-            fetch_type='js', callback=self.index_page, save={'type':self.table_name[0]})
+            fetch_type='js', callback=self.index_page, 
+            force_update=True, save={'type':self.table_name[0]})
         self.crawl('http://61.144.226.82/ghweb/main/zwgk/yssz/ysszResultViewAction.do?method=jsydXkzQuery&&order=0&sort=desc&pageNo=1', 
-            fetch_type='js', callback=self.index_page, save={'type':self.table_name[1]})
+            fetch_type='js', callback=self.index_page, 
+            force_update=True, save={'type':self.table_name[1]})
         self.crawl('http://61.144.226.82/ghweb/main/zwgk/yssz/ysszResultViewAction.do?method=jsgcXkzQuery&&order=0&sort=desc&pageNo=1', 
-            fetch_type='js', callback=self.index_page, save={'type':self.table_name[2]})
+            fetch_type='js', callback=self.index_page, 
+            force_update=True, save={'type':self.table_name[2]})
         self.crawl('http://61.144.226.82/ghweb/main/zwgk/yssz/ysszResultViewAction.do?method=jsgcYshgzQuery&&order=0&sort=desc&pageNo=1', 
-            fetch_type='js', callback=self.index_page, save={'type':self.table_name[4]})
+            fetch_type='js', callback=self.index_page, 
+            force_update=True, save={'type':self.table_name[4]})
     def index_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
         table = soup('table', {'class':'tdown'})[0].find_all('td')[0].find_all('a')[-1]['href'].split('?')[-1].split('&')

@@ -10,19 +10,19 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.stghj.gov.cn/Category_218/Index.aspx', 
-            callback=self.index_page, save={'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[1]})
         self.crawl('http://www.stghj.gov.cn/Category_217/Index.aspx', 
-            callback=self.index_page, save={'type':self.table_name[0]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[0]})
         self.crawl('http://www.stghj.gov.cn/Category_221/Index.aspx',
-            callback=self.index_page, save={'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
         self.crawl('http://www.stghj.gov.cn/Category_295/Index.aspx', 
-            callback=self.index_page, save={'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
         self.crawl('http://www.stghj.gov.cn/Category_292/Index.aspx', 
-            callback=self.index_page, save={'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[1]})
         self.crawl('http://www.stghj.gov.cn/Category_276/Index.aspx', 
-            callback=self.index_page, save={'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[1]})
         self.crawl('http://www.stghj.gov.cn/Category_279/Index.aspx', 
-            callback=self.index_page, save={'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -36,7 +36,7 @@ class Handler(My):
         url = response.url[:-5]
         for i in range(2, page_count + 1):
             link = url + '_' + str(i) + '.aspx'
-            self.crawl(link, callback=self.next_list, save=response.save)
+            self.crawl(link, callback=self.next_list, force_update=True, save=response.save)
 
         t = soup('ul', {'class':'News_list'})[0].find_all('li')
         domain = 'http://www.stghj.gov.cn'
