@@ -9,7 +9,6 @@ from urllib.parse import quote
 
 class Handler(My):
     name = "DG"
-    mkdir = '/home/sheldon/web/'
     
     @every(minutes=24 * 60)
     def on_start(self):

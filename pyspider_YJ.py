@@ -6,7 +6,6 @@ import re
 
 class Handler(My):
     name = "YJ"
-    mkdir = '/home/sheldon/web/'
     
     @every(minutes=24 * 60)
     def on_start(self):

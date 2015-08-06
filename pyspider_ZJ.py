@@ -8,7 +8,6 @@ from urllib.parse import urlencode
 
 class Handler(My):
     name = "ZJ"
-    mkdir = '/home/sheldon/web/'
     
     @every(minutes=24 * 60)
     def on_start(self):

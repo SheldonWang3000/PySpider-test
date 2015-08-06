@@ -13,6 +13,7 @@ from urllib.parse import quote
 '''放到python环境目录的site-packages下'''
 class My(BaseHandler):
 
+    mkdir = '/opt/web/'
     r = redis.Redis()
     download_key = 'download'
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'  

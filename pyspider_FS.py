@@ -6,7 +6,6 @@ from urllib.parse import urlencode
 
 class Handler(My):
     name = "FS"
-    mkdir = '/home/sheldon/web/'
 
     domains = {'xzyjs':'http://www.fsgh.gov.cn/GTGHService/ViewCase/jsxmghxzyjs/',
             'ydgh':'http://www.fsgh.gov.cn/GTGHService/ViewCase/ydghxkz/',
