@@ -1,6 +1,8 @@
 from pyspider.libs.base_handler import *
 from my import My
 from bs4 import BeautifulSoup
+import re
+from urllib.request import urljoin
 
 '''汕尾'''
 
@@ -10,7 +12,9 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.swghj.gov.cn/gs/gd.htm', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[8]})
+            callback=self.index_page, force_update=True, save={'type':self.table_name[7]})
+        self.crawl('http://www.swghj.gov.cn/gs/gsgd.html', 
+            callback=self.index_page, force_update=True, save={'type':self.table_name[6]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -22,13 +26,15 @@ class Handler(My):
                 link = urljoin(response.url, i['href'])
                 next_link = link
                 self.crawl(link, callback=self.index_page, force_update=True, save=response.save) 
+                break
 
-        lists = soup.find('table', {'width':'100%'}).find_all('a', {'href': re.compile(r'')})
+        lists = soup.find('table', {'width':'100%'}).find_all('a', href=True)
         print(len(lists))
         for i in lists:
-            link = urljoin(response.url, i['href'])
-            if link != next_link:
-                print(link)
-                self.crawl(link, callback=self.content_page, save=response.save)
+            if i.get_text() != '下一页':
+                link = urljoin(response.url, i['href'])
+                if link != next_link:
+                    print(link)
+                    self.crawl(link, callback=self.content_page, save=response.save)
 
         

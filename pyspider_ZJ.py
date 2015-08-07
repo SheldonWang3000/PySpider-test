@@ -13,11 +13,11 @@ class Handler(My):
     def on_start(self):
         self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=21&1', 
             callback=self.index_page, force_update=True, save={'page':1, 'type':self.table_name[0]})
-        self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=21&1', 
+        self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=22&1', 
             callback=self.index_page, force_update=True, save={'page':1, 'type':self.table_name[1]})
-        self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=21&1', 
+        self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=23&1', 
             callback=self.index_page, force_update=True, save={'page':1, 'type':self.table_name[2]})
-        self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=21&1', 
+        self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=24&1', 
             callback=self.index_page, force_update=True, save={'page':1, 'type':self.table_name[3]})
 
     def index_page(self, response):
@@ -29,8 +29,10 @@ class Handler(My):
         for i in lists:
             crawl_link = domain + i['href'] 
             self.crawl(crawl_link, callback=self.content_page, save=response.save)
-        
-        last_page = int(soup('a', {'href': re.compile(r'javascript:__doPostBack')})[-1]['href'].split(',')[1].split('\'')[1])
+        try: 
+            last_page = int(soup('a', {'href': re.compile(r'javascript:__doPostBack')})[-1]['href'].split(',')[1].split('\'')[1])
+        except IndexError:
+            last_page = response.save['page']
         if last_page != response.save['page']:
             parmas = {'__EVENTTARGET': 'ywgslist$AspNetPager1'}
             parmas['__EVENTARGUMENT'] = str(response.save['page'] + 1)

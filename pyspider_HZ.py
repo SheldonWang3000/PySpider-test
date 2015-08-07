@@ -18,6 +18,12 @@ class Handler(My):
             callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
         self.crawl('http://ghjs.huizhou.gov.cn/business/htmlfiles/ghjsj/ph_ghyshgz/index.html', 
             callback=self.index_page, force_update=True, save={'type':self.table_name[4]})
+        self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/pq_xzyjs/index.html', 
+            callback=self.index_page, force_update=True, save={'type':self.table_name[9]})
+        self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/pq_ydghxkz/index.html', 
+            callback=self.index_page, force_update=True, save={'type':self.table_name[10]})
+        self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/pq_gcghxkz/index.html', 
+            callback=self.index_page, force_update=True, save={'type':self.table_name[11]})
     def index_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
 

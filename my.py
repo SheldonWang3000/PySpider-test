@@ -26,7 +26,8 @@ class My(BaseHandler):
     city_name = {'CZ':'潮州', 'DG':'东莞', 'FS':'佛山', 'GZ':'广州', 'GZ_after':'广州',
                  'HY':'河源', 'HZ':'惠州', 'JM':'江门', 'JM_X':'江门', 'JY':'揭阳', 'MM':'茂名',
                  'MZ':'梅州', 'QY':'清远', 'SG':'韶关', 'ST':'汕头', 'SW':'汕尾', 'SZ':'深圳', 
-                 'YF':'云浮', 'YJ':'阳江', 'ZH':'珠海', 'ZJ':'湛江', 'ZQ':'肇庆', 'ZS':'中山'}
+                 'YF':'云浮', 'YJ':'阳江', 'ZH':'珠海', 'ZJ':'湛江', 'ZQ':'肇庆', 'ZS':'中山',
+                 'CZ_approval':'潮州', 'FS_approval':'佛山'}
 
     headers= {
         "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -95,7 +96,7 @@ class My(BaseHandler):
             d['url'] = request_url
             d['type'] = 'attachment'
             d['path'] = path
-            d['name'] = each['src']
+            d['file_name'] = each['src']
             self.r.rpush(self.download_key, str(d))
             # self.crawl(request_url, fetch_type='js', callback = self.js_css_download, save = {'path':path, 'name':each['src']})
 
@@ -113,7 +114,7 @@ class My(BaseHandler):
             d['url'] = request_url
             d['type'] = 'attachment'
             d['path'] = path
-            d['name'] = each['href']
+            d['file_name'] = each['href']
             self.r.rpush(self.download_key, str(d))
             # self.crawl(request_url, callback = self.js_css_download, save = {'path':path, 'name':each['href']})
 
@@ -143,7 +144,7 @@ class My(BaseHandler):
                         each['src'] = m.hexdigest() + '.png'
                     elif re.search('.gif', image_url) is not None:
                         each['src'] = m.hexdigest() + '.gif'
-                    d['name'] = each['src']
+                    d['file_name'] = each['src']
                     self.r.rpush(self.download_key, str(d))
 
         attachments = soup('a', {'href': re.compile(r'^http')})
@@ -182,7 +183,7 @@ class My(BaseHandler):
                        m = hashlib.md5()
                        m.update(attachment_url.encode())
                        each['href'] = m.hexdigest() + '.' + type_name
-                       d['name'] = each['href']
+                       d['file_name'] = each['href']
                        self.r.rpush(self.download_key, str(d))
 
         # 针对 background 属性
@@ -207,7 +208,7 @@ class My(BaseHandler):
                     each['src'] = m.hexdigest() + '.png'
                 elif re.search('.gif', image_url) is not None:
                     each['src'] = m.hexdigest() + '.gif'
-                d['name'] = each['src']
+                d['file_name'] = each['src']
                 self.r.rpush(self.download_key, str(d))
 
         return {
