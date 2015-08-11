@@ -10,15 +10,20 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=70&page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=71&page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=72&page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[4]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[4], 'source':'GH'})
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=126&page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=127&page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[2], 'source':'GH'})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')

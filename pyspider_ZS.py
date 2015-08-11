@@ -10,7 +10,8 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.zsghj.gov.cn/list/p-5.html', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[8]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[8], 'source':'GH'})
 
     def index_page(self, response):
         r = BeautifulSoup(response.text)

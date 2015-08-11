@@ -13,19 +13,25 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9&page=1', 
-            fetch_type='js', force_update=True, callback=self.index_page, save={'page':1, 'type':self.table_name[0]})
+            fetch_type='js', force_update=True, callback=self.plan_page, 
+            save={'page':1, 'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%D3%C3%B5%D8%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&page=1', 
-            fetch_type='js', force_update=True, callback=self.index_page, save={'page':1, 'type':self.table_name[1]})
+            fetch_type='js', force_update=True, callback=self.plan_page, 
+            save={'page':1, 'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%B9%A4%B3%CC%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&page=1', 
-            fetch_type='js', force_update=True, callback=self.index_page, save={'page':1, 'type':self.table_name[2]})
+            fetch_type='js', force_update=True, callback=self.plan_page, 
+            save={'page':1, 'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://121.10.6.230/dggsweb/SeePQAllGS.aspx?%B9%AB%CA%BE=%C5%FA%C7%B0%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9&page=1', 
-            fetch_type='js', force_update=True, callback=self.index_page, save={'page':1, 'type':self.table_name[9]})
+            fetch_type='js', force_update=True, callback=self.plan_page, 
+            save={'page':1, 'type':self.table_name[9], 'source':'GH'})
         self.crawl('http://121.10.6.230/dggsweb/SeePQAllGS.aspx?%B9%AB%CA%BE=%C5%FA%C7%B0%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%D3%C3%B5%D8%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&page=1', 
-            fetch_type='js', force_update=True, callback=self.index_page, save={'page':1, 'type':self.table_name[10]})
+            fetch_type='js', force_update=True, callback=self.plan_page, 
+            save={'page':1, 'type':self.table_name[10], 'source':'GH'})
         self.crawl('http://121.10.6.230/dggsweb/SeePQAllGS.aspx?%B9%AB%CA%BE=%C5%FA%C7%B0%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%B9%A4%B3%CC%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&page=1', 
-            fetch_type='js', force_update=True, callback=self.index_page, save={'page':1, 'type':self.table_name[11]})
+            fetch_type='js', force_update=True, callback=self.plan_page, 
+            save={'page':1, 'type':self.table_name[11], 'source':'GH'})
 
-    def index_page(self, response):
+    def plan_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
       
         last_page = int(soup.find(id=re.compile(r'LabelPageCount')).get_text())
@@ -47,7 +53,7 @@ class Handler(My):
             save_dict = response.save
             save_dict['page'] = save_dict['page'] + 1
             self.crawl(url, method='POST',
-                data=data, callback=self.index_page, force_update=True, save=save_dict)
+                data=data, callback=self.plan_page, force_update=True, save=save_dict)
 
         content = soup('a', {'target':'_blank'})
 

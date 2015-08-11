@@ -10,25 +10,35 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.stghj.gov.cn/Category_218/Index_1.aspx', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://www.stghj.gov.cn/Category_217/Index_1.aspx', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[0]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://www.stghj.gov.cn/Category_221/Index_1.aspx',
-            callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://www.stghj.gov.cn/Category_295/Index_1.aspx', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://www.stghj.gov.cn/Category_292/Index_1.aspx', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://www.stghj.gov.cn/Category_276/Index_1.aspx', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://www.stghj.gov.cn/Category_279/Index_1.aspx', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://www.stghj.gov.cn/Category_207/Index_1.aspx', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[6]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[6], 'source':'GH'})
         self.crawl('http://www.stghj.gov.cn/Category_265/Index_1.aspx', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[6]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[6], 'source':'GH'})
         self.crawl('http://www.stghj.gov.cn/Category_263/Index_1.aspx', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[6]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[6], 'source':'GH'})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)

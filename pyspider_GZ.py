@@ -11,22 +11,22 @@ class Handler(My):
     def on_start(self):
         self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=004&area=all&page=1', 
             fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[1]})
+            force_update=True, save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=005&area=all&page=1', 
             fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[0]})
+            force_update=True, save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=006&area=all&page=1', 
             fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[4]})
+            force_update=True, save={'type':self.table_name[4], 'source':'GH'})
         self.crawl('http://www.upo.gov.cn/WebApi/SzskgkApi.aspx?do=list&lb=007&area=all&page=1', 
             fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[2]})
+            force_update=True, save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://www.upo.gov.cn/WebApi/GsApi.aspx?do=phlist&lb=null&area=null&page=1', 
             fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[7]})
+            force_update=True, save={'type':self.table_name[7], 'source':'GH'})
         self.crawl('http://www.upo.gov.cn/WebApi/GsApi.aspx?do=pclist&lb=null&area=null&page=1', 
             fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[6]})
+            force_update=True, save={'type':self.table_name[6], 'source':'GH'})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)

@@ -13,19 +13,24 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.sggh.gov.cn/Article_Class_Item.asp?ClassID=148&ChildClassID=219&page=1', 
-            callback=self.approval_page, force_update=True, save={'type':self.table_name[8]})
+            callback=self.approval_page, force_update=True, 
+            save={'type':self.table_name[8], 'source':'GH'})
         self.crawl('http://www.sggh.gov.cn/article_Class_Item.asp?ClassID=148&ChildClassID=204&page=1', 
-            callback=self.approval_page, force_update=True, save={'type':self.table_name[8]})
+            callback=self.approval_page, force_update=True, 
+            save={'type':self.table_name[8], 'source':'GH'})
 
         self.crawl('http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=605&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0&currentpage=1&pagesize=15', 
-            callback=self.certificate_page, force_update=True, save={'type':self.table_name[0]})
+            callback=self.certificate_page, force_update=True, 
+            save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=606&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0&currentpage=1&pagesize=15', 
-            callback=self.certificate_page, force_update=True, save={'type':self.table_name[1]})
+            callback=self.certificate_page, force_update=True, 
+            save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=607&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0&currentpage=1&pagesize=15', 
-            callback=self.certificate_page, force_update=True, save={'type':self.table_name[2]})
+            callback=self.certificate_page, force_update=True, 
+            save={'type':self.table_name[2], 'source':'GH'})
 
         self.crawl('http://www.sgland.gov.cn/ggxx.asp?page=1', callback=self.land_page,
-            save={'type':self.table_name[14]}, force_update=True, fetch_type='js')
+            save={'type':self.table_name[14], 'source':'GT'}, force_update=True, fetch_type='js')
 
     def approval_page(self, response):
         soup = BeautifulSoup(response.text)

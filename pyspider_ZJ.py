@@ -12,13 +12,17 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=21&1', 
-            callback=self.index_page, force_update=True, save={'page':1, 'type':self.table_name[0]})
+            callback=self.index_page, force_update=True, 
+            save={'page':1, 'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=22&1', 
-            callback=self.index_page, force_update=True, save={'page':1, 'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, 
+            save={'page':1, 'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=23&1', 
-            callback=self.index_page, force_update=True, save={'page':1, 'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, 
+            save={'page':1, 'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://www.zjgh.gov.cn/ysszgs.aspx?classid=24&1', 
-            callback=self.index_page, force_update=True, save={'page':1, 'type':self.table_name[3]})
+            callback=self.index_page, force_update=True, 
+            save={'page':1, 'type':self.table_name[3], 'source':'GH'})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')

@@ -10,17 +10,23 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.zqplan.gov.cn/ghxk_1_1____0.aspx', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[0]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://www.zqplan.gov.cn/ghxk_1_2____0.aspx', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://www.zqplan.gov.cn/ghxk_1_3____0.aspx',
-            callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://www.zqplan.gov.cn/ghxk_1_5____0.aspx',
-            callback=self.index_page, force_update=True, save={'type':self.table_name[4]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[4], 'source':'GH'})
         self.crawl('http://www.zqplan.gov.cn/gs_1_17.aspx',
-            callback=self.index_page, force_update=True, save={'type':self.table_name[6]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[6], 'source':'GH'})
         self.crawl('http://www.zqplan.gov.cn/gs_1_24.aspx',
-            callback=self.index_page, force_update=True, save={'type':self.table_name[7]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[7], 'source':'GH'})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)

@@ -10,15 +10,20 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=project_site_submission&page=1', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[0]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=businesses_project_planning_permit&page=1', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[1]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=project_planning_permit&page=1', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[2]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=village_project_planning_permit&page=1', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[3]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[3], 'source':'GH'})
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=project_planning_acceptance&page=1', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[4]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[4], 'source':'GH'})
 
         headers = {}
         headers['Accept'] = '*/*'
@@ -36,7 +41,7 @@ class Handler(My):
         headers['X-Requested-With'] = 'XMLHttpRequest'
         self.crawl('http://www.qyggzyjy.com/item/ajaxpage.asp?labelid=20127957470240&infoid=&classid=20138907766269&refreshtype=Folder&specialid=&curpage=1&id=1514', 
             callback=self.land_page, method='POST', data='', headers=headers,
-            save={'type':self.table_name[14]}, fetch_type='js', force_update=True)
+            save={'type':self.table_name[14], 'source':'GH'}, fetch_type='js', force_update=True)
 
     def plan_page(self, response):
         r = BeautifulSoup(response.text)

@@ -10,13 +10,17 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://csgh.maoming.gov.cn/active/show.ashx?action=certList&pwd=&chk=1&key=&no=&sid=1&page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[0]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://csgh.maoming.gov.cn/active/show.ashx?action=certList&pwd=&chk=1&key=&no=&sid=2&page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[1]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://csgh.maoming.gov.cn/active/show.ashx?action=certList&pwd=&chk=1&key=&no=&sid=3&page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[2]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://csgh.maoming.gov.cn/active/show.ashx?action=certList&pwd=&chk=1&key=&no=&sid=4&page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[4]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[4], 'source':'GH'})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)

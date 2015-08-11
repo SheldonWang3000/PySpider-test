@@ -16,9 +16,11 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.jygh.gov.cn/class_type.asp?zf11id=54&page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[8]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[8], 'source':'GH'})
         self.crawl('http://www.jygh.gov.cn/class_type.asp?zf11id=69&page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[8]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[8], 'source':'GH'})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)

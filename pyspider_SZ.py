@@ -11,19 +11,20 @@ class Handler(My):
     def on_start(self):
         self.crawl('http://61.144.226.82/ghweb/main/zwgk/yssz/ysszResultViewAction.do?method=xzyjsQuery&&order=0&sort=desc&pageNo=1', 
             fetch_type='js', callback=self.plan_page, 
-            force_update=True, save={'type':self.table_name[0]})
+            force_update=True, save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://61.144.226.82/ghweb/main/zwgk/yssz/ysszResultViewAction.do?method=jsydXkzQuery&&order=0&sort=desc&pageNo=1', 
             fetch_type='js', callback=self.plan_page, 
-            force_update=True, save={'type':self.table_name[1]})
+            force_update=True, save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://61.144.226.82/ghweb/main/zwgk/yssz/ysszResultViewAction.do?method=jsgcXkzQuery&&order=0&sort=desc&pageNo=1', 
             fetch_type='js', callback=self.plan_page, 
-            force_update=True, save={'type':self.table_name[2]})
+            force_update=True, save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://61.144.226.82/ghweb/main/zwgk/yssz/ysszResultViewAction.do?method=jsgcYshgzQuery&&order=0&sort=desc&pageNo=1', 
             fetch_type='js', callback=self.plan_page, 
-            force_update=True, save={'type':self.table_name[4]})
+            force_update=True, save={'type':self.table_name[4], 'source':'GH'})
 
         self.crawl('http://www.sz68.com/land/?s=0',
-            callback=self.land_page, save={'type':self.table_name[14]}, force_update=True)
+            callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'}, 
+            force_update=True)
 
     def plan_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')

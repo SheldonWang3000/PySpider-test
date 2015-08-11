@@ -12,9 +12,11 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.swghj.gov.cn/gs/gd.htm', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[7]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[7], 'source':'GH'})
         self.crawl('http://www.swghj.gov.cn/gs/gsgd.html', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[6]})
+            callback=self.index_page, force_update=True, 
+            save={'type':self.table_name[6], 'source':'GH'})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)

@@ -11,19 +11,26 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://ghjs.huizhou.gov.cn/business/htmlfiles/ghjsj/ph_xzyjs/index.html', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[0]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://ghjs.huizhou.gov.cn/business/htmlfiles/ghjsj/ph_ydghxkz/index.html', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[1]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://ghjs.huizhou.gov.cn/business/htmlfiles/ghjsj/ph_gcghxkz/index.html', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[2]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://ghjs.huizhou.gov.cn/business/htmlfiles/ghjsj/ph_ghyshgz/index.html', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[4]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[4], 'source':'GH'})
         self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/pq_xzyjs/index.html', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[9]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[9], 'source':'GH'})
         self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/pq_ydghxkz/index.html', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[10]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[10], 'source':'GH'})
         self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/pq_gcghxkz/index.html', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[11]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[11], 'source':'GH'})
 
         self.headers = {}
         self.headers['Accept'] = 'text/plain, */*; q=0.01'
@@ -43,8 +50,9 @@ class Handler(My):
         data['page'] = 1
         data['size'] = 10
         data['orderBy'] = 'OFFERDATE-desc'
-        self.crawl('http://www.hzgtjy.com/Index/PublicResults?page=1', method='POST', force_update=True,
-            save={'type':self.table_name[14]}, headers=self.headers, data=data, callback=self.land_page)
+        self.crawl('http://www.hzgtjy.com/Index/PublicResults?page=1', method='POST', 
+            force_update=True, save={'type':self.table_name[14], 'source':'GT'}, 
+            headers=self.headers, data=data, callback=self.land_page)
 
     def plan_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')

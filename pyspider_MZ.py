@@ -10,14 +10,15 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.meizhou.gov.cn/open/index.php?NodeID=872&u=19&page=1', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[8]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[8], 'source':'GH'})
 
         self.crawl('http://www.mzgtzy.gov.cn/newsAction.do?method=queryNews&classId=020010350000001647&queryForward=xgxz&page=1', 
-            callback=self.land_page, save={'type':self.table_name[14]},
+            callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'},
             js_script='''function(){return document.all('orderBy').form.totalPages.value;}''', 
             fetch_type='js', force_update=True)
         self.crawl('http://www.mzgtzy.gov.cn/newsAction.do?method=queryNews&classId=020010350000001648&queryForward=xgxz&page=1', 
-            callback=self.land_page, save={'type':self.table_name[14]},
+            callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'},
             js_script='''function(){return document.all('orderBy').form.totalPages.value;}''', 
             fetch_type='js', force_update=True)
 

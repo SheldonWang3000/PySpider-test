@@ -11,16 +11,16 @@ class Handler(My):
     def on_start(self):
         self.crawl('http://ghj.jiangmen.gov.cn/spcs.asp?rstype=1&page=1', 
             fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[0]})
+            force_update=True, save={'type':self.table_name[0]}, 'source':'GH')
         self.crawl('http://ghj.jiangmen.gov.cn/spcs.asp?rstype=2&page=1', 
             fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[1]})
+            force_update=True, save={'type':self.table_name[1]}, 'source':'GH')
         self.crawl('http://ghj.jiangmen.gov.cn/spcs.asp?rstype=3&page=1', 
             fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[2]})
+            force_update=True, save={'type':self.table_name[2]}, 'source':'GH')
         self.crawl('http://ghj.jiangmen.gov.cn/spcs.asp?rstype=4&page=1', 
             fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[4]})
+            force_update=True, save={'type':self.table_name[4]}, 'source':'GH')
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)

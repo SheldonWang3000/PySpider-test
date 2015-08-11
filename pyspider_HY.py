@@ -10,14 +10,18 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=282&page=1', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[2]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=301&page=1', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[0]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=403&page=1', 
-            callback=self.plan_page, force_update=True, save={'type':self.table_name[1]})
+            callback=self.plan_page, force_update=True, 
+            save={'type':self.table_name[1], 'source':'GH'})
 
         self.crawl('http://gtj.heyuan.gov.cn/ggxx/ggxx_tdjy.jsp?pageNO=1&maxPage=100', 
-            callback=self.land_page, force_update=True, save={'type':self.table_name[14]})
+            callback=self.land_page, force_update=True, 
+            save={'type':self.table_name[14], 'source':'GT'})
 
     def plan_page(self, response):
         soup = BeautifulSoup(response.text)

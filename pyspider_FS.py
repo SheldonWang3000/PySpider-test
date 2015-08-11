@@ -17,21 +17,23 @@ class Handler(My):
         data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/xzyjs?page=1', 
             method='POST',data=data, callback=self.certificate_page, force_update=True, 
-            save={'action':'xzyjs','type':self.table_name[0]})
+            save={'action':'xzyjs','type':self.table_name[0], 'source':'GH'})
         params = {'strWhere' : '%2C%2C%2C', 'action': 'ydgh', 'pageIndex': '1', 'pageSize': '15'}
         data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/ydgh?page=1', 
             method='POST',data=data, callback=self.certificate_page, force_update=True,  
-            save={'action':'ydgh','type':self.table_name[1]})
+            save={'action':'ydgh','type':self.table_name[1], 'source':'GH'})
         params = {'strWhere' : '%2C%2C%2C', 'action': 'gcgh', 'pageIndex': '1', 'pageSize': '15'}
         data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/gcgh?page=1', 
             method='POST',data=data, callback=self.certificate_page, force_update=True,  
-            save={'action':'gcgh','type':self.table_name[2]})
+            save={'action':'gcgh','type':self.table_name[2], 'source':'GH'})
 
-        self.crawl('http://www.fsgtgh.gov.cn/ywzt/cxgh/pqgs/index.htm', save={'type':self.table_name[6]}, 
+        self.crawl('http://www.fsgtgh.gov.cn/ywzt/cxgh/pqgs/index.htm', 
+            save={'type':self.table_name[6], 'source':'GH'}, 
             force_update=True, fetch_type='js', callback=self.approval_page) 
-        self.crawl('http://www.fsgtgh.gov.cn/ywzt/cxgh/phgg/index.htm', save={'type':self.table_name[6]}, 
+        self.crawl('http://www.fsgtgh.gov.cn/ywzt/cxgh/phgg/index.htm', 
+            save={'type':self.table_name[6], 'source':'GH'}, 
             force_update=True, fetch_type='js', callback=self.approval_page) 
 
     def certificate_page(self, response):
