@@ -13,37 +13,118 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.sggh.gov.cn/Article_Class_Item.asp?ClassID=148&ChildClassID=219&page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[8]})
+            callback=self.approval_page, force_update=True, save={'type':self.table_name[8]})
         self.crawl('http://www.sggh.gov.cn/article_Class_Item.asp?ClassID=148&ChildClassID=204&page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[8]})
+            callback=self.approval_page, force_update=True, save={'type':self.table_name[8]})
 
-    def index_page(self, response):
+        self.crawl('http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=605&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0&currentpage=1&pagesize=15', 
+            callback=self.certificate_page, force_update=True, save={'type':self.table_name[0]})
+        self.crawl('http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=606&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0&currentpage=1&pagesize=15', 
+            callback=self.certificate_page, force_update=True, save={'type':self.table_name[1]})
+        self.crawl('http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=607&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0&currentpage=1&pagesize=15', 
+            callback=self.certificate_page, force_update=True, save={'type':self.table_name[2]})
+
+        self.crawl('http://www.sgland.gov.cn/ggxx.asp?page=1', callback=self.land_page,
+            save={'type':self.table_name[14]}, force_update=True, fetch_type='js')
+
+    def approval_page(self, response):
         soup = BeautifulSoup(response.text)
         page_count = int(soup('a', {'href':re.compile(r'Article_Class')})[-1]['href'].split('&')[-1].split('=')[-1])
 
         url = response.url[:-1]
         for i in range(2, page_count + 1):
             link = url + str(i)
-            self.crawl(link, callback=self.next_list, 
+            self.crawl(link, callback=self.approval_list_page, 
                 force_update=True, save=response.save)
 
         lists = soup('ul')[2].find_all('li')
         domain = 'http://www.sggh.gov.cn/'
         for i in lists:
             link = domain + i.find('a')['href']
-            self.crawl(link, fetch_type='js', callback=self.content_page, save=response.save)
+            self.crawl(link, fetch_type='js', callback=self.approval_content_page, save=response.save)
+            
+    def certificate_page(self, response):
+        soup = BeautifulSoup(response.text)
+        page_count = int(soup('div', 'list_page')[0].find('table').find_all('a')[-1]['onclick'].split(',')[1].strip('\''))
 
-    @config(priority=2)
-    def next_list(self, response):
+        url = response.url
+        params_str = url.split('?')[1].split('&')
+        params = {}
+        for i in params_str:
+            if len(i) != 0:
+                temp = i.split('=') 
+                params[temp[0]] = temp[1]
+
+        for i in range(2, page_count + 1):
+            link = url.split('?')[0]
+            params['currentpage'] = str(i)
+            self.crawl(link, callback=self.certificate_list, force_update=True, 
+                params=params, save=response.save)
+
+        lists = soup('table', 'service_table')[0].find_all('a')
+        domain = 'http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!single.action'
+        for i in lists:
+            params_list = i['onclick'].split('(')[1].split(')')[0].split(',')
+            params_list = [j.strip('\'') for j in params_list]
+            params = {}
+            params['deptId'] = params_list[0] 
+            params['filePath'] = params_list[1]
+            self.crawl(domain, fetch_type='js', params=params, 
+                callback=self.iframe_page, save=response.save)
+
+    def land_page(self, response):
+        soup = BeautifulSoup(response.text)
+        page_count = int(soup('span', 'news_text')[-1].find_all('strong')[1].get_text())
+
+        url, params = self.get_params(response)
+        for i in range(2, page_count + 1):
+            params['page'] = str(i)
+            self.crawl(url, params=params, save=response.save, fetch_type='js',
+                force_update=True, callback=self.land_list_page)
+
+        lists = soup('table', 'dh')[0].find_all('a', {'target':'_blank'})
+        for i in lists:
+            link = self.real_path(response.url, i['href'])
+            self.crawl(link, callback=self.content_page, 
+                save=response.save, fetch_type='js')
+
+
+    def land_list_page(self, response):
+        soup = BeautifulSoup(response.text)
+        lists = soup('table', 'dh')[0].find_all('a', {'target':'_blank'})
+        for i in lists:
+            link = self.real_path(response.url, i['href'])
+            self.crawl(link, callback=self.content_page, 
+                save=response.save, fetch_type='js')
+
+    def iframe_page(self, response):
+        soup = BeautifulSoup(response.text)
+        iframe = soup('iframe')[1]
+        link = self.real_path('http://zwgk.sg.gov.cn/', iframe['src'])
+        self.crawl(link, fetch_type='js', save=response.save, callback=self.content_page)
+
+    def certificate_list(self, response):
+        soup = BeautifulSoup(response.text)
+        lists = soup('table', 'service_table')[0].find_all('a')
+        domain = 'http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!single.action'
+        for i in lists:
+            params_list = i['onclick'].split('(')[1].split(')')[0].split(',')
+            params_list = [j.strip('\'') for j in params_list]
+            params = {}
+            params['deptId'] = params_list[0] 
+            params['filePath'] = params_list[1]
+            self.crawl(domain, fetch_type='js', params=params, 
+                callback=self.iframe_page, save=response.save)
+
+    def approval_list_page(self, response):
         soup = BeautifulSoup(response.text)
         lists = soup('ul')[2].find_all('li')
         domain = 'http://www.sggh.gov.cn/'
         for i in lists:
             link = domain + i.find('a')['href']
-            self.crawl(link, fetch_type='js', callback=self.content_page, save=response.save)
+            self.crawl(link, fetch_type='js', callback=self.approval_content_page, save=response.save)
 
-    @config(priority=2)
-    def content_page(self, response):
+    def approval_content_page(self, response):
         url = response.url
         m = hashlib.md5()
         m.update(url.encode())

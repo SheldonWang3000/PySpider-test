@@ -13,6 +13,8 @@ class Handler(My):
         # 爬取 url 网页，回调index_page 函数 ，页面类型为：1 目录页
         self.crawl(url, fetch_type='js', callback=self.index_page, 
             force_update=True, save={'page':1, 'type':self.table_name[8]})
+        self.crawl('http://gtzy.yunfu.gov.cn/website/newdeptemps/gtzy/news.jsp?columnid=009001056008&ipage=1', fetch_type='js', callback=self.index_page, 
+            force_update=True, save={'page':1, 'type':self.table_name[14]})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -30,11 +32,12 @@ class Handler(My):
                 callback=self.next_list, save=response.save)
 
         contentPageList = []    
-        for li in soup.select('.newslist li'):
-            content_urltag = li.find('a')
+        lists = soup('ul', 'list4')[0].find_all('a', href=True)
+        for li in lists:
+            content_urltag = li
             position = content_urltag['href'].find('/is')
             pageUrl = content_urltag['href'][position:-3]
-            print(pageUrl)
+            # print(pageUrl)
             contentPageList.append(pageUrl)
         for uri in contentPageList:
             # 爬取内容页面
@@ -44,11 +47,12 @@ class Handler(My):
     def next_list(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
         contentPageList = []    
-        for li in soup.select('.newslist li'):
-            content_urltag = li.find('a')
+        lists = soup('ul', 'list4')[0].find_all('a', href=True)
+        for li in lists:
+            content_urltag = li
             position = content_urltag['href'].find('/is')
             pageUrl = content_urltag['href'][position:-3]
-            print(pageUrl)
+            # print(pageUrl)
             contentPageList.append(pageUrl)
         for uri in contentPageList:
             # 爬取内容页面

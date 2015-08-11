@@ -13,7 +13,7 @@ from urllib.parse import quote
 '''放到python环境目录的site-packages下'''
 class My(BaseHandler):
 
-    mkdir = '/opt/web/'
+    mkdir = '/home/oracle/Gis/'
     r = redis.Redis()
     download_key = 'download'
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'  
@@ -21,15 +21,17 @@ class My(BaseHandler):
     table_name = ['选址意见书', '建设用地规划许可证', '建设工程规划许可证', '乡村建设规划许可证',
                 '规划验收合格证', '规划验收合格证', '批前公示', '批后公布', 'Unknow', '选址意见书_批前',
                 '建设用地规划许可证_批前', '建设工程规划许可证_批前', '乡村建设规划许可证_批前',
-                '规划验收合格证_批前']
+                '规划验收合格证_批前', '挂牌']
 
-    city_name = {'CZ':'潮州', 'DG':'东莞', 'FS':'佛山', 'GZ':'广州', 'GZ_after':'广州',
-                 'HY':'河源', 'HZ':'惠州', 'JM':'江门', 'JM_X':'江门', 'JY':'揭阳', 'MM':'茂名',
-                 'MZ':'梅州', 'QY':'清远', 'SG':'韶关', 'ST':'汕头', 'SW':'汕尾', 'SZ':'深圳', 
-                 'YF':'云浮', 'YJ':'阳江', 'ZH':'珠海', 'ZJ':'湛江', 'ZQ':'肇庆', 'ZS':'中山',
-                 'CZ_approval':'潮州', 'FS_approval':'佛山'}
+    city_name = {'CZ':'潮州', 'DG':'东莞', 'FS':'佛山', 'GZ':'广州', 'HY':'河源', 'HZ':'惠州', 
+                 'JM':'江门', 'JM_X':'江门', 'JY':'揭阳', 'MM':'茂名', 'MZ':'梅州', 'QY':'清远', 
+                 'SG':'韶关', 'ST':'汕头', 'SW':'汕尾', 'SZ':'深圳', 'YF':'云浮', 'YJ':'阳江', 
+                 'ZH':'珠海', 'ZJ':'湛江', 'ZQ':'肇庆', 'ZS':'中山',
+                 }
 
-    headers= {
+    source_name = {'GH':'规划', 'GT':'国土', 'JS':'建设', 'JT':'交通', 'GF':'公服'}
+
+    headers = {
         "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         "Accept-Encoding":"gzip, deflate, sdch",
         "Accept-Language":"zh-CN,zh;q=0.8",
@@ -54,6 +56,14 @@ class My(BaseHandler):
     def get_date(self):
         return time.strftime("%Y-%m-%d", time.localtime())
 
+    def get_params(self, response):
+        url, params_str = response.url.split('?')
+        params = {}
+        for i in params_str.split('&'):
+            temp = i.split('=')
+            params[temp[0]] = temp[1]
+        return (url, params)
+
     def real_path(self, a, b):
         path = urljoin(a, b)
         arr = urlparse(path)
@@ -76,7 +86,7 @@ class My(BaseHandler):
         m = hashlib.md5()
         m.update(url.encode())
         web_name = '/' + m.hexdigest() + '/'
-        path = self.mkdir + self.name + web_name
+        path = self.mkdir + respons.save['source'] + '/' + self.name + web_name
         if not os.path.exists(path):
             os.makedirs(path)           
 
@@ -214,7 +224,8 @@ class My(BaseHandler):
         return {
             "url": url,
             "html": str(soup),
-            "type": response.save['type']
+            "type": response.save['type'],
+            "source": response.save['source']
         }
 
 
@@ -223,7 +234,7 @@ class My(BaseHandler):
             m = hashlib.md5()
             m.update(result['url'].encode())
             web_name = '/' + m.hexdigest() + '/'
-            path = self.mkdir + self.name + web_name
+            path = self.mkdir + result['source'] + '/' + self.name + web_name
             if not os.path.exists(path):
                 os.makedirs(path)           
 
@@ -244,7 +255,7 @@ class My(BaseHandler):
             print(self.get_date())
             values = (result['url'], path,
                     self.get_date(), self.city_name[self.name], 
-                    result['type'], content)
+                    result['type'], content, result['source'])
 
             conn = None
             try:
@@ -254,11 +265,11 @@ class My(BaseHandler):
                     cursor = conn.cursor()
                     cursor.setinputsizes(cx_Oracle.NCHAR, cx_Oracle.NCHAR,
                         cx_Oracle.DATETIME, cx_Oracle.NCHAR,
-                        cx_Oracle.NCHAR, cx_Oracle.CLOB)
+                        cx_Oracle.NCHAR, cx_Oracle.CLOB, cx_Oracle.NCHAR)
                     cursor.prepare('''insert into TBL_ORGLPBLC 
                         (ORIGINALADDRESS, STORAGEPATH, 
-                        ARCHIVEDATE, ASCRIPTIONCITY, DOCUMENTTYPE, BODY) 
-                        values(:1, :2, to_date(:3, 'yyyy-mm-dd'), :4, :5, :6)''')
+                        ARCHIVEDATE, ASCRIPTIONCITY, DOCUMENTTYPE, BODY, SOURCE) 
+                        values(:1, :2, to_date(:3, 'yyyy-mm-dd'), :4, :5, :6, :7)''')
                     cursor.execute(None, values)
                     conn.commit()
                 finally:
