@@ -16,25 +16,54 @@ class Handler(My):
         params = {'strWhere' : '%2C%2C%2C', 'action': 'xzyjs', 'pageIndex': '1', 'pageSize': '15'}
         data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/xzyjs?page=1', 
-            method='POST',data=data, callback=self.certificate_page, force_update=True, 
+            method='POST',data=data, callback=self.certificate_page, age=1, 
             save={'action':'xzyjs','type':self.table_name[0], 'source':'GH'})
         params = {'strWhere' : '%2C%2C%2C', 'action': 'ydgh', 'pageIndex': '1', 'pageSize': '15'}
         data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/ydgh?page=1', 
-            method='POST',data=data, callback=self.certificate_page, force_update=True,  
+            method='POST',data=data, callback=self.certificate_page, age=1,  
             save={'action':'ydgh','type':self.table_name[1], 'source':'GH'})
         params = {'strWhere' : '%2C%2C%2C', 'action': 'gcgh', 'pageIndex': '1', 'pageSize': '15'}
         data = urlencode(params)
         self.crawl('http://www.fsgh.gov.cn/GTGHService/home/SearchData/gcgh?page=1', 
-            method='POST',data=data, callback=self.certificate_page, force_update=True,  
+            method='POST',data=data, callback=self.certificate_page, age=1,  
             save={'action':'gcgh','type':self.table_name[2], 'source':'GH'})
 
         self.crawl('http://www.fsgtgh.gov.cn/ywzt/cxgh/pqgs/index.htm', 
             save={'type':self.table_name[6], 'source':'GH'}, 
-            force_update=True, fetch_type='js', callback=self.approval_page) 
+            age=1, fetch_type='js', callback=self.approval_page) 
         self.crawl('http://www.fsgtgh.gov.cn/ywzt/cxgh/phgg/index.htm', 
             save={'type':self.table_name[6], 'source':'GH'}, 
-            force_update=True, fetch_type='js', callback=self.approval_page) 
+            age=1, fetch_type='js', callback=self.approval_page) 
+
+        self.crawl('http://www.fsgtgh.gov.cn/ywzt/tdgl/tdgycy/index.htm', method='GET', 
+            save={'type':self.table_name[14], 'source':'GT'}, age=1, 
+            callback=self.land_page,fetch_type='js')
+
+    def land_page(self, response):
+        page_tag = response.doc('#sub_table > div > span')
+        p1 = page_tag.text().find('共')
+        p2 = page_tag.text().find('页')
+        page_count = int(page_tag.text()[p1+1:p2])
+        
+        p1 = page_tag.text().find('第')
+        p2 = page_tag.text().find('页',p2+1)
+        current_page = int(page_tag.text()[p1+1:p2])
+        
+        print(page_count)
+        print(current_page)
+        
+        if current_page < page_count:
+            # 获取下一页链接
+            for each in page_tag.children().items():
+                if '下一页' == each.text():
+                    self.crawl(each.attr.href, method='GET', age=1, 
+                        save=response.save,
+                        callback=self.land_page, fetch_type='js')
+        for each in response.doc('#sub_table > table > tbody > tr > td:nth-child(2) > a').items():
+            self.crawl(each.attr.href, age=1, save=response.save,  
+                callback=self.content_page, fetch_type='js')    
+                              
 
     def certificate_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -64,7 +93,7 @@ class Handler(My):
             params['pageIndex'] = str(i)
             temp_data = urlencode(params)
             self.crawl(temp_url, method='POST', data=temp_data, 
-                callback=self.certificate_list_page, save=response.save, force_update=True)
+                callback=self.certificate_list_page, save=response.save, age=1)
 
     def certificate_list_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -102,7 +131,7 @@ class Handler(My):
         print(domain)
         for i in range(1, page_count + 1):
             link = domain % i
-            self.crawl(link, callback=self.approval_list_page, force_update=True, 
+            self.crawl(link, callback=self.approval_list_page, age=1, 
                 save=response.save, fetch_type='js')
 
     def approval_list_page(self, response):

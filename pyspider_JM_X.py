@@ -10,7 +10,7 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.xhplan.com/ghgs.asp?Page=1', 
-            callback=self.index_page, force_update=True, save={'type':self.table_name[8]}})
+            callback=self.index_page, age=1, save={'type':self.table_name[8]}})
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -19,7 +19,7 @@ class Handler(My):
         url = response.url[:-1]
         for i in range(2, page_count + 1):
             link = url + str(i)
-            self.crawl(link, callback=self.next_list, force_update=True, save=response.save)
+            self.crawl(link, callback=self.next_list, age=1, save=response.save)
 
         lists = soup('div', {'class':'doclist'})[0].find_all('li')
         domain = 'http://www.xhplan.com/'
@@ -27,7 +27,6 @@ class Handler(My):
             link = domain + i.find('a')['href']
             self.crawl(link, callback=self.content_page, save=response.save)
 
-    @config(priority=2)
     def next_list(self, response):
         soup = BeautifulSoup(response.text)
         lists = soup('div', {'class':'doclist'})[0].find_all('li')

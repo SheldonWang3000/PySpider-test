@@ -11,20 +11,20 @@ class Handler(My):
     def on_start(self):
         self.crawl('http://61.144.226.82/ghweb/main/zwgk/yssz/ysszResultViewAction.do?method=xzyjsQuery&&order=0&sort=desc&pageNo=1', 
             fetch_type='js', callback=self.plan_page, 
-            force_update=True, save={'type':self.table_name[0], 'source':'GH'})
+            age=1, save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://61.144.226.82/ghweb/main/zwgk/yssz/ysszResultViewAction.do?method=jsydXkzQuery&&order=0&sort=desc&pageNo=1', 
             fetch_type='js', callback=self.plan_page, 
-            force_update=True, save={'type':self.table_name[1], 'source':'GH'})
+            age=1, save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://61.144.226.82/ghweb/main/zwgk/yssz/ysszResultViewAction.do?method=jsgcXkzQuery&&order=0&sort=desc&pageNo=1', 
             fetch_type='js', callback=self.plan_page, 
-            force_update=True, save={'type':self.table_name[2], 'source':'GH'})
+            age=1, save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://61.144.226.82/ghweb/main/zwgk/yssz/ysszResultViewAction.do?method=jsgcYshgzQuery&&order=0&sort=desc&pageNo=1', 
             fetch_type='js', callback=self.plan_page, 
-            force_update=True, save={'type':self.table_name[4], 'source':'GH'})
+            age=1, save={'type':self.table_name[4], 'source':'GH'})
 
         self.crawl('http://www.sz68.com/land/?s=0',
             callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'}, 
-            force_update=True)
+            age=1)
 
     def plan_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -42,7 +42,7 @@ class Handler(My):
                 callback=self.content_page, save=response.save)
 
         self.crawl(response.url, fetch_type='js', 
-            callback=self.content_page, force_update=True)
+            callback=self.content_page, age=1)
 
     def land_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -63,5 +63,5 @@ class Handler(My):
                 params = {}
                 params['s'] = i
                 link = response.url.split('?')[0]
-                self.crawl(link, force_update=True, params=params, callback=self.land_page,
+                self.crawl(link, age=1, params=params, callback=self.land_page,
                     save=response.save)

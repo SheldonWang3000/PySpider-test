@@ -10,24 +10,24 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=282&page=1', 
-            callback=self.plan_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=301&page=1', 
-            callback=self.plan_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=403&page=1', 
-            callback=self.plan_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[1], 'source':'GH'})
 
         self.crawl('http://gtj.heyuan.gov.cn/ggxx/ggxx_tdjy.jsp?pageNO=1&maxPage=100', 
-            callback=self.land_page, force_update=True, 
+            callback=self.land_page, age=1, 
             save={'type':self.table_name[14], 'source':'GT'})
 
     def plan_page(self, response):
         soup = BeautifulSoup(response.text)
         a_list = soup('a', {'href': re.compile(r'page=')})
         if len(a_list) == 0:
-            self.crawl(response.url, callback=self.content_page, force_update=True, save=response.save)
+            self.crawl(response.url, callback=self.content_page, age=1, save=response.save)
         else:
             temp = a_list[-1]['href'].split('?')
             params = {}
@@ -39,10 +39,10 @@ class Handler(My):
 
             for i in range(2, page_count + 1):
                 params['page'] = str(i)
-                self.crawl(domain, params=params, force_update=True, 
+                self.crawl(domain, params=params, age=1, 
                     callback=self.content_page, save=response.save)
 
-            self.crawl(response.url, callback=self.content_page, force_update=True, save=response.save)
+            self.crawl(response.url, callback=self.content_page, age=1, save=response.save)
 
     def land_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -59,5 +59,5 @@ class Handler(My):
                 temp = i.split('=')
                 params[temp[0]] = temp[1]
             params['pageNO'] = str(int(params['pageNO']) + 1)
-            self.crawl(url, params=params, callback=self.land_page, force_update=True,
+            self.crawl(url, params=params, callback=self.land_page, age=1,
                 save=response.save)

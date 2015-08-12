@@ -13,24 +13,24 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.sggh.gov.cn/Article_Class_Item.asp?ClassID=148&ChildClassID=219&page=1', 
-            callback=self.approval_page, force_update=True, 
+            callback=self.approval_page, age=1, 
             save={'type':self.table_name[8], 'source':'GH'})
         self.crawl('http://www.sggh.gov.cn/article_Class_Item.asp?ClassID=148&ChildClassID=204&page=1', 
-            callback=self.approval_page, force_update=True, 
+            callback=self.approval_page, age=1, 
             save={'type':self.table_name[8], 'source':'GH'})
 
         self.crawl('http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=605&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0&currentpage=1&pagesize=15', 
-            callback=self.certificate_page, force_update=True, 
+            callback=self.certificate_page, age=1, 
             save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=606&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0&currentpage=1&pagesize=15', 
-            callback=self.certificate_page, force_update=True, 
+            callback=self.certificate_page, age=1, 
             save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://zwgk.sg.gov.cn/website/govPublic/govPublicSiteAction!deptgovp_list.action?deptId=547&titleTypeId=607&siteOrgCode=440200&pagesize=15&action=show&pager.offset=0&currentpage=1&pagesize=15', 
-            callback=self.certificate_page, force_update=True, 
+            callback=self.certificate_page, age=1, 
             save={'type':self.table_name[2], 'source':'GH'})
 
         self.crawl('http://www.sgland.gov.cn/ggxx.asp?page=1', callback=self.land_page,
-            save={'type':self.table_name[14], 'source':'GT'}, force_update=True, fetch_type='js')
+            save={'type':self.table_name[14], 'source':'GT'}, age=1, fetch_type='js')
 
     def approval_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -40,7 +40,7 @@ class Handler(My):
         for i in range(2, page_count + 1):
             link = url + str(i)
             self.crawl(link, callback=self.approval_list_page, 
-                force_update=True, save=response.save)
+                age=1, save=response.save)
 
         lists = soup('ul')[2].find_all('li')
         domain = 'http://www.sggh.gov.cn/'
@@ -63,7 +63,7 @@ class Handler(My):
         for i in range(2, page_count + 1):
             link = url.split('?')[0]
             params['currentpage'] = str(i)
-            self.crawl(link, callback=self.certificate_list, force_update=True, 
+            self.crawl(link, callback=self.certificate_list, age=1, 
                 params=params, save=response.save)
 
         lists = soup('table', 'service_table')[0].find_all('a')
@@ -85,7 +85,7 @@ class Handler(My):
         for i in range(2, page_count + 1):
             params['page'] = str(i)
             self.crawl(url, params=params, save=response.save, fetch_type='js',
-                force_update=True, callback=self.land_list_page)
+                age=1, callback=self.land_list_page)
 
         lists = soup('table', 'dh')[0].find_all('a', {'target':'_blank'})
         for i in lists:

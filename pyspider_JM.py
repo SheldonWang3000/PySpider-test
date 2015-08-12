@@ -10,19 +10,40 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://ghj.jiangmen.gov.cn/spcs.asp?rstype=1&page=1', 
-            fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[0]}, 'source':'GH')
+            fetch_type='js', callback=self.plan_page, 
+            age=1, save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://ghj.jiangmen.gov.cn/spcs.asp?rstype=2&page=1', 
-            fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[1]}, 'source':'GH')
+            fetch_type='js', callback=self.plan_page, 
+            age=1, save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://ghj.jiangmen.gov.cn/spcs.asp?rstype=3&page=1', 
-            fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[2]}, 'source':'GH')
+            fetch_type='js', callback=self.plan_page, 
+            age=1, save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://ghj.jiangmen.gov.cn/spcs.asp?rstype=4&page=1', 
-            fetch_type='js', callback=self.index_page, 
-            force_update=True, save={'type':self.table_name[4]}, 'source':'GH')
+            fetch_type='js', callback=self.plan_page, 
+            age=1, save={'type':self.table_name[4], 'source':'GH'})
 
-    def index_page(self, response):
+        self.crawl('http://gtj.jiangmen.gov.cn/jmgtj/RemiseList.aspx', age=1, 
+            save={'type':self.table_name[14], 'source':'GT'}, callback=self.land_page)
+    def land_page(self, response):
+        next_tag = response.doc('.NextBtnCSS')
+        if next_tag.outerHtml() is not None:
+            arguments = next_tag.attr.href[24:-1].replace('\'','').split(',')
+            data = {}
+            data['__EVENTTARGET'] = arguments[0]
+            data['__EVENTARGUMENT'] = arguments[1] 
+            data['__VIEWSTATE'] = str(response.doc('#__VIEWSTATE').attr.value)
+            data['__VIEWSTATEGENERATOR'] = str(response.doc('#__VIEWSTATEGENERATOR').attr.value)
+            data['__EVENTVALIDATION'] = str(response.doc('#__EVENTVALIDATION').attr.value)
+            data['AxGridView1$ctl18$ctl04'] = 15
+            data['AxGridView1$ctl18$ctl05'] = 1
+            data['txtExamineNo'] = ''
+            data['__VIEWSTATEENCRYPTED'] = ''
+            
+            self.crawl('http://gtj.jiangmen.gov.cn/jmgtj/RemiseList.aspx', 
+                method='POST', age=1, save=response.save, 
+                callback=self.land_page, data=data)
+
+    def plan_page(self, response):
         soup = BeautifulSoup(response.text)
         t = soup('a', {'href': re.compile(r'spcs.asp')})[-1]['href'].split('?')[-1].split('&')
         params = {}
@@ -35,4 +56,4 @@ class Handler(My):
             temp = params
             temp['page'] = str(i)
             self.crawl(domain, fetch_type='js', callback=self.content_page, 
-                params=temp, save=response.save, force_update=True) 
+                params=temp, save=response.save, age=1) 

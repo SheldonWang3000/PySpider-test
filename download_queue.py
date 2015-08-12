@@ -56,25 +56,24 @@ def retry(ExceptionToCheck, tries=4, delay=3, backoff=2, logger=None):
 def open_url(opener, url):
 	return opener.open(url)
 
+@retry(urllib.request.URLError, tries=4)
+def download_url(url, path):
+	urllib.request.urlretrieve(url, path)
+
 def download_attachment(url, path):
 	try:
-		try:
-			opener = urllib.request.build_opener()
-			f = open_url(opener, url)
-		except http.client.HTTPException:
-			opener = urllib.request.build_opener()
-			headers= {
-			"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-			"Accept-Encoding":"gzip, deflate, sdch",
-			"Accept-Language":"zh-CN,zh;q=0.8",
-			"Cache-Control":"max-age=0",
-			"Connection":"keep-alive",
-			"User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36"
-			}
-			opener.addheaders = headers.items()
-			f = open_url(opener, url)
-		with open(path, 'wb') as code:
-			code.write(f.read())
+		opener = urllib.request.build_opener()
+		headers= {
+		"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+		"Accept-Encoding":"gzip, deflate, sdch",
+		"Accept-Language":"zh-CN,zh;q=0.8",
+		"Cache-Control":"max-age=0",
+		"Connection":"keep-alive",
+		"User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36"
+		}
+		opener.addheaders = headers.items()
+		urllib.request.install_opener(opener)
+		download_url(url, path)
 	except urllib.request.HTTPError:
 		print('404')
 
@@ -84,21 +83,17 @@ def download_image(url, path):
 	height = 0
 	width = 0
 	try:
-		try:
-			opener = urllib.request.build_opener()
-			f = open_url(opener, url)
-		except http.client.HTTPException:
-			opener = urllib.request.build_opener()
-			headers= {
-			"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-			"Accept-Encoding":"gzip, deflate, sdch",
-			"Accept-Language":"zh-CN,zh;q=0.8",
-			"Cache-Control":"max-age=0",
-			"Connection":"keep-alive",
-			"User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36"
-			}
-			opener.addheaders = headers.items()
-			f = open_url(opener, url)
+		opener = urllib.request.build_opener()
+		headers= {
+		"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+		"Accept-Encoding":"gzip, deflate, sdch",
+		"Accept-Language":"zh-CN,zh;q=0.8",
+		"Cache-Control":"max-age=0",
+		"Connection":"keep-alive",
+		"User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36"
+		}
+		opener.addheaders = headers.items()
+		f = open_url(opener, url)
 		if height * width == 0:
 			with open(path, 'wb') as code:
 				code.write(f.read())
@@ -116,7 +111,6 @@ if __name__ == '__main__':
 	while True:
 		try:
 			s = r.blpop(key, 0)[1]
-			# s = '''{'type':'image', 'path':'/home/sheldon/', 'url':'http://www.hfjs.gd.cn/imageshome/hpbhome24.jpg', 'file_name':'a.jpg'}'''
 			print(s)
 			d = eval(s)
 			path = d['path'] + d['file_name']
@@ -128,4 +122,4 @@ if __name__ == '__main__':
 				download_attachment(url, path)
 			print('done')
 		except Exception as e:
-			print(str(e))			
+			break

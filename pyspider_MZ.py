@@ -10,17 +10,17 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.meizhou.gov.cn/open/index.php?NodeID=872&u=19&page=1', 
-            callback=self.plan_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[8], 'source':'GH'})
 
         self.crawl('http://www.mzgtzy.gov.cn/newsAction.do?method=queryNews&classId=020010350000001647&queryForward=xgxz&page=1', 
             callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'},
             js_script='''function(){return document.all('orderBy').form.totalPages.value;}''', 
-            fetch_type='js', force_update=True)
+            fetch_type='js', age=1)
         self.crawl('http://www.mzgtzy.gov.cn/newsAction.do?method=queryNews&classId=020010350000001648&queryForward=xgxz&page=1', 
             callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'},
             js_script='''function(){return document.all('orderBy').form.totalPages.value;}''', 
-            fetch_type='js', force_update=True)
+            fetch_type='js', age=1)
 
     def plan_page(self, response):
         soup = BeautifulSoup(response.text)
@@ -30,7 +30,7 @@ class Handler(My):
         for i in range(2, page_count + 1):
             link = url + str(i)
             self.crawl(link, callback=self.plan_list_page, 
-                force_update=True, save=response.save)
+                age=1, save=response.save)
 
         lists = soup('ul', {'class':'dotlist'})[0].find_all('li')
         for i in lists:
@@ -62,7 +62,7 @@ class Handler(My):
             data['gotoPage'] = str(i)
             params['page'] = str(i)
             self.crawl(url, params=params, method='POST', data=data,
-                force_update=True, callback=self.land_list_page, fetch_type='js',
+                age=1, callback=self.land_list_page, fetch_type='js',
                 save=response.save)
 
         lists = soup('a', {'class', 'fl'})

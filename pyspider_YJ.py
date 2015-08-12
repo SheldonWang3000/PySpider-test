@@ -10,20 +10,45 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=70&page=1', 
-            callback=self.index_page, force_update=True, 
+            callback=self.index_page, age=1, 
             save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=71&page=1', 
-            callback=self.index_page, force_update=True, 
+            callback=self.index_page, age=1, 
             save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=72&page=1', 
-            callback=self.index_page, force_update=True, 
+            callback=self.index_page, age=1, 
             save={'type':self.table_name[4], 'source':'GH'})
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=126&page=1', 
-            callback=self.index_page, force_update=True, 
+            callback=self.index_page, age=1, 
             save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=127&page=1', 
-            callback=self.index_page, force_update=True, 
+            callback=self.index_page, age=1, 
             save={'type':self.table_name[2], 'source':'GH'})
+
+        self.crawl('http://www.yjlr.gov.cn/NewsList.asp?SortID=19&Page=1',
+            callback=self.land_page, age=1,
+            save={'type':self.table_name[14], 'source':'GT'})
+
+    def land_page(self, response):
+        soup = BeautifulSoup(response.text)    
+        page_count = int((int(soup('div', 'Bodyer_right_page_end')[0].find('font').get_text()) + 24) / 25)
+        url, params = self.get_params(response)
+        for i in range(2, page_count + 1):
+            params['Page'] = str(i)
+            self.crawl(url, params=params, save=response.save,
+                callback=self.land_list_page, age=1)
+
+        lists = soup.find_all('div', 'news_list')
+        for i in lists:
+            link = self.real_path(response.url, i.find('a')['href'])
+            self.crawl(link, callback=self.content_page, save=response.save)
+
+    def land_list_page(self, response):
+        soup = BeautifulSoup(response.text)
+        lists = soup.find_all('div', 'news_list')
+        for i in lists:
+            link = self.real_path(response.url, i.find('a')['href'])
+            self.crawl(link, callback=self.content_page, save=response.save)
 
     def index_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -40,11 +65,11 @@ class Handler(My):
                 print(temp[1])
                 link = temp[1].strip('\'')
                 self.crawl(link, callback=self.content_page, 
-                    force_update=True, save=response.save)
+                    age=1, save=response.save)
             elif temp[3] == '1':
                 crawl_link = domain + temp[0] 
                 self.crawl(crawl_link, callback=self.content_page, 
-                    force_update=True, save=response.save)
+                    age=1, save=response.save)
 
         last_page = int(soup('strong')[0].get_text().split('/')[1])
         url = response.url[:-1]
@@ -52,7 +77,7 @@ class Handler(My):
             crawl_link = url + str(i)
             # print(crawl_link)
             self.crawl(crawl_link, callback=self.next_list, 
-                force_update=True, save=response.save)
+                age=1, save=response.save)
 
     def next_list(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')

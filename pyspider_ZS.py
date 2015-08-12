@@ -1,6 +1,7 @@
 from pyspider.libs.base_handler import *
 from my import My
 from bs4 import BeautifulSoup
+import random
 
 '''中山'''
 
@@ -10,25 +11,47 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.zsghj.gov.cn/list/p-5.html', 
-            callback=self.index_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[8], 'source':'GH'})
 
-    def index_page(self, response):
+        self.crawl('http://www.zsfdc.gov.cn/ArticleList.aspx?id=33&page=1',
+            callback=self.land_page, age=1, 
+            save={'type':self.table_name[14], 'source':'GT'})
+
+    def land_page(self, response):
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        lists = soup('table', 'gridview')[0].find_all('a', {'target':'_blank'}) 
+        for i in lists:
+            link = self.real_path(response.url, i['href'])
+            self.crawl(link, callback=self.content_page, save=response.save)
+
+        if len(lists) == 20:
+            data = {}
+            data['__VIEWSTATE'] = soup.find('input', {'name':'__VIEWSTATE'})['value']
+            data['__EVENTVALIDATION'] = soup.find('input', {'name':'__EVENTVALIDATION'})['value']
+            data['ctl00$ContentPlaceHolder1$ibtNext.x'] = str(random.randint(0, 99))
+            data['ctl00$ContentPlaceHolder1$ibtNext.y'] = str(random.randint(0, 99))
+            url, params = self.get_params(response)
+            params['page'] = str(int(params['page']) + 1)
+            self.crawl(url, params=params, data=data, method='POST',
+                save=response.save, age=1, callback=self.land_page)
+
+    def plan_page(self, response):
         r = BeautifulSoup(response.text)
         page_count = int(r.find_all('span', 'pageinfo')[0].find_all('strong')[0].get_text())
 
         url = 'http://www.zsghj.gov.cn/list/p-5-46-%s.html'
         for i in range(2, page_count + 1):
             link = url % (i)
-            self.crawl(link, callback=self.next_list, force_update=True, save=response.save)
+            self.crawl(link, callback=self.plan_list_page, age=1, save=response.save)
         domain = 'http://www.zsghj.gov.cn'
         lists = r.find_all('div', 'artlist')[0].find_all('li')
         for i in lists:
             link = domain + i.a['href']
             self.crawl(link, callback=self.content_page, save=response.save)
 
-    @config(priority=2)
-    def next_list(self, response):
+    def plan_list_page(self, response):
         r = BeautifulSoup(response.text)
         domain = 'http://www.zsghj.gov.cn'
         lists = r.find_all('div', 'artlist')[0].find_all('li')

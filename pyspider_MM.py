@@ -10,19 +10,63 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://csgh.maoming.gov.cn/active/show.ashx?action=certList&pwd=&chk=1&key=&no=&sid=1&page=1', 
-            callback=self.index_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://csgh.maoming.gov.cn/active/show.ashx?action=certList&pwd=&chk=1&key=&no=&sid=2&page=1', 
-            callback=self.index_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://csgh.maoming.gov.cn/active/show.ashx?action=certList&pwd=&chk=1&key=&no=&sid=3&page=1', 
-            callback=self.index_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://csgh.maoming.gov.cn/active/show.ashx?action=certList&pwd=&chk=1&key=&no=&sid=4&page=1', 
-            callback=self.index_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[4], 'source':'GH'})
 
-    def index_page(self, response):
+        self.crawl('http://gtzyj.maoming.gov.cn/newsAction.do?method=queryNews&classId=020010350000000960&page=1',
+            callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'},
+            age=1, fetch_type='js')
+
+    def land_page(self, response):
+        soup = BeautifulSoup(response.text)
+
+        page_count = int(soup('input', {'name':'totalPages'})[0]['value'])
+        data = {}
+        data['classId'] = soup('input', {'name':'classId'})[0]['value']
+        data['textGeneralType'] = soup('input', {'name':'textGeneralType'})[0]['value']
+        data['curPageNo'] = soup('input', {'name':'curPageNo'})[0]['value']
+        data['totalCnts'] = soup('input', {'name':'totalCnts'})[0]['value']
+        data['totalPages'] = soup('input', {'name':'totalPages'})[0]['value']
+        data['cntPerPage'] = soup('input', {'name':'cntPerPage'})[0]['value']
+        data['SplitFlag'] = '1'
+        data['orderBy'] = soup('input', {'name':'orderBy'})[0]['value']
+        data['descOrAsc'] = soup('input', {'name':'descOrAsc'})[0]['value']
+        print(data['curPageNo'])
+       
+        url, params = self.get_params(response) 
+        for i in range(2, page_count + 1):
+            data['gotoPage'] = str(i) 
+            params['page'] = str(i)
+            self.crawl(url, params=params, data=data, method='POST',
+                save=response.save, callback=self.land_list_page, 
+                age=1, fetch_type='js') 
+
+        lists = soup('div', 'text')
+        for i in lists:
+            link = self.real_path(response.url, i.find_all('a')[0]['href'])
+            # print(link)
+            self.crawl(link, callback=self.content_page, save=response.save, fetch_type='js')
+
+    def land_list_page(self, response):
+        soup = BeautifulSoup(response.text)
+        print(soup('input', {'name':'curPageNo'})[0]['value'])
+
+        lists = soup('div', 'text')
+        for i in lists:
+            link = self.real_path(response.url, i.find_all('a')[0]['href'])
+            # print(link)
+            self.crawl(link, callback=self.content_page, save=response.save, fetch_type='js')
+
+    def plan_page(self, response):
         soup = BeautifulSoup(response.text)
 
         t = soup('div', {'class':'pagebar'})[0].get_text()
@@ -33,8 +77,8 @@ class Handler(My):
         url = response.url[:-1]
         for i in range(2, pages+ 1):
             link = url + str(i)
-            self.crawl(link, callback=self.next_list, 
-                force_update=True, save=response.save)
+            self.crawl(link, callback=self.plan_list_page, 
+                age=1, save=response.save)
 
         domain = 'http://csgh.maoming.gov.cn/'
         links = soup('table', {'id':'bookindex'})[0].find_all('a')
@@ -43,8 +87,7 @@ class Handler(My):
             # print(link)
             self.crawl(link, callback=self.content_page, save=response.save)
 
-    @config(priority=2)
-    def next_list(self, response):
+    def plan_list_page(self, response):
         soup = BeautifulSoup(response.text)
         domain = 'http://csgh.maoming.gov.cn/'
         links = soup('table', {'id':'bookindex'})[0].find_all('a')

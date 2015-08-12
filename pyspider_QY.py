@@ -10,19 +10,19 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=project_site_submission&page=1', 
-            callback=self.plan_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=businesses_project_planning_permit&page=1', 
-            callback=self.plan_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=project_planning_permit&page=1', 
-            callback=self.plan_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=village_project_planning_permit&page=1', 
-            callback=self.plan_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[3], 'source':'GH'})
         self.crawl('http://120.81.224.155:8084/project/fany.php?typeform=project_planning_acceptance&page=1', 
-            callback=self.plan_page, force_update=True, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[4], 'source':'GH'})
 
         headers = {}
@@ -41,7 +41,7 @@ class Handler(My):
         headers['X-Requested-With'] = 'XMLHttpRequest'
         self.crawl('http://www.qyggzyjy.com/item/ajaxpage.asp?labelid=20127957470240&infoid=&classid=20138907766269&refreshtype=Folder&specialid=&curpage=1&id=1514', 
             callback=self.land_page, method='POST', data='', headers=headers,
-            save={'type':self.table_name[14], 'source':'GH'}, fetch_type='js', force_update=True)
+            save={'type':self.table_name[14], 'source':'GH'}, fetch_type='js', age=1)
 
     def plan_page(self, response):
         r = BeautifulSoup(response.text)
@@ -53,7 +53,7 @@ class Handler(My):
         for i in range(2, pages + 1):
             link = url + str(i)
             self.crawl(link, callback=self.plan_list_page, 
-                force_update=True, save=response.save)
+                age=1, save=response.save)
 
         domain = 'http://120.81.224.155:8084/project/show.php?id=%s&typeform=%s'
         lists = r('ul', {'class':'list'})[0].find_all('li')[1:]
@@ -113,7 +113,7 @@ class Handler(My):
         page_count = int(soup('a', {'id','prev'})[-1]['href'].split('(')[1].split(')')[0])
         for i in range(2, page_count + 1):
             params['curpage'] = str(i)
-            self.crawl(url, params=params, data='', headers=headers, force_update=True,
+            self.crawl(url, params=params, data='', headers=headers, age=1,
                 save=response.save, method='POST', fetch_type='js', callback=self.land_list_page)
 
     def land_list_page(self, response):
