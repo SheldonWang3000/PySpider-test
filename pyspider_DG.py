@@ -24,22 +24,22 @@ class Handler(My):
             save={'page':1, 'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://121.10.6.230/dggsweb/SeePQAllGS.aspx?%B9%AB%CA%BE=%C5%FA%C7%B0%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9&page=1', 
             fetch_type='js', age=1, callback=self.plan_page, 
-            save={'page':1, 'type':self.table_name[9], 'source':'GH'})
-        self.crawl('http://121.10.6.230/dggsweb/SeePQAllGS.aspx?%B9%AB%CA%BE=%C5%FA%C7%B0%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%D3%C3%B5%D8%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&page=1', 
-            fetch_type='js', age=1, callback=self.plan_page, 
-            save={'page':1, 'type':self.table_name[10], 'source':'GH'})
-        self.crawl('http://121.10.6.230/dggsweb/SeePQAllGS.aspx?%B9%AB%CA%BE=%C5%FA%C7%B0%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%B9%A4%B3%CC%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&page=1', 
-            fetch_type='js', age=1, callback=self.plan_page, 
-            save={'page':1, 'type':self.table_name[11], 'source':'GH'})
+        #     save={'page':1, 'type':self.table_name[9], 'source':'GH'})
+        # self.crawl('http://121.10.6.230/dggsweb/SeePQAllGS.aspx?%B9%AB%CA%BE=%C5%FA%C7%B0%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%D3%C3%B5%D8%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&page=1', 
+        #     fetch_type='js', age=1, callback=self.plan_page, 
+        #     save={'page':1, 'type':self.table_name[10], 'source':'GH'})
+        # self.crawl('http://121.10.6.230/dggsweb/SeePQAllGS.aspx?%B9%AB%CA%BE=%C5%FA%C7%B0%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%B9%A4%B3%CC%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&page=1', 
+        #     fetch_type='js', age=1, callback=self.plan_page, 
+        #     save={'page':1, 'type':self.table_name[11], 'source':'GH'})
 
-        self.crawl('http://land.dg.gov.cn/publicfiles/business/htmlfiles/gtj/s15867/list.htm',
-            fetch_type='js', age=1, callback=self.land_page,
-            save={'type':self.table_name[14], 'source':'GT'},
-            js_script='''function(){return new XMLSerializer().serializeToString(_getPagefromArr('2').docObj);}''')
-        self.crawl('http://land.dg.gov.cn/publicfiles/business/htmlfiles/gtj/s30308/list.htm',
-            fetch_type='js', age=1, callback=self.land_page,
-            save={'type':self.table_name[14], 'source':'GT'},
-            js_script='''function(){return new XMLSerializer().serializeToString(_getPagefromArr('2').docObj);}''')
+        # self.crawl('http://land.dg.gov.cn/publicfiles/business/htmlfiles/gtj/s15867/list.htm',
+        #     fetch_type='js', age=1, callback=self.land_page,
+        #     save={'type':self.table_name[14], 'source':'GT'},
+        #     js_script='''function(){return new XMLSerializer().serializeToString(_getPagefromArr('2').docObj);}''')
+        # self.crawl('http://land.dg.gov.cn/publicfiles/business/htmlfiles/gtj/s30308/list.htm',
+        #     fetch_type='js', age=1, callback=self.land_page,
+        #     save={'type':self.table_name[14], 'source':'GT'},
+        #     js_script='''function(){return new XMLSerializer().serializeToString(_getPagefromArr('2').docObj);}''')
         self.crawl('http://land.dg.gov.cn/publicfiles/business/htmlfiles/gtj/s16089/list.htm',
             fetch_type='js', age=1, callback=self.land_page,
             save={'type':self.table_name[14], 'source':'GT'},

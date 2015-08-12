@@ -28,9 +28,9 @@ class Handler(My):
         self.crawl('http://www.zjlr.gov.cn/newslist.action?id=48&bigid=15',
             callback=self.land_page, age=1,
             save={'type':self.table_name[14], 'source':'GT'})
-        self.crawl('http://www.zjlr.gov.cn/newslist.action?id=46&bigid=14',
-            callback=self.land_page, age=1,
-            save={'type':self.table_name[14], 'source':'GT'})
+        # self.crawl('http://www.zjlr.gov.cn/newslist.action?id=46&bigid=14',
+        #     callback=self.land_page, age=1,
+        #     save={'type':self.table_name[14], 'source':'GT'})
 
     def land_page(self, response):
         soup = BeautifulSoup(response.text)

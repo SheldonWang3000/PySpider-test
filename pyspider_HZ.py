@@ -22,15 +22,15 @@ class Handler(My):
         self.crawl('http://ghjs.huizhou.gov.cn/business/htmlfiles/ghjsj/ph_ghyshgz/index.html', 
             callback=self.plan_page, age=1, 
             save={'type':self.table_name[4], 'source':'GH'})
-        self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/pq_xzyjs/index.html', 
-            callback=self.plan_page, age=1, 
-            save={'type':self.table_name[9], 'source':'GH'})
-        self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/pq_ydghxkz/index.html', 
-            callback=self.plan_page, age=1, 
-            save={'type':self.table_name[10], 'source':'GH'})
-        self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/pq_gcghxkz/index.html', 
-            callback=self.plan_page, age=1, 
-            save={'type':self.table_name[11], 'source':'GH'})
+        # self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/pq_xzyjs/index.html', 
+        #     callback=self.plan_page, age=1, 
+        #     save={'type':self.table_name[9], 'source':'GH'})
+        # self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/pq_ydghxkz/index.html', 
+        #     callback=self.plan_page, age=1, 
+        #     save={'type':self.table_name[10], 'source':'GH'})
+        # self.crawl('http://ghjs.huizhou.gov.cn/publicfiles/business/htmlfiles/ghjsj/pq_gcghxkz/index.html', 
+        #     callback=self.plan_page, age=1, 
+        #     save={'type':self.table_name[11], 'source':'GH'})
 
         self.headers = {}
         self.headers['Accept'] = 'text/plain, */*; q=0.01'
