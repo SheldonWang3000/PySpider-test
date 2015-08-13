@@ -39,7 +39,7 @@ class Handler(My):
 
             for i in range(2, page_count + 1):
                 params['page'] = str(i)
-                self.crawl(domain, params=params, age=1, 
+                self.crawl(response.url.split('?')[0], params=params, age=1, 
                     callback=self.content_page, save=response.save)
 
             self.crawl(response.url, callback=self.content_page, age=1, save=response.save)

@@ -31,15 +31,15 @@ class Handler(My):
         headers['Connection'] = 'keep-alive'
         headers['Content-Length'] = '0'
         headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        headers['Cookie'] = 'ASPSESSIONIDCCCTQBBA=KCNANNLDOIMECFJAIMCKNCMM; yunsuo_session_verify=e4ecb63e6f67da8abe8de0110ba17341; _gscu_1015059567=39174433vyrf0j32; _gscs_1015059567=t39208734md7nxq29|pv:2; _gscbrs_1015059567=1; Hm_lvt_872f2242082cb9b1f8ab105d4703b206=1439174433; Hm_lpvt_872f2242082cb9b1f8ab105d4703b206=1439208737'
+        headers['Cookie'] = 'ASPSESSIONIDCCCTQBBA=KCNANNLDOIMECFJAIMCKNCMM; yunsuo_session_verify=e4ecb63e6f67da8abe8de0110ba17341; ASPSESSIONIDACCRRBBA=DKNLIFFBDNIGNCPBDEDFIFEN; _gscu_1015059567=39174433vyrf0j32; _gscs_1015059567=t39433094iz3tki18|pv:7; _gscbrs_1015059567=1; Hm_lvt_872f2242082cb9b1f8ab105d4703b206=1439174433; Hm_lpvt_872f2242082cb9b1f8ab105d4703b206=1439433254'
         headers['Accept-Language'] = 'zh-CN,zh;q=0.8,en;q=0.6'
         headers['Origin'] = 'http://www.qyggzyjy.com'
         headers['RA-Sid'] = '6FA100BB-20150228-025839-140a2d-0496ae'
         headers['RA-Ver'] = '3.0.7'
-        headers['Referer'] = 'http://www.qyggzyjy.com/Item/list.asp?id=1514'
+        headers['Referer'] = 'http://www.qyggzyjy.com/Item/list.asp?id=1515'
         headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36'
         headers['X-Requested-With'] = 'XMLHttpRequest'
-        self.crawl('http://www.qyggzyjy.com/item/ajaxpage.asp?labelid=20127957470240&infoid=&classid=20138907766269&refreshtype=Folder&specialid=&curpage=1&id=1514', 
+        self.crawl('http://www.qyggzyjy.com/item/ajaxpage.asp?labelid=20127957470240&infoid=&classid=20130496804991&refreshtype=Folder&specialid=&curpage=1&id=1515', 
             callback=self.land_page, method='POST', data='', headers=headers,
             save={'type':self.table_name[14], 'source':'GH'}, fetch_type='js', age=1)
 
@@ -101,12 +101,12 @@ class Handler(My):
         headers['Connection'] = 'keep-alive'
         headers['Content-Length'] = '0'
         headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        headers['Cookie'] = 'ASPSESSIONIDCCCTQBBA=KCNANNLDOIMECFJAIMCKNCMM; yunsuo_session_verify=e4ecb63e6f67da8abe8de0110ba17341; _gscu_1015059567=39174433vyrf0j32; _gscs_1015059567=t39208734md7nxq29|pv:2; _gscbrs_1015059567=1; Hm_lvt_872f2242082cb9b1f8ab105d4703b206=1439174433; Hm_lpvt_872f2242082cb9b1f8ab105d4703b206=1439208737'
+        headers['Cookie'] = 'ASPSESSIONIDCCCTQBBA=KCNANNLDOIMECFJAIMCKNCMM; yunsuo_session_verify=e4ecb63e6f67da8abe8de0110ba17341; ASPSESSIONIDACCRRBBA=DKNLIFFBDNIGNCPBDEDFIFEN; _gscu_1015059567=39174433vyrf0j32; _gscs_1015059567=t39433094iz3tki18|pv:7; _gscbrs_1015059567=1; Hm_lvt_872f2242082cb9b1f8ab105d4703b206=1439174433; Hm_lpvt_872f2242082cb9b1f8ab105d4703b206=1439433254'
         headers['Accept-Language'] = 'zh-CN,zh;q=0.8,en;q=0.6'
         headers['Origin'] = 'http://www.qyggzyjy.com'
         headers['RA-Sid'] = '6FA100BB-20150228-025839-140a2d-0496ae'
         headers['RA-Ver'] = '3.0.7'
-        headers['Referer'] = 'http://www.qyggzyjy.com/Item/list.asp?id=1514'
+        headers['Referer'] = 'http://www.qyggzyjy.com/Item/list.asp?id=1515'
         headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36'
         headers['X-Requested-With'] = 'XMLHttpRequest'
 

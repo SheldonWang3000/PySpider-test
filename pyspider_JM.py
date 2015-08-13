@@ -22,8 +22,14 @@ class Handler(My):
             fetch_type='js', callback=self.plan_page, 
             age=1, save={'type':self.table_name[4], 'source':'GH'})
 
-        self.crawl('http://gtj.jiangmen.gov.cn/jmgtj/RemiseList.aspx', age=1, 
-            save={'type':self.table_name[14], 'source':'GT'}, callback=self.land_page)
+        self.crawl('http://gtj.jiangmen.gov.cn/jmgtj/RemiseList.aspx',
+            save={'type':self.table_name[14], 'source':'GT', 'page':'1'}, 
+            callback=self.land_page, age=1) 
+        self.crawl('http://gtj.jiangmen.gov.cn/jmgtj/RemiseList.aspx?page=1',
+            save={'type':self.table_name[14], 'source':'GT'}, 
+            callback=self.content_page, age=1)
+        
+
     def land_page(self, response):
         next_tag = response.doc('.NextBtnCSS')
         if next_tag.outerHtml() is not None:
@@ -38,10 +44,15 @@ class Handler(My):
             data['AxGridView1$ctl18$ctl05'] = 1
             data['txtExamineNo'] = ''
             data['__VIEWSTATEENCRYPTED'] = ''
-            
-            self.crawl('http://gtj.jiangmen.gov.cn/jmgtj/RemiseList.aspx', 
-                method='POST', age=1, save=response.save, 
+            params = {}
+            params['page'] = str(int(response.save['page']) + 1)
+            save_dict = response.save
+            save_dict['page'] = str(int(save_dict['page']) + 1)
+            self.crawl(response.url, method='POST', age=1, save=save_dict, 
                 callback=self.land_page, data=data)
+            self.crawl(response.url, params=params, 
+                method='POST', age=1, save=save_dict, 
+                callback=self.content_page, data=data)
 
     def plan_page(self, response):
         soup = BeautifulSoup(response.text)

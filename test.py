@@ -8,8 +8,8 @@ import os
 with open('/home/sheldon/PySpider-test/test.html', 'r') as f:
 	html = f.read()
 soup = BeautifulSoup(html, 'html.parser')
-t = soup('ul', 'cbm-ul')[0].find_all('a', {'target':'_blank'})
-t = len(t)
+t = soup('a', 'last-page')
+# t = len(t)
 # for i in t:
 	# print(i['href'])
 print(t)

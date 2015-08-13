@@ -86,10 +86,9 @@ class My(BaseHandler):
         m = hashlib.md5()
         m.update(url.encode())
         web_name = '/' + m.hexdigest() + '/'
-        path = self.mkdir + respons.save['source'] + '/' + self.name + web_name
+        path = self.mkdir + self.name + '/' + response.save['source'] + '/' +  web_name
         if not os.path.exists(path):
             os.makedirs(path)           
-
         soup = BeautifulSoup(response.text)
 
         script_tag = soup.find_all('script', src=True)
@@ -234,7 +233,7 @@ class My(BaseHandler):
             m = hashlib.md5()
             m.update(result['url'].encode())
             web_name = '/' + m.hexdigest() + '/'
-            path = self.mkdir + result['source'] + '/' + self.name + web_name
+            path = self.mkdir + self.name + '/' +  result['source'] + '/' + web_name
             if not os.path.exists(path):
                 os.makedirs(path)           
 

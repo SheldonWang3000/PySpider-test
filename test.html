@@ -1,349 +1,419 @@
 
 
 
+<HTML><HEAD><TITLE>深圳市规划和国土资源委员会</TITLE>
+<meta http-equiv="Content-Language" content="zh-cn">
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<LINK href="images_fdc/07/szfdc.css" type=text/css rel=stylesheet></HEAD>
+<BODY>
+<CENTER>
 
+<SCRIPT ID=clientEventHandlersJS LANGUAGE=javascript>
+function FieldSearchForm_onsubmit() 
+{
+  var SQLTitle,SQLContent,SQL,Relation;
+  SQLTitle=SQLContent=SQL=Relation="";
 
+  Relation=" AND ";
+  if(document.FieldSearchForm.Title.value!="")
+    SQLTitle="CONT_NO='"+ document.FieldSearchForm.Title.value+"' "+ Relation;
+  if(document.FieldSearchForm.Content.value!="")
+    SQLContent="LU_UNITS=" + document.FieldSearchForm.Content.value + Relation;       
+  //alert("检索表达式不能为空!");
+  SQL=SQLTitle + SQLContent;
 
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<link rel="stylesheet" type="text/css" href="/cms/css/cms_zq/base.css" />
-<link rel="stylesheet" type="text/css" href="/cms/css/cms_zq/module.css" />
-<script type="text/javascript" src="/cms/js/cms_zq/common.js"></script>
-<title>肇庆市国土资源局</title>
-</head>
-<body>
-<div id="container">
-  <!-- head Start-->
-  
-<link rel="stylesheet" type="text/css" href="/cms/css/cms_zq/index.css" />
-<script src="/cms/js/AC_RunActiveContent.js" type="text/javascript"></script>
-<script type="text/javascript" src="/cms/js/js.js"></script>
-<script type="text/javascript">
-  function login1(){
-    if(IndexLogForm.USER_NAME.value==''){
-      alert('用户名不能为空');
-      return false;
-    }
-    IndexLogForm.action='/do/login';
-    IndexLogForm.submit();
-    }
-  function toWebRegist(){   
-    IndexLogForm.action='/userReg.do?method=showEditPage';
-    IndexLogForm.target="_blank";
+  var Length=SQL.length;
+  SQL=SQL.substring(0,Length-4);
+     //alert(SQL);
+  document.FieldSearchForm.searchword.value=SQL;
+  if(SQL=="")
+  {
+    //alert("检索表达式不能为空!");
+    return true;
   }
-  function searchNews(fromName){
-    if(trimString(fromName.titleName.value)==""){
-        alert("请填写搜索关键字");
-        document.getElementById("titleName").focus()
-        return false;
-      }
-    fromName.action="/newsAction.do?method=searchNews";
-    fromName.target="_blank";
-    fromName.submit();
-  }
-  
-  /*导航节点专用脚本*/
-  function ckTag(aparam,bparam,cparam){
-    var _aparam = document.getElementById(aparam).getElementsByTagName("li");
-    for(i=0;i<_aparam.length;i++){
-      _aparam[i].className='oldTag.gif';
-    }
-    cparam.className ='currTag';
-    
-    var _nwn = document.getElementById("n_word_node").getElementsByTagName("ul");
-    var _bparam = document.getElementById(bparam);
-    for(ii=0;ii<_nwn.length;ii++){
-      _nwn[ii].className='undis';
-    }
-    _bparam.className='dis';
-  }
-</script>
+  return true;
+}
+</SCRIPT>
+  <TABLE cellSpacing=0 cellPadding=0 width=98% bgColor=#ffffff>
 
-<div id="header">
-  <div class="banner"><img src="/cms/images/cms_zq/banner.jpg" /></div>
-  <div class="navigation">
-    <ul id="n_word" class="n_word">
-      <li onmouseover="ckTag('n_word','nwn01',this)"><a class="headLink fb" href="/">首页</a></li>
-      <li onmouseover="ckTag('n_word','nwn02',this)"><a class="headLink fb" href="javascript:void(0)">政务公开</a></li>
-      <li onmouseover="ckTag('n_word','nwn03',this)"><a class="headLink fb" href="javascript:void(0)">网上办事</a></li>
-      <li onmouseover="ckTag('n_word','nwn04',this)"><a class="headLink fb" href="javascript:void(0)">政务平台</a></li>
-      <li onmouseover="ckTag('n_word','nwn05',this)"><a class="headLink fb" href="javascript:void(0)">信息查询</a></li>
-    </ul>
-    <ul class="n_img">
-      <li>
-        <!--<img src="/cms/images/cms_zq/ico1.gif" />&nbsp;<img src="/cms/images/cms_zq/ico2.gif" />&nbsp;<img src="/cms/images/cms_zq/ico3.gif" />&nbsp;&nbsp;-->
-      </li>
-    </ul>
-    <ul id="n_word_node" class="n_word_node cl">
-      <li>
-        <form name="IndexLogForm" action="" method="post" >
-        <ul id="nwn01" class="dis">
-          <li><script language="javascript" src="/cms/common/indexLogin.jsp"></script></li>
-        </ul>
-        </form>
-      </li>
-      <li>
-        <ul id="nwn02" class="undis">
-          <li>
-            <a href="/GOApply.do?method=dir">机构职能</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000851">法律法规</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000852">规划计划</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000853">土地管理</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000854">矿政管理</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000855">地环管理</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000856">测绘管理</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000857">耕地保护</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000858">专题专栏</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <ul id="nwn03"  class="undis">
-          <li>
-      <a href="/DeclareAction.do?method=bussGuid&url=bussGuidg" target="_blank">办事指南</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/WGbookAction.do?method=toZx" target="_blank">办事资讯</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/comqueryAction.do?method=allDataModel&reserve=true&url=showQueryWeb" target="_blank">业务查询</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <ul  id="nwn04" class="undis">
-          <li>
-            <a href="/cms/govEmailbox/govEmailbox_index.jsp">政务信箱</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/WGbookAction.do?method=toZx">网上咨询</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000875">信息指南</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000876">常见问题</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000878">知识普及</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000879">执法检查</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/cms/directory/lianxiwomen.jsp">联系我们</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <ul id="nwn05" class="undis">
-          <li>
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000861">政务大厅</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000862">办事流程</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000863">办事须知</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000865">文件下载</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000866">行政许可</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000867">业务信息</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000868">公告公示</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/newsAction.do?method=queryNews&classId=020010350000000869">收费指南</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <!--<a href="/newsAction.do?method=queryNews&classId=020010350000000870">土地招拍挂</a>-->
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</div>
+  <TR>
+      <TD valign="top"> 
+        <TABLE cellSpacing=0 cellPadding=0 width=100% bgColor=#ffffff>
 
-  <!-- head End-->
-  <form name="form2" id="form2" method="post" target="_blank" action="">
-    <input type="hidden" name="classId" value="020010350000000912">
-    <input type="hidden" name="textGeneralType" value="020010350000000912">
-    <div id="cArea">
-      <div class="nav-tree sd-all fl">
-        <h2 class="fcfff f20">导航节点</h2>
-        <dl class="dl_List">
-          
-            
-              <dd>
-                <!--<div class="ico"></div>-->
-                <a href="/newsAction.do?method=queryNews&classId=020010350000000912" title="土地交易公告" class="dlListALinkB">
-                 &nbsp; <img src="/cms/images/dot2.gif" />
-                
-                
-                <span>
-                土地交易公告
+   
 
-                </span></a> </dd>
-            
-          
-        </dl>
-      </div>
-      <div class="nav-list fr">
-        <div class="c-box-other sd-all">
-          <div class="nowloc"> <span class="ico fl"></span>
-            <div>您现在的位置: <a href='http://www.zqgtzy.gov.cn:80/'>首页</a> -><a href='newsAction.do?method=queryNews&classId=020010350000000911' >公告信息</a> -><a href='newsAction.do?method=queryNews&classId=020010350000000912' ><font color=green>土地交易公告</font></a></div>
-          </div>
-          <div class="c-b-main fc30 f14">
-            <ul class="cbm-ul">
+  <TR>
+              <TD valign="top"> 
+      <TABLE cellSpacing=15 cellPadding=0 width="100%">
+        <TBODY>
+<form method="post" action="/was5/web/search?channelid=235315" name="FieldSearchForm" LANGUAGE=javascript onSubmit="return FieldSearchForm_onsubmit()">
+        <TR>
+          <TD align=middle>合同号 <INPUT type="text" name="Title"> 
+            用地单位 <INPUT type="text" name="Content"> 
+      <input type="hidden" value="AND" name ="Relation"  id=RelationAnd  
+        CHECKED><input type="hidden" name="Relation" value="OR" id=RelationOr>
+      <input type="hidden" name="searchword">
+      <INPUT  type=submit value=查询 name=submit> 
+      </TD></TR>
+      </form>
+
+        <TR>
+        <TR>
+                    <TD align=middle valign="top"> 
+                      
+                    <TABLE width="100%" border=1 cellSpacing=0 
+            borderColor=#404040 rules=rows id=DataGrid1 
+            style="BORDER-LEFT-COLOR: #404040; BORDER-BOTTOM-COLOR: #404040; BORDER-TOP-COLOR: #404040;BORDER-COLLAPSE: collapse; BORDER-RIGHT-COLOR: #404040; ">
+                      <TBODY> 
+                      <TR style="BACKGROUND-COLOR: #e0e0e0" nowrap> 
+                        <TD width="80">合同号</TD>
+                        <TD>用地单位</TD>
+                        <TD >出让方式</TD>
+                        <TD>宗地号</TD>
+                        <TD>土地用途</TD>
+                        <TD>用地面积</TD>
+                        <TD>使用年限</TD>
+                        <TD width="80">签订日期</TD>
+                      </TR>
               
-                <li>
-                  <div class="ico"></div>
-                  <div class="text"> <a href="/newsAction.do?method=viewNews&classId=020010350000000912&newsId=020010040000094838" target="_blank" title="肇庆市国有建设用地使用权网上拍卖出让公告">
-                    肇庆市国有建设用地使用权网上拍卖出让公告
-
-                    </a> </div>
-                  <div class="time">
-                    2015-06-09
-                  </div>
-                </li>
-              
-                <li>
-                  <div class="ico"></div>
-                  <div class="text"> <a href="/newsAction.do?method=viewNews&classId=020010350000000912&newsId=020010040000094770" target="_blank" title="肇庆市国有建设用地使用权网上拍卖出让公告">
-                    肇庆市国有建设用地使用权网上拍卖出让公告
-
-                    </a> </div>
-                  <div class="time">
-                    2015-05-14
-                  </div>
-                </li>
-              
-                <li>
-                  <div class="ico"></div>
-                  <div class="text"> <a href="/newsAction.do?method=viewNews&classId=020010350000000912&newsId=020010040000094728" target="_blank" title="肇庆市国有建设用地使用权拍卖出让公告">
-                    肇庆市国有建设用地使用权拍卖出让公告
-
-                    </a> </div>
-                  <div class="time">
-                    2015-05-06
-                  </div>
-                </li>
-              
-                <li>
-                  <div class="ico"></div>
-                  <div class="text"> <a href="/newsAction.do?method=viewNews&classId=020010350000000912&newsId=020010040000094709" target="_blank" title="肇庆市国土资源局大旺分局国有土地使用权招拍挂出让成交公示">
-                    肇庆市国土资源局大旺分局国有土地使用权招拍挂出让成交公示
-
-                    </a> </div>
-                  <div class="time">
-                    2015-04-16
-                  </div>
-                </li>
-              
-                <li>
-                  <div class="ico"></div>
-                  <div class="text"> <a href="/newsAction.do?method=viewNews&classId=020010350000000912&newsId=020010040000094708" target="_blank" title="肇庆市国土资源局大旺分局国有土地使用权招拍挂出让成交公示">
-                    肇庆市国土资源局大旺分局国有土地使用权招拍挂出让成交公示
-
-                    </a> </div>
-                  <div class="time">
-                    2015-04-16
-                  </div>
-                </li>
-              
-                <li>
-                  <div class="ico"></div>
-                  <div class="text"> <a href="/newsAction.do?method=viewNews&classId=020010350000000912&newsId=020010040000094707" target="_blank" title="肇庆市国有建设用地使用权网上挂牌出让公告">
-                    肇庆市国有建设用地使用权网上挂牌出让公告
-
-                    </a> </div>
-                  <div class="time">
-                    2015-04-15
-                  </div>
-                </li>
-              
-                <li>
-                  <div class="ico"></div>
-                  <div class="text"> <a href="/newsAction.do?method=viewNews&classId=020010350000000912&newsId=020010040000094696" target="_blank" title="肇庆市西江南路东、“牛顶岗”北侧地段地块拍卖更正公告">
-                    肇庆市西江南路东、“牛顶岗”北侧地段地块拍卖更正公告
-
-                    </a> </div>
-                  <div class="time">
-                    2015-04-04
-                  </div>
-                </li>
-              
-                <li>
-                  <div class="ico"></div>
-                  <div class="text"> <a href="/newsAction.do?method=viewNews&classId=020010350000000912&newsId=020010040000094669" target="_blank" title="肇庆市国有建设用地使用权拍卖转让公告">
-                    肇庆市国有建设用地使用权拍卖转让公告
-
-                    </a> </div>
-                  <div class="time">
-                    2015-04-03
-                  </div>
-                </li>
-              
-                <li>
-                  <div class="ico"></div>
-                  <div class="text"> <a href="/newsAction.do?method=viewNews&classId=020010350000000912&newsId=020010040000094659" target="_blank" title="肇庆市国有建设用地使用权拍卖出让公告">
-                    肇庆市国有建设用地使用权拍卖出让公告
-
-                    </a> </div>
-                  <div class="time">
-                    2015-03-20
-                  </div>
-                </li>
-              
-                <li>
-                  <div class="ico"></div>
-                  <div class="text"> <a href="/newsAction.do?method=viewNews&classId=020010350000000912&newsId=020010040000094652" target="_blank" title="肇庆市国土资源局鼎湖分局国有土地使用权招拍挂出让成交公示">
-                    肇庆市国土资源局鼎湖分局国有土地使用权招拍挂出让成交公示
-
-                    </a> </div>
-                  <div class="time">
-                    2015-03-17
-                  </div>
-                </li>
-              
-            </ul>
-            <p><script language='javascript'>
- function queryOrderBy(target){document.all('orderBy').value=target; var fm = document.all('orderBy').form;if(fm.descOrAsc && fm.descOrAsc.value.toUpperCase() == 'DESC'){fm.descOrAsc.value = 'ASC';} else {fm.descOrAsc.value = 'DESC';}submitSplitPage(fm, 'query');}
-function doSubmit(){ var fm = document.all('orderBy').form;fm.SplitFlag.value = 1;  fm.target = '_self'; fm.action = 'newsAction.do?method=queryNews';fm.submit(); } 
-function submitSplitPage(form, target) {if (target == 'query') { if(form.totalPages.value == 0) return; form.SplitFlag.value = 1;form.gotoPage.value = 1 ;}if (target == 'firstpage') {form.SplitFlag.value = 1; form.gotoPage.value = 1 ;}if (target== 'prepage') {form.SplitFlag.value = 1; form.gotoPage.value = parseInt(form.curPageNo.value) - 1 ;}if (target == 'nextpage') {form.SplitFlag.value = 1; form.gotoPage.value = parseInt(form.curPageNo.value) + 1 ;}if (target == 'lastpage') {form.SplitFlag.value = 1; form.gotoPage.value = parseInt(form.totalPages.value) ;}
-if (parseInt(form.gotoPage.value) <= parseInt(form.totalPages.value) && parseInt(form.gotoPage.value) >= 0) { if(parseInt(form.gotoPage.value) == 0){form.gotoPage.value = 1;}doSubmit();}else{alert('超出页数范围，请重新选择！');}}
-function  check_data(){if(!((event.keyCode>=48&&event.keyCode<=57)||(event.keyCode>=96&&event.keyCode<=105)||(event.keyCode==8)||(event.keyCode==46)||(event.keyCode==37)||(event.keyCode==39))){event.returnValue=false;}
- if(event.keyCode == 13) {var fm = document.all('orderBy').form; submitSplitPage(fm,'');} }
-</script>
-<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0'><tr><input type='hidden' name='curPageNo' value='1'> <input type='hidden' name='totalCnts' value='164'> <input type='hidden' name='totalPages' value='17'> <input type='hidden' name='cntPerPage' value='10'><input type='hidden' name='SplitFlag' value='0'><input type='hidden' name='orderBy' value='null'><input type='hidden' name='descOrAsc' value='desc'>
-<td width='30%'  class='title_3' align='center' nowrap>共164条,此页1-10条  共17页，此页 1/17</td>
-<td width='30%'  class='title_3' align='right' nowrap>
-<input type='button' id='FIRSTPAGE' name='FIRSTPAGE' value='首页' onClick="submitSplitPage(this.form, 'firstpage')" style='WIDTH:25pt'> <input type='button' id='PERPAGE' name='PERPAGE' value='上页' onClick="submitSplitPage(this.form, 'prepage')" style='WIDTH:25pt'> <input type='button' id='NEXTPAGE' name='NEXTPAGE' value='下页' onClick="submitSplitPage(this.form, 'nextpage')" style='WIDTH:25pt'> <input type='button' id='LASTPAGE' name='LASTPAGE' value='尾页' onClick="submitSplitPage(this.form, 'lastpage')" style='WIDTH:25pt'> 转到<input type='text' id='gotoPage' onkeydown='check_data()' name='gotoPage' style='WIDTH:25pt' maxlength='20' value='1' > 页<input type='button' id='goto' name='goto'  value='跳转' onClick="submitSplitPage(this.form, 'goto')" style='WIDTH:25pt'> </td>
-</tr></table>
-<script language='javascript'>var curNo = document.all('orderBy').form.curPageNo.value;
- var total = document.all('orderBy').form.totalPages.value; var FIRSTPAGE = document.getElementById('FIRSTPAGE');
- var PERPAGE = document.getElementById('PERPAGE');  var NEXTPAGE = document.getElementById('NEXTPAGE');
- var LASTPAGE = document.getElementById('LASTPAGE');
- if(curNo == 1 && total == 1){FIRSTPAGE.disabled=true; PERPAGE.disabled=true; NEXTPAGE.disabled=true; LASTPAGE.disabled=true;
- }else if(curNo == 1 && total > 1){FIRSTPAGE.disabled=true; PERPAGE.disabled=true; NEXTPAGE.disabled=false; LASTPAGE.disabled=false;
- }else if(total > 1 && curNo == total){FIRSTPAGE.disabled=false; PERPAGE.disabled=false; NEXTPAGE.disabled=true; LASTPAGE.disabled=true;
- }else if(total > 1 && curNo < total && curNo > 1){ FIRSTPAGE.disabled=false; PERPAGE.disabled=false; NEXTPAGE.disabled=false; LASTPAGE.disabled=false;
- }else if(total == 0){ FIRSTPAGE.disabled=true; PERPAGE.disabled=true; NEXTPAGE.disabled=true; LASTPAGE.disabled=true;}
-</script>
-
-</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-  <div class="hr_10"></div>
-  <!-- foot Start-->
-  
-
-<style>
-#_ideConac{width:100%;display:inline-block;text-align:center;}
-</style>
-
-<div id="footer" style="position:relative;">
-  <p class="f_fun tc"> <a href="#" class="word_1">设为首页</a> | <a href="#" class="word_1" onclick="window.external.addFavorite('http://demo.zqfuso.com','国土资源局网站')"  title="国土资源局网站">加为收藏</a> | <a href="/RssXAction.do?method=list" class="word_1">RSS订阅</a> | <a href="/cms/booking/booking_index.jsp" class="word_1">邮件订阅</a> | <a href="/RssXAction.do?method=subindex" class="word_1">个性化订阅</a> | <a href="/cms/sitemap.jsp" class="word_1">网站导航</a> | <a href="/do/login" class="word_1">后台管理</a> <!-- |<a href="/webFriendAction.do?method=queryClient" class="word_1">友情链接</a>--> </p>
-<!-- <img src="http://v.t.qq.com/share/images/s/weiboicon16.png" />  <img src="http://static.cnblogs.com/images/icon_weibo_24.png"/>-->
-  <div class="f_info" tyle="position:relative;padding-top:0px;">
-  
-   <div class="tc" style="padding:10px 0;"><a href="http://t.qq.com/zqgtwb/mine " target="_blank"><img src="http://v.t.qq.com/share/images/s/weiboicon16.png" /></a>  <a href="http://weibo.com/p/1001063303348993/home?from=page_100106&mod=TAB#place " target="_blank"><img src="http://static.cnblogs.com/images/icon_weibo_24.png"/></a></div>
-    <p><script src="http://s14.cnzz.com/stat.php?id=2243346&web_id=2243346&show=pic" language="JavaScript"></script>
-</p>
-    <p>主办单位：肇庆市国土资源局  粤ICP备09164583号-1</p>
-    <p>地址：肇庆市端州区信安六路9号（交警支队东侧）</p>
-    <p>电话：（0758）2824890 传真：（0758）2840470 </p>
-  </div>
-  <!--<img src="/cms/images/ewm.jpg" />-->
-  <div class="polic_div"><img src="/cms/images/cms_zq/polic.gif" /></div>
-  <div style="position:absolute;left:242px;top: 40px;"><img src="/cms/images/ewm.jpg" style="width:86px;height:86px"/></div>
-  <div style="position:absolute;left:220px;top: 135px;color:white;">扫描并关注微信公众平台</div>
-</div>
-
-  <script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript src='http://dcs.conac.cn/js/20/297/0000/45004679/CA202970000450046790001.js' type='text/javascript'%3E%3C/script%3E"));</script>
-
-  <!--foot End-->
-</div>
-</body>
-</html>
+         
+                      <TR height="25px"> 
+                        <TD>2007-4033补充合同四</TD>
+                        <TD>深圳市宝安高科电子有限公司</TD>
+                        <TD>协议</TD>
+                        <TD>A608-0128</TD>
+                        <TD></TD>
+                        <TD>31999.83</TD>
+                        <TD>50</TD>
+                        <TD>2015-05-20</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-2005</TD>
+                        <TD>深圳市马蹄山股份合作公司</TD>
+                        <TD>协议</TD>
+                        <TD>G03303-0338</TD>
+                        <TD>商业性办公用地</TD>
+                        <TD>3180.59</TD>
+                        <TD>40</TD>
+                        <TD>2015-05-11</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-2003</TD>
+                        <TD>深圳市名居房地产有限公司</TD>
+                        <TD>协议</TD>
+                        <TD>G01034-0332</TD>
+                        <TD>二类居住用地,商业用</TD>
+                        <TD>43720.87</TD>
+                        <TD>40</TD>
+                        <TD>2015-05-05</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-1003</TD>
+                        <TD>深圳市西乡蚝业股份合作公司</TD>
+                        <TD>协议</TD>
+                        <TD>A103-0723</TD>
+                        <TD>商业服务业用地</TD>
+                        <TD>7016.7</TD>
+                        <TD>40</TD>
+                        <TD>2015-05-04</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>(2015)5007</TD>
+                        <TD>深圳市联嘉祥科技股份有限公司</TD>
+                        <TD>挂牌</TD>
+                        <TD>A907-0155</TD>
+                        <TD>普通工业用地</TD>
+                        <TD>16228.8</TD>
+                        <TD>30</TD>
+                        <TD>2015-04-24</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>(2015）5008</TD>
+                        <TD>深圳市汇川技术股份有限公司</TD>
+                        <TD>挂牌</TD>
+                        <TD>A907-0160</TD>
+                        <TD>普通工业用地</TD>
+                        <TD>12650.1</TD>
+                        <TD>30</TD>
+                        <TD>2015-04-24</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-7006</TD>
+                        <TD>深圳市光明新城物业发展有限公司</TD>
+                        <TD>挂牌</TD>
+                        <TD>A608-0162</TD>
+                        <TD>工业用地</TD>
+                        <TD>11184.76</TD>
+                        <TD>30</TD>
+                        <TD>2015-04-23</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-5009</TD>
+                        <TD>深圳市鸿荣源实业有限公司</TD>
+                        <TD>协议</TD>
+                        <TD>A824-0117</TD>
+                        <TD>二类居住用地,商业用</TD>
+                        <TD>49850.69</TD>
+                        <TD>70</TD>
+                        <TD>2015-04-20</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-1002</TD>
+                        <TD>深圳市宝安区人民政府</TD>
+                        <TD>协议</TD>
+                        <TD>A004-0156</TD>
+                        <TD>教育设施用地</TD>
+                        <TD>26568.81</TD>
+                        <TD>50</TD>
+                        <TD>2015-04-20</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-5010</TD>
+                        <TD>深圳市鸿荣源实业有限公司</TD>
+                        <TD>协议</TD>
+                        <TD>A824-0119</TD>
+                        <TD>二类居住用地</TD>
+                        <TD>17100.9</TD>
+                        <TD>70</TD>
+                        <TD>2015-04-20</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-5011</TD>
+                        <TD>深圳市鸿荣源实业有限公司</TD>
+                        <TD>协议</TD>
+                        <TD>A824-0116</TD>
+                        <TD>二类居住用地</TD>
+                        <TD>26666.42</TD>
+                        <TD>70</TD>
+                        <TD>2015-04-20</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-6003</TD>
+                        <TD>深圳前海君临融资租赁有限公司</TD>
+                        <TD>拍卖</TD>
+                        <TD>B302-0115</TD>
+                        <TD>商业用地</TD>
+                        <TD>6941.25</TD>
+                        <TD>40</TD>
+                        <TD>2015-04-16</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-5013</TD>
+                        <TD>深圳市鸿荣源实业有限公司</TD>
+                        <TD>协议</TD>
+                        <TD>A824-0121</TD>
+                        <TD>二类居住用地</TD>
+                        <TD>41207.4</TD>
+                        <TD>70</TD>
+                        <TD>2015-04-16</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-6003</TD>
+                        <TD>深圳深中润投资控股有限公司</TD>
+                        <TD>拍卖</TD>
+                        <TD>B302-0115</TD>
+                        <TD>商业用地</TD>
+                        <TD>6941.25</TD>
+                        <TD>40</TD>
+                        <TD>2015-04-16</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-5014</TD>
+                        <TD>深圳市鸿荣源实业有限公司</TD>
+                        <TD>协议</TD>
+                        <TD>A824-0120</TD>
+                        <TD>二类居住用地</TD>
+                        <TD>35266.01</TD>
+                        <TD>70</TD>
+                        <TD>2015-04-16</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-5012</TD>
+                        <TD>深圳市鸿荣源实业有限公司</TD>
+                        <TD>协议</TD>
+                        <TD>A824-0118</TD>
+                        <TD>二类居住用地,商业用</TD>
+                        <TD>35225.31</TD>
+                        <TD>70</TD>
+                        <TD>2015-04-16</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-8003</TD>
+                        <TD>深圳澳科电缆有限公司</TD>
+                        <TD>协议</TD>
+                        <TD>T305-0091</TD>
+                        <TD>新型产业用地</TD>
+                        <TD>17594.73</TD>
+                        <TD>50</TD>
+                        <TD>2015-03-17</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-8002</TD>
+                        <TD>深圳北邮网络科技有限公司</TD>
+                        <TD>挂牌</TD>
+                        <TD>T205-0118</TD>
+                        <TD>工业用地</TD>
+                        <TD>3133.91</TD>
+                        <TD>30</TD>
+                        <TD>2015-03-12</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-5006</TD>
+                        <TD>深圳市庙一股份合作公司</TD>
+                        <TD>协议</TD>
+                        <TD>A933-0736</TD>
+                        <TD>普通工业用地</TD>
+                        <TD>4278.69</TD>
+                        <TD>50</TD>
+                        <TD>2015-03-10</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-1001</TD>
+                        <TD>中粮地产（集团）股份有限公司</TD>
+                        <TD>协议</TD>
+                        <TD>A210-0421</TD>
+                        <TD>居住用地</TD>
+                        <TD>47595.43</TD>
+                        <TD>70</TD>
+                        <TD>2015-03-02</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2014-8024</TD>
+                        <TD>深圳市燃气集团股份有限公司</TD>
+                        <TD>协议</TD>
+                        <TD>T102-0254</TD>
+                        <TD>供燃气用地</TD>
+                        <TD>12052.7</TD>
+                        <TD>30</TD>
+                        <TD>2015-03-02</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-6001</TD>
+                        <TD>中海地产集团有限公司</TD>
+                        <TD>挂牌</TD>
+                        <TD>H103-0010</TD>
+                        <TD>二类居住用地</TD>
+                        <TD>47166.23</TD>
+                        <TD>70</TD>
+                        <TD>2015-02-06</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-5005</TD>
+                        <TD>深圳市宝观城股份合作公司</TD>
+                        <TD>协议</TD>
+                        <TD>A915-0634</TD>
+                        <TD>商业服务业用地</TD>
+                        <TD>12232.43</TD>
+                        <TD>40</TD>
+                        <TD>2015-01-19</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2014-1043</TD>
+                        <TD>深圳市西乡径贝股份合作公司</TD>
+                        <TD>协议</TD>
+                        <TD>A105-1697</TD>
+                        <TD>二类居住用地,商业用</TD>
+                        <TD>11014.11</TD>
+                        <TD>70</TD>
+                        <TD>2015-01-16</TD>
+                      </TR>
+                  
+         
+         
+                      <TR height="25px"> 
+                        <TD>2015-9001</TD>
+                        <TD>深圳市中核海得威生物科技有限公司</TD>
+                        <TD>挂牌</TD>
+                        <TD>G14304-0284</TD>
+                        <TD>工业用地</TD>
+                        <TD>13004.95</TD>
+                        <TD>30</TD>
+                        <TD>2015-01-15</TD>
+                      </TR>
+                  
+        <TR> 
+                        <TD colspan="8"><div align="center"><nobr></nobr> 
+                          <nobr></nobr> 
+                          <nobr><span style="font-weight: bold;border: none;background: none">1</span>&nbsp;<a target="_self" href="search?page=2&channelid=235315&perpage=25&outlinepage=10">2</a>&nbsp;<a target="_self" href="search?page=3&channelid=235315&perpage=25&outlinepage=10">3</a>&nbsp;<a target="_self" href="search?page=4&channelid=235315&perpage=25&outlinepage=10">4</a>&nbsp;<a target="_self" href="search?page=5&channelid=235315&perpage=25&outlinepage=10">5</a>&nbsp;<a target="_self" href="search?page=6&channelid=235315&perpage=25&outlinepage=10">6</a>&nbsp;<a target="_self" href="search?page=7&channelid=235315&perpage=25&outlinepage=10">7</a>&nbsp;<a target="_self" href="search?page=8&channelid=235315&perpage=25&outlinepage=10">8</a>&nbsp;<a target="_self" href="search?page=9&channelid=235315&perpage=25&outlinepage=10">9</a>&nbsp;<a target="_self" href="search?page=10&channelid=235315&perpage=25&outlinepage=10">10</a>&nbsp;</nobr> 
+                         
+                          <nobr><a class="next-page" href="search?page=2&channelid=235315&perpage=25&outlinepage=10" target="_self">下一页</a>&nbsp;</nobr> 
+            <nobr><a class="last-page" href="search?page=57&channelid=235315&perpage=25&outlinepage=10" target="_self">尾页</a>&nbsp;</nobr> </div></TD>
+                      </TR>
+                      </TBODY> 
+                    </TABLE>
+                    </TD>
+                  </TR></TBODY></TABLE>
+              </TD>
+            </TR></TABLE>
+</TD>
+    </TR></TABLE>
+</CENTER></BODY></HTML>

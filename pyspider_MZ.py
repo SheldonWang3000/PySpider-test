@@ -13,10 +13,10 @@ class Handler(My):
             callback=self.plan_page, age=1, 
             save={'type':self.table_name[8], 'source':'GH'})
 
-        self.crawl('http://www.mzgtzy.gov.cn/newsAction.do?method=queryNews&classId=020010350000001647&queryForward=xgxz&page=1', 
-            callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'},
-            js_script='''function(){return document.all('orderBy').form.totalPages.value;}''', 
-            fetch_type='js', age=1)
+        # self.crawl('http://www.mzgtzy.gov.cn/newsAction.do?method=queryNews&classId=020010350000001647&queryForward=xgxz&page=1', 
+        #     callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'},
+        #     js_script='''function(){return document.all('orderBy').form.totalPages.value;}''', 
+        #     fetch_type='js', age=1)
         self.crawl('http://www.mzgtzy.gov.cn/newsAction.do?method=queryNews&classId=020010350000001648&queryForward=xgxz&page=1', 
             callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'},
             js_script='''function(){return document.all('orderBy').form.totalPages.value;}''', 

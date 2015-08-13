@@ -22,8 +22,8 @@ class Handler(My):
         self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%B9%A4%B3%CC%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&page=1', 
             fetch_type='js', age=1, callback=self.plan_page, 
             save={'page':1, 'type':self.table_name[2], 'source':'GH'})
-        self.crawl('http://121.10.6.230/dggsweb/SeePQAllGS.aspx?%B9%AB%CA%BE=%C5%FA%C7%B0%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9&page=1', 
-            fetch_type='js', age=1, callback=self.plan_page, 
+        # self.crawl('http://121.10.6.230/dggsweb/SeePQAllGS.aspx?%B9%AB%CA%BE=%C5%FA%C7%B0%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%CF%EE%C4%BF%D1%A1%D6%B7%D2%E2%BC%FB%CA%E9&page=1', 
+        #     fetch_type='js', age=1, callback=self.plan_page, 
         #     save={'page':1, 'type':self.table_name[9], 'source':'GH'})
         # self.crawl('http://121.10.6.230/dggsweb/SeePQAllGS.aspx?%B9%AB%CA%BE=%C5%FA%C7%B0%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%D3%C3%B5%D8%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&page=1', 
         #     fetch_type='js', age=1, callback=self.plan_page, 
@@ -44,7 +44,7 @@ class Handler(My):
             fetch_type='js', age=1, callback=self.land_page,
             save={'type':self.table_name[14], 'source':'GT'},
             js_script='''function(){return new XMLSerializer().serializeToString(_getPagefromArr('2').docObj);}''')
-
+    
     def land_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
         info = xmltodict.parse(response.js_script_result)
@@ -102,4 +102,4 @@ class Handler(My):
             domain = domains[response.save['type']]
             link = domain + link
             # print(link)
-            self.crawl(link, callback=self.content_page, save={'type':response.save['type']})
+            self.crawl(link, callback=self.content_page, save=response.save)

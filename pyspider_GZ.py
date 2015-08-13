@@ -79,7 +79,6 @@ class Handler(My):
             self.crawl(next_page, callback=self.plan_list_page, 
                 age=1, save=response.save)
 
-    @config(priority=2)
     def plan_list_page(self, response):
         soup = BeautifulSoup(response.text)
         # url = response.url

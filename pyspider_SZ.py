@@ -22,7 +22,10 @@ class Handler(My):
             fetch_type='js', callback=self.plan_page, 
             age=1, save={'type':self.table_name[4], 'source':'GH'})
 
-        self.crawl('http://www.sz68.com/land/?s=0',
+        self.crawl('http://www.szpl.gov.cn:8080/was5/web/search?page=1&channelid=235315&perpage=25&outlinepage=10',
+            callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'}, 
+            age=1)
+        self.crawl('http://www.szpl.gov.cn:8080/was5/web/search?page=1&channelid=290259&perpage=25&outlinepage=10',
             callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'}, 
             age=1)
 
@@ -46,22 +49,15 @@ class Handler(My):
 
     def land_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
-
-        lists = soup('table', {'style': 'border-top: 0px #ccc solid ;border-bottom: 0px #ccc solid;margin: 0 0 0 0;'})
-        lists = lists[0].find_all('div', {'style':'float:right;'})
-        for i in lists:
-            link = self.real_path(response.url, i.find('a')['href'])
-            self.crawl(link, callback=self.content_page, save=response.save)
         
+        t = soup('a', 'last-page')[0]['href']
         params = {}
-        for i in response.url.split('?')[1].split('&'):
+        for i in t.split('?')[1].split('&'):
             temp = i.split('=')
-            params[temp[0]] = int(temp[1])
-        if params['s'] == 0:
-            page_count = int(soup('div', {'id':'wp_page_numbers'})[0].find_all('li')[-3].find('a')['href'].split('=')[1])
-            for i in range(1, page_count + 1):
-                params = {}
-                params['s'] = i
-                link = response.url.split('?')[0]
-                self.crawl(link, age=1, params=params, callback=self.land_page,
-                    save=response.save)
+            params[temp[0]] = temp[1]
+        page_count = int(params['page'])
+
+        for i in range(2, page_count + 1):
+            params['page'] = str(i)
+            self.crawl(response.url.split('?')[0], age=1, params=params, callback=self.content_page,
+                save=response.save)
