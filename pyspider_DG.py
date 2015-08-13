@@ -44,7 +44,28 @@ class Handler(My):
             fetch_type='js', age=1, callback=self.land_page,
             save={'type':self.table_name[14], 'source':'GT'},
             js_script='''function(){return new XMLSerializer().serializeToString(_getPagefromArr('2').docObj);}''')
+
+        self.crawl('http://www.dgjs.gov.cn/dgweb/search.do?page=0', age=1, fetch_type='js',
+            callback=self.build_page, save={'type':self.table_name[15], 'source':'JS'},
+            method='POST', data={'pageMethod':'next','method':'searchProjFinishInf','currentPage':'0','currentPage_temp':'0'})
     
+    def build_page(self, response):
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        page_count = int(soup('td', 'tabletitle1')[-1].get_text().split('/')[-1].split('\n')[1])
+
+        data = {'pageMethod':'next','method':'searchProjFinishInf','currentPage':'0','currentPage_temp':'0'}
+        url, params = self.get_params(response)
+        self.crawl(url, age=1, fetch_type='js', callback=self.content_page, 
+                save=response.save, method='POST', data=data, params=params)
+        for i in range(1, page_count):
+            data['currentPage'] = str(i) 
+            params['page'] = str(i)
+            self.crawl(url, age=1, fetch_type='js', callback=self.content_page, 
+                save=response.save, method='POST', data=data, params=params)
+    
+
+
     def land_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
         info = xmltodict.parse(response.js_script_result)

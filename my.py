@@ -21,7 +21,7 @@ class My(BaseHandler):
     table_name = ['选址意见书', '建设用地规划许可证', '建设工程规划许可证', '乡村建设规划许可证',
                 '规划验收合格证', '规划验收合格证', '批前公示', '批后公布', 'Unknow', '选址意见书_批前',
                 '建设用地规划许可证_批前', '建设工程规划许可证_批前', '乡村建设规划许可证_批前',
-                '规划验收合格证_批前', '挂牌']
+                '规划验收合格证_批前', '挂牌', '竣工验收']
 
     city_name = {'CZ':'潮州', 'DG':'东莞', 'FS':'佛山', 'GZ':'广州', 'HY':'河源', 'HZ':'惠州', 
                  'JM':'江门', 'JM_X':'江门', 'JY':'揭阳', 'MM':'茂名', 'MZ':'梅州', 'QY':'清远', 
@@ -56,8 +56,13 @@ class My(BaseHandler):
     def get_date(self):
         return time.strftime("%Y-%m-%d", time.localtime())
 
-    def get_params(self, response):
-        url, params_str = response.url.split('?')
+    def get_params(self, response=None, link=''):
+        if response == None and not link:
+            raise KeyError
+        if response != None:
+            url, params_str = response.url.split('?')
+        else:
+            url, params_str = link.split('?')
         params = {}
         for i in params_str.split('&'):
             temp = i.split('=')

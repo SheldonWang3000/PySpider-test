@@ -23,6 +23,10 @@ class Handler(My):
             callback=self.land_page, age=1, 
             save={'type':self.table_name[14], 'source':'GT'})
 
+        self.crawl('http://www.ghjsj-heyuan.gov.cn/certificate.asp?categoryid=461&page=1', 
+            callback=self.plan_page, age=1, 
+            save={'type':self.table_name[15], 'source':'JS'})
+
     def plan_page(self, response):
         soup = BeautifulSoup(response.text)
         a_list = soup('a', {'href': re.compile(r'page=')})

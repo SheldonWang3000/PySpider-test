@@ -29,6 +29,38 @@ class Handler(My):
             callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'}, 
             age=1)
 
+        self.crawl('http://61.144.226.2:8001/web/project/jgysAction.do?page=1&method=toList&method=toList&method=toList&method=toList&method=toList&method=toList',
+            age=1, save={'type':self.table_name[15], 'source':'JS'}, callback=self.build_page)
+
+    def build_page(self, response):
+        soup = BeautifulSoup(response.text, 'html.parser')
+        t = soup('a', {'id':'lx'})
+        params = {}
+        for i in t[0]['href'].split('?')[1].split('&'):
+            temp = i.split('=')
+            params[temp[0]] = temp[1]
+        page_count = int(params['page'])
+
+        url, params = self.get_params(response)
+        for i in range(2, page_count + 1):
+            params['page'] = str(i)
+            self.crawl(url, params=params, save=response.save,
+                callback=self.build_list_page, age=1)
+
+        domain = 'http://61.144.226.2:8001/web/project/jgysAction.do?method=toView&ndxh=%s'
+        lists = soup('table', {'id':'bean'})[0].find_all('a')
+        for i in lists:
+            link = domain % i.get_text()
+            self.crawl(link, save=response.save, callback=self.content_page)
+
+    def build_list_page(self, response):
+        soup = BeautifulSoup(response.text, 'html.parser')
+        domain = 'http://61.144.226.2:8001/web/project/jgysAction.do?method=toView&ndxh=%s'
+        lists = soup('table', {'id':'bean'})[0].find_all('a')
+        for i in lists:
+            link = domain % i.get_text()
+            self.crawl(link, save=response.save, callback=self.content_page)
+
     def plan_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
         table = soup('table', {'class':'tdown'})[0].find_all('td')[0].find_all('a')[-1]['href'].split('?')[-1].split('&')

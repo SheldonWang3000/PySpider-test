@@ -1,419 +1,452 @@
 
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<HTML><HEAD><TITLE>深圳市规划和国土资源委员会</TITLE>
-<meta http-equiv="Content-Language" content="zh-cn">
-<META http-equiv=Content-Type content="text/html; charset=UTF-8">
-<LINK href="images_fdc/07/szfdc.css" type=text/css rel=stylesheet></HEAD>
-<BODY>
-<CENTER>
-
-<SCRIPT ID=clientEventHandlersJS LANGUAGE=javascript>
-function FieldSearchForm_onsubmit() 
-{
-  var SQLTitle,SQLContent,SQL,Relation;
-  SQLTitle=SQLContent=SQL=Relation="";
-
-  Relation=" AND ";
-  if(document.FieldSearchForm.Title.value!="")
-    SQLTitle="CONT_NO='"+ document.FieldSearchForm.Title.value+"' "+ Relation;
-  if(document.FieldSearchForm.Content.value!="")
-    SQLContent="LU_UNITS=" + document.FieldSearchForm.Content.value + Relation;       
-  //alert("检索表达式不能为空!");
-  SQL=SQLTitle + SQLContent;
-
-  var Length=SQL.length;
-  SQL=SQL.substring(0,Length-4);
-     //alert(SQL);
-  document.FieldSearchForm.searchword.value=SQL;
-  if(SQL=="")
-  {
-    //alert("检索表达式不能为空!");
-    return true;
-  }
-  return true;
-}
-</SCRIPT>
-  <TABLE cellSpacing=0 cellPadding=0 width=98% bgColor=#ffffff>
-
-  <TR>
-      <TD valign="top"> 
-        <TABLE cellSpacing=0 cellPadding=0 width=100% bgColor=#ffffff>
-
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head><title>
+  江门市工程建设领域项目信息和信用信息公开平台
+</title>
+    
+    <link href="style.css" rel="stylesheet"
+        type="text/css" />
+    <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="js/tools.js"></script>
+<script>
+var j = jQuery.noConflict();
+j(document).ready(function(){
+   j(".l1").toggle(function(){
+         j(".slist").animate({height: 'toggle', opacity: 'hide'}, "slow");
+     j(this).next(".slist").animate({height: 'toggle', opacity: 'toggle'}, "slow");
+   },function(){
+             j(".slist").animate({height: 'toggle', opacity: 'hide'}, "slow");
+                 j(this).next(".slist").animate({height: 'toggle', opacity: 'toggle'}, "slow");
+   });
    
+   j(".l2").toggle(function(){
+     j(this).next(".sslist").animate({height: 'toggle', opacity: 'toggle'}, "slow");
+   },function(){
+                 j(this).next(".sslist").animate({height: 'toggle', opacity: 'toggle'}, "slow");
+   });
+   
+   j(".l1").click(function(){
+        j(".l1").removeClass("l12");
+        j(".l1").addClass("l11");
+        j(this).removeClass("l11");
+        j(this).addClass("l12");
+        });  
+   
+   j(".close").toggle(function(){
+        j(".slist").animate({height: 'toggle', opacity: 'hide'}, "fast");  
+        j(".sslist").animate({height: 'toggle', opacity: 'hide'}, "fast");  
+         },function(){
+        j(".slist").animate({height: 'toggle', opacity: 'show'}, "fast");  
+        j(".sslist").animate({height: 'toggle', opacity: 'show'}, "fast");  
+        });  
+    
+    //部门新闻列表需要调整宽度
+    if(getQueryStringRegExp("deptNo"))
+    {
+        j("#divLeft").css("height","310px");
+        j("#divNLeft").css("height","310px");
+        j("#divLeft").css("min-height","310px");
+        j("#divNLeft").css("min-height","310px");
+    }
+    if(getQueryStringRegExp("type"))
+    {
+        j("#divLeft").css("height","310px");
+        j("#divNLeft").css("height","310px");
+        j("#divLeft").css("min-height","310px");
+        j("#divNLeft").css("min-height","310px");
+    }
+});
+</script>
+</head>
+<body>
+    <form name="aspnetForm" method="post" action="InfoList.aspx?type=XMJS_JGYS&amp;page=1" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
 
-  <TR>
-              <TD valign="top"> 
-      <TABLE cellSpacing=15 cellPadding=0 width="100%">
-        <TBODY>
-<form method="post" action="/was5/web/search?channelid=235315" name="FieldSearchForm" LANGUAGE=javascript onSubmit="return FieldSearchForm_onsubmit()">
-        <TR>
-          <TD align=middle>合同号 <INPUT type="text" name="Title"> 
-            用地单位 <INPUT type="text" name="Content"> 
-      <input type="hidden" value="AND" name ="Relation"  id=RelationAnd  
-        CHECKED><input type="hidden" name="Relation" value="OR" id=RelationOr>
-      <input type="hidden" name="searchword">
-      <INPUT  type=submit value=查询 name=submit> 
-      </TD></TR>
-      </form>
+<div>
 
-        <TR>
-        <TR>
-                    <TD align=middle valign="top"> 
+  <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="2C47612D" />
+  <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+  <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+  <input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+  <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="sudlayENtfHIgJQuVUpeZgB0yjh0LkarZ5Ik13tLds8VyXs9Amx9YxEgjYmAGG/HRQJ510UDmOZ4qiCbUm69Am89z/FMECpfUxJupsEjHuA9nck0/jVZah5A++u0gY14CXwQQwMipW9zdYushyK3VnMliMctF1i2jjX7wiCXE6gDfc0T01DZCoiGiq3jArXo0ZO4LNAjtgokQp94qdV3Yo5eVHppX9s9PVT4eLGZd+8X2BBuhHUVD514cT5oyYeGdGnXsoHCD8dyqIGkQ2Ccl6aDc2h/pRFZzq095c6HNaw2V1bJoVuyqhxPMyYrXWyK+FEr8mux6hcYVXqOcIez2RxzR4Ga0zca3PlJQgcwgklhaxgUasrALX6gCmXEL1EmuwH8ruzq3xewG7/v3yj+Vhpf0RGHt/9og0DryWb0bf0N6qpzGyleZyAWxv11QEv4f6z2mcyQe+peTxfOM6q29ZsrjpujDhAFG0D5Bq689TlhUID48sbGHBXOij9LVWHBYeT1mg==" />
+</div>
+    <div class="main">
+            <!--头文件开始-->
+            
+<script type="text/javascript" language="javascript" src="http://gcjs.jiangmen.gov.cn/js/Function.js"></script>
+
+<script language="javascript1.2" type="text/javascript" src="http://gcjs.jiangmen.gov.cn/js/prototype-1.4.0.js"></script>
+
+<script language="javascript1.2" type="text/javascript" src="http://gcjs.jiangmen.gov.cn/js/ajax_service.js"></script>
+
+<script language="javascript1.2" type="text/javascript" src="http://gcjs.jiangmen.gov.cn/js/newsitem.js"></script>
+<style type="text/css">
+.input2_text
+{
+    color:#aaa;
+  border-right: #c8c8c8 1px solid;
+  border-top: #c8c8c8 1px solid;
+  font-size: 9pt;
+  border-left: #c8c8c8 1px solid;
+  border-bottom: #c8c8c8 1px solid;
+  height: 16px;
+  padding-top:3px;
+}     
+</style>
+
+<div class="header">
+<div id="ctl00_top1_PathDiv" style="display: none;"><input type="text" id="RelativePath" value="" /> </div>
+    <div id="ctl00_top1_banner" class="banner">
+    </div>
+    <div class="menu">
+        <ul>
+            <li id="ctl00_top1_C1" class="column1" onmouseover="HideSubTitle();"><a href="default.aspx" id="ctl00_top1_Link1">首 页</a> </li>
+            
+                    <li id="ctl00_top1_ColumnList_ctl00_ItemDiv" class="columnItem"><a href="NewsList.aspx?ItemId=86" id="ctl00_top1_ColumnList_ctl00_ItemLink" target="_self" onmouseover="HideSubTitle();">
+                        工作动态
+                    </a></li>
+                
+                    <li id="ctl00_top1_ColumnList_ctl01_ItemDiv" class="columnItem"><a href="InfoSearch.aspx?ItemId=31" id="ctl00_top1_ColumnList_ctl01_ItemLink" target="_self" onmouseover="HideSubTitle();">
+                        信息查询
+                    </a></li>
+                
+                    <li id="ctl00_top1_ColumnList_ctl02_ItemDiv" class="columnItem"><a href="NewsList.aspx?ItemId=38" id="ctl00_top1_ColumnList_ctl02_ItemLink" target="_self" onmouseover="HideSubTitle();">
+                        政策法规
+                    </a></li>
+                
+                    <li id="ctl00_top1_ColumnList_ctl03_ItemDiv" class="columnItem"><a href="NewsList.aspx?ItemId=35" id="ctl00_top1_ColumnList_ctl03_ItemLink" target="_self" onmouseover="HideSubTitle();">
+                        组织机构
+                    </a></li>
+                
+                    <li id="ctl00_top1_ColumnList_ctl04_ItemDiv" class="columnItem"><a href="http://dzjc.jiangmen.gov.cn/main.jsp" id="ctl00_top1_ColumnList_ctl04_ItemLink" target="_blank" onmouseover="HideSubTitle();">
+                        网上监察
+                    </a></li>
+                
+                    <li id="ctl00_top1_ColumnList_ctl05_ItemDiv" class="columnItem"><a href="NewsList.aspx?ItemId=39" id="ctl00_top1_ColumnList_ctl05_ItemLink" target="_self" onmouseover="HideSubTitle();">
+                        投诉举报
+                    </a></li>
+                
+                    <li id="ctl00_top1_ColumnList_ctl06_ItemDiv" class="columnItem"><a href="InfoCount.aspx?ItemId=41" id="ctl00_top1_ColumnList_ctl06_ItemLink" target="_self" onmouseover="HideSubTitle();">
+                        统计数据
+                    </a></li>
+                
+        </ul>
+        <input name="ctl00$top1$host" type="hidden" id="ctl00_top1_host" value="http://gcjs.jiangmen.gov.cn/" />
+    </div>
+    <div id="ctl00_top1_Top3" class="loginMain">
+        <div id="NormalTable" class="login">
+          <span></span> <font style="font-size:12px;">栏目分类：</font>&nbsp;<select name="ctl00$top1$ColumnType" id="ctl00_top1_ColumnType">
+  <option selected="selected" value="ALL">----------全部----------</option>
+  <option value="XMSP_SPXX">项目审批信息</option>
+  <option value="XMSP_HZXX">项目核准信息</option>
+  <option value="XMSP_BAXX">项目备案信息</option>
+  <option value="XMJS_JBXX">项目基本信息</option>
+  <option value="XMJS_ZBTB">招标投标信息</option>
+  <option value="XMJS_ZDCQ_ZDXX">征地拆迁-征地信息</option>
+  <option value="XMJS_ZDCQ_CQXX">征地拆迁-拆迁信息</option>
+  <option value="XMJS_ZDCQ_YFBC">征地拆迁-已支付拆迁补偿信息</option>
+  <option value="XMJS_SJBG">重大设计变更信息</option>
+  <option value="XMJS_SGGL">施工管理信息</option>
+  <option value="XMJS_HTLY">合同履约信息</option>
+  <option value="XMJS_ZLJC">质量安全检查信息</option>
+  <option value="XMJS_ZJGL">资金管理信息</option>
+  <option value="XMJS_JGYS">交竣工验收信息</option>
+  <option value="XMDW_LHJL">项目从业单位良好行为信息</option>
+  <option value="XMDW_BLJL">项目从业单位不良行为信息</option>
+  <option value="XMRY_LHJL">项目从业人员良好行为信息</option>
+  <option value="XMRY_BLJL">项目从业人员不良行为信息</option>
+  <option value="XMTD_ZPGR">土地招标拍卖挂牌出让信息</option>
+  <option value="XMTD_GTCR">国有土地使用权出让合同信息</option>
+  <option value="XMTD_YDSP">建设用地审批信息</option>
+  <option value="XMKY_TKSP">探矿权审批信息</option>
+  <option value="XMKY_TKCR">探矿权出让信息</option>
+  <option value="XMKY_CKSP">采矿权审批信息</option>
+  <option value="XMKY_CKCR">采矿权出让信息</option>
+  <option value="XYDW_QYJB">企业基本信息</option>
+  <option value="XYDW_QYZZ">资质信息</option>
+  <option value="XYDW_XMYJ">项目业绩信息</option>
+  <option value="XYDW_XYPJ">信用评价信息</option>
+  <option value="XYDW_LHJL">信用从业单位良好行为信息</option>
+  <option value="XYDW_BLJL_WFXX">信用从业单位不良行为-违法信息</option>
+  <option value="XYDW_BLJL_XZCF">信用从业单位不良行为-行政处罚</option>
+  <option value="XYDW_BLJL_XZQZ">信用从业单位不良行为-行政强制</option>
+  <option value="XYDW_BLJL_XZCJ">信用从业单位不良行为-行政裁决</option>
+  <option value="XYDW_BLJL_QXXX">信用单位不良行为-欠薪及欠缴社保金</option>
+  <option value="XYDW_BLJL_QSXX">信用从业单位不良行为-欠税信息</option>
+  <option value="XYDW_BLJL_ZLAQ">信用从业单位不良行为-质量安全</option>
+  <option value="XYRY_RYXX">人员基本信息</option>
+  <option value="XYRY_ZYZG">执业资格信息</option>
+  <option value="XYRY_LHJL">信用从业人员良好行为信息</option>
+  <option value="XYRY_BLJL_WFXX">信用从业人员不良行为-违法信息</option>
+  <option value="XYRY_BLJL_XZCF">信用从业人员不良行为-行政处罚</option>
+
+</select>&nbsp;&nbsp;&nbsp;
+            <input name="ctl00$top1$keyword" type="text" id="ctl00_top1_keyword" class="input2_text" value="请输入关键字" onblur="if((/^\s*$/.test(this.value))){this.value='请输入关键字';this.className='input2_text'}" onfocus="if(this.value==this.defaultValue){this.value='';this.className='input_text'}" onkeydown="this.className='input_text'" /> &nbsp;&nbsp;&nbsp;
+                
+                <input type="submit" name="ctl00$top1$btn_Search" value="查 询" id="ctl00_top1_btn_Search" class="btnsearch" />
+        </div>
+        <table cellpadding="0" cellspacing="0" width="95%">
+            <tr>
+                <td id="layer2" style="display: none; text-align: left; height: 28px;
+                    vertical-align: middle;">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--导航结束-->
+</div>
+
+            <!--头文件结束-->
+            <div class="container">
+                <!--左边开始-->
+                <div class="leftbig">
+                <div id="divLeft" class="left">
+                  <div id="divNLeft" class="nleft">
+                   <!--统计数据开始-->
+                   
+                   
+                   <!--统计数据结束-->
+                   <!--组织机构开始-->
+                   
+                   
+                   <!--组织机构结束-->
+                   <!--指导目录开始-->
+                    <div class="colT">
+                       <span class="Columnfont">
+                            <a id="ctl00_HyperLink2">指导目录</a></span></div>
+                    <div class="zzjg">
+                       <div id="ctl00_mlmenu" class="mlmenu"><h1 class="l1 l11" style="padding-left:0;width:200px;">项目审批公开信息</h1> <div class="slist" ><li class="l3" style="list-style:none;" title="项目审批信息"><a href="InfoList.aspx?type=XMSP_SPXX"  style="width:200px">项目审批信息</a></li><li class="l3" style="list-style:none;" title="项目核准信息"><a href="InfoList.aspx?type=XMSP_HZXX"  style="width:200px">项目核准信息</a></li><li class="l3" style="list-style:none;" title="项目备案信息"><a href="InfoList.aspx?type=XMSP_BAXX"  style="width:200px">项目备案信息</a></li></div><h1 class="l1 l11" style="padding-left:0;width:200px;">项目建设管理公开信息</h1> <div class="slist" ><li class="l3" style="list-style:none;" title="项目基本信息"><a href="InfoList.aspx?type=XMJS_JBXX"  style="width:200px">项目基本信息</a></li><li class="l3" style="list-style:none;" title="招标投标信息"><a href="InfoList.aspx?type=XMJS_ZBTB"  style="width:200px">招标投标信息</a></li><li class="l3" style="list-style:none;" title="重大设计变更信息"><a href="InfoList.aspx?type=XMJS_SJBG"  style="width:200px">重大设计变更信息</a></li><li class="l3" style="list-style:none;" title="施工管理信息"><a href="InfoList.aspx?type=XMJS_SGGL"  style="width:200px">施工管理信息</a></li><li class="l3" style="list-style:none;" title="合同履约信息"><a href="InfoList.aspx?type=XMJS_HTLY"  style="width:200px">合同履约信息</a></li><li class="l3" style="list-style:none;" title="质量安全检查信息"><a href="InfoList.aspx?type=XMJS_ZLJC"  style="width:200px">质量安全检查信息</a></li><li class="l3" style="list-style:none;" title="资金管理信息"><a href="InfoList.aspx?type=XMJS_ZJGL"  style="width:200px">资金管理信息</a></li><li class="l3" style="list-style:none;" title="交竣工验收信息"><a href="InfoList.aspx?type=XMJS_JGYS"  style="width:200px">交竣工验收信息</a></li><li class="l3" style="list-style:none;" title="征地拆迁"><a href="InfoList.aspx?type=XMJS_ZDCQ"  style="width:200px">征地拆迁</a></li></div><h1 class="l1 l11" style="padding-left:0;width:200px;">项目从业单位公开信息</h1> <div class="slist" ><li class="l3" style="list-style:none;" title="项目从业单位良好行为信息"><a href="InfoList.aspx?type=XMDW_LHJL"  style="width:200px">项目从业单位良好行为信息</a></li><li class="l3" style="list-style:none;" title="项目从业单位不良行为信息"><a href="InfoList.aspx?type=XMDW_BLJL"  style="width:200px">项目从业单位不良行为信息</a></li></div><h1 class="l1 l11" style="padding-left:0;width:200px;">项目从业人员公开信息</h1> <div class="slist" ><li class="l3" style="list-style:none;" title="项目从业人员良好行为信息"><a href="InfoList.aspx?type=XMRY_LHJL"  style="width:200px">项目从业人员良好行为信息</a></li><li class="l3" style="list-style:none;" title="项目从业人员不良行为信息"><a href="InfoList.aspx?type=XMRY_BLJL"  style="width:200px">项目从业人员不良行为信息</a></li></div><h1 class="l1 l11" style="padding-left:0;width:200px;">土地使用权审批和出让信息</h1> <div class="slist" ><li class="l3" style="list-style:none;" title="土地招标拍卖挂牌出让信息"><a href="InfoList.aspx?type=XMTD_ZPGR"  style="width:200px">土地招标拍卖挂牌出让信息</a></li><li class="l3" style="list-style:none;" title="国有土地使用权出让合同信息"><a href="InfoList.aspx?type=XMTD_GTCR"  style="width:200px">国有土地使用权出让合同信息</a></li><li class="l3" style="list-style:none;" title="建设用地审批信息"><a href="InfoList.aspx?type=XMTD_YDSP"  style="width:200px">建设用地审批信息</a></li></div><h1 class="l1 l11" style="padding-left:0;width:200px;">矿业权审批和出让信息</h1> <div class="slist" ><li class="l3" style="list-style:none;" title="探矿权审批信息"><a href="InfoList.aspx?type=XMKY_TKSP"  style="width:200px">探矿权审批信息</a></li><li class="l3" style="list-style:none;" title="探矿权出让信息"><a href="InfoList.aspx?type=XMKY_TKCR"  style="width:200px">探矿权出让信息</a></li><li class="l3" style="list-style:none;" title="采矿权审批信息"><a href="InfoList.aspx?type=XMKY_CKSP"  style="width:200px">采矿权审批信息</a></li><li class="l3" style="list-style:none;" title="采矿权出让信息"><a href="InfoList.aspx?type=XMKY_CKCR"  style="width:200px">采矿权出让信息</a></li></div><h1 class="l1 l11" style="padding-left:0;width:200px;">从业人员信用信息</h1> <div class="slist" ><li class="l3" style="list-style:none;" title="人员基本信息"><a href="InfoList.aspx?type=XYRY_RYXX"  style="width:200px">人员基本信息</a></li><li class="l3" style="list-style:none;" title="执业资格信息"><a href="InfoList.aspx?type=XYRY_ZYZG"  style="width:200px">执业资格信息</a></li><li class="l3" style="list-style:none;" title="信用从业人员良好行为信息"><a href="InfoList.aspx?type=XYRY_LHJL"  style="width:200px">信用从业人员良好行为信息</a></li><li class="l3" style="list-style:none;" title="信用从业人员不良行为"><a href="InfoList.aspx?type=XYRY_BLJL"  style="width:200px">信用从业人员不良行为</a></li></div><h1 class="l1 l11" style="padding-left:0;width:200px;">从业单位信用信息</h1> <div class="slist" ><li class="l3" style="list-style:none;" title="企业基本信息"><a href="InfoList.aspx?type=XYDW_QYJB"  style="width:200px">企业基本信息</a></li><li class="l3" style="list-style:none;" title="资质信息"><a href="InfoList.aspx?type=XYDW_QYZZ"  style="width:200px">资质信息</a></li><li class="l3" style="list-style:none;" title="项目业绩信息"><a href="InfoList.aspx?type=XYDW_XMYJ"  style="width:200px">项目业绩信息</a></li><li class="l3" style="list-style:none;" title="信用评价信息"><a href="InfoList.aspx?type=XYDW_XYPJ"  style="width:200px">信用评价信息</a></li><li class="l3" style="list-style:none;" title="信用从业单位良好行为信息"><a href="InfoList.aspx?type=XYDW_LHJL"  style="width:200px">信用从业单位良好行为信息</a></li><li class="l3" style="list-style:none;" title="信用从业单位不良行为"><a href="InfoList.aspx?type=XYDW_BLJL"  style="width:200px">信用从业单位不良行为</a></li></div></div>
+                    </div>
+                   <!--指导目录结束-->
+                  </div>
+                </div>
+                <!--广告图片开始-->
+                <div class="adgg">
+                    
+                         <div class="adpic"><a href='http://gcjs.gd.gov.cn/' title='广东省治理工作专栏' target="_blank"><img src='AdUpload/2011102810250676.jpg' alt="" /></a></div>
                       
-                    <TABLE width="100%" border=1 cellSpacing=0 
-            borderColor=#404040 rules=rows id=DataGrid1 
-            style="BORDER-LEFT-COLOR: #404040; BORDER-BOTTOM-COLOR: #404040; BORDER-TOP-COLOR: #404040;BORDER-COLLAPSE: collapse; BORDER-RIGHT-COLOR: #404040; ">
-                      <TBODY> 
-                      <TR style="BACKGROUND-COLOR: #e0e0e0" nowrap> 
-                        <TD width="80">合同号</TD>
-                        <TD>用地单位</TD>
-                        <TD >出让方式</TD>
-                        <TD>宗地号</TD>
-                        <TD>土地用途</TD>
-                        <TD>用地面积</TD>
-                        <TD>使用年限</TD>
-                        <TD width="80">签订日期</TD>
-                      </TR>
-              
-         
-                      <TR height="25px"> 
-                        <TD>2007-4033补充合同四</TD>
-                        <TD>深圳市宝安高科电子有限公司</TD>
-                        <TD>协议</TD>
-                        <TD>A608-0128</TD>
-                        <TD></TD>
-                        <TD>31999.83</TD>
-                        <TD>50</TD>
-                        <TD>2015-05-20</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-2005</TD>
-                        <TD>深圳市马蹄山股份合作公司</TD>
-                        <TD>协议</TD>
-                        <TD>G03303-0338</TD>
-                        <TD>商业性办公用地</TD>
-                        <TD>3180.59</TD>
-                        <TD>40</TD>
-                        <TD>2015-05-11</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-2003</TD>
-                        <TD>深圳市名居房地产有限公司</TD>
-                        <TD>协议</TD>
-                        <TD>G01034-0332</TD>
-                        <TD>二类居住用地,商业用</TD>
-                        <TD>43720.87</TD>
-                        <TD>40</TD>
-                        <TD>2015-05-05</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-1003</TD>
-                        <TD>深圳市西乡蚝业股份合作公司</TD>
-                        <TD>协议</TD>
-                        <TD>A103-0723</TD>
-                        <TD>商业服务业用地</TD>
-                        <TD>7016.7</TD>
-                        <TD>40</TD>
-                        <TD>2015-05-04</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>(2015)5007</TD>
-                        <TD>深圳市联嘉祥科技股份有限公司</TD>
-                        <TD>挂牌</TD>
-                        <TD>A907-0155</TD>
-                        <TD>普通工业用地</TD>
-                        <TD>16228.8</TD>
-                        <TD>30</TD>
-                        <TD>2015-04-24</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>(2015）5008</TD>
-                        <TD>深圳市汇川技术股份有限公司</TD>
-                        <TD>挂牌</TD>
-                        <TD>A907-0160</TD>
-                        <TD>普通工业用地</TD>
-                        <TD>12650.1</TD>
-                        <TD>30</TD>
-                        <TD>2015-04-24</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-7006</TD>
-                        <TD>深圳市光明新城物业发展有限公司</TD>
-                        <TD>挂牌</TD>
-                        <TD>A608-0162</TD>
-                        <TD>工业用地</TD>
-                        <TD>11184.76</TD>
-                        <TD>30</TD>
-                        <TD>2015-04-23</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-5009</TD>
-                        <TD>深圳市鸿荣源实业有限公司</TD>
-                        <TD>协议</TD>
-                        <TD>A824-0117</TD>
-                        <TD>二类居住用地,商业用</TD>
-                        <TD>49850.69</TD>
-                        <TD>70</TD>
-                        <TD>2015-04-20</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-1002</TD>
-                        <TD>深圳市宝安区人民政府</TD>
-                        <TD>协议</TD>
-                        <TD>A004-0156</TD>
-                        <TD>教育设施用地</TD>
-                        <TD>26568.81</TD>
-                        <TD>50</TD>
-                        <TD>2015-04-20</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-5010</TD>
-                        <TD>深圳市鸿荣源实业有限公司</TD>
-                        <TD>协议</TD>
-                        <TD>A824-0119</TD>
-                        <TD>二类居住用地</TD>
-                        <TD>17100.9</TD>
-                        <TD>70</TD>
-                        <TD>2015-04-20</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-5011</TD>
-                        <TD>深圳市鸿荣源实业有限公司</TD>
-                        <TD>协议</TD>
-                        <TD>A824-0116</TD>
-                        <TD>二类居住用地</TD>
-                        <TD>26666.42</TD>
-                        <TD>70</TD>
-                        <TD>2015-04-20</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-6003</TD>
-                        <TD>深圳前海君临融资租赁有限公司</TD>
-                        <TD>拍卖</TD>
-                        <TD>B302-0115</TD>
-                        <TD>商业用地</TD>
-                        <TD>6941.25</TD>
-                        <TD>40</TD>
-                        <TD>2015-04-16</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-5013</TD>
-                        <TD>深圳市鸿荣源实业有限公司</TD>
-                        <TD>协议</TD>
-                        <TD>A824-0121</TD>
-                        <TD>二类居住用地</TD>
-                        <TD>41207.4</TD>
-                        <TD>70</TD>
-                        <TD>2015-04-16</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-6003</TD>
-                        <TD>深圳深中润投资控股有限公司</TD>
-                        <TD>拍卖</TD>
-                        <TD>B302-0115</TD>
-                        <TD>商业用地</TD>
-                        <TD>6941.25</TD>
-                        <TD>40</TD>
-                        <TD>2015-04-16</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-5014</TD>
-                        <TD>深圳市鸿荣源实业有限公司</TD>
-                        <TD>协议</TD>
-                        <TD>A824-0120</TD>
-                        <TD>二类居住用地</TD>
-                        <TD>35266.01</TD>
-                        <TD>70</TD>
-                        <TD>2015-04-16</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-5012</TD>
-                        <TD>深圳市鸿荣源实业有限公司</TD>
-                        <TD>协议</TD>
-                        <TD>A824-0118</TD>
-                        <TD>二类居住用地,商业用</TD>
-                        <TD>35225.31</TD>
-                        <TD>70</TD>
-                        <TD>2015-04-16</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-8003</TD>
-                        <TD>深圳澳科电缆有限公司</TD>
-                        <TD>协议</TD>
-                        <TD>T305-0091</TD>
-                        <TD>新型产业用地</TD>
-                        <TD>17594.73</TD>
-                        <TD>50</TD>
-                        <TD>2015-03-17</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-8002</TD>
-                        <TD>深圳北邮网络科技有限公司</TD>
-                        <TD>挂牌</TD>
-                        <TD>T205-0118</TD>
-                        <TD>工业用地</TD>
-                        <TD>3133.91</TD>
-                        <TD>30</TD>
-                        <TD>2015-03-12</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-5006</TD>
-                        <TD>深圳市庙一股份合作公司</TD>
-                        <TD>协议</TD>
-                        <TD>A933-0736</TD>
-                        <TD>普通工业用地</TD>
-                        <TD>4278.69</TD>
-                        <TD>50</TD>
-                        <TD>2015-03-10</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-1001</TD>
-                        <TD>中粮地产（集团）股份有限公司</TD>
-                        <TD>协议</TD>
-                        <TD>A210-0421</TD>
-                        <TD>居住用地</TD>
-                        <TD>47595.43</TD>
-                        <TD>70</TD>
-                        <TD>2015-03-02</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2014-8024</TD>
-                        <TD>深圳市燃气集团股份有限公司</TD>
-                        <TD>协议</TD>
-                        <TD>T102-0254</TD>
-                        <TD>供燃气用地</TD>
-                        <TD>12052.7</TD>
-                        <TD>30</TD>
-                        <TD>2015-03-02</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-6001</TD>
-                        <TD>中海地产集团有限公司</TD>
-                        <TD>挂牌</TD>
-                        <TD>H103-0010</TD>
-                        <TD>二类居住用地</TD>
-                        <TD>47166.23</TD>
-                        <TD>70</TD>
-                        <TD>2015-02-06</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-5005</TD>
-                        <TD>深圳市宝观城股份合作公司</TD>
-                        <TD>协议</TD>
-                        <TD>A915-0634</TD>
-                        <TD>商业服务业用地</TD>
-                        <TD>12232.43</TD>
-                        <TD>40</TD>
-                        <TD>2015-01-19</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2014-1043</TD>
-                        <TD>深圳市西乡径贝股份合作公司</TD>
-                        <TD>协议</TD>
-                        <TD>A105-1697</TD>
-                        <TD>二类居住用地,商业用</TD>
-                        <TD>11014.11</TD>
-                        <TD>70</TD>
-                        <TD>2015-01-16</TD>
-                      </TR>
-                  
-         
-         
-                      <TR height="25px"> 
-                        <TD>2015-9001</TD>
-                        <TD>深圳市中核海得威生物科技有限公司</TD>
-                        <TD>挂牌</TD>
-                        <TD>G14304-0284</TD>
-                        <TD>工业用地</TD>
-                        <TD>13004.95</TD>
-                        <TD>30</TD>
-                        <TD>2015-01-15</TD>
-                      </TR>
-                  
-        <TR> 
-                        <TD colspan="8"><div align="center"><nobr></nobr> 
-                          <nobr></nobr> 
-                          <nobr><span style="font-weight: bold;border: none;background: none">1</span>&nbsp;<a target="_self" href="search?page=2&channelid=235315&perpage=25&outlinepage=10">2</a>&nbsp;<a target="_self" href="search?page=3&channelid=235315&perpage=25&outlinepage=10">3</a>&nbsp;<a target="_self" href="search?page=4&channelid=235315&perpage=25&outlinepage=10">4</a>&nbsp;<a target="_self" href="search?page=5&channelid=235315&perpage=25&outlinepage=10">5</a>&nbsp;<a target="_self" href="search?page=6&channelid=235315&perpage=25&outlinepage=10">6</a>&nbsp;<a target="_self" href="search?page=7&channelid=235315&perpage=25&outlinepage=10">7</a>&nbsp;<a target="_self" href="search?page=8&channelid=235315&perpage=25&outlinepage=10">8</a>&nbsp;<a target="_self" href="search?page=9&channelid=235315&perpage=25&outlinepage=10">9</a>&nbsp;<a target="_self" href="search?page=10&channelid=235315&perpage=25&outlinepage=10">10</a>&nbsp;</nobr> 
-                         
-                          <nobr><a class="next-page" href="search?page=2&channelid=235315&perpage=25&outlinepage=10" target="_self">下一页</a>&nbsp;</nobr> 
-            <nobr><a class="last-page" href="search?page=57&channelid=235315&perpage=25&outlinepage=10" target="_self">尾页</a>&nbsp;</nobr> </div></TD>
-                      </TR>
-                      </TBODY> 
-                    </TABLE>
-                    </TD>
-                  </TR></TBODY></TABLE>
-              </TD>
-            </TR></TABLE>
-</TD>
-    </TR></TABLE>
-</CENTER></BODY></HTML>
+                         <div class="adpic"><a href='http://jmlz.jiangmen.gov.cn/' title='江门廉政网' target="_blank"><img src='AdUpload/2011102810255984.jpg' alt="" /></a></div>
+                      
+                </div>
+                <!--广告图片结束-->
+                </div>
+                <!--左边结束-->
+                <!--右边开始-->
+                <div class="right">
+                     
+<div class="Mnlist">
+      <div class="newdtT ww">
+   <span class="nfont">
+        <span id="ctl00_ContentPlaceHolder1_labnav"><a href="default.aspx">首页</a> > <a href="InfoList.aspx?type=XMJS_JGYS">交竣工验收信息</a></span></span></div>
+       <ul id="Nlist">
+         <div>
+  <table cellspacing="0" cellpadding="2" border="0" id="ctl00_ContentPlaceHolder1_AxGridView1" style="color:#333333;border-width:0px;font-size:9pt;width:100%;border-collapse:collapse;">
+    <tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl02_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3633" target="_blank" style="color:#000000;">濠江花园小区24#、25#、26#</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl02_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl03_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3634" target="_blank" style="color:#000000;">益丞帝豪居1#、2#住宅，商铺A段</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl03_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl04_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3635" target="_blank" style="color:#000000;">益丞帝豪居3#、5#、6#、9#住宅</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl04_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl05_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3636" target="_blank" style="color:#000000;">民房</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl05_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl06_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3637" target="_blank" style="color:#000000;">5#厂房</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl06_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl07_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3638" target="_blank" style="color:#000000;">东风雅苑1#住宅楼、5#楼</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl07_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl08_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3639" target="_blank" style="color:#000000;">上城骏园车库（二）、人防工程</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl08_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl09_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3640" target="_blank" style="color:#000000;">４#研发车间</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl09_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl10_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3641" target="_blank" style="color:#000000;">综合楼、经销楼</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl10_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl11_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3642" target="_blank" style="color:#000000;">市培英高中新疆班扩招学生宿舍楼</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl11_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl12_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3643" target="_blank" style="color:#000000;">江海碧桂园一期高层b-51#楼</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl12_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl13_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3644" target="_blank" style="color:#000000;">建设路-迎宾路立交及周边环境整治工程之新建北郊泵房</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl13_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl14_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3645" target="_blank" style="color:#000000;">江门金鸵产业发展有限公司厂区6#、7#、11#、12#、14#、15#厂房及13..</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl14_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl15_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3646" target="_blank" style="color:#000000;">江门市翠林村南地块11#～13#、15#～20#、22#、23#</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl15_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl16_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3647" target="_blank" style="color:#000000;">城市花园第二期地下车库</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl16_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl17_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3648" target="_blank" style="color:#000000;">江海花园南区S-5栋方案</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl17_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl18_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3649" target="_blank" style="color:#000000;">江门麻园公交站场加气站站房、加气岛</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl18_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl19_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3650" target="_blank" style="color:#000000;">第二工场</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl19_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl20_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3651" target="_blank" style="color:#000000;">中颐海伦堡三期地下室（低层建筑部分）</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl20_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl21_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3652" target="_blank" style="color:#000000;">五邑海鲜楼</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl21_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl22_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3653" target="_blank" style="color:#000000;">新桥海鲜楼</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl22_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl23_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3654" target="_blank" style="color:#000000;">消防训练塔</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl23_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl24_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3655" target="_blank" style="color:#000000;">帕佳图.尚品3#住宅</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl24_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl25_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3656" target="_blank" style="color:#000000;">综合楼、经销楼</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl25_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr style="height:20px;">
+      <td align="left" style="width:90%;">
+                                    <li><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl26_XMName" href="InfoShow.aspx?Type=XMJS_JGYS&amp;Id=3657" target="_blank" style="color:#000000;">江海碧桂园一期高层b-50#楼</a>
+                                    <span><span id="ctl00_ContentPlaceHolder1_AxGridView1_ctl26_ctime">2015-07-30</span></span></li>
+                                
+</td>
+    </tr><tr>
+      <td class="pagebottom" colspan="1"><div style="text-align:right;">
+        <a href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$AxGridView1$ctl28$ctl01','')" style="COLOR:BLUE;">首页</a>&nbsp;&nbsp;<a href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$AxGridView1$ctl28$ctl02','')" style="COLOR:BLUE;">上页</a>&nbsp;&nbsp;<a href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$AxGridView1$ctl28$ctl03','')" style="COLOR:BLUE;">下页</a>&nbsp;&nbsp;<a href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$AxGridView1$ctl28$ctl04','')" style="COLOR:BLUE;">尾页</a>&nbsp;&nbsp;<span style="color:DimGray;COLOR:black;">[第<font color=red>3</font>页][共<font color=red>58</font>页][共<font color=red>1447</font>条记录]</span>&nbsp;&nbsp<span style="COLOR:black;">每页记录数：</span><input name="ctl00$ContentPlaceHolder1$AxGridView1$ctl28$ctl07" type="text" value="25" onkeypress="if((event.keyCode &lt; 48 || event.keyCode > 57)&amp;&amp; event.keyCode!=45) event.returnValue=false;" class="input_height_13" style="width:28px;" /><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl28_singleSizeEnterLink" href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$AxGridView1$ctl28$singleSizeEnterLink','')" style="COLOR:BLUE;">设定</a>&nbsp;&nbsp;<a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl28_gotoLink" href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$AxGridView1$ctl28$gotoLink','')" style="COLOR:BLUE;">转到</a>&nbsp;<input name="ctl00$ContentPlaceHolder1$AxGridView1$ctl28$ctl08" type="text" value="3" onkeypress="if((event.keyCode &lt; 48 || event.keyCode > 57)&amp;&amp; event.keyCode!=45) event.returnValue=false;" class="input_height_13" style="width:28px;" /><a id="ctl00_ContentPlaceHolder1_AxGridView1_ctl28_gotoLinkEnd" href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$AxGridView1$ctl28$gotoLinkEnd','')" style="COLOR:BLUE;">页</a>
+      </div></td>
+    </tr>
+  </table>
+</div>
+       </ul>
+    </div>
+
+                </div>
+                <!--右边结束-->
+                <!--友情链接广告图开始-->
+               
+                <!--友情链接广告图结束-->
+            </div>
+            <!--底部开始-->
+            
+<div class="Footer">
+    主办：江门市市委 市政府    维护：江门市经济和信息化局    技术支持：<a href="http://www.gddlkj.com" target="_blank">广东迪浪科技有限公司</a> <br /> 版权所有：未经授权禁止复制或建立镜像    备案编号：粤ICP备05067949号 <br />
+   
+   你是第 <span id="ctl00_bottom1_Counter" style="color:#C90000;font-weight:bold;">94523</span> 位访客   今天已有<span id="ctl00_bottom1_dayCount">77</span>人访问
+</div>
+            <!--底部结束-->
+        </div>
+       
+    
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+
+            <!–[if IE 6]>  
+            <script type="text/javascript">  
+            try{
+                 document.execCommand("BackgroundImageCache", false, true);   
+                }catch(e){}
+            </script>  
+            <![endif]–> </form>
+</body>
+</html>

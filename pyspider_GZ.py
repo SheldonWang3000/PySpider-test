@@ -33,6 +33,30 @@ class Handler(My):
             save={'type':self.table_name[14], 'source':'GT'},
             js_script='''function(){return nAllCount}''')
 
+        self.crawl('http://gzcc2012.gzcc.gov.cn/zwgk/jgys.aspx',
+            save={'type':self.table_name[15], 'source':'JS', 'page':'1'}, age=1,
+            fetch_type='js', callback=self.build_page)
+
+    def build_page(self, response):
+        soup = BeautifulSoup(response.text, 'html.parser')
+        page_count = int(soup('a', 'a1')[-1]['href'].split(',')[1].split('\'')[1])
+
+        data = {}
+        data['__VIEWSTATE'] = soup('input', {'name':'__VIEWSTATE'})[0]['value']
+        data['__EVENTTARGET'] = 'ASNPager1'
+        data['__EVENTVALIDATION'] = soup('input', {'name':'__EVENTVALIDATION'})[0]['value']
+
+        data['__EVENTARGUMENT'] = response.save['page']
+        params = {}
+        params['page'] = response.save['page']
+        self.crawl(response.url, data=data, method='POST', age=1, params=params,
+                save=response.save, fetch_type='js', callback=self.content_page)
+        if response.save['page'] != str(page_count):
+            response.save['page'] = str(int(response.save['page']) + 1)
+            data['__EVENTARGUMENT'] = response.save['page']
+            self.crawl(response.url, data=data, method='POST', age=1, 
+                save=response.save, fetch_type='js', callback=self.build_page)   
+
     def land_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
 
