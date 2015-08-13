@@ -122,4 +122,4 @@ if __name__ == '__main__':
 				download_attachment(url, path)
 			print('done')
 		except Exception as e:
-			break
+			print(str(e))
