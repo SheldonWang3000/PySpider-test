@@ -134,7 +134,7 @@ class Handler(My):
         m = hashlib.md5()
         m.update(url.encode())
         web_name = '/' + m.hexdigest() + '/'
-        path = self.mkdir + self.name + web_name
+        path = self.mkdir + self.name + '/' + response.save['source'] + '/' +  web_name
         if not os.path.exists(path):
             os.makedirs(path)           
 
@@ -292,5 +292,6 @@ class Handler(My):
         return {
             "url": url,
             "html": str(soup),
-            "type": response.save['type']
+            "type": response.save['type'],
+            "source": response.save['source']
         }
