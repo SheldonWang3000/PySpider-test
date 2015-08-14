@@ -119,7 +119,7 @@ class Handler(My):
             parmas = link.split('?')[1]
             parmas = parmas.split('&')
             link = ''
-            link += quote('项目受理编号'.encode('gbk')) + '=' + quote(parmas[0].split('=')[1].encode('gbk')) + '&' + quote('公示'.encode('gbk')) + '=' + quote(parmas[1].split('=')[1].encode('gbk'))
+            link += quote('项目受理编号'.encode('gbk')) + '=' + quote(parmas[0].split('=')[1].encode('GB18030')) + '&' + quote('公示'.encode('gbk')) + '=' + quote(parmas[1].split('=')[1].encode('GB18030'))
             domain = domains[response.save['type']]
             link = domain + link
             # print(link)
