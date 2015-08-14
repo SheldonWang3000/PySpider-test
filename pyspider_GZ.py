@@ -2,7 +2,7 @@ from pyspider.libs.base_handler import *
 from my import My
 import os
 from bs4 import BeautifulSoup
-'''广州市国土资源和规划委员会'''
+'''广州'''
 
 class Handler(My):
     name = "GZ"

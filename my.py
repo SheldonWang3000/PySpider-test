@@ -10,7 +10,7 @@ from urllib.parse import urljoin
 from urllib.parse import urlparse
 from urllib.parse import urlunparse
 from urllib.parse import quote
-'''放到python环境目录的site-packages下'''
+'''放到/opt/pythontools下'''
 class My(BaseHandler):
 
     mkdir = '/home/oracle/Gis/'
@@ -56,6 +56,7 @@ class My(BaseHandler):
     def get_date(self):
         return time.strftime("%Y-%m-%d", time.localtime())
 
+    '''返回基本url和url参数'''
     def get_params(self, response=None, link=''):
         if response == None and not link:
             raise KeyError
@@ -69,6 +70,7 @@ class My(BaseHandler):
             params[temp[0]] = temp[1]
         return (url, params)
 
+    '''生成绝对链接'''
     def real_path(self, a, b):
         path = urljoin(a, b)
         arr = urlparse(path)
@@ -87,15 +89,17 @@ class My(BaseHandler):
 
     @config(priority=2)
     def content_page(self, response):
+        '''构造存储位置'''
         url = response.url
         m = hashlib.md5()
         m.update(url.encode())
         web_name = '/' + m.hexdigest() + '/'
         path = self.mkdir + self.name + '/' + response.save['source'] + '/' +  web_name
         if not os.path.exists(path):
-            os.makedirs(path)           
-        soup = BeautifulSoup(response.text)
+            os.makedirs(path)        
 
+        soup = BeautifulSoup(response.text)
+        '''提取js文件'''
         script_tag = soup.find_all('script', src=True)
         for each in script_tag:
             js_m = hashlib.md5()
@@ -113,7 +117,7 @@ class My(BaseHandler):
             d['file_name'] = each['src']
             self.r.rpush(self.download_key, str(d))
             # self.crawl(request_url, fetch_type='js', callback = self.js_css_download, save = {'path':path, 'name':each['src']})
-
+        '''提取css文件'''
         css_tag = soup.find_all('link', type='text/css')
         for each in css_tag:
             css_m = hashlib.md5()
@@ -131,7 +135,7 @@ class My(BaseHandler):
             d['file_name'] = each['href']
             self.r.rpush(self.download_key, str(d))
             # self.crawl(request_url, callback = self.js_css_download, save = {'path':path, 'name':each['href']})
-
+        '''提取图片，显示用的img标签内的文字'''
         images = soup('img')
         image_list = []
         if images is not None:
@@ -160,7 +164,7 @@ class My(BaseHandler):
                         each['src'] = m.hexdigest() + '.gif'
                     d['file_name'] = each['src']
                     self.r.rpush(self.download_key, str(d))
-
+        '''提取附件'''            
         attachments = soup('a', {'href': re.compile(r'^http')})
         attachment_list = []
         if attachments is not None:
@@ -199,8 +203,7 @@ class My(BaseHandler):
                        each['href'] = m.hexdigest() + '.' + type_name
                        d['file_name'] = each['href']
                        self.r.rpush(self.download_key, str(d))
-
-        # 针对 background 属性
+        '''提取background图片'''
         for key in soup.find_all(background=True):
             image_url = self.real_path(url, key['background'])
             k = image_url.split('/')
@@ -246,7 +249,7 @@ class My(BaseHandler):
             f = open(page_path, 'wb')
             f.write(result['html'].encode('utf-8'))
             f.close()
-
+            '''去除页面全部标签，只获得全部文字，用于全文索引'''
             content_path = path + 'content.txt'
             soup = BeautifulSoup(result['html'], 'html.parser')
             for i in soup('style') + soup('script'):
@@ -260,7 +263,7 @@ class My(BaseHandler):
             values = (result['url'], path,
                     self.get_date(), self.city_name[self.name], 
                     result['type'], content, result['source'])
-
+            '''存入数据库'''
             conn = None
             try:
                 dsn = cx_Oracle.makedsn('localhost', 1521, 'urbandeve')

@@ -9,7 +9,7 @@ from io import BytesIO
 import time
 from functools import wraps
 
-
+'''这里是重试机制，使用装饰器来给函数调用做重试'''
 def retry(ExceptionToCheck, tries=4, delay=3, backoff=2, logger=None):
     """Retry calling the decorated function using an exponential backoff.
 
@@ -60,6 +60,7 @@ def open_url(opener, url):
 def download_url(url, path):
 	urllib.request.urlretrieve(url, path)
 
+'''附件、js、css下载，404时会被catch'''
 def download_attachment(url, path):
 	try:
 		opener = urllib.request.build_opener()
@@ -77,6 +78,7 @@ def download_attachment(url, path):
 	except urllib.request.HTTPError:
 		print('404')
 
+'''图片下载，height和width为图片下载最小尺寸，小于height或小于width的图片不进行下载'''
 def download_image(url, path):
 	# height = 400
 	# width = 400
