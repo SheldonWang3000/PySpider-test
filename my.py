@@ -75,15 +75,15 @@ class My(BaseHandler):
         real_path = os.path.normpath(arr[2])
         return urlunparse((arr.scheme, arr.netloc, real_path, arr.params, arr.query, arr.fragment))
 
-    def js_css_download(self, response):
-        # 存储位置
-        path = response.save['path']
-        file_name = response.save['name']
-        # 创建目录
-        if not os.path.exists(path):
-            os.makedirs(path)
-        with open(path + file_name, 'w') as f:
-            f.write(response.text)
+    # def js_css_download(self, response):
+    #     # 存储位置
+    #     path = response.save['path']
+    #     file_name = response.save['name']
+    #     # 创建目录
+    #     if not os.path.exists(path):
+    #         os.makedirs(path)
+    #     with open(path + file_name, 'w') as f:
+    #         f.write(response.text)
 
     @config(priority=2)
     def content_page(self, response):
