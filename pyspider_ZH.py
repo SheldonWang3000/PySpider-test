@@ -29,6 +29,36 @@ class Handler(My):
             age=1, save={'type':self.table_name[14], 'source':'GT','flag':2},  
             callback=self.land_page, fetch_type='js')
 
+        self.crawl('http://dmqzjj.doumen.gov.cn/zlaq/jgys/index.htm', 
+            age=1, save={'type':self.table_name[15], 'source':'JS'},
+            fetch_type='js', callback=self.build_page)
+
+    def build_page(self, response):
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        lists = soup('div', 'listr right')[0].find('ul').find_all('a', href=True)
+        print(len(lists))
+        for i in lists:
+            link = self.real_path(response.url, i['href'])
+            self.crawl(link, save=response.save, callback=self.content_page, fetch_type='js')
+
+        page_count = int(soup('div', 'page')[0].find_all('a')[-1]['href'].split('_')[1].split('.')[0])
+        print(page_count)
+        domain = 'http://dmqzjj.doumen.gov.cn/zlaq/jgys/index_%s.htm'
+        for i in range(1, page_count + 1):
+            link = domain % str(i)
+            self.crawl(link, save=response.save, age=1, fetch_type='js',
+                callback=self.build_list_page)
+
+    def build_list_page(self, response):
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        lists = soup('div', 'listr right')[0].find('ul').find_all('a', href=True)
+        print(len(lists))
+        for i in lists:
+            link = self.real_path(response.url, i['href'])
+            self.crawl(link, save=response.save, callback=self.content_page, fetch_type='js')
+
     def land_page(self, response):
         # 获取总页数
         page_tag = response.doc('#pagesplit > table > tbody > tr')

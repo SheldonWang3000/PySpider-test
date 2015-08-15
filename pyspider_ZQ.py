@@ -32,6 +32,32 @@ class Handler(My):
             callback=self.land_page, age=1, fetch_type='js',
             save={'type':self.table_name[14], 'source':'GT'})
 
+        self.crawl('http://sxpt.zhaoqing.gov.cn/xmxxml/xmjsglgkxx/jjgysxx/index.htm', 
+            age=1, fetch_type='js', callback=self.build_page, headers={},
+            save={'type':self.table_name[15], 'source':'GT'})
+
+    def build_page(self, response):
+        soup = BeautifulSoup(response.text, 'html.parser')
+        print(len(soup('table')))
+        lists = soup('table')[1].find_all('a', {'target':'_blank'})
+        for i in lists:
+            link = self.real_path(response.url, i['href'])
+            self.crawl(link, save=response.save, callback=self.content_page, headers={})
+
+        page_count = int(soup('div', {'id':'flipover'})[0].find_all('a', 'gl_bg07')[-1]['href'].split('_')[1].split('.')[0])
+        print(page_count)
+        domain = 'http://sxpt.zhaoqing.gov.cn/xmxxml/xmjsglgkxx/jjgysxx/index_%s.htm'
+        for i in range(1, page_count + 1):
+            link = domain % str(i)
+            self.crawl(link, age=1, save=response.save, callback=self.build_list_page, headers={})
+    def build_list_page(self, response):
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        lists = soup('table')[1].find_all('a', {'target':'_blank'})
+        for i in lists:
+            link = self.real_path(response.url, i['href'])
+            self.crawl(link, save=response.save, callback=self.content_page, headers={})
+
     def land_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
         page_count = int(soup('input', {'name':'totalPages'})[0]['value'])

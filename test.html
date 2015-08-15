@@ -1,1506 +1,607 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1"><title>
-  湛江市城市规划局
-</title><link href="css/main.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="admin/Visit/visit1.js"></script>
-    <script type="text/javascript">
-    
-    function dongtai(state)
-    {
-           if(state==1)
-           {
-              td1.style.backgroundImage="url(images/benjudongtai.gif)";
-              td2.style.backgroundImage="url(images/topmenuout.gif)";
-              b1.style.color="White";
-              b2.style.color="black";
-              table1.style.display="block";
-              table2.style.display="none";
-           }
-           else
-           {
-              td1.style.backgroundImage="url(images/topmenuout.gif)";
-              td2.style.backgroundImage="url(images/benjudongtai.gif)";
-              b1.style.color="black";
-              b2.style.color="White";
-              table1.style.display="none";
-              table2.style.display="block";
-           }
-
-    }
-    
-    function gongzuodongtai(state)
-    {
-          if(state==1)
-           {
-              td3.style.backgroundImage="url(images/gongzuodongtaiOver.gif)";
-              td4.style.backgroundImage="url(images/gongzuodongtaiOut.gif)";
-              b3.style.color="#419E00";
-              b4.style.color="black";
-              table3.style.display="block";
-              table4.style.display="none";
-           }
-           else
-           {
-              td3.style.backgroundImage="url(images/gongzuodongtaiOut.gif)";
-              td4.style.backgroundImage="url(images/gongzuodongtaiOver.gif)";
-              b3.style.color="black";
-              b4.style.color="#419E00";
-              table3.style.display="none";
-              table4.style.display="block";
-           }
-    }
-    
-    function yssz(state)
-    {
-          if(state==1)
-           {
-              td5.style.backgroundImage="url(images/ysszbg2.gif)";
-              td6.style.backgroundImage="url(images/ysszbg3.gif)";
-              td7.style.backgroundImage="url(images/ysszbg3.gif)";
-              td8.style.backgroundImage="url(images/ysszbg3.gif)";
-              td9.style.backgroundImage="url(images/ysszbg3.gif)";
-              b5.style.color="white";
-              b6.style.color="black";
-              b7.style.color="black";
-              b8.style.color="black";
-              b9.style.color="black";
-              tbyssz1.style.display="block";
-              tbyssz2.style.display="none";
-              tbyssz3.style.display="none";
-              tbyssz4.style.display="none";
-              tbyssz5.style.display="none";
-           }
-           else if(state==2)
-           {
-              td5.style.backgroundImage="url(images/ysszbg3.gif)";
-              td6.style.backgroundImage="url(images/ysszbg2.gif)";
-              td7.style.backgroundImage="url(images/ysszbg3.gif)";
-              td8.style.backgroundImage="url(images/ysszbg3.gif)";
-              td9.style.backgroundImage="url(images/ysszbg3.gif)";
-              b5.style.color="black";
-              b6.style.color="white";
-              b7.style.color="black";
-              b8.style.color="black";
-              b9.style.color="black";
-              tbyssz1.style.display="none";
-              tbyssz2.style.display="block";
-              tbyssz3.style.display="none";
-              tbyssz4.style.display="none";
-              tbyssz5.style.display="none";
-           }
-           else if(state==3)
-           {
-              td5.style.backgroundImage="url(images/ysszbg3.gif)";
-              td6.style.backgroundImage="url(images/ysszbg3.gif)";
-              td7.style.backgroundImage="url(images/ysszbg2.gif)";
-              td8.style.backgroundImage="url(images/ysszbg3.gif)";
-              td9.style.backgroundImage="url(images/ysszbg3.gif)";
-              b5.style.color="black";
-              b6.style.color="black";
-              b7.style.color="white";
-              b8.style.color="black";
-              b9.style.color="black";
-              tbyssz1.style.display="none";
-              tbyssz2.style.display="none";
-              tbyssz3.style.display="block";
-              tbyssz4.style.display="none";
-              tbyssz5.style.display="none";
-           }
-           else if(state==4)
-           {
-              td5.style.backgroundImage="url(images/ysszbg3.gif)";
-              td6.style.backgroundImage="url(images/ysszbg3.gif)";
-              td7.style.backgroundImage="url(images/ysszbg3.gif)";
-              td8.style.backgroundImage="url(images/ysszbg2.gif)";
-              td9.style.backgroundImage="url(images/ysszbg3.gif)";
-              b5.style.color="black";
-              b6.style.color="black";
-              b7.style.color="black";
-              b8.style.color="white";
-              b9.style.color="black";
-              tbyssz1.style.display="none";
-              tbyssz2.style.display="none";
-              tbyssz3.style.display="none";
-              tbyssz4.style.display="block";
-              tbyssz5.style.display="none";
-           }
-           else
-           {
-              td5.style.backgroundImage="url(images/ysszbg3.gif)";
-              td6.style.backgroundImage="url(images/ysszbg3.gif)";
-              td7.style.backgroundImage="url(images/ysszbg3.gif)";
-              td8.style.backgroundImage="url(images/ysszbg3.gif)";
-              td9.style.backgroundImage="url(images/ysszbg2.gif)";
-              b5.style.color="black";
-              b6.style.color="black";
-              b7.style.color="black";
-              b8.style.color="black";
-              b9.style.color="white";
-              tbyssz1.style.display="none";
-              tbyssz2.style.display="none";
-              tbyssz3.style.display="none";
-              tbyssz4.style.display="none";
-              tbyssz5.style.display="block";
-           }
-    }
-    
-    function ghcg(state)
-    {
-          if(state==1)
-           {
-              b10.style.color="#419E00";
-              b11.style.color="black";
-              b12.style.color="black";
-              b13.style.color="black";
-              b14.style.color="black";
-              b15.style.color="black";
-              tbghcg1.style.display="block";
-              tbghcg2.style.display="none";
-              tbghcg3.style.display="none";
-              tbghcg4.style.display="none";
-              tbghcg5.style.display="none";
-              tbghcg6.style.display="none";
-           }
-           else if(state==2)
-           {
-              b10.style.color="black";
-              b11.style.color="#419E00";
-              b12.style.color="black";
-              b13.style.color="black";
-              b14.style.color="black";
-              b15.style.color="black";
-              tbghcg1.style.display="none";
-              tbghcg2.style.display="block";
-              tbghcg3.style.display="none";
-              tbghcg4.style.display="none";
-              tbghcg5.style.display="none";
-              tbghcg6.style.display="none";
-           }
-           else if(state==3)
-           {
-              b10.style.color="black";
-              b11.style.color="black";
-              b12.style.color="#419E00";
-              b13.style.color="black";
-              b14.style.color="black";
-              b15.style.color="black";
-              tbghcg1.style.display="none";
-              tbghcg2.style.display="none";
-              tbghcg3.style.display="block";
-              tbghcg4.style.display="none";
-              tbghcg5.style.display="none";
-              tbghcg6.style.display="none";
-           }
-           else if(state==4)
-           {
-              b10.style.color="black";
-              b11.style.color="black";
-              b12.style.color="black";
-              b13.style.color="#419E00";
-              b14.style.color="black";
-              b15.style.color="black";
-              tbghcg1.style.display="none";
-              tbghcg2.style.display="none";
-              tbghcg3.style.display="none";
-              tbghcg4.style.display="block";
-              tbghcg5.style.display="none";
-              tbghcg6.style.display="none";
-           }
-           else if(state==5)
-           {
-              b10.style.color="black";
-              b11.style.color="black";
-              b12.style.color="black";
-              b13.style.color="black";
-              b14.style.color="#419E00";
-              b15.style.color="black";
-              tbghcg1.style.display="none";
-              tbghcg2.style.display="none";
-              tbghcg3.style.display="none";
-              tbghcg4.style.display="none";
-              tbghcg5.style.display="block";
-              tbghcg6.style.display="none";
-           }
-           else
-           {
-              b10.style.color="black";
-              b11.style.color="black";
-              b12.style.color="black";
-              b13.style.color="black";
-              b14.style.color="black";
-              b15.style.color="#419E00";
-              tbghcg1.style.display="none";
-              tbghcg2.style.display="none";
-              tbghcg3.style.display="none";
-              tbghcg4.style.display="none";
-              tbghcg5.style.display="none";
-              tbghcg6.style.display="block";
-           }
-    }
-    
-    </script>
-</head>
-<body>
-    <form name="form1" method="post" action="ysszgs.aspx?classid=25" id="form1">
-<div>
-<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
-</div>
-
-<script language="Javascript"><!--
-function ANP_checkInput(bid,mv){var el=document.getElementById(bid);var r=new RegExp("^\\s*(\\d+)\\s*$");
-if(r.test(el.value)){if(RegExp.$1<1||RegExp.$1>mv){alert("页索引超出范围！");el.focus();el.select();return false;}
-return true;}alert("页索引不是有效的数值！");el.focus();el.select();return false;}
-function ANP_keydown(e,btnId){
-var kcode;
-if(window.event){kcode=e.keyCode;}
-else if(e.which){kcode=e.which;}
-var validKey=(kcode==8||kcode==46||kcode==37||kcode==39||(kcode>=48&&kcode<=57)||(kcode>=96&&kcode<=105));
-if(!validKey){
-if(kcode==13) document.getElementById(btnId).click();
-if(e.preventDefault) e.preventDefault();else{event.returnValue=false};
-}
-}
-
---></script>
-<div>
-
-  <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
-  <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
-  <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBgLouqyzBAKH+qSCBwKkjaHPCgKkjaXPCgKkja3PCgK5t+KNCu9LuugEbTR5WnP8waQkmHiHhZVb" />
-</div>
-    <div align="center">
-    
-        
-  <script src="js/jquery.js" type="text/javascript" language="javascript"></script>
-    <script src="js/menu.js" type="text/javascript" language="javascript"></script>
-
-    <SCRIPT language=javascript>
-        function c2white(menu)
-        {
-            if(menu==1)
-            {
-               menu1.style.color="#ffffff";
-               menu2.style.color="#000000";
-               menu3.style.color="#000000";
-               menu4.style.color="#000000";
-               menu5.style.color="#000000";
-               menu6.style.color="#000000";
-               menu7.style.color="#000000";
-            }
-            else if(menu==2)
-            {
-               menu1.style.color="#000000";
-               menu2.style.color="#ffffff";
-               menu3.style.color="#000000";
-               menu4.style.color="#000000";
-               menu5.style.color="#000000";
-               menu6.style.color="#000000";
-               menu7.style.color="#000000";
-            }
-            else if(menu==3)
-            {
-               menu1.style.color="#000000";
-               menu2.style.color="#000000";
-               menu3.style.color="#ffffff";
-               menu4.style.color="#000000";
-               menu5.style.color="#000000";
-               menu6.style.color="#000000";
-               menu7.style.color="#000000";
-            }
-            else if(menu==4)
-            {
-               menu1.style.color="#000000";
-               menu2.style.color="#000000";
-               menu3.style.color="#000000";
-               menu4.style.color="#ffffff";
-               menu5.style.color="#000000";
-               menu6.style.color="#000000";
-               menu7.style.color="#000000";
-            }
-            else if(menu==5)
-            {
-               menu1.style.color="#000000";
-               menu2.style.color="#000000";
-               menu3.style.color="#000000";
-               menu4.style.color="#000000";
-               menu5.style.color="#ffffff";
-               menu6.style.color="#000000";
-               menu7.style.color="#000000";
-            }
-            else if(menu==6)
-            {
-               menu1.style.color="#000000";
-               menu2.style.color="#000000";
-               menu3.style.color="#000000";
-               menu4.style.color="#000000";
-               menu5.style.color="#000000";
-               menu6.style.color="#ffffff";
-               menu7.style.color="#000000";
-            }
-             else if(menu==7)
-            {
-               menu1.style.color="#000000";
-               menu2.style.color="#000000";
-               menu3.style.color="#000000";
-               menu4.style.color="#000000";
-               menu5.style.color="#000000";
-               menu6.style.color="#000000";
-               menu7.style.color="#ffffff";
-               menu8.style.color="#000000";
-            }
-             else if(menu==9)
-            {
-               menu1.style.color="#000000";
-               menu2.style.color="#000000";
-               menu3.style.color="#000000";
-               menu4.style.color="#000000";
-               menu5.style.color="#000000";
-               menu6.style.color="#000000";
-               menu7.style.color="#000000";
-               menu8.style.color="#000000";
-               menu9.style.color="#ffffff";
-            }
-           else
-            {
-               menu1.style.color="#000000";
-               menu2.style.color="#000000";
-               menu3.style.color="#000000";
-               menu4.style.color="#000000";
-               menu5.style.color="#000000";
-               menu6.style.color="#000000";
-               menu7.style.color="#000000";
-               menu8.style.color="#ffffff";
-            }
-        }
-        
-        function c2black()
-        {
-           menu1.style.color="#000000";
-           menu2.style.color="#000000";
-           menu3.style.color="#000000";
-           menu4.style.color="#000000";
-           menu5.style.color="#000000";
-           menu6.style.color="#000000";
-           menu7.style.color="#000000";
-           menu8.style.color="#000000";
-           menu9.style.color="#000000";
-        }
-    
-    
-        function showDate()
-        {
-            var d = new Date();  
-            document.write("<font style='font-size:12px;'>今天是"+d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日");
-            switch(d.getDay())
-            {
-             case 0:
-              document.write("  星期日");
-              break;
-             case 1:
-              document.write("  星期一");
-              break;
-             case 2:
-              document.write("  星期二");
-              break;
-             case 3:
-              document.write("  星期三");
-              break;
-             case 4:
-              document.write("  星期四");
-              break;
-             case 5:
-              document.write("  星期五");
-              break;
-             case 6:
-              document.write("  星期六");
-              break;
-            }
-             document.write("</font>");
-        }
-    </script>
-  
-  <table width="1003" height="30" border="0" align="center" cellpadding="0" cellspacing="0" style="background-color:Green; color:#ffffff;font-size:12px;">
-    <tr>
-        <td width="50">&nbsp;</td>
-      <td width="720" align="left">您好,
-       <span id="top1_MemberName" style="color:White;"></span>
-      <script language="JavaScript" type="text/JavaScript">
-            showDate();
-            </script>
-      </td>
-      <td width="200" style="font-size:12px;">
-          <div align="center">
-          <img src="images/arrow.gif" alt="" /> <a href="rss.aspx" style="color:White;">RSS订阅</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="images/arrow.gif" alt="" /> <a href="SiteMap.aspx" style="color:White;">网站地图</a>
-          </div>
-      </td>
-      <td width="50">&nbsp;</td> 
-    </tr>
-  </table>
-  
-  
-    <div id="FlashShow1">
-  <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="1003" height="185">
-      <param name="movie" value="swf/index.swf" />
-      <param name="quality" value="high" />
-      <param name="wmode" value="opaque" />
-      <embed src="swf/index.swf" wmode="opaque" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="1003" height="185"></embed>
-    </object></div>
-    
-<!--<div id="ShowHide1" style=" width:1003px; height:500px; border:0px solid #000; margin:0 auto; overflow:hidden;"><img width="1003" height="500" border="0" src="xinian.jpg" alt="" /></div>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>广东省肇庆市工程建设领域项目信息和信用信息公开共享专栏</title>
+<link href="../../../images/gcly_style.css" rel="stylesheet" type="text/css" />
+<!--script type="text/javascript" src="./images/select2css.js"></script-->
+<script type="text/javascript" src="../../../images/channelChange.js"></script>
+<script language="javascript" src="../../../images/page_func.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../../images/jquery.js"></script>
 <script type="text/javascript">
-var b=500;
-var c=true;
-var c1=true;
-function ShowObj1(){
-if(c == true){b+=3}
-if(b>=500){c=false;c1=true;setTimeout("HideObj1()",5000)}
-//document.getElementById("ShowHide1").width=380
-document.getElementById("ShowHide1").style.height=b+"px"; //运行后图片的大小
-setTimeout("ShowObj1()",1)}//根据实际情况选择延时
-//setTimeout("ShowObj1()",2000);
-
-function HideObj1(){
-if(c1 == true){b-=3}
-if(b<=185){c1=false;document.getElementById("FlashShow1").style.display="block";document.getElementById("ShowHide1").style.display="none";}
-//document.getElementById("ShowHide1").width=380
-document.getElementById("ShowHide1").style.height=b+"px"; //运行后图片的大小
-setTimeout("HideObj1()",1)}//根据实际情况选择延时
-setTimeout("HideObj1()",5000);
-</script>-->
-
-  <table id="tb1" style="width:1003px; background-image:url(images/topmenuout.gif); margin-top:0px;" cellpadding="0" cellspacing="0">
-    <tr>
-
-            <td width="50px">&nbsp;</td>
-
-            
-            <td  style="width:91px;height:30px;"  align="center">
-                <a href="default.aspx" style="font-size:14px" ><b id="menu1" >首页</b></a> 
-     
-            </td>           
-            
-            <td width="30px">&nbsp;</td>
-            <td id="M1" style="width:91px;height:30px;" class="topmenuout" align="center">
-              <a href="ghdt.aspx" style="font-size:14px"><b id="menu2" onmouseover="c2white(2)" onmouseout="c2black()">规划动态</b></a>
-            </td>
-            <td width="30px">&nbsp;</td>
-            <td id="M2" style="width:91px;height:30px;" class="topmenuout" align="center">
-              <a href="zwgk_content.aspx?id=95" style=" font-size:14px" ><b id="menu3" onmouseover="c2white(3)" onmouseout="c2black()">政务公开</b></a>
-            </td>
-            <td width="30px">&nbsp;</td>
-            <td id="M8" style="width:91px;height:30px;" class="topmenuout" align="center">
-              <a href="DWGK_List.aspx?columnid=149" style=" font-size:14px" ><b id="menu9" onmouseover="c2white(9)" onmouseout="c2black()">党务公开</b></a>
-            </td>
-            <td width="30px">&nbsp;</td>
-            <td id="M3" style="width:91px;height:30px;" class="topmenuout" align="center">
-              <a href="ghcg.aspx" style="font-size:14px"><b  id="menu4" onmouseover="c2white(4)" onmouseout="c2black()">规划成果</b></a>
-            </td>
-            <td width="30px">&nbsp;</td>
-            <td id="M4" style="width:91px;height:30px;" class="topmenuout" align="center">
-              <a href="zxfw.aspx" style="font-size:14px" ><b id="menu5" onmouseover="c2white(5)" onmouseout="c2black()">在线服务</b></a>
-            </td>
-            <td width="30px">&nbsp;</td>
-            <td id="M5" style="width:91px;height:30px;" class="topmenuout" align="center">
-              <a href="gzcy.aspx" style="font-size:14px" ><b id="menu6" onmouseover="c2white(6)" onmouseout="c2black()">公众参与</b></a>
-            </td>
-            <td width="30px">&nbsp;</td>
-            <td id="M6" style="width:91px;height:30px;" class="topmenuout" align="center">
-              <a href="ghsc.aspx" style="font-size:14px" ><b id="menu7" onmouseover="c2white(7)" onmouseout="c2black()">规划视窗</b></a>
-            </td>
-            <td width="30px">&nbsp;</td>
-            <td id="M7" style="width:91px;height:30px;" class="topmenuout" align="center">
-              <a href="#" style="font-size:14px"><b id="menu8" onmouseover="c2white(8)" onmouseout="c2black()">官方微博</b></a>
-            </td>
-            
-            <td>&nbsp;</td>
-    </tr>
-  </table>
-  <table style="width:1003px; background-image:url(images/topmenucbg.gif); height:30px;" cellpadding="0" cellspacing="0"> 
-    <tr>
-      <td style="height:19px;" colspan="" align="left">
-      
-          <table id="M00" style="margin-left:20px; display:none;">
-          <tr>
-            <td style="height:14px; width:80px;">
-            <a href="#" class="FT01">绿色规划</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="#" class="FT01">和谐湛江</a>
-            </td>
-          </tr>
-        </table>
-      
-          <table id="M11" style="margin-left:62px; display:none;">
-          <tr>
-            <td style="height:14px; width:80px;">
-            <a href="ghdt_more.aspx?columnname=公告通知&ColumnID=135" class="FT01">公告通知</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="ghdt_more.aspx?columnname=本局动态&ColumnID=136" class="FT01">本局动态</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="ghdt_more.aspx?columnname=行业动态&ColumnID=137" class="FT01">行业动态</a>&nbsp;
-            </td>
-                                                
-          </tr>
-        </table>
-          
-        <table id="M22" style="margin-left:100px; display:none;">
-          <tr>
-            <td style="height:14px; width:80px;">
-            <a href="ZWGK_List.aspx?columnid=55&lm=jgzn" class="FT01">机构职能</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="ZWGK_List.aspx?columnid=60&lm=zcfg" class="FT01">政策法规</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="ZWGK_List.aspx?columnid=65&lm=ghjh" class="FT01">规划计划</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-             
-            <td style="height:14px; width:80px;">
-            <a href="ZWGK_List.aspx?columnid=69&lm=ywgz" class="FT01">业务工作</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            
-                      
-            
-            <td style="height:14px; width:80px;">
-            <a href="ZWGK_List.aspx?columnid=82&lm=sjtj" class="FT01">数据统计</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-             
-            
-            <td style="height:14px; width:80px;">
-            <a href="ZWGK_List.aspx?columnid=86&lm=qt" class="FT01">其    它</a>
-            </td>
-          </tr>
-        </table>
-          
-        <table id="M88" style="margin-left:100px; display:none;">
-          <tr>
-            <td style="height:14px; width:80px;">
-            <a href="DWGK_List.aspx?columnid=149" class="FT01">机构设置</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="DWGK_News_List.aspx?cid=150" class="FT01">党建动态</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="DWGK_News_List.aspx?cid=151" class="FT01">学习园地</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-             
-            <td style="height:14px; width:100px;">
-            <a href="DWGK_News_List.aspx?cid=152" class="FT01">党风廉政建设</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            
-                      
-            
-            <td style="height:14px; width:80px;">
-            <a href="DWGK_News_List.aspx?cid=153" class="FT01">规章制度</a><!--&nbsp;<span style="color:White;">|</span>-->
-            </td>
-             
-            <!--
-            <td style="height:14px; width:80px;">
-            <a href="DWGK_News_List.aspx?cid=154" class="FT01">其    它</a>
-            </td>-->
-          </tr>
-        </table>
-        
-        <table id="M33" style="margin-left:220px; display:none;">
-          <tr>
-            <td style="height:14px; width:80px;">
-            <a href="ghcg_more.aspx?columnname=总体规划&ColumnID=140" class="FT01">总体规划</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="ghcg_more.aspx?columnname=分区规划&ColumnID=141" class="FT01">分区规划</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="ghcg_more.aspx?columnname=详细规划&ColumnID=142" class="FT01">详细规划</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="ghcg_more.aspx?columnname=专项规划&ColumnID=143" class="FT01">专项规划</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="ghcg_more.aspx?columnname=城市设计&ColumnID=144" class="FT01">城市设计</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="ghcg_more.aspx?columnname=整治规划&ColumnID=145" class="FT01">整治规划</a>
-            </td>
-          </tr>
-        </table>
-        
-        
-        <table id="M44" style="margin-left:385px; display:none;">
-          <tr>
-            <td style="height:14px; width:80px;">
-            <a href="zxfw_more.aspx?columnname=办事指南&ColumnID=152" class="FT01">办事指南</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="zxfw_more.aspx?columnname=审批流程&ColumnID=153" class="FT01">审批流程</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="zxfw_more.aspx?columnname=表格下载&ColumnID=154" class="FT01">表格下载</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="zxfw_more.aspx?columnname=电子报批&ColumnID=155" class="FT01">电子报批</a>&nbsp;
-            </td>
-            <td style="height:14px; width:80px;">
-            <!--<a href="zxfw_more.aspx?columnname=资质管理&ColumnID=156" class="FT01">资质管理</a>-->
-            </td>
-          </tr>
-        </table>
-        
-        
-        <table id="M55" style="margin-left:462px; display:none;">
-          <tr>
-            <td style="height:14px; width:80px;">
-            <a href="message.aspx?columnname=业务咨询&ColumnID=13"" class="FT01">业务咨询</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="message.aspx?columnname=留言建议&ColumnID=14" class="FT01">留言建议</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-                                                
-            <td style="height:14px; width:80px;">
-            <a href="diaocha/index.asp" class="FT01" target="_blank">调查问卷</a>
-            &nbsp;<span style="color:White;">|</span>
-            </td>
-            
-            <td style="height:14px; width:80px;">
-            <a href='Secretary-mail.aspx?columnname=%u5c40%u957f%u90ae%u7bb1&id=14105' class="FT01">局长信箱</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href='Secretary-mail.aspx?columnname=%u6295%u8bc9%u90ae%u7bb1&id=14106' class="FT01">投诉信箱</a>
-            </td>
-          </tr>
-        </table>
-        
-        <table id="M66" style="margin-left:670px; display:none;">
-          <tr>
-            <td style="height:14px; width:80px;">
-            <a href="ghsc_more.aspx?columnname=规划探索&ColumnID=147" class="FT01">规划探索</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="ghsc_more.aspx?columnname=规划文苑&ColumnID=148" class="FT01">规划文苑</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="ghsc_more.aspx?columnname=数字规划&ColumnID=149" class="FT01">数字规划</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="ghsc_more.aspx?columnname=规划字典&ColumnID=150" class="FT01">规划字典</a>
-            </td>
-          </tr>
-        </table>
-        
-        <table id="M77" style="margin-left:820px; display:none;">
-          <tr>
-            <td style="height:14px; width:80px;">
-            <a href="http://weibo.com/zjplan" class="FT01">新浪微博</a>&nbsp;<span style="color:White;">|</span>
-            </td>
-            <td style="height:14px; width:80px;">
-            <a href="http://t.qq.com/zhanjiangplan" class="FT01">腾讯微博</a>
-            </td>
-          </tr>
-        </table>
-        
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-        
-        <table cellpadding="0" cellspacing="0" style="vertical-align:top; margin-top:3px; margin-left:3px; ">
-      <tr>
-      
-      <td width="700" valign="top" style="height:500px;" >
-          
-          <table id="ContentTBL" cellpadding="0" cellspacing="0">
-  <tr>
-    <td width="100%" style="" valign="top">
-                         
-                         <table width="100%" id="NaviTB">
-                         <tr>
-                         <td style="width:5%;" align="center"><img src="images/daohang.gif" alt="" /></td>
-                         <td style="width:95%;" align="left">当前位置:网站首页 >> <a href="zwgk.aspx">政务公开</a> >> <a href="ywgs.aspx">业务公示</a> >> 一书三证公示 </td>
-                         </tr>
-                         </table>
-                  </td>
-  </tr>
-  <tr>
-    <td style="border-top:1px solid #999999 ;"><img src="images/ghdtbg.gif" alt="" style=" margin-top:0px;" /></td>
-  </tr>
-  <tr>
-    <td width="100%" style=" padding-bottom:30px;" align="center" valign="top">
-                         
-                         <table width="627" style="margin-top:0px; border:1px solid #CACACA;border-top:3px solid #87D422;"  cellpadding=0 cellspacing=0> 
-
-                         <tr>
-                             <td style="width:100%; height:100px;border-bottom:1px solid #CACACA;" valign="top">
-                                  <!-- 搜索s -->
-                                  
-  <table cellpadding=0 cellspacing=0 width="100%" style="height:50px;background-image:url(images/ghdtbg2.gif);">
-      <tr>
-          <td align="right" style="width:162px; height:50px;padding-top:2px;">
-          搜索服务:&nbsp;&nbsp;
-          </td>
-          <td align="left" style="width:180px;height:50px;">
-           
-          <input name="search$SearchStr" type="text" value="请输入关键字" id="search_SearchStr" style="width:160px; height:15px;" />
- 
-          </td>
-          <td style="width:100px;height:100px;" valign="middle">
-              <select name="search$ColumnIDDDL" id="search_ColumnIDDDL">
-      <option value="73">业务公示</option>
-      <option value="74">├批前公示</option>
-      <option selected="selected" value="76">├一书三证审批</option>
-
-    </select>
-          </td>
-          <td align="left" style="height:45px; padding-top:4px; padding-left:18px;">
-              <input type="image" name="search$SearchImgBtn" id="search_SearchImgBtn" src="images/ghdtSearch.gif" style="border-width:0px;" />
-          </td>
-      </tr>
-  </table>
-                                  
-                                 
-                                 <!-- 搜索e -->
-                             </td>
-                         </tr>
-                         <tr>
-                             <td style="width:100%; height:30px;" valign="top">
-                                    
-                                    <table width="100%" style="height:30px;" cellpadding=0 cellspacing=0>
-                                        <tr>
-                                            <td align="center" style="width:250px; background-image:url(images/ghdtbg3.gif); "><b style="color:White; font-size:14px;">一书三证公示</b></td>
-                                            <td align="right" style="width:513px;background-image:url(images/ghdtbg4.gif); padding-right:30px;">&nbsp;</td>
-                                        </tr>
-                                    </table>
-                                    
-
-                                    
-                                  
-                                    
-
-                             </td>
-                         </tr>
-                         </table>
-                         
-                           
-<!--  一书三证专用控件  -->
-
-
-<style type="text/css">
-    a{ color:Black; text-decoration:none;}
+<!--
+function MM_jumpMenuGo(objId,targ,restore){ //v9.0
+  var selObj = null;  with (document) { 
+  if (getElementById) selObj = getElementById(objId);
+  if (selObj) eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0; }
+}
+//-->
+</script>
+<style>
+#content01 .left li.sec_chnl {
+  background:url(gcly_pic_tcbg.gif) no-repeat;
+  height:31px;
+  padding:0 10px 0 35px;
+  font:bold 13px/31px Arial, Helvetica, sans-serif;
+  color:#333;
+  cursor:pointer;
+  display:none;
+}
+#content01 .left li.link_chnl {
+  background:url(gcly_pic_tcbg01.gif) no-repeat;
+  height:31px;
+  padding:0 10px 0 35px;
+  font:bold 13px/31px Arial, Helvetica, sans-serif;
+  color:#fff;
+  cursor:pointer;
+}
 </style>
 
-
-  <div style="width:627px;">
- 
-
-
-
-            
-            
-            
-
-            
-            
-            <table width="627" height="58" align="center" style="border-left:1px solid #CACACA; border-right:1px solid #CACACA; border-bottom:1px solid #CACACA;" >
-              <tr>
-              <td align="center">
-                  <table border="1" width="98%" height="33" bordercolor="#cccccc" cellpadding="3" cellspacing="0" style="background:url(images/menubg.gif) repeat-x center; color:#298502; font-weight:bold;">
-                      <tr>
-                        <td><a href="?classid=21" style="color:#298502; text-decoration:none;">项目选址意见书</a></td>
-                        <td><a href="?classid=22" style="color:#298502; text-decoration:none;">用地规划许可证</a></td>
-                        <td><a href="?classid=23" style="color:#298502; text-decoration:none;">工程规划许可证</a></td>
-                        <td><a href="?classid=24" style="color:#298502; text-decoration:none;">乡村规划许可证</a></td>
-                        <td><a href="?classid=25" style="color:#298502; text-decoration:none;">竣工规划核实意见</a></td>    
-                      </tr>
-                  </table>
-              
-              </td>
-                    
-                                   
-             </tr>
-                        </table>            
-            
-            
- 
-            
-                     <table width="627" style="height:30px; border:1px solid #CACACA;border-top:0px; text-align:left;" cellpadding=3 cellspacing=3 border="1" bordercolor="#e4e4e4">
-                     <tr style="background-color:#F9F8F8; text-align:center;"> <td   >证书编号</td><td  >项目名称</td><td  >用地单位</td><td  >位置</td><td   >核发日期</td></tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13456' target="_blank">湛城规（法制）核【2014】41号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            金海湾二期住宅小区2栋&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江安康房地产开发有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            赤坎区金城路81-99号&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2104-08-05&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13478' target="_blank">湛城规（法制）核【2014】5号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江市公安消防局海滨消防站&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            市公安消防局&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            霞山区海洋小区海景路与海洋路交叉口地段东侧&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2104-01-23&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13186' target="_blank">湛城规（法制）核【2015】66号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            帝景金岸A区海盛苑5号楼&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江市加禾房地产开发有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            赤坎区海田路128号&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-07-14&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13202' target="_blank">湛城规（法制）核【2015】65号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            帝景金岸A区海盛苑4号楼&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江市加禾房地产开发有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            赤坎区海田路128号&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-07-14&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13484' target="_blank">建字第4408012015J0148号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            交通智能指挥中心业务技术用房项目配套厕所、储藏室&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江市公安局&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            赤坎区北站路37号&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-07-14&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13440' target="_blank">湛城规（法制）核【2015】68号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            海东新区汽车加油站&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江中油新奥天然气有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            坡头海东新区海川快线（原名海湾大道）以北、东城西路以南、柏西路以西&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-07-11&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13131' target="_blank">湛城规（法制）核【2015】62号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江区域中心第一通信机楼&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            中国移动通信集团广东有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            麻章区瑞云南路东侧、云头上村村民用地南侧&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-07-09&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13135' target="_blank">湛城规（法制）核【2015】61号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            海鸥花苑地下室&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            广东国域房地产开发有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            麻章区麻章镇麻海路26号&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-06-30&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13134' target="_blank">湛城规（法制）核【2015】60号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            霞山区文体综合馆&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江市第四中学&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            霞山区人民大道以西、银帆公园南侧区&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-06-25&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13140' target="_blank">湛城规（法制）核【2015】59号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            华信城市美林花园2区6-8栋住宅楼&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江市华信房地产开发有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            霞山区银苑路1号&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-06-25&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13138' target="_blank">湛城规（法制）核【2015】58号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            澳华花园幼儿园（三层）&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江市好创房地产开发有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            湛江市霞山区社坛路23号&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-06-23&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13144' target="_blank">湛城规（法制）核【2015】57号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            澳华花园及其垃圾房&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江市好创房地产开发有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            湛江市霞山区社坛路23号&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-06-23&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13133' target="_blank">湛城规（法制）核【2015】55号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            公园一号商住小区4-7栋地下室（地下室二层）&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江鑫泰投资有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            赤坎区人民大道以西、规划路以北、庶文路以东&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-06-18&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13136' target="_blank">湛城规（法制）核【2015】56号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            海湾郦都商住小区二期14号16号楼&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            荣盛广东房地产开发有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            赤坎区华田路2号&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-06-18&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13139' target="_blank">湛城规（法制）核【2015】54号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            公园一号商住小区7栋&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江鑫泰投资有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            赤坎区人民大道以西、规划路以北、庶文路以东&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-06-18&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13132' target="_blank">湛城规（法制）核【2015】52号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            海鸥花苑2、3号楼&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            广东国域房地产开发有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            麻章区麻章镇麻海路26号&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-06-16&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13187' target="_blank">湛城规（法制）核【2015】51号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            金海湾二期住宅小区别苑（不含37至40号别苑）&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            湛江安康房地产开发有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            赤坎区金城路81-99号&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-06-10&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                        <tr>
-                             
-                            <td style=" width:130px; padding-top:5px;padding-bottom:5px;" align="left">
-                           <div style="width:110px;">
-                            &nbsp;<a href='ysszgs_content.aspx?id=13142' target="_blank">湛城规（法制）核【2015】50号</a> &nbsp;
-                             </div>
-                            </td>
-                            <td>
-                                <div style="width:120px;">
-                            海湾郦都商住小区二期12号13号楼&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:120px;">
-                            荣盛广东房地产开发有限公司&nbsp;                           </div>
-     
-     </td>
-                            <td>
-                                <div style="width:150px;">
-                            赤坎区华田路2号&nbsp;
-                                </div>
-     </td>
-                            <td   padding-right:10px; color:#010101;padding-bottom:5px;">
-                                <div style="width:66px;">
-                            2015-06-02&nbsp;
-                            </div>
-                             </td>
-                        </tr>
-                
-                 </table> 
-                
- 
-           <table width="100%">
-               <tr>
-                   <td width="40%" align="right" valign="baseline">共<span id="ywgslist_Total">506</span> 条信息 当前第<span id="ywgslist_currentpage">1</span>页/共<span id="ywgslist_Pages">29</span>页</td>
-                   <td width="60%" align="left">
-    <!-- AspNetPager V6.0.0 for VS2005  Copyright:2003-2006 Webdiyer (www.webdiyer.com) -->
-    <div id="ywgslist_AspNetPager1" style="color:Black;width:100%;text-align:left;">
-      <a disabled="true" style="margin-right:5px;">[首页]</a><a disabled="true" style="margin-right:5px;">[上页]</a><span style="margin-right:5px;font-weight:Bold;color:red;">1</span><a href="javascript:__doPostBack('ywgslist$AspNetPager1','2')" style="margin-right:5px;">2</a><a href="javascript:__doPostBack('ywgslist$AspNetPager1','3')" style="margin-right:5px;">3</a><a href="javascript:__doPostBack('ywgslist$AspNetPager1','4')" style="margin-right:5px;">4</a><a href="javascript:__doPostBack('ywgslist$AspNetPager1','5')" style="margin-right:5px;">5</a><a href="javascript:__doPostBack('ywgslist$AspNetPager1','6')" style="margin-right:5px;">6</a><a href="javascript:__doPostBack('ywgslist$AspNetPager1','7')" style="margin-right:5px;">7</a><a href="javascript:__doPostBack('ywgslist$AspNetPager1','8')" style="margin-right:5px;">8</a><a href="javascript:__doPostBack('ywgslist$AspNetPager1','9')" style="margin-right:5px;">9</a><a href="javascript:__doPostBack('ywgslist$AspNetPager1','10')" style="margin-right:5px;">10</a><span style="margin-right:5px;"><a href="javascript:__doPostBack('ywgslist$AspNetPager1','11')">...</a></span><a href="javascript:__doPostBack('ywgslist$AspNetPager1','2')" style="margin-right:5px;">[下页]</a><a href="javascript:__doPostBack('ywgslist$AspNetPager1','29')" style="margin-right:5px;">[尾页]</a>&nbsp;&nbsp;<input type="text" value="1" name="ywgslist$AspNetPager1_input" id="ywgslist$AspNetPager1_input" onkeydown="ANP_keydown(event,'ywgslist$AspNetPager1_btn');" style="width:30px;width:18px;height:12px;" /><input type="Submit" name="ywgslist$AspNetPager1" id="ywgslist$AspNetPager1_btn" value="go" onclick="return ANP_checkInput('ywgslist$AspNetPager1_input',29)" />
-    </div>
-    <!-- AspNetPager V6.0.0 for VS2005 End -->
-
-    </td>
-               </tr>
-           </table>
-  
-
-</div>
-
-                  </td>
-  </tr>
-</table>
-
-          
-        
-                    
-      </td>
-      <td>&nbsp;</td>
-      
-      <td   valign="top" id="bodyrighttd">
-      
-        
+<SCRIPT language='javascript'>
+<!--
+function showOrHideTable(tableID)
+{
+  var tableObject=document.all(tableID);
+  if(tableObject.style.display=="")
+  {
+    tableObject.style.display="none";
+  }
+  else
+  {
+    tableObject.style.display="";
+  }
+}
+//-->
+</SCRIPT>
 
 
-<div style="background-color:White;">
-<table id="PColumns_DL" cellspacing="0" border="0" style="border-color:#CCCCCC;border-width:1px;border-style:Solid;width:283px;border-collapse:collapse;">
-  <tr>
-    <td colspan="2">
-        <table cellpadding="0" cellspacing="0" style="width:278px; margin-top:5px;border-bottom:0px;">   
-         <tr>
-         <td style="width:98%;height:28px; padding-left:18px; font-size:14px; font-weight:bold; color:#ffffff; text-align:left; background:url(images/ColumnsHead_bg.gif) center no-repeat;"> 业务公示 </td>
-         </tr>
-         
-         
-</table>
-    </td>
-  </tr><tr>
-    <td class="ColumnsControl">
-      <div class="TitleList" style="width:102px;">  
-      <a href='ywgs_more.aspx?ColumnID=74&ColumnName=批前公示' style="color:Black;" title='批前公示'>批前公示</a> 
-      </div>
-    </td><td class="ColumnsControl">
-      <div class="TitleList" style="width:102px;">  
-      <a href='ywgs_more.aspx?ColumnID=76&ColumnName=一书三证审批' style="color:Black;" title='一书三证审批'>一书三证审批</a> 
-      </div>
-    </td>
-  </tr>
-</table>
-</div>     
-        
-         
-                        
-        
-                
-        
-              
-                
-        
-              
-      </td>
-      <td>&nbsp;</td>
+</head>
+
+<body>
+<!--[if !IE]>头部模板开始<![endif]-->
+<div><img src="../../../images/gcly_pic_top.jpg" alt="广东省肇庆市工程建设领域项目信息和信用信息公开共享专栏" width="1003" height="160" /></div>
+<!--[if !IE]>头部模板结束<![endif]-->
+
+
+
+<!--[if !IE]>导航栏开始<![endif]-->
+<div id="nav">
+  <!--[if !IE]>检索开始<![endif]-->
+<script>  
+  function SearchForm1_onsubmit() {     
+  if(document.SearchForm1.keyword.value=="请输入关键字...")
+  {
+    alert("请输入关键字...");
+    return false;
+  }
+  var rs=document.SearchForm1.keyword.value;
+  var pattern = new RegExp("[`~!@#$^&*=|{}':;',\\[\\].<>/?~！@#￥……&*——|{}【】‘；：'。，、？]");
+  var keyw="";
+  for (var i = 0; i < rs.length; i++) { 
+  if( pattern.test(rs.substr(i,1))){
+  alert("存在非法字符，请重新输入");  
+  return false;
+  }
+  }   
+  var tmp = document.SearchForm1.keyword.value;
+//tmp = "qymc like('"+ tmp +"')";
+document.SearchForm1.searchword.value=tmp;
+document.SearchForm1.channelid.value=document.SearchForm1.a1.value;
+  return true;
+  }
+</script> 
+  <!--[if !IE]>检索开始<![endif]-->
+  <form onSubmit="return SearchForm1_onsubmit()"  method="post" name="SearchForm1" action="http://sxpt.zhaoqing.gov.cn:9000/was5/web/search" target="_blank" class="float_right">
+   <input type='hidden' id='channelid' name='channelid' value='214018' />
+     <input type="hidden" name="searchword" />
+  <table width="0" border="0" cellspacing="2" cellpadding="0">
+      <tr>
+        <td><input name="keyword" style="color:#7B7C7D;" value="请输入关键字..." onfocus="javascript:if(this.value=='请输入关键字...'){this.value='';this.style.color='#000'}" onblur="javascript:if(this.value==''){this.value='请输入关键字...';this.style.color='#7B7C7D'}" /></td>
+        <td><select name="a1" id="a1">
+        <option value="214018">项目信息</option>
+            <option value="267543">企业信息</option>
+            <option value="205998">人员信息</option>
+      <option value="259408">土地矿产信息</option>
+          </select></td>
+        <td><input name="button" type="submit" class="button" value="检&nbsp;&nbsp;索" /></td>
       </tr>
-      
-      
-      </table>
-
-    
-
-            <table width="1003" height="17" style="background-image:url(images/footbg1.gif);" cellpadding="0" cellspacing="0">
-            <tr>
-            <td ></td>
-            </tr>
-            </table>
-        
-            <table width="1003" height="30" style="background-image:url(images/footbg2.gif);" cellpadding="0" cellspacing="0">
-            <tr>
-            <td align="center" style="color:White;">
-            <a href="/" style="color:White;">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="message.aspx?columnname=业务咨询&ColumnID=13" style="color:White;">业务咨询</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="SiteMap.aspx" style="color:White;">网站地图</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="zcfg.aspx" style="color:White;">政策法规</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="rss.aspx" style="color:White;">RSS订阅</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="zxfw_more.aspx?columnname=办事指南&ColumnID=152" style="color:White;">办事指南</a>&nbsp;&nbsp;&nbsp;&nbsp;<!--|&nbsp;&nbsp;&nbsp;&nbsp;<a href="DVBBS/Dvbbs820Ac/index.asp" style="color:White;">规划论坛</a>-->
-            </td>
-            </tr>
-            </table>
-       
-
-<br />
-<TABLE>
-<TBODY>
-<TR>
-<TD vAlign=top><IMG src="wj_jinjin.gif" width=60> <A href="http://210.76.65.188/webrecord/innernet/Welcome.jsp?bano=4408013000536" target=_blank><IMG" src="/images/waicon.gif" border="0"></A>&nbsp; </TD>
-<TD vAlign=top>
-<TABLE cellSpacing=0 cellPadding=0>
-<TBODY>
-<TR>
-<TD align=middle height=23>版权所有:湛江市城市规划局 &copy;All Rights Reserved 湛江市城市规划编制研究与信息中心管理与维护 粤ICP备 12059765号</TD></TR>
-<TR>
-<TD align=middle height=23>电话:0759-3399036&nbsp;&nbsp;&nbsp;传真:0759-3399101&nbsp;&nbsp;&nbsp;E-MAIL:zjplan@163.com&nbsp;&nbsp;&nbsp;邮编:524022&nbsp;&nbsp;&nbsp;地址:广东省湛江市人民大道中26号<BR></TD></TR>
-<TR>
-<TD align=middle height=23>
-<P>建议使用分辨率为1024*768 、IE5.5以上版本浏览</P></TD></TR></TBODY></TABLE></TD>
-<TD><A href="http://210.76.65.188" target=_blank><IMG src="/images/gt.gif" border=0></A> <IMG src="wj_chacha.gif" width=60> </TD></TR></TBODY></TABLE>
-<SCRIPT language=javascript src="http://js.users.51.la/3955723.js" type=text/javascript></SCRIPT>
-<NOSCRIPT><A href="http://www.51.la/?3955723" target=_blank><IMG style="BORDER-RIGHT: medium none; BORDER-TOP: medium none; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none" alt=我要啦免费统计 src="http://img.users.51.la/3955723.asp"></A></NOSCRIPT>
-
-
- 
-<center>
-  <div style="text-align:center;">
-    <div id="foot1_pnl">
-  
-      <a href="v108.cn" style="color:#dddddd;">协办：汇创科技</a>
-      <span id="_ideConac"><script type="text/javascript" src="http://dcs.conac.cn/js/20/315/0000/45003905/CA203150000450039050001.js" ></script> </span>
-    
+    </table>
+  </form>
+  <!--[if !IE]>检索结束<![endif]-->
+  <ul>
+    <li><a href="../../../">首页</a></li>
+    <li><a href="http://sxpt.zhaoqing.gov.cn/fzlm/gzdt/" target="_blank">工作动态</a></li>
+    <li><a href="../../" target="_blank">项目信息公开</a></li>
+    <li><a href="../../../xyxxml/" target="_blank">信用信息公开</a></li>
+    <li><a href="http://sxpt.zhaoqing.gov.cn/fzlm/zcfg/" target="_blank">法规文件</a></li>
+  <li><a href="http://sxpt.zhaoqing.gov.cn:8080/wcm/app/statistics.jsp" target="_blank">信息发布统计</a>
+    <li class="none"><a href="http://sxpt.zhaoqing.gov.cn/old" target="_blank">旧版链接</a></li>
+  </ul>
 </div>
+<!--[if !IE]>导航栏结束<![endif]-->
+
+
+<!--[if !IE]>现在位置导航开始<![endif]-->
+<div id="crumb">当前位置：<a href="../../../" class="CurrChnlCls">首页</a>&nbsp;&nbsp;>>>&nbsp;&nbsp;<a href="../../" class="CurrChnlCls">项目信息目录</a>&nbsp;&nbsp;>>>&nbsp;&nbsp;<a href="../" class="CurrChnlCls">项目建设管理公开信息</a>&nbsp;&nbsp;>>>&nbsp;&nbsp;<a href="./" class="CurrChnlCls">交竣工验收信息</a></div>
+<!--[if !IE]>现在位置导航结束<![endif]-->
+
+
+<div class="clear"></div>
+<!--[if !IE]>主体内容开始<![endif]-->
+<div id="content01">
+
+
+  
+  <div class="table">
+  
+    <!--[if !IE]>表格开始<![endif]-->
+    <ul>
+      <li class="tc"><img src="../../../images/gcly_pic_tc02a.gif" width="10" height="30" /><span class="bg">交竣工验收信息</span></li>
+    </ul>
+    
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <thead>
+    <tr class="bg02">
+      <td style="width:50px">序号</td>
+      <td style="width:200px">项目编码</td>
+      <td>项目名称</td>
+      <td style="width:80px">发布日期</td>
+    </tr>
+    </thead>
+    
+    
+    <tr class="gray">
+      <td class="center">58499</td>
+      <td class="center">4412244565334702012199</td>
+      <td><a href="../../../hjgcly/glj/xmjsglgkxx_3431/jjgysxx_3443/201505/t20150506_58499.htm" target="_blank">省道S263线怀集县石迳至根枝段路面改造工程</a></td>
+      <td class="center">2015-05-06</td>
+    </tr>
+    
+    
+    <tr class="white">
+      <td class="center">58071</td>
+      <td class="center">4412265608022392014001</td>
+      <td><a href="../../../dqgcly/jtysj/xmjsglgkxx_4187/jjgysxx_4199/201412/t20141225_58071.htm" target="_blank">德庆县京村桥新建工程</a></td>
+      <td class="center">2014-12-25</td>
+    </tr>
+    
+    
+    
+    <tr class="gray">
+      <td class="center">58059</td>
+      <td class="center">4412260071702212013211</td>
+      <td><a href="../../../dqgcly/jtysj/xmjsglgkxx_4187/jjgysxx_4199/201412/t20141224_58059.htm" target="_blank">德庆县黎头厂村道硬底化工程</a></td>
+      <td class="center">2014-12-24</td>
+    </tr>
+    
+    
+    <tr class="white">
+      <td class="center">58046</td>
+      <td class="center">4412260071702212013090</td>
+      <td><a href="../../../dqgcly/jtysj/xmjsglgkxx_4187/jjgysxx_4199/201412/t20141224_58046.htm" target="_blank">德庆县五星至三坑村道硬底化工程</a></td>
+      <td class="center">2014-12-24</td>
+    </tr>
+    
+    
+    
+    <tr class="gray">
+      <td class="center">58035</td>
+      <td class="center">4412260071702212012192</td>
+      <td><a href="../../../dqgcly/jtysj/xmjsglgkxx_4187/jjgysxx_4199/201412/t20141224_58035.htm" target="_blank">德庆县X807马河线三级公路改造工程</a></td>
+      <td class="center">2014-12-24</td>
+    </tr>
+    
+    
+    <tr class="white">
+      <td class="center">57677</td>
+      <td class="center">4412234565357082014000</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57677.htm" target="_blank">高桥一桥改建工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    
+    <tr class="gray">
+      <td class="center">57676</td>
+      <td class="center">4412234565357082014000</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57676.htm" target="_blank">惠爱桥改建工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    <tr class="white">
+      <td class="center">57675</td>
+      <td class="center">4412234565357082014000</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57675.htm" target="_blank">应岗桥改建工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    
+    <tr class="gray">
+      <td class="center">57674</td>
+      <td class="center">4412234565357082014000</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57674.htm" target="_blank">高崀桥改建工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    <tr class="white">
+      <td class="center">57673</td>
+      <td class="center">4412234565357082014000</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57673.htm" target="_blank">柯木桥改建工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    
+    <tr class="gray">
+      <td class="center">57672</td>
+      <td class="center">4412234565357082014000</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57672.htm" target="_blank">联和中学桥改建工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    <tr class="white">
+      <td class="center">57671</td>
+      <td class="center">4412234565357082014000</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57671.htm" target="_blank">东星二桥改建工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    
+    <tr class="gray">
+      <td class="center">57670</td>
+      <td class="center">4412234565357082014000</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57670.htm" target="_blank">锦波小学桥改建工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    <tr class="white">
+      <td class="center">57669</td>
+      <td class="center">4412234565357082014000</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57669.htm" target="_blank">西马坑桥改建工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    
+    <tr class="gray">
+      <td class="center">57668</td>
+      <td class="center">4412234565357082014001</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57668.htm" target="_blank">X420线（柯螺线）公路路面抢修工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    <tr class="white">
+      <td class="center">57667</td>
+      <td class="center">4412234565357082014001</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57667.htm" target="_blank">广宁县道X443南北线路面改造工程项目</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    
+    <tr class="gray">
+      <td class="center">57666</td>
+      <td class="center">4412234565357082014001</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57666.htm" target="_blank">广宁县X419线槐树寨至三驳段路面改善工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    <tr class="white">
+      <td class="center">57665</td>
+      <td class="center">4412234565357082014001</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57665.htm" target="_blank">广宁县X421（白清线）桂水段路面改善工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    
+    <tr class="gray">
+      <td class="center">57664</td>
+      <td class="center">4412234565357082014001</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57664.htm" target="_blank">潭布道班修缮工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    <tr class="white">
+      <td class="center">57663</td>
+      <td class="center">4412234565357082014001</td>
+      <td><a href="../../../gngcly/jtysj/xmjsglgkxx_3161/jjgysxx_3173/201410/t20141014_57663.htm" target="_blank">江美道班修缮工程</a></td>
+      <td class="center">2014-10-14</td>
+    </tr>
+    
+    
+    
+  </table>
+    <!--[if !IE]>表格结束<![endif]-->
+  
+   
+   <!--[if !IE]>翻页导航开始<![endif]-->
+   <div id="flipover">
+   <table border="0" cellspacing="0" cellpadding="0">
+     <tr>
+       <td><SCRIPT LANGUAGE="JavaScript">
+    createPageHTML(22, 0,"index", "htm"); 
+    </SCRIPT></td>
+     </tr>
+   </table>
+   </div>
+   <!--[if !IE]>翻页导航结束<![endif]-->
+   
   </div>
-  <div style="text-align:center;"><span id="foot1_msglb" style="color:#DDDDDD;"></span></div>
-<br />
-</center>
- 
-    </div>
-    
-    
-<script type="text/javascript">
-//<![CDATA[
-var theForm = document.forms['form1'];
-if (!theForm) {
-    theForm = document.form1;
-}
-function __doPostBack(eventTarget, eventArgument) {
-    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
-        theForm.__EVENTTARGET.value = eventTarget;
-        theForm.__EVENTARGUMENT.value = eventArgument;
-        theForm.submit();
-    }
-}
-//]]>
+  
+  <!--[if !IE]>栏目列表开始<![endif]-->
+<!--  $("#link_chnl94 a").css("color","#fff");-->
+   <ul class="left">
+        <li>        
+<ul>
+        
+          <li class="link" id="link_chnl81" style="text-align:left"  onclick='$(".sec_chnl").hide();$(".par81").show();'>项目审批公开信息</li>
+           
+           
+          <li class="sec_chnl par81" id="chnl82"><a href="../../xmspgkxx/xmspxx/">项目审批信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[394]</span></li>  
+           <!--script>
+           document.getElementById("chnl82").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par81" id="chnl83"><a href="../../xmspgkxx/xmhzxx/">项目核准信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[416]</span></li>  
+           <!--script>
+           document.getElementById("chnl83").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par81" id="chnl84"><a href="../../xmspgkxx/xmbaxx/">项目备案信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[430]</span></li>  
+           <!--script>
+           document.getElementById("chnl84").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par81" id="chnl6875"><a href="../../xmspgkxx/kxxyjbgspxx/">可行性研究报告审批信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[1539]</span></li> 
+           <!--script>
+           document.getElementById("chnl6875").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par81" id="chnl5531"><a href="../../xmspgkxx/jnpgspxx/">节能评估审批信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[466]</span></li>  
+           <!--script>
+           document.getElementById("chnl5531").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par81" id="chnl5602"><a href="../../xmspgkxx/ghxzyjspxx/">规划选址意见审批信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[4]</span></li>  
+           <!--script>
+           document.getElementById("chnl5602").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par81" id="chnl5603"><a href="../../xmspgkxx/ydpfwjspxx/">用地批复文件审批信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[4]</span></li>  
+           <!--script>
+           document.getElementById("chnl5603").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par81" id="chnl5604"><a href="../../xmspgkxx/hjyxpjspxx/">环境影响评价审批信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[899]</span></li>  
+           <!--script>
+           document.getElementById("chnl5604").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par81" id="chnl5605"><a href="../../xmspgkxx/sgxkspxx/">施工许可审批信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[390]</span></li>  
+           <!--script>
+           document.getElementById("chnl5605").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par81" id="chnl6620"><a href="../../xmspgkxx/gs/">概算审批信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[1]</span></li>  
+           <!--script>
+           document.getElementById("chnl6620").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par81" id="chnl6621"><a href="../../xmspgkxx/cbsjfaspxx/">初步设计方案审批信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[294]</span></li>  
+           <!--script>
+           document.getElementById("chnl6621").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+        
+          <li class="link" id="link_chnl85" style="text-align:left"  onclick='$(".sec_chnl").hide();$(".par85").show();'>项目建设管理公开信息</li>
+           
+           
+          <li class="sec_chnl par85" id="chnl86"><a href="../xmjbxx/">项目基本信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[3384]</span></li> 
+           <!--script>
+           document.getElementById("chnl86").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par85" id="chnl87"><a href="../zbtbxx/">招标投标信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[242]</span></li>  
+           <!--script>
+           document.getElementById("chnl87").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par85" id="chnl88"><a href="../zdcqxx/">征地拆迁信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[0]</span></li>  
+           <!--script>
+           document.getElementById("chnl88").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par85" id="chnl89"><a href="../zdsjbgxx/">重大设计变更信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[11]</span></li> 
+           <!--script>
+           document.getElementById("chnl89").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par85" id="chnl90"><a href="../sgglxx/">施工管理信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[531]</span></li>  
+           <!--script>
+           document.getElementById("chnl90").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par85" id="chnl91"><a href="../htlyxx/">合同履约信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[477]</span></li>  
+           <!--script>
+           document.getElementById("chnl91").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par85" id="chnl92"><a href="../zlaqjcxx/">质量安全检查信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[616]</span></li>  
+           <!--script>
+           document.getElementById("chnl92").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par85" id="chnl93"><a href="../zjglxx/">资金管理信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[459]</span></li>  
+           <!--script>
+           document.getElementById("chnl93").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par85" id="chnl94"><a href="./">交竣工验收信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[439]</span></li> 
+           <!--script>
+           document.getElementById("chnl94").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+        
+          <li class="link" id="link_chnl95" style="text-align:left"  onclick='$(".sec_chnl").hide();$(".par95").show();'>项目从业单位公开信息</li>
+           
+           
+          <li class="sec_chnl par95" id="chnl96"><a href="../../xmcydwgkxx/lhxwjlxx/">良好行为记录信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[0]</span></li>  
+           <!--script>
+           document.getElementById("chnl96").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par95" id="chnl97"><a href="../../xmcydwgkxx/blxwjlxx/">不良行为记录信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[0]</span></li>  
+           <!--script>
+           document.getElementById("chnl97").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+        
+          <li class="link" id="link_chnl98" style="text-align:left"  onclick='$(".sec_chnl").hide();$(".par98").show();'>项目从业人员公开信息</li>
+           
+           
+          <li class="sec_chnl par98" id="chnl99"><a href="../../xmcyrygkxx/lhxwjlxx_99/">良好行为记录信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[0]</span></li> 
+           <!--script>
+           document.getElementById("chnl99").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par98" id="chnl100"><a href="../../xmcyrygkxx/blxwjlxx_100/">不良行为记录信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[0]</span></li> 
+           <!--script>
+           document.getElementById("chnl100").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+        
+          <li class="link" id="link_chnl101" style="text-align:left"  onclick='$(".sec_chnl").hide();$(".par101").show();'>土地使用权审批和出让信息</li>
+           
+           
+          <li class="sec_chnl par101" id="chnl102"><a href="../../tdsyqsphcrxx/tdzbpmgpcrxx/">土地招标拍卖挂牌出让信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[357]</span></li>  
+           <!--script>
+           document.getElementById("chnl102").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par101" id="chnl103"><a href="../../tdsyqsphcrxx/gytdsyqcrhtxx/">国有土地使用权出让合同信</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[622]</span></li> 
+           <!--script>
+           document.getElementById("chnl103").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par101" id="chnl104"><a href="../../tdsyqsphcrxx/jsydspxx/">建设用地审批信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[628]</span></li>  
+           <!--script>
+           document.getElementById("chnl104").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+        
+          <li class="link" id="link_chnl105" style="text-align:left"  onclick='$(".sec_chnl").hide();$(".par105").show();'>矿业权审批和出让信息</li>
+           
+           
+          <li class="sec_chnl par105" id="chnl106"><a href="../../kyqsphcrxx/tkqspxx/">探矿权审批信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[15]</span></li> 
+           <!--script>
+           document.getElementById("chnl106").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par105" id="chnl107"><a href="../../kyqsphcrxx/tkqcrxx/">探矿权出让信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[0]</span></li>  
+           <!--script>
+           document.getElementById("chnl107").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par105" id="chnl108"><a href="../../kyqsphcrxx/ckqspxx/">采矿权审批信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[66]</span></li> 
+           <!--script>
+           document.getElementById("chnl108").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+           
+          <li class="sec_chnl par105" id="chnl109"><a href="../../kyqsphcrxx/ckqcrxx/">采矿权出让信息</a><span style="text-align:right;font:12px/30px Arial, Helvetica, sans-serif;color:#f60;">[8]</span></li>  
+           <!--script>
+           document.getElementById("chnl109").style.display=
+       ==0?"none":"block";
+           </script-->
+           
+        
+        </ul>
+        </li>
+    </ul>
+<script>
+$(".par85").show();
+$("#chnl94 a").css("font-weight","bold").css("color","red");
+$("#link_chnl85").css({"background":"url(../../../images/gcly_pic_tcbg01.gif) no-repeat","height":"31px","color":"#fff","font":"bold 13px/31px Arial, Helvetica, sans-serif"});
 </script>
 
-</form>
-    
+</div>
+<!--[if !IE]>主体内容开始<![endif]-->
+
+
+
+<div class="clear"></div>
+<!--[if !IE]>尾部模板开始<![endif]-->
+<div id="foot">
+  <img src="../../../images/gcly_button_wj.gif" width="50" height="68" />
+  <span>建议使用1024*768分辨率主办：肇庆市人民政府　承办：肇庆市信息中心粤ICP备05089017</span>
+</div>
+<!--[if !IE]>尾部模板结束<![endif]-->
 </body>
 </html>
