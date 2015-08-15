@@ -26,6 +26,31 @@ class Handler(My):
             callback=self.land_page, save={'type':self.table_name[14], 'source':'GT'},
             age=1, fetch_type='js')
 
+        self.crawl('http://jianshe.maoming.gov.cn/class.asp?classid=109&page=1',
+            callback=self.build_page, save={'type':self.table_name[15], 'source':'JS'}, age=1)
+
+    def build_page(self, response):
+        soup = BeautifulSoup(response.text, 'html.parser')
+        t = soup('div', 'page')[0].find_all('a')[-1]['href']
+        page_count = int(self.get_params(link=t)[1]['page'])
+        print(page_count)
+        url, params = self.get_params(response)
+        for i in range(2, page_count + 1):
+            params['page'] = str(i)
+            self.crawl(url, params=params, age=1, save=response.save, callback=self.buid_list_page)
+
+        lists = soup('ul', 'newactivity')[0].find_all('a', {'target':'_blank'})
+        for i in lists:
+            link = self.real_path(response.url, i['href'])
+            self.crawl(link, save=response.save, callback=self.content_page)
+
+    def buid_list_page(self, response):
+        soup = BeautifulSoup(response.text, 'html.parser')
+        lists = soup('ul', 'newactivity')[0].find_all('a', {'target':'_blank'})
+        for i in lists:
+            link = self.real_path(response.url, i['href'])
+            self.crawl(link, save=response.save, callback=self.content_page)
+
     def land_page(self, response):
         soup = BeautifulSoup(response.text)
 

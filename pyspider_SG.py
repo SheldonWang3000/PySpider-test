@@ -147,10 +147,16 @@ class Handler(My):
             js_name = js_m.hexdigest()
             # 获取访问地址
             request_url = self.real_path(url, each['src'])
-            # 改动网页 css 地址为相对地址
+            # 改动网页js地址为相对地址
             each['src'] = js_name + '.js'
-            # 爬取css文件
-            self.crawl(request_url, fetch_type='js', callback = self.js_css_download, save = {'path':path, 'name':each['src']})
+            # 爬取js文件
+            d = {}
+            d['url'] = request_url
+            d['type'] = 'attachment'
+            d['path'] = path
+            d['file_name'] = each['src']
+            self.r.rpush(self.download_key, str(d))
+            # self.crawl(request_url, fetch_type='js', callback = self.js_css_download, save = {'path':path, 'name':each['src']})
 
         css_tag = soup.find_all('link', type='text/css')
         for each in css_tag:
@@ -162,7 +168,13 @@ class Handler(My):
             # 改动网页 css 地址为相对地址
             each['href'] = css_name + '.css'
             # 爬取css文件
-            self.crawl(request_url, callback = self.js_css_download, save = {'path':path, 'name':each['href']})
+            d = {}
+            d['url'] = request_url
+            d['type'] = 'attachment'
+            d['path'] = path
+            d['file_name'] = each['href']
+            self.r.rpush(self.download_key, str(d))
+            # self.crawl(request_url, callback = self.js_css_download, save = {'path':path, 'name':each['href']})
 
         images = soup('img')
         image_list = []

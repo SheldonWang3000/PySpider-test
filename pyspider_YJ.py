@@ -10,24 +10,28 @@ class Handler(My):
     @every(minutes=24 * 60)
     def on_start(self):
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=70&page=1', 
-            callback=self.index_page, age=1, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=71&page=1', 
-            callback=self.index_page, age=1, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[2], 'source':'GH'})
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=72&page=1', 
-            callback=self.index_page, age=1, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[4], 'source':'GH'})
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=126&page=1', 
-            callback=self.index_page, age=1, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://www.yjjs.gov.cn/list_nmag.asp?classid=127&page=1', 
-            callback=self.index_page, age=1, 
+            callback=self.plan_page, age=1, 
             save={'type':self.table_name[2], 'source':'GH'})
 
         self.crawl('http://www.yjlr.gov.cn/NewsList.asp?SortID=19&Page=1',
             callback=self.land_page, age=1,
             save={'type':self.table_name[14], 'source':'GT'})
+
+        self.crawl('http://www.yjjs.gov.cn/list.asp?classid=73&page=1',
+            callback=self.plan_page, age=1,
+            save={'type':self.table_name[15], 'source':'JS'})
 
     def land_page(self, response):
         soup = BeautifulSoup(response.text)    
@@ -50,7 +54,7 @@ class Handler(My):
             link = self.real_path(response.url, i.find('a')['href'])
             self.crawl(link, callback=self.content_page, save=response.save)
 
-    def index_page(self, response):
+    def plan_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
      
         lists = soup('a', {'onclick': re.compile(r'titlelinks')})
@@ -76,10 +80,10 @@ class Handler(My):
         for i in range(2, last_page + 1):
             crawl_link = url + str(i)
             # print(crawl_link)
-            self.crawl(crawl_link, callback=self.next_list, 
+            self.crawl(crawl_link, callback=self.plan_list_page, 
                 age=1, save=response.save)
 
-    def next_list(self, response):
+    def plan_list_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
         lists = soup('a', {'onclick': re.compile(r'titlelinks')})
         domain = 'http://www.yjjs.gov.cn/news_Info.asp?rs_id='

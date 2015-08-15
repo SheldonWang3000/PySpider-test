@@ -18,6 +18,39 @@ class Handler(My):
             callback=self.land_page, age=1, 
             save={'type':self.table_name[14], 'source':'GT'})
 
+        self.crawl('http://www.zsjs.gov.cn/web/workOnline/queryProjectBackupsList?page=1&start=0&limit=20',
+            callback=self.build_page, age=1,
+            save={'type':self.table_name[15], 'source':'JS'})
+
+    def build_page(self, response):
+        null = ''
+        true = 'true'
+        false = 'false'
+        json = eval(response.text)
+        domain = 'http://www.zsjs.gov.cn/web/ysbaViewPage?id=%s'
+        lists = json['rows']
+        for i in lists:
+            link = domain % i['id']
+            self.crawl(link, save=response.save, callback=self.content_page)
+
+        page_count = int((int(json['total']) + 19) / 20)
+        url, params = self.get_params(response)
+        for i in range(2, page_count + 1):
+            params['page'] = str(i)
+            params['start'] = str((i - 1) * 20)
+            self.crawl(url, params=params, age=1, save=response.save, callback=self.build_list_page)
+
+    def build_list_page(self, response):
+        null = ''
+        true = 'true'
+        false = 'false'
+        json = eval(response.text)
+        domain = 'http://www.zsjs.gov.cn/web/ysbaViewPage?id=%s'
+        lists = json['rows']
+        for i in lists:
+            link = domain % i['id']
+            self.crawl(link, save=response.save, callback=self.content_page)
+
     def land_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
 

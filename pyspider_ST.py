@@ -67,11 +67,10 @@ class Handler(My):
         soup = BeautifulSoup(response.text)
         try:
             t = soup('div', {'class':'pagecss'})[0].find_all('a')[-1]['href']   
+            page_count = int(t.split('.')[0].split('_')[1])
         except IndexError:
             return 
-
-        page_count = int(t.split('.')[0].split('_')[1])
-
+        
         url = response.url[:-6]
         for i in range(2, page_count + 1):
             link = url + str(i) + '.aspx'

@@ -65,17 +65,15 @@ class Handler(My):
     def plan_page(self, response):
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        lists = soup('a', {'target':'_blank'})[:-3]
-        print(len(lists))
+        lists = soup('table', {'style':'height:30px; border:1px solid #CACACA;border-top:0px; text-align:left;'})[0].find_all('a', {'target':'_blank'})
         domain = 'http://www.zjgh.gov.cn/'
         for i in lists:
             crawl_link = domain + i['href'] 
             self.crawl(crawl_link, callback=self.content_page, save=response.save)
-        try: 
-            last_page = int(soup('a', {'href': re.compile(r'javascript:__doPostBack')})[-1]['href'].split(',')[1].split('\'')[1])
-        except IndexError:
-            last_page = response.save['page']
-        if last_page != response.save['page']:
+
+        last_page = int(soup('span', {'id':'ywgslist_Pages'})[0].get_text())
+        # print(last_page)
+        if last_page != response.save['page'] + 1:
             parmas = {'__EVENTTARGET': 'ywgslist$AspNetPager1'}
             parmas['__EVENTARGUMENT'] = str(response.save['page'] + 1)
             parmas['__VIEWSTATE'] = soup.find('input', {'name':'__VIEWSTATE'})['value']

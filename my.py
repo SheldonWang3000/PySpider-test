@@ -107,9 +107,9 @@ class My(BaseHandler):
             js_name = js_m.hexdigest()
             # 获取访问地址
             request_url = self.real_path(url, each['src'])
-            # 改动网页 css 地址为相对地址
+            # 改动网页js地址为相对地址
             each['src'] = js_name + '.js'
-            # 爬取css文件
+            # 爬取js文件
             d = {}
             d['url'] = request_url
             d['type'] = 'attachment'
