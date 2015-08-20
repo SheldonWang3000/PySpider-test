@@ -26,10 +26,14 @@ class My(BaseHandler):
     city_name = {'CZ':'潮州', 'DG':'东莞', 'FS':'佛山', 'GZ':'广州', 'HY':'河源', 'HZ':'惠州', 
                  'JM':'江门', 'JM_X':'江门', 'JY':'揭阳', 'MM':'茂名', 'MZ':'梅州', 'QY':'清远', 
                  'SG':'韶关', 'ST':'汕头', 'SW':'汕尾', 'SZ':'深圳', 'YF':'云浮', 'YJ':'阳江', 
-                 'ZH':'珠海', 'ZJ':'湛江', 'ZQ':'肇庆', 'ZS':'中山',
+                 'ZH':'珠海', 'ZJ':'湛江', 'ZQ':'肇庆', 'ZS':'中山', 'DP':'大众点评', 'AJK':'安居客'
                  }
 
-    source_name = {'GH':'规划', 'GT':'国土', 'JS':'建设', 'JT':'交通', 'GF':'公服'}
+    source_name = {'GH':'规划', 'GT':'国土', 'JS':'建设', 'JT':'交通', 'GF':'公服',
+        'CZ':'潮州', 'DG':'东莞', 'FS':'佛山', 'GZ':'广州', 'HY':'河源', 'HZ':'惠州', 
+        'JM':'江门', 'JM_X':'江门', 'JY':'揭阳', 'MM':'茂名', 'MZ':'梅州', 'QY':'清远', 
+        'SG':'韶关', 'ST':'汕头', 'SW':'汕尾', 'SZ':'深圳', 'YF':'云浮', 'YJ':'阳江', 
+        'ZH':'珠海', 'ZJ':'湛江', 'ZQ':'肇庆', 'ZS':'中山',}
 
     headers = {
         "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -136,11 +140,14 @@ class My(BaseHandler):
             self.r.rpush(self.download_key, str(d))
             # self.crawl(request_url, callback = self.js_css_download, save = {'path':path, 'name':each['href']})
         '''提取图片，显示用的img标签内的文字'''
-        images = soup('img')
+        images = soup('img', src=True) + soup('img', {'data-src': re.compile(r'')})
         image_list = []
         if images is not None:
             for each in images:
-                image_url = self.real_path(url, each['src'])
+                try:
+                    image_url = self.real_path(url, each['src'])
+                except KeyError:
+                    image_url = self.real_path(url, each['data-src'])
                 k = image_url.split('/')
                 link = k[0]
                 for i in k[1:]:

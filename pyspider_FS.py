@@ -36,7 +36,7 @@ class Handler(My):
             save={'type':self.table_name[6], 'source':'GH'}, 
             age=1, fetch_type='js', callback=self.approval_page) 
 
-        self.crawl('http://www.fsgtgh.gov.cn/ywzt/tdgl/tdgycy/index.htm', method='GET', 
+        self.crawl('http://www.fsgtgh.gov.cn/ywzt/tdgl/tdgycy/index.htm',
             save={'type':self.table_name[14], 'source':'GT'}, age=1, 
             callback=self.land_page,fetch_type='js')
 

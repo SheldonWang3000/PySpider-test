@@ -9,57 +9,6 @@ from io import BytesIO
 import time
 from functools import wraps
 
-'''这里是重试机制，使用装饰器来给函数调用做重试'''
-def retry(ExceptionToCheck, tries=4, delay=3, backoff=2, logger=None):
-    """Retry calling the decorated function using an exponential backoff.
-
-    http://www.saltycrane.com/blog/2009/11/trying-out-retry-decorator-python/
-    original from: http://wiki.python.org/moin/PythonDecoratorLibrary#Retry
-
-    :param ExceptionToCheck: the exception to check. may be a tuple of
-        exceptions to check
-    :type ExceptionToCheck: Exception or tuple
-    :param tries: number of times to try (not retry) before giving up
-    :type tries: int
-    :param delay: initial delay between retries in seconds
-    :type delay: int
-    :param backoff: backoff multiplier e.g. value of 2 will double the delay
-        each retry
-    :type backoff: int
-    :param logger: logger to use. If None, print
-    :type logger: logging.Logger instance
-    """
-    def deco_retry(f):
-
-        @wraps(f)
-        def f_retry(*args, **kwargs):
-            mtries, mdelay = tries, delay
-            while mtries > 1:
-                try:
-                    return f(*args, **kwargs)
-                except ExceptionToCheck as e:
-                    msg = "%s, Retrying in %d seconds..." % (str(e), mdelay)
-                    if logger:
-                        logger.warning(msg)
-                    else:
-                        print(msg)
-                    time.sleep(mdelay)
-                    mtries -= 1
-                    mdelay *= backoff
-            return f(*args, **kwargs)
-
-        return f_retry  # true decorator
-
-    return deco_retry
-
-@retry(urllib.request.URLError, tries=4)
-def open_url(opener, url):
-	return opener.open(url)
-
-@retry(urllib.request.URLError, tries=4)
-def download_url(url, path):
-	urllib.request.urlretrieve(url, path)
-
 '''附件、js、css下载，404时会被catch'''
 def download_attachment(url, path):
 	try:
@@ -74,7 +23,7 @@ def download_attachment(url, path):
 		}
 		opener.addheaders = headers.items()
 		urllib.request.install_opener(opener)
-		download_url(url, path)
+		urllib.request.urlretrieve(url, path)
 	except urllib.request.HTTPError:
 		print('404')
 
@@ -95,7 +44,7 @@ def download_image(url, path):
 		"User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36"
 		}
 		opener.addheaders = headers.items()
-		f = open_url(opener, url)
+		f = opener.open(url)
 		if height * width == 0:
 			with open(path, 'wb') as code:
 				code.write(f.read())

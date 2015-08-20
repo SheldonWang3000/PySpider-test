@@ -17,7 +17,7 @@ class Handler(My):
             fetch_type='js', age=1, callback=self.plan_page, 
             save={'page':1, 'type':self.table_name[0], 'source':'GH'})
         self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%D3%C3%B5%D8%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&page=1', 
-            fetch_type='js', age=1, callback=self.plan_page, 
+            fetch_type='js', age=1, callback=self.plan_page,
             save={'page':1, 'type':self.table_name[1], 'source':'GH'})
         self.crawl('http://121.10.6.230/dggsweb/SeePHAllGS.aspx?%B9%AB%CA%BE=%C5%FA%BA%F3%B9%AB%CA%BE&%D2%B5%CE%F1%C0%E0%D0%CD=%BD%A8%C9%E8%B9%A4%B3%CC%B9%E6%BB%AE%D0%ED%BF%C9%D6%A4&page=1', 
             fetch_type='js', age=1, callback=self.plan_page, 
@@ -50,7 +50,7 @@ class Handler(My):
             method='POST', data={'pageMethod':'next','method':'searchProjFinishInf','currentPage':'0','currentPage_temp':'0'})
     
     def build_page(self, response):
-        soup = BeautifulSoup(response.text, 'html.parser')
+        soup = BeautifulSoup(response.text, 'lxml')
 
         page_count = int(soup('td', 'tabletitle1')[-1].get_text().split('/')[-1].split('\n')[1])
 
@@ -67,7 +67,7 @@ class Handler(My):
 
 
     def land_page(self, response):
-        soup = BeautifulSoup(response.text, 'html.parser')
+        soup = BeautifulSoup(response.text, 'lxml')
         info = xmltodict.parse(response.js_script_result)
         lists = info['xml']['RECS']['INFO']
         domain = 'http://land.dg.gov.cn/publicfiles/business/htmlfiles/'
@@ -79,7 +79,8 @@ class Handler(My):
 
 
     def plan_page(self, response):
-        soup = BeautifulSoup(response.text, 'html.parser')
+        print(response.encoding)
+        soup = BeautifulSoup(response.text, 'lxml', from_encoding="GB18030")
       
         last_page = int(soup.find(id=re.compile(r'LabelPageCount')).get_text())
         if last_page != response.save['page']:
@@ -103,7 +104,7 @@ class Handler(My):
                 data=data, callback=self.plan_page, age=1, save=save_dict)
 
         content = soup('a', {'target':'_blank'})
-
+        print(soup.original_encoding)
         domains = {}
         domains[self.table_name[0]] = 'http://121.10.6.230/dggsweb/PHGSFJ/PHjsxmxzFJ.aspx?'
         domains[self.table_name[1]] = 'http://121.10.6.230/dggsweb/PHGSFJ/PHjsydghFJ.aspx?'
@@ -116,10 +117,11 @@ class Handler(My):
             link = i['href']
             h = HTMLParser()
             link = h.unescape(link)
-            parmas = link.split('?')[1]
-            parmas = parmas.split('&')
+            params = link.split('?')[1]
+            params = params.split('&')
+            print(params)
             link = ''
-            link += quote('项目受理编号'.encode('gbk')) + '=' + quote(parmas[0].split('=')[1].encode('GB18030')) + '&' + quote('公示'.encode('gbk')) + '=' + quote(parmas[1].split('=')[1].encode('GB18030'))
+            link += quote('项目受理编号'.encode('gbk')) + '=' + quote(params[0].split('=')[1].encode('GB18030')) + '&' + quote('公示'.encode('gbk')) + '=' + quote(params[1].split('=')[1].encode('GB18030'))
             domain = domains[response.save['type']]
             link = domain + link
             # print(link)

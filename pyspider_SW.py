@@ -61,6 +61,6 @@ class Handler(My):
                 link = urljoin(response.url, i['href'])
                 if link != next_link:
                     print(link)
-                    self.crawl(link, callback=self.content_page, save=response.save)
+                    self.crawl(link, callback=self.content_page, save=response.save, fetch_type='js')
 
         

@@ -76,7 +76,7 @@ class Handler(My):
             self.crawl(domain, fetch_type='js', params=params, 
                 callback=self.content_page, save=response.save)
 
-        self.crawl(response.url, fetch_type='js', 
+        self.crawl(response.url, fetch_type='js', save=response.save,
             callback=self.content_page, age=1)
 
     def land_page(self, response):
