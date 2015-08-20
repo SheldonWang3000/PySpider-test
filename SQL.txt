@@ -29,3 +29,5 @@ os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 AMERICAN_AMERICA.AL32UTF8
 
 select userenv('language') from dual;
+
+insert into test1 values(1, 'name');

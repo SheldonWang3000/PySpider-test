@@ -62,6 +62,7 @@ if __name__ == '__main__':
 	while True:
 		try:
 			s = r.blpop(key, 0)[1]
+			# s = '''{'url':'http://www.zjlr.gov.cn/indexjs/newnav.js', 'type':'attachment','path':'/home/sheldon/','file_name':'a.css'}'''
 			print(s)
 			d = eval(s)
 			path = d['path'] + d['file_name']
